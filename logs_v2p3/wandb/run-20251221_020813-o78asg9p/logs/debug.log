@@ -1,0 +1,27 @@
+2025-12-21 02:08:13,092 INFO    MainThread:10312 [wandb_setup.py:_flush():80] Current SDK version is 0.23.1
+2025-12-21 02:08:13,092 INFO    MainThread:10312 [wandb_setup.py:_flush():80] Configure stats pid to 10312
+2025-12-21 02:08:13,092 INFO    MainThread:10312 [wandb_setup.py:_flush():80] Loading settings from /Users/sushantmehta/.config/wandb/settings
+2025-12-21 02:08:13,092 INFO    MainThread:10312 [wandb_setup.py:_flush():80] Loading settings from /Users/sushantmehta/Desktop/clones_final/tinker-cookbook-main/wandb/settings
+2025-12-21 02:08:13,092 INFO    MainThread:10312 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-12-21 02:08:13,093 INFO    MainThread:10312 [wandb_init.py:setup_run_log_directory():714] Logging user logs to logs_v2p3/wandb/run-20251221_020813-o78asg9p/logs/debug.log
+2025-12-21 02:08:13,093 INFO    MainThread:10312 [wandb_init.py:setup_run_log_directory():715] Logging internal logs to logs_v2p3/wandb/run-20251221_020813-o78asg9p/logs/debug-internal.log
+2025-12-21 02:08:13,093 INFO    MainThread:10312 [wandb_init.py:init():841] calling init triggers
+2025-12-21 02:08:13,093 INFO    MainThread:10312 [wandb_init.py:init():846] wandb.init called with sweep_config: {}
+config: {'learning_rate': 4e-05, 'dataset_builder': {'model_name_for_tokenizer': 'Qwen/Qwen3-4B-Instruct-2507', 'renderer_name': 'qwen3_instruct', 'data_path': None, 'train_ratio': 0.9, 'seed': 42, 'groups_per_batch': 16, 'group_size': 32, 'judge_model': 'gpt-5-mini', 'judge_max_retries': 5, 'judge_temperature': 1.0, 'system_message': None}, 'model_name': 'Qwen/Qwen3-4B-Instruct-2507', 'max_tokens': 8192, 'temperature': 1.0, 'compute_post_kl': False, 'evaluator_builders': [], 'lora_rank': 32, 'kl_penalty_coef': 0.0, 'kl_discount_factor': 0.0, 'loss_fn': 'importance_sampling', 'num_substeps': 1, 'wandb_project': 'tinker-RLVR', 'wandb_name': 'rlvr-Qwen_Qwen3-4B-Instruct-2507-gs32-gpb16-lr4e-05-2025-12-21-02-08', 'log_path': './logs_v2p3', 'base_url': None, 'enable_trace': False, 'remove_constant_reward_groups': False, 'eval_every': 5, 'save_every': 5, 'load_checkpoint_path': None, 'async_config': None, 'stream_minibatch_config': None, 'num_groups_to_log': 4, '_wandb': {}}
+2025-12-21 02:08:13,093 INFO    MainThread:10312 [wandb_init.py:init():889] starting backend
+2025-12-21 02:08:13,586 INFO    MainThread:10312 [wandb_init.py:init():892] sending inform_init request
+2025-12-21 02:08:13,640 INFO    MainThread:10312 [wandb_init.py:init():900] backend started and connected
+2025-12-21 02:08:13,679 INFO    MainThread:10312 [wandb_init.py:init():970] updated telemetry
+2025-12-21 02:08:13,699 INFO    MainThread:10312 [wandb_init.py:init():994] communicating run to backend with 90.0 second timeout
+2025-12-21 02:08:14,211 INFO    MainThread:10312 [wandb_init.py:init():1041] starting run threads in backend
+2025-12-21 02:08:14,280 INFO    MainThread:10312 [wandb_run.py:_console_start():2521] atexit reg
+2025-12-21 02:08:14,280 INFO    MainThread:10312 [wandb_run.py:_redirect():2369] redirect: wrap_raw
+2025-12-21 02:08:14,280 INFO    MainThread:10312 [wandb_run.py:_redirect():2438] Wrapping output streams.
+2025-12-21 02:08:14,280 INFO    MainThread:10312 [wandb_run.py:_redirect():2461] Redirects installed.
+2025-12-21 02:08:14,282 INFO    MainThread:10312 [wandb_init.py:init():1081] run started, returning control to user process
+2025-12-21 02:08:14,347 INFO    MainThread:10312 [wandb_run.py:_config_callback():1396] config_cb None None {'learning_rate': 4e-05, 'dataset_builder': {'model_name_for_tokenizer': 'Qwen/Qwen3-4B-Instruct-2507', 'renderer_name': 'qwen3_instruct', 'data_path': None, 'train_ratio': 0.9, 'seed': 42, 'groups_per_batch': 16, 'group_size': 32, 'judge_model': 'gpt-5-mini', 'judge_max_retries': 5, 'judge_temperature': 1.0, 'system_message': None}, 'model_name': 'Qwen/Qwen3-4B-Instruct-2507', 'max_tokens': 8192, 'temperature': 1.0, 'compute_post_kl': False, 'evaluator_builders': [], 'lora_rank': 32, 'kl_penalty_coef': 0.0, 'kl_discount_factor': 0.0, 'loss_fn': 'importance_sampling', 'num_substeps': 1, 'wandb_project': 'tinker-RLVR', 'wandb_name': 'rlvr-Qwen_Qwen3-4B-Instruct-2507-gs32-gpb16-lr4e-05-2025-12-21-02-08', 'log_path': './logs_v2p3', 'base_url': None, 'enable_trace': False, 'remove_constant_reward_groups': False, 'eval_every': 5, 'save_every': 5, 'load_checkpoint_path': None, 'async_config': None, 'stream_minibatch_config': None, 'num_groups_to_log': 4}
+2025-12-22 01:30:35,904 INFO    MainThread:10312 [wandb_run.py:_finish():2287] finishing run sushantmehta-surge-ai/tinker-RLVR/o78asg9p
+2025-12-22 01:30:35,906 INFO    MainThread:10312 [wandb_run.py:_atexit_cleanup():2486] got exitcode: 0
+2025-12-22 01:30:35,907 INFO    MainThread:10312 [wandb_run.py:_restore():2468] restore
+2025-12-22 01:30:35,907 INFO    MainThread:10312 [wandb_run.py:_restore():2474] restore done
+2025-12-22 01:30:39,444 INFO    MainThread:10312 [wandb_run.py:_footer_sync_info():3862] logging synced files

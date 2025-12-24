@@ -1,0 +1,9 @@
+{"time":"2025-12-22T13:38:15.26949-08:00","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-22T13:38:15.628899-08:00","level":"INFO","msg":"stream: created new stream","id":"860sw0vc"}
+{"time":"2025-12-22T13:38:15.628974-08:00","level":"INFO","msg":"handler: started","stream_id":"860sw0vc"}
+{"time":"2025-12-22T13:38:15.629143-08:00","level":"INFO","msg":"stream: started","id":"860sw0vc"}
+{"time":"2025-12-22T13:38:15.629144-08:00","level":"INFO","msg":"writer: started","stream_id":"860sw0vc"}
+{"time":"2025-12-22T13:38:15.629222-08:00","level":"INFO","msg":"sender: started","stream_id":"860sw0vc"}
+{"time":"2025-12-22T21:04:02.305288-08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/860sw0vc/file_stream\": read tcp 10.0.0.44:65217->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-12-23T06:43:34.040605-08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/860sw0vc/file_stream\": read tcp 10.0.0.44:54669->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-12-23T11:02:37.272849-08:00","level":"INFO","msg":"api: retrying HTTP error","status":502,"url":"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/860sw0vc/file_stream","body":"\n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>502 Server Error</title>\n</head>\n<body text=#000000 bgcolor=#ffffff>\n<h1>Error: Server Error</h1>\n<h2>The server encountered a temporary error and could not complete your request.<p>Please try again in 30 seconds.</h2>\n<h2></h2>\n</body></html>\n"}

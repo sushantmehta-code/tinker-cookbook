@@ -1,0 +1,4860 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 8</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 8  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T01:00:35  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (With Reasoning and Conflict Note)**
+
+- **Return Policy: Increased return window to 60 days**  
+  *Reasoning:* Previously limited to 30 days, the new 60-day window is intended to improve customer satisfaction by offering more flexibility—especially since most returns happen within 10 days. This makes returns feel more accessible and helps retain customers.  
+  ✅ *No conflict* – Both CEO and District Manager agree on this change.
+
+- **Customer greeting time: Must be wi...          </p>
+          <p class="lt-p">
+Rubrics: 20/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (with reconciliation and reasoning)**
+
+- **Return Policy: 60-day return window (up from 30 days)**  
+  *Reasoning:* Most customers don’t return items after 10 days, so extending the window to 60 days improves customer satisfaction and reduces frustration without significantly increasing risk of fraud or loss.  
+  *Note:* Both CEO and District Manager agree on this change. No conflict.
+
+- **Return eligibility with used items or removed tags**  
+  *Reasoning:* Items tha...          </p>
+          <p class="lt-p">
+Rubrics: 23/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.885          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (for your review)**  
+
+- **Return Policy**:  
+  - *Change*: Customers can now return items up to **60 days** after purchase (previously 30 days).  
+  - *Reasoning*: Most customers don’t return items after 10 days, so this policy increases customer satisfaction without incentivizing returns of unused goods.  
+  - *Clarification*: **No contradiction** – both the CEO and district manager state the same 60-day return window. However, **the CEO adds a critical exception**:...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (with Contradictions &amp; Reasoning)**
+
+- **Return Policy (60 days)**  
+  *Change*: Customers now have up to 60 days to return items (previously 30 days).  
+  *Reasoning*: Most customers don’t return items after 10 days, so extending to 60 days improves customer satisfaction and retention without significantly increasing returns for unused items.  
+  *Note*: Both the CEO and the District Manager agree on this point. **No contradiction.**
+
+- **Customer Greeting Time**  
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (for your review)**
+
+- **Return Policy Updated to 60 Days (with exception for used items)**  
+  *Reasoning:* Previously, returns were limited to 30 days. The CEO explains that most customers don’t return items after 10 days, so extending it to 60 days is a customer-friendly way to improve satisfaction—especially for items not yet used. However, if an item has been used or the tag has been removed, returns must be approved explicitly by a manager.  
+  *Note:* Both CEO ...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (with reasoning and contradictions noted)**
+
+- **Return Policy: Customers now have up to 60 days to return items**  
+  *Reasoning:* The CEO states that most customers don’t return items after 10 days, so extending returns to 60 days is a way to improve customer satisfaction and retention without increasing returns for unused or damaged items.  
+  ✅ *Consistent with both emails.*
+
+- **Return Policy Exceptions: Returns with used items or removed tags require explicit ma...          </p>
+          <p class="lt-p">
+Rubrics: 24/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.923          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (With Reasoning and Contradictions)**
+
+- **Return Policy (60-day window)**  
+  *Change:* Customers can now return items up to 60 days after purchase.  
+  *Reasoning:* The CEO notes that “most customers don’t return things after 10 days anyway,” so extending returns to 60 days is a customer-friendly, low-effort way to improve satisfaction.  
+  *Note:* The district manager echoes this point and emphasizes it as a key shift. ✅ *Consistent with CEO — no contradiction.*
+
+-...          </p>
+          <p class="lt-p">
+Rubrics: 20/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (with Reasoning &amp; Conflicts)**
+
+- **Return Policy (60-day window)**  
+  *Change:* Customers can now return items up to 60 days after purchase, up from 30 days.  
+  *Reasoning:* Most customers don’t return items after 10 days, so extending the window is a low-effort way to improve satisfaction and retention.  
+  *Conflict/Clarification:* Both the CEO and district manager state the same 60-day return policy. ✅ **No contradiction** – aligned.
+
+- **Customer Greeting Rule*...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (for your review)**
+
+- **Return Policy Expansion**:  
+  Customers can now return items up to **60 days** after purchase (was previously 30 days).  
+  *Reasoning*: Most customers return items within 10 days, so extending the window improves customer satisfaction without increasing returns.  
+  → *Note: Both emails agree on this change. No contradiction.*
+
+- **Customer Greeting Time**:  
+  Customers must be greeted within **4 minutes** of entering the store (CEO), or wi...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (with Reasoning &amp; Clarifications)**
+
+- **Return Policy: Up to 60 days**  
+  *Reasoning:* Previously, returns were limited to 30 days. The change to 60 days is intended to improve customer satisfaction and retention, as most returns happen within the first 10 days. This gives customers more flexibility without significantly increasing operational burden.  
+  ✅ **Alignment:** Both CEO and District Manager agree on this change.  
+
+- **Customer Greeting Time: Within 4 min...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (with rationale and discrepancies)**
+
+- **Return Policy (60-day window)**  
+  ✅ *Change:* Customers can now return items up to 60 days after purchase (previously 30 days).  
+  📌 *Reasoning:* The CEO notes that most customers don’t return items after 10 days, so extending returns to 60 days is a simple, customer-happiness-focused way to increase satisfaction and retention.  
+  🔍 *Discrepancy:* The district manager *reiterates* the 60-day return policy, but does not pro...          </p>
+          <p class="lt-p">
+Rubrics: 19/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.731          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (For Your Review)**
+
+- **Return Policy Change**:  
+  ✅ Customers now have **up to 60 days** to return items (up from 30).  
+  🔍 *Reasoning*: Most customers don’t return items after 10 days, so extending the window improves satisfaction and keeps them in the store ecosystem.  
+  ⚠️ *Clarification*: Returns are **only accepted if the item has not been used or if the tag is intact** — exceptions require **explicit manager approval** if the item has been used or the tag i...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: ### Summary of Policy Changes (for your review)
+
+- **Return Policy Update**  
+  *Change:* Customers can now return items up to 60 days after purchase (up from 30 days).  
+  *Reasoning:* Most returns happen within the first 10 days, so extending the window to 60 days improves customer satisfaction and retention without significantly increasing risk.  
+  *Note:* Both CEO and District Manager agree on this change — **no contradiction**.
+
+- **Customer Greeting Time**  
+  *Change:* Customers must be ...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (for your review)**
+
+- **Return Policy**:  
+  Customers can now return items up to **60 days** after purchase (previously 30 days).  
+  *Reasoning*: Most returns occur within the first 10 days, so extending the window helps retain customers without significantly increasing losses.  
+  → *Note: Both CEO and District Manager agree on this change — no contradiction.*
+
+- **Customer Greeting Time**:  
+  Customers must be greeted within **4 minutes of entering the store** (...          </p>
+          <p class="lt-p">
+Rubrics: 19/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.731          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (with reasoning and contradictions noted)**
+
+- **Return Policy: 60-day return window (from 30 days)**  
+  *Reasoning:* The CEO states that most customers don’t return items after 10 days, so extending returns to 60 days is a customer-friendly, low-friction way to improve satisfaction. The district manager echoes this point, reinforcing that returns are unlimited in duration, regardless of reason. ✅ *No contradiction — both parties agree.*
+
+- **Customer Greeting Time: ...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me comb through these two emails I received from my higher-ups. I need to summarize the policy changes that were made so I can send them out to my team. One is from my CEO, and the other is from ...          </p>
+          <p class="lt-p">
+Response: **Summary of Policy Changes (for your reference)**
+
+- **Return Policy (60-day window):**  
+  Customers can now return items up to 60 days after purchase. *Reasoning:* Most customers don’t return items after 10 days, so extending the window improves satisfaction without encouraging return abuse.  
+  → *Note: The district manager confirms this change, which aligns with the CEO’s communication.*
+
+- **Customer Greeting Time:**  
+  Customers must be greeted within **4 minutes** of entering the store....          </p>
+          <p class="lt-p">
+Rubrics: 20/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1244                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1112                </td>
+                <td>
+0.885                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.885                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1311                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1174                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1241                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1323                </td>
+                <td>
+0.923                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.923                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1229                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1178                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+980                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1197                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1269                </td>
+                <td>
+0.731                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.731                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1168                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1032                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1121                </td>
+                <td>
+0.731                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.731                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1264                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+778                </td>
+                <td>
+1151                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s go through your request step by step using the provided data from AE Alex.
+
+---
+
+### 🔢 **1. Total ACV and Breakdown by Quarter**
+
+#### Raw Data:
+
+| Deal | Close Date     | ACV (£) | Stage       | Create Date   | Trial Created | Trial Activated |
+|------|----------------|---------|-------------|---------------|---------------|-----------------|
+| 1    | 15/02/2025     | 18,000  | Closed Won  | 25/12/2023    | 05/01/2025    | 19/01/2025      |
+| 2    | 16/04/2025     | 16,000  | C...          </p>
+          <p class="lt-p">
+Rubrics: 9/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s break down Alex&#x27;s performance using the data you&#x27;ve provided. We&#x27;ll go step-by-step as requested.
+
+---
+
+### 🔢 **1. Total ACV and Quarterly Breakdown**
+
+First, list the deals with their ACV and dates:
+
+| Deal | ACV (£) | Close Date | Quarter |
+|------|--------|-----------|--------|
+| Deal 1 | 18,000 | 15/02/2025 | Q1 |
+| Deal 2 | 16,000 | 16/04/2025 | Q2 |
+| Deal 3 | 12,000 | 29/08/2025 | Q3 |
+| Deal 4 | 140,000 | 30/07/2025 | Q3 |
+| Deal 5 | 30,000 | 12/08/2025 | Q3 |
+| Deal 6...          </p>
+          <p class="lt-p">
+Rubrics: 6/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s analyze the data systematically and provide a detailed, professional report as requested.
+
+---
+
+### **Alex&#x27;s Deal Performance Report (2025 – Year to Date)**
+
+---
+
+#### **1. Total ACV &amp; Quarterly Breakdown**
+
+We’ll first extract the **ACV** for each deal and group them by **quarter** based on the **Close Date**.
+
+| Deal | Close Date | ACV (£) | Quarter |
+|------|------------|---------|---------|
+| Deal 1 | 15/02/2025 | 18,000 | Q1 |
+| Deal 2 | 16/04/2025 | 16,000 | Q1 |
+| Deal 3...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break down the data step-by-step as requested. We’ll process the information thoroughly and present it in a clear, professional format.
+
+---
+
+### 📊 **Deal Data Summary (Alex – AE, 2025)**
+
+| Deal | Close Date | ACV (£) | Stage | Create Date | Trial Created | Trial Activated |
+|------|------------|---------|-------|-------------|----------------|------------------|
+| 1    | 15/02/2025 | 18,000  | Closed Won | 25/12/2023 | 05/01/2025 | 19/01/2025 |
+| 2    | 16/04/2025 | 16,000  |...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step-by-step with clarity and precision, based on the data you provided.
+
+---
+
+### 📊 **Deal Data Summary (Alex – AE, 2025)**
+
+We have 6 deals with the following fields:
+- Close Date  
+- ACV (in pounds)  
+- Stage  
+- Create Date  
+- Trial Created Date  
+- Trial Activated Date  
+
+We’ll extract and structure the data, then answer your questions in order.
+
+---
+
+#### **1. Total ACV and Breakdown by Quarter**
+
+Let’s first calculate total ACV and allocate by quarter...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s go through the data step by step and compile everything you&#x27;ve requested — total ACV, quarterly breakdown, performance vs. targets (with percentages), average deal close time, average trial activation time, and performance summaries.
+
+---
+
+### 📌 Data Overview (6 Deals)
+
+| Deal | Close Date | ACV (£) | Stage | Create Date | Trial Created | Trial Activated |
+|------|------------|---------|--------|-------------|----------------|------------------|
+| 1 | 15/02/2025 | 18,000 | Close...          </p>
+          <p class="lt-p">
+Rubrics: 6/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Absolutely. Let&#x27;s go step-by-step through your request and deliver a clear, structured, and insightful report based on the data provided for Alex’s deals in 2025.
+
+---
+
+### 🔍 **Deal Summary &amp; Analysis for Alex (2025)**
+
+#### ✔️ **Total ACV (Annual)**
+We first calculate the total Annual Contract Value (ACV) by summing the individual ACV figures:
+
+- Deal 1: £18,000  
+- Deal 2: £16,000  
+- Deal 3: £12,000  
+- Deal 4: £140,000  
+- Deal 5: £30,000  
+- Deal 6: £21,000  
+
+**Total ACV = £18k + £16k + £1...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s carefully analyze the data provided for Alex’s deals in 2025, and deliver a full performance report as requested.
+
+---
+
+### ✅ **1. Total ACV &amp; Breakdown by Quarter**
+
+We begin by extracting and standardizing the data:
+
+| Deal | Close Date | ACV (£) | Stage | Create Date | Trial Created | Trial Activated |
+|------|------------|---------|--------|-------------|---------------|------------------|
+| Deal 1 | 15/02/2025 | 18,000 | Closed Won | 25/12/2023 | 05/01/2025 | 19/01/2025 |
+|...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully process the data provided for Alex&#x27;s deals to generate a comprehensive and accurate performance report as requested.
+
+---
+
+### **Deal Data Summary**
+
+| Deal | Close Date | ACV (£) | Stage | Create Date | Date Trial Created | Date Trial Activated |
+|------|------------|--------|--------|-------------|---------------------|------------------------|
+| 1    | 15/02/2025 | 18,000 | Closed Won | 25/12/2023 | 05/01/2025 | 19/01/2025 |
+| 2    | 16/04/2025 | 16,000 | Closed Won | 01/02/20...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s go through the data systematically and provide a comprehensive, well-structured analysis of Alex&#x27;s performance based on the information provided.
+
+---
+
+### **Deal Data (Cleaned and Organized)**
+
+| Deal | Close Date       | ACV (£) | Stage       | Create Date     | Trial Created | Trial Activated |
+|------|------------------|---------|-------------|------------------|---------------|------------------|
+| 1    | 15/02/2025       | 18,000  | Closed Won  | 25/12/2023       | 05/01/2...          </p>
+          <p class="lt-p">
+Rubrics: 5/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.455          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s work through the data step by step with clarity, precision, and insight — just as requested.
+
+---
+
+### **Deal Data Summary**
+
+We are given 6 deals with the following format:  
+**Close Date | ACV | Stage | Create Date | Date Trial Created | Date Trial Activated**
+
+---
+
+#### **1. Deal 1**  
+- Close Date: 15/02/2025  
+- ACV: £18,000  
+- Stage: Closed Won  
+- Create Date: 25/12/2023  
+- Trial Created: 05/01/2025  
+- Trial Activated: 19/01/2025  
+
+#### **2. Deal 2**  
+- Close Date: 1...          </p>
+          <p class="lt-p">
+Rubrics: 9/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Absolutely. Let&#x27;s go step-by-step through your full request using the provided data from AE Alex.
+
+---
+
+### 📊 **Deal Data Summary**
+
+| Deal | Close Date | ACV (£) | Stage | Create Date | Trial Created Date | Trial Activated Date |
+|------|------------|--------|--------|-------------|----------------------|------------------------|
+| 1 | 15/02/2025 | 18,000.00 | Closed Won | 25/12/2023 | 05/01/2025 | 19/01/2025 |
+| 2 | 16/04/2025 | 16,000.00 | Closed Won | 01/02/2025 | 05/02/2025 | 13/02/2025 |
+|...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s go through your data step by step and provide a **comprehensive, structured, and insightful performance report** for Alex, one of your AEs, based on the provided deals.
+
+---
+
+### 📊 **Deal Data Summary (Alex – 2025)**
+
+| Deal | Close Date | ACV (£) | Stage | Create Date | Trial Created | Trial Activated |
+|------|------------|--------|-------|-------------|---------------|------------------|
+| Deal 1 | 15/02/2025 | 18,000 | Closed Won | 25/12/2023 | 05/01/2025 | 19/01/2025 |
+| De...          </p>
+          <p class="lt-p">
+Rubrics: 6/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through this step-by-step with clear, structured analysis based on the data provided.
+
+---
+
+### **1. Total ACV for Alex’s Deals**
+
+We&#x27;ll extract the ACV from each deal:
+
+| Deal | ACV (£) |
+|------|--------|
+| Deal 1 | 18,000 |
+| Deal 2 | 16,000 |
+| Deal 3 | 12,000 |
+| Deal 4 | 140,000 |
+| Deal 5 | 30,000 |
+| Deal 6 | 21,000 |
+
+**Total ACV =**  
+18,000 + 16,000 + 12,000 + 140,000 + 30,000 + 21,000 = **£237,000**
+
+---
+
+### **2. Breakdown by Quarter (2025)**
+
+We need to assign ...          </p>
+          <p class="lt-p">
+Rubrics: 9/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s analyze the data provided for Alex (one of our AEs), step-by-step, to deliver a comprehensive and insightful report as requested.
+
+---
+
+### **Deal Data Recap**
+
+| Deal | Close Date | ACV (£) | Stage | Create Date | Trial Created | Trial Activated |
+|------|------------|---------|-------|-------------|----------------|------------------|
+| 1    | 15/02/2025 | 18,000  | Closed Won | 25/12/2023 | 05/01/2025 | 19/01/2025 |
+| 2    | 16/04/2025 | 16,000  | Closed Won | 01/02/2025 | 05/02/2025 | ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Here is some data from one of our AEs, Alex. You&#x27;ll see the close date, ACV, stage, create date, date trial was created, and date the trial was activated (in this order). 
+
+Deal 1 15/02/2025 £18,000...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s go through the data step by step to deliver a comprehensive, well-structured performance report for Alex, our AE.
+
+---
+
+### **Deal Data Summary**
+
+| Deal | Close Date | ACV (£) | Stage | Create Date | Trial Created | Trial Activated |
+|------|------------|---------|-------|-------------|---------------|------------------|
+| Deal 1 | 15/02/2025 | 18,000 | Closed Won | 25/12/2023 | 05/01/2025 | 19/01/2025 |
+| Deal 2 | 16/04/2025 | 16,000 | Closed Won | 01/02/2025 | 05/02/2025 | 13...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3630                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2853                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2662                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2963                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3416                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3407                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2979                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3628                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3908                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3011                </td>
+                <td>
+0.455                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.455                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+4521                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3431                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3995                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3084                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+3504                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+4342                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s carefully build a **recital programme** that meets **all your constraints**, then format it clearly for printing and for detailed tracking of performance durations, accompanist use, and grade levels.
+
+---
+
+### ✅ Constraints Recap:
+
+1. **Grade 4 and above, non-piano students must have an accompanist**  
+   → So: Any student with Grade ≥4 and who does **not play piano** needs an accompanist.
+
+2. **Accompanist should not walk on/off every performance**  
+   → So, **we need to group...          </p>
+          <p class="lt-p">
+Rubrics: 12/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Here is a professionally formatted **recital programme** that meets **all your constraints**, including:
+
+- Students **Grade 4 and above** who **do not play piano** require an **accompanist**  
+- Accompanists should **not walk on/off** for every performance (i.e., used as a consistent, shared presence)  
+- Students **under Level 5** must **not be back to back**  
+- Recital **must not end with a student below Grade 7**  
+- Performance durations:  
+  - Grade 1–2: 4 minutes  
+  - Grade 3–6: 6 minut...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s carefully build a **recital programme** that satisfies **all your constraints**:
+
+---
+
+### ✅ Constraints Recap:
+
+1. **Accompanist needed** for:
+   - Any student who is **Grade 4 or above** and **does NOT play piano**.
+   - Accompanist should **not walk on/off every performance** → so we should group students with accompanists together in blocks (i.e., group several performances with the same accompanist).
+
+2. **No two students under Level 5** should be back-to-back.
+
+3. **Recita...          </p>
+          <p class="lt-p">
+Rubrics: 10/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.455          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **fully optimized recital programme** based on your detailed requirements. The programme is structured so that:
+
+---
+
+### ✅ Requirements Met:
+- **Students grade 4 and above who do not play piano** must have an **accompanist**.
+- **Accompainists do not walk on/off every performance** → so we ensure **accompanists appear only once** (i.e., they are used for multiple students, not in between each performance).
+- **No two students below level 5 are back to back**.
+- **Recital d...          </p>
+          <p class="lt-p">
+Rubrics: 15/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.682          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s carefully construct a **recital programme** that satisfies *all* your constraints. We’ll go step-by-step to ensure:
+
+---
+
+### ✅ **Constraints Recap**:
+1. **All students who are Grade 4 and above AND do NOT play piano** must have an **accompanist**.
+2. **Accompanists should not walk on/off every performance** → so we want to **group students with accompanists together** if possible.
+3. **No two students under Level 5** (i.e., Grade 1–4) should be back-to-back.
+4. **The recital must n...          </p>
+          <p class="lt-p">
+Rubrics: 7/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.318          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Here is a **well-structured recital programme** that meets all your requirements, including:
+
+---
+
+### ✅ Programme for Recital (Performance Order)
+
+```
+Maya Chen (Cello, Grade 5)  
+Liam O&#x27;Connell (Flute, Grade 2)  
+Chloe Kim (Violin, Grade 1)  
+Ethan Davies (Clarinet, Grade 6)  
+Isabella Rossi (Piano, Grade 7)  
+Noah Jackson (Saxophone, Grade 4)  
+Olivia Moore (Oboe, Grade 5)  
+Sam Rodriguez (Trumpet, Grade 6)  
+Grace Hall (Viola, Grade 8)  
+David Singh (Double Bass, Grade 3)  
+Emily Wong (Piano...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Here&#x27;s a carefully crafted **recital programme** that meets **all your constraints**:
+
+---
+
+### **Recital Programme**
+
+1. Liam O&#x27;Connell – Flute (Grade 2)  
+2. Grace Hall – Viola (Grade 8)  
+3. Emily Wong – Piano (Grade 4)  
+4. Ethan Davies – Clarinet (Grade 6)  
+5. David Singh – Double Bass (Grade 3)  
+6. Noah Jackson – Saxophone (Grade 4)  
+7. Isabella Rossi – Piano (Grade 7)  
+8. Chloe Kim – Violin (Grade 1)  
+9. Olivia Moore – Oboe (Grade 5)  
+10. Ben Carter – Harp (Grade 7)  
+11....          </p>
+          <p class="lt-p">
+Rubrics: 12/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Based on your detailed requirements, I’ll create a **recital programme** that satisfies all constraints and conditions.
+
+---
+
+### ✅ **Constraints Recap:**
+
+1. **Accompanist Requirement:**  
+   - Only students who are **Grade 4 and above** and **do not play piano** need an accompanist.  
+   - **Accompanist should not walk on/off for every performance** → so we will group performances (if possible) where an accompanist is used to avoid repeating entrances/withdrawals.
+
+2. **No back-to-b...          </p>
+          <p class="lt-p">
+Rubrics: 8/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through this step by step to create a **balanced, practical, and rule-compliant recital programme**.
+
+---
+
+### 🔍 **Constraints Recap**
+
+We have **15 students** with grades 1–8, instruments, and whether they play piano or not.
+
+#### Key Rules:
+
+1. **Accompanist needed** only for:
+   - Students **Grade 4 and above** who **do NOT play piano**.
+   - Accompanist should **not walk on/off every performance** → so we want to **group accompanist-dependent performances together** (i...          </p>
+          <p class="lt-p">
+Rubrics: 12/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Here is a **well-structured recital programme** that satisfies all your requirements:
+
+---
+
+### 🎻 **Recital Programme**  
+*Performance Order – Student Names Only*  
+
+1. Liam O&#x27;Connell  
+2. Maya Chen  
+3. Olivia Moore  
+4. David Singh  
+5. Ethan Davies  
+6. Isabella Rossi  
+7. Grace Hall  
+8. Ben Carter  
+9. Noah Jackson  
+10. Emily Wong  
+11. Sofia Rivera  
+12. Chloe Kim  
+13. Sam Rodriguez  
+14. Hannah Scott  
+**Intermission**  
+15. Alex Müller  
+
+---
+
+### 📅 **Performance Durations &amp; Details** ...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a carefully crafted **recital programme** based on your requirements. I’ve considered:
+
+- **Grade 4 and above who do not play piano** must have an accompanist.
+- **Accompianists should not walk on/off for every performance** → so we’ll group students with accompanists together (i.e., assign one accompanist to multiple performances, if possible).
+- **No students under level 5 back to back**.
+- **No ending with a student below grade 7**.
+- **Performance durations**:
+  - Grade 1–2: 4 m...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s work through the constraints and create a **legally formatted, printable recital programme** that satisfies all the requirements.
+
+---
+
+### ✅ **Constraints Recap &amp; Logic Applied**
+
+#### **Students (ID → Name → Grade → Instrument → Category)**
+| ID | Name | Grade | Instrument | Category |
+|----|------|-------|------------|----------|
+| 1 | Maya Chen | 5 | Cello | String |
+| 2 | Liam O&#x27;Connell | 2 | Flute | Wind |
+| 3 | Sofia Rivera | 8 | Piano | Piano |
+| 4 | Ethan Davies | 6 | C...          </p>
+          <p class="lt-p">
+Rubrics: 14/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s carefully plan the recital programme based on your detailed constraints.
+
+---
+
+### ✅ **Constraints Summary &amp; Planning**
+
+We have 15 students. We need to:
+1. **No student below Grade 5** should be back to back.
+2. **No student below Grade 7** should end the recital.
+3. **All Grade 4+ students who do NOT play piano must have an accompanist**.
+4. **Accompanist should not walk on/off for every performance** → so we will *minimize* or *avoid* alternating accompanists — ideally only o...          </p>
+          <p class="lt-p">
+Rubrics: 10/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.455          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s carefully build a **recital programme** based on your detailed requirements.
+
+---
+
+### ✅ Requirements Summary:
+
+1. **Accompanist needed**:
+   - Only for students **grade 4 and above** who **do not play piano**.
+   - Accompanist should **not walk on/off for every performance** → so we should **group performances** where possible to minimize accompanist changes.
+
+2. **No student under level 5 back to back**:
+   - So, if one student is grade 1, 2, or 3, the next student must be **g...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s walk through your requirements step by step and build a professional, practical recital programme that meets **all constraints** and is ready to print.
+
+---
+
+### ✅ **Requirements Recap &amp; Constraints:**
+
+#### 📌 **Student Constraints:**
+1. **All students who are Grade 4 and above AND do NOT play piano** must have an **accompanist**.
+2. **Accompanists should not walk on/off for every performance** → so we must **group performances** where the same accompanist is used (i.e., avoid f...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a recital programme from these 15 students. All students who are grade 4 and above who do not play piano need to have an accompanist, and it would be best to not have the accompanist ...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s carefully craft a **recital programme** based on your detailed requirements.
+
+---
+
+### ✅ Requirements Recap:
+
+1. **Students Grade 4 and above (excluding piano players)** must have an **accompanist**.
+2. **Avoid having the accompanist walk on/off** for every performance → So, **accompanists should be used for multiple students (in blocks)** if possible.
+3. **No two students under Level 5** should be back-to-back.
+4. **Recital must not end with a student below Grade 7**.
+5. **Perf...          </p>
+          <p class="lt-p">
+Rubrics: 9/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.409          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+8192                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+6966                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+8192                </td>
+                <td>
+0.455                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.455                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+7846                </td>
+                <td>
+0.682                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.682                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+8192                </td>
+                <td>
+0.318                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.318                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+7133                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+6853                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+8192                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+8192                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+6834                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+1796                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+6722                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+8192                </td>
+                <td>
+0.455                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.455                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+8192                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+8192                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+450                </td>
+                <td>
+8192                </td>
+                <td>
+0.409                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.409                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician  
+Shift A	Taylor  
+Shift B	Riley  
+Shift C	Morgan  
+Shift D	Casey  
+Shift E	Devon  
+Shift F	Jordan  
+
+The schedule satisfies all rules by respecting certification requirements: Shift C (HVAC required) is assigned to Morgan, who has both HVAC and Electrical certifications; Shift F (Security-Clearance required) is assigned to Jordan, who holds Security-Clearance; Shift E (Electrical strongly preferred) is assigned to Devon, who lacks certification but is eligible due to n...          </p>
+          <p class="lt-p">
+Rubrics: 5/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician	
+Shift A	Taylor	
+Shift B	Morgan	
+Shift C	Riley	
+Shift D	Casey	
+Shift E	Devon	
+Shift F	Jordan	
+
+Taylor, with Security-Clearance certification, is assigned to Shift A (06:00–10:00) to satisfy the early-morning preference and certification requirements for the morning shift. Morgan, with both HVAC and Electrical certifications, is assigned to Shift B (10:00–14:00) for a non-certification shift with no preference conflict, allowing flexibility for future assignments. Riley,...          </p>
+          <p class="lt-p">
+Rubrics: 6/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Absent  
+Shift	B	Casey  
+Shift	C	Morgan  
+Shift	D	Riley  
+Shift	E	Taylor  
+Shift	F	Jordan  
+
+Jordan prefers early-morning and cannot work past 16:00; assigned to Shift A (06:00–10:00) which is early-morning and within their availability. Riley, with HVAC certification, is assigned to Shift B (10:00–14:00), which satisfies HVAC requirements and aligns with their mid-day preference. Morgan, with both HVAC and Electrical certifications, handles Shift C (14:00–18:00) which requires HVAC and fi...          </p>
+          <p class="lt-p">
+Rubrics: 4/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician  
+Shift A	Taylor  
+Shift B	Riley  
+Shift C	Morgan  
+Shift D	Casey  
+Shift E	Devon  
+Shift F	Jordan  
+
+The schedule satisfies all rules by ensuring every shift has a qualified technician according to certification requirements: Shift A and Shift F require Security-Clearance, assigned to Taylor and Jordan respectively; Shift C requires HVAC, assigned to Morgan who has both HVAC and Electrical certification; Shift E strongly prefers Electrical, assigned to Devon who lacks ...          </p>
+          <p class="lt-p">
+Rubrics: 5/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician	
+Shift A	Taylor	
+Shift B	Riley	
+Shift C	Morgan	
+Shift D	Casey	
+Shift E	Devon	
+Shift F	Jordan	
+
+Taylor, with Security-Clearance certification, is assigned to Shift A (06:00–10:00), fulfilling the early-morning preference and meeting the shift&#x27;s requirement. Riley, with HVAC certification, is assigned to Shift B (10:00–14:00), which has no certification requirements and aligns with their mid-day preference. Morgan, with both HVAC and Electrical certifications, is assigned...          </p>
+          <p class="lt-p">
+Rubrics: 3/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician	
+Shift A	Taylor	
+Shift B	Riley	
+Shift C	Morgan	
+Shift D	Casey	
+Shift E	Devon	
+Shift F	Jordan	
+
+Taylor, with Security-Clearance certification, is assigned to Shift A (early-morning) to satisfy the early-morning preference and meet the shift’s time requirements, while Jordan, who has Security-Clearance and prefers early-morning, is assigned to Shift F (PM) to fulfill their preference and certification needs, despite having a shift ending at 06:00, as the time gap from the...          </p>
+          <p class="lt-p">
+Rubrics: 3/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician  
+Shift A	Taylor  
+Shift B	Riley  
+Shift C	Morgan  
+Shift D	Casey  
+Shift E	Devon  
+Shift F	Jordan  
+
+Shift A is assigned to Taylor because she holds a security-clearance certification and has a preference for PM, though this shift is early-morning; however, due to her certification and availability, she is the only security-clearance technician available for early-morning shifts. Shift B is assigned to Riley, an HVAC-certified technician, who has a mid-day preference a...          </p>
+          <p class="lt-p">
+Rubrics: 5/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician  
+Shift A	Taylor  
+Shift B	Riley  
+Shift C	Morgan  
+Shift D	Casey  
+Shift E	Devon  
+Shift F	Jordan  
+
+Taylor, with Security-Clearance certification, is assigned to Shift A (early-morning) to fulfill the early-morning preference and meet the time eligibility requirement after their shift ended at 06:00. Riley, with HVAC certification, is assigned to Shift B (mid-day) to satisfy the HVAC requirement for any qualifying shift, though no shift demands HVAC during this period...          </p>
+          <p class="lt-p">
+Rubrics: 4/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician  
+Shift A	Taylor  
+Shift B	Riley  
+Shift C	Morgan  
+Shift D	Casey  
+Shift E	Devon  
+Shift F	Jordan  
+
+Taylor, with Security-Clearance certification, is assigned to Shift A (early-morning) to fulfill both the preference for PM shifts and the certification requirement for early-morning shifts. Riley, with HVAC certification, is assigned to Shift B (10:00–14:00) as an available HVAC-certified technician with no conflicts in time or preferences. Morgan, with both HVAC and E...          </p>
+          <p class="lt-p">
+Rubrics: 5/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician  
+Shift A	Taylor  
+Shift B	Riley  
+Shift C	Morgan  
+Shift D	Casey  
+Shift E	Devon  
+Shift F	Jordan  
+
+Jordan is assigned to Shift F, which requires Security-Clearance, and is eligible as their last shift ended at 06:00, allowing them to work from 16:00–20:00 (time-eligible). Taylor, with Security-Clearance, is assigned to Shift A, which is early-morning and matches their preference, and is time-eligible since their last shift ended at 06:00. Riley, with HVAC certificati...          </p>
+          <p class="lt-p">
+Rubrics: 3/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Absent  
+Shift	B	
+Shift	C	
+Shift	D	Taylor  
+Shift	E	Casey  
+Shift	F	Devon  
+
+Jordan cannot work Shift A due to time eligibility (last shift ended Mon 22:00; 06:00 is less than 10 hours later). Riley is only eligible for Shift B or C, but C requires HVAC, and Riley lacks HVAC certification. Morgan, who has HVAC and Electrical, is eligible for Shift C and E, but E strongly prefers Electrical, and Morgan has it. Morgan is assigned to Shift C to meet HVAC requirement and satisfy the preference...          </p>
+          <p class="lt-p">
+Rubrics: 1/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.083          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician  
+Shift A	Taylor  
+Shift B	Riley  
+Shift C	Morgan  
+Shift D	Casey  
+Shift E	Devon  
+Shift F	Jordan  
+
+Shift A requires an early-morning shift and is assigned to Taylor, who has security clearance and prefers the PM, but is assigned here due to the early-morning preference being required and Taylor being the only security-certified technician available with time eligibility. Taylor&#x27;s last shift ended at 06:00, and this shift starts at 06:00, which violates the 10-hour ru...          </p>
+          <p class="lt-p">
+Rubrics: 3/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift			Assigned Technician	
+Shift A		Devon	
+Shift B		Riley	
+Shift C		Morgan	
+Shift D		Casey	
+Shift E		Taylor	
+Shift F		Jordan	
+
+Shift A is assigned to Devon because they have no certification requirements and prefer early-morning, and their previous shift ended at 09:00, so the 06:00 start on Tuesday is within the 10-hour window. Shift B is assigned to Riley, who has HVAC certification and is available; Riley’s previous shift ended at 03:00, so the 10:00 start is within the 10-hour threshold, a...          </p>
+          <p class="lt-p">
+Rubrics: 2/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.167          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician  
+Shift A	Taylor  
+Shift B	Riley  
+Shift C	Morgan  
+Shift D	Casey  
+Shift E	Devon  
+Shift F	Jordan  
+
+The schedule adheres to all rules by ensuring each shift is staffed with a certified technician where required: Shift C (HVAC) is filled by Morgan, who has HVAC certification; Shift F (Security-Clearance) is assigned to Jordan, who holds the required clearance. Time-eligibility is maintained as each technician&#x27;s assignment begins at least 10 hours after their previous s...          </p>
+          <p class="lt-p">
+Rubrics: 5/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician	
+Shift A	Taylor	
+Shift B	Riley	
+Shift C	Morgan	
+Shift D	Casey	
+Shift E	Casey	
+Shift F	Jordan	
+
+Taylor, with security-clearance, is assigned to Shift A (early-morning), satisfying both certification and preference requirements. Riley, with HVAC certification, takes Shift B (mid-day), which has no certification requirements and aligns with their preference for mid-day. Morgan, certified in both HVAC and electrical, is assigned to Shift C (14:00–18:00), which requires HVAC...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the automated compliance scheduler for Northstar Facilities, responsible for generating the weekly technician assignment schedule for their flagship data center.
+
+Your task is to produce (1)...          </p>
+          <p class="lt-p">
+Response: Shift	Assigned Technician  
+Shift A	Taylor  
+Shift B	Riley  
+Shift C	Morgan  
+Shift D	Casey  
+Shift E	Devon  
+Shift F	Jordan  
+
+Jordan is assigned to Shift F, which requires Security-Clearance and falls within their eligibility window since their last shift ended at 06:00, and 16:00 is 10 hours later. Taylor, who prefers PM, is assigned to Shift A (early-morning), which is not their preferred time, but this is due to a certification mismatch—no Security-Clearance technician is available for earl...          </p>
+          <p class="lt-p">
+Rubrics: 5/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+514                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+405                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+325                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+249                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+3042                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+7166                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+367                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+406                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+373                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+8192                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+8192                </td>
+                <td>
+0.083                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.083                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+8192                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+8192                </td>
+                <td>
+0.167                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.167                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+327                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+314                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+755                </td>
+                <td>
+447                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

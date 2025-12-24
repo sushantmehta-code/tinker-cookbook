@@ -1,0 +1,4641 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 23</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 23  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T13:17:15  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Max Cost Estimates (Tools, Inventory, Marketing)**  
+- Tools: $5,000 (max)  
+- Inventory: $10,000 (max)  
+- Marketing: $7,000 (max)  
+**Total: $22,000 (max)**
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory with just-in-time ordering to reduce overstock and holding costs.  
+- Use scheduling software to boost technician productivity and cut labor costs per job.  
+- Streamline operations with efficient dispatch and route planning to minimize idle time.
+
+**Marketing – Building R...          </p>
+          <p class="lt-p">
+Rubrics: 35/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.897          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Totals)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+**Sum: $22,000**
+
+**3 Core Ways to Reduce Operating Costs**  
+- Implement just-in-time (JIT) inventory to minimize overstock and free up capital.  
+- Use scheduling software to boost technician productivity by 20–30% and reduce idle time.  
+- Streamline operations with efficient routing and dispatch to maximize service output.
+
+**Marketing – Referral Networks &amp; Engagement Ideas**  
+- Reach out to ins...          </p>
+          <p class="lt-p">
+Rubrics: 37/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.949          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Totals)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+- **Total Max Estimate: $22,000**
+
+**3 Core Ways to Reduce Operating Costs**  
+- Efficient inventory management reduces holding costs by minimizing overstock and using just-in-time ordering.  
+- Specialized scheduling software increases technician productivity by 20–30%, cutting idle time and labor costs.  
+- Streamlined operations through optimized routes and dispatching improve daily job output and...          </p>
+          <p class="lt-p">
+Rubrics: 37/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.949          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Totals)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+*Total Max: $22,000*
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory with just-in-time ordering to minimize overstock and free up capital.  
+- Use scheduling software to boost technician productivity by 20–30% and reduce idle time.  
+- Streamline operations through efficient route planning and resource allocation.
+
+**Marketing – Referral Network &amp; Engagement Ideas**  
+- Reach out to...          </p>
+          <p class="lt-p">
+Rubrics: 37/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.949          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Totals)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+*Sum: $22,000*  
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory with just-in-time ordering to reduce holding costs and free up capital.  
+- Use scheduling software to boost technician productivity and reduce idle time.  
+- Leverage technology for efficient job dispatch and route planning to maximize daily output.  
+
+**Marketing – Building Referral Networks &amp; Engagement**  
+- Reach ...          </p>
+          <p class="lt-p">
+Rubrics: 37/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.949          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Maxes Only – Sum)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+**Total Max: $22,000**
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory with just-in-time ordering to reduce overstock and holding costs.  
+- Use scheduling software to boost technician productivity and reduce idle labor time.  
+- Streamline operations through route optimization and efficient dispatch to increase daily job output.
+
+**Marketing – Building Referral Network &amp; Enga...          </p>
+          <p class="lt-p">
+Rubrics: 37/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.949          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Values &amp; Total)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+**Total (max): $22,000**  
+
+**3 Core Ways to Reduce Operating Costs**  
+- Implement just-in-time (JIT) inventory to minimize overstock and free up capital.  
+- Use scheduling software to boost technician productivity by 20–30% and reduce idle time.  
+- Streamline operations with efficient routing and dispatch to maximize service output.  
+
+**Marketing – Referral Network &amp; Engagement Ideas**  ...          </p>
+          <p class="lt-p">
+Rubrics: 38/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.974          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Totals)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+**Total (max): $22,000**
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory with just-in-time ordering to reduce overstock and holding costs.  
+- Use scheduling software to boost technician productivity and cut idle time.  
+- Streamline operations with efficient route planning and dispatch to maximize daily service output.
+
+**Marketing – Referral Networks &amp; Engagement**  
+- Reach out t...          </p>
+          <p class="lt-p">
+Rubrics: 36/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.923          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Totals)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+*Total Max: $22,000*
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory with just-in-time ordering to minimize overstock and idle capital.  
+- Use scheduling software to boost technician productivity by 20–30% and reduce labor costs.  
+- Streamline operations through efficient routing and dispatch to lower idle time and increase daily output.
+
+**Marketing &amp; Referral Network Building** ...          </p>
+          <p class="lt-p">
+Rubrics: 37/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.949          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Maxes Only – Sum)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+**Total: $22,000**  
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory with just-in-time ordering to reduce overstock and holding costs.  
+- Use scheduling software to boost technician productivity and reduce idle time.  
+- Streamline operations through efficient routing and dispatch to maximize daily service output.  
+
+**Marketing – Referral Network &amp; Engagement Ideas**  
+- Rea...          </p>
+          <p class="lt-p">
+Rubrics: 35/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.897          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Totals)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+**Total (max): $22,000**
+
+**3 Core Ways to Reduce Operating Costs**  
+- Implement just-in-time (JIT) inventory to reduce overstock and free up capital.  
+- Use scheduling software to boost technician productivity by 20–30% and cut idle labor time.  
+- Optimize service routes and dispatch to maximize daily job completions.
+
+**Marketing – Referral Network &amp; Engagement Ideas**  
+- Reach out to insurance...          </p>
+          <p class="lt-p">
+Rubrics: 38/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.974          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Budgets &amp; Total)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+**Total (Max): $22,000**  
+
+**3 Core Ways to Reduce Operating Costs**  
+- Manage inventory efficiently using just-in-time ordering to reduce overstock and holding costs.  
+- Streamline operations with scheduling software to increase technician productivity and reduce idle time.  
+- Leverage technology to automate workflows and minimize labor costs per service.  
+
+**Marketing – Referral Netwo...          </p>
+          <p class="lt-p">
+Rubrics: 35/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.897          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Max Cost Estimates (Tools, Inventory, Marketing)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+- **Total: $22,000**
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory with just-in-time ordering to reduce overstock and holding costs.  
+- Use scheduling software to boost technician productivity and lower labor costs per job.  
+- Implement efficient routing and dispatch to minimize idle time and maximize daily output.
+
+**Marketing – Building Referral Network &amp; ...          </p>
+          <p class="lt-p">
+Rubrics: 37/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.949          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Totals)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+- **Total Max Investment: $22,000**  
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory with just-in-time ordering to minimize holding costs and avoid overstock.  
+- Use scheduling software to boost technician productivity by 20–30% and reduce idle time.  
+- Implement efficient operations through route optimization and streamlined job dispatch.  
+
+**Marketing – Referral Networks &amp; Eng...          </p>
+          <p class="lt-p">
+Rubrics: 36/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.923          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Values &amp; Total)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+**Total (tools + inventory + marketing): $22,000**
+
+**3 Core Ways to Reduce Operating Costs**  
+- Optimize inventory using just-in-time ordering to reduce holding costs and free up capital.  
+- Use scheduling software to improve technician productivity and reduce idle labor time.  
+- Streamline operations with efficient routing and dispatch to maximize service output per day.
+
+**Marketing – R...          </p>
+          <p class="lt-p">
+Rubrics: 38/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.974          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My friend owns an auto-repair company and wants my help expanding into auto-glass repair. I’m not familiar with the industry and trying to figure out if I should undertake this at all. Just starting m...          </p>
+          <p class="lt-p">
+Response: **Cost Estimates (Max Budgets &amp; Total)**  
+- Tools: $5,000  
+- Inventory: $10,000  
+- Marketing: $7,000  
+- **Total (tools, inventory, marketing): $22,000**  
+
+**3 Core Ways to Reduce Operating Costs**  
+- Implement just-in-time (JIT) inventory to minimize overstock and free up capital.  
+- Use scheduling software to improve technician productivity by 20–30% and reduce idle time.  
+- Optimize service routing and dispatch to maximize daily job completion and lower labor costs.  
+
+**Marketing: Bui...          </p>
+          <p class="lt-p">
+Rubrics: 38/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.974          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+195                </td>
+                <td>
+0.897                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.897                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+202                </td>
+                <td>
+0.949                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.949                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+202                </td>
+                <td>
+0.949                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.949                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+186                </td>
+                <td>
+0.949                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.949                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+180                </td>
+                <td>
+0.949                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.949                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+208                </td>
+                <td>
+0.949                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.949                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+192                </td>
+                <td>
+0.974                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.974                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+181                </td>
+                <td>
+0.923                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.923                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+189                </td>
+                <td>
+0.949                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.949                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+216                </td>
+                <td>
+0.897                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.897                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+192                </td>
+                <td>
+0.974                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.974                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+203                </td>
+                <td>
+0.897                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.897                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+182                </td>
+                <td>
+0.949                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.949                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+188                </td>
+                <td>
+0.923                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.923                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+191                </td>
+                <td>
+0.974                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.974                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1404                </td>
+                <td>
+203                </td>
+                <td>
+0.974                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.974                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report: Offensive Performance &amp; Batting Practice Optimization**  
+*Prepared by: Analytics Coordinator*  
+*Date: April 5, 2025*  
+*Audience: Coaching Staff (Hitting Coaches, Managers, Batting Practice Lead)*
+
+---
+
+## 🔍 1. Summary of Player Offensive Performance (Previous Month)
+
+The following table summarizes key offensive metrics from the last month across the five primary hitters in the lineup.
+
+| Player      | AtBats | Hits | HR | RBI | Walks | Ks | AVG |...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report**  
+**Prepared by: Analytics Coordinator**  
+**Date: April 27, 2025**  
+**Subject: Offensive Performance Review &amp; Batting Practice Optimization (April 1–May 1, 2025)**  
+
+---
+
+### **1. Summary of Player Offensive Performance (April 1 – May 1, 2025)**
+
+The team recorded a total of **90 at-bats** across the month, with a team average of **.344 batting average (BA)**, **.111 slugging percentage (SLG)**, and **.311 on-base plus slugging (OPS)**. Key stan...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Internal Analytics Report: Offensive Performance &amp; Batting Practice Optimization**  
+**Team:** Riverside Hawks  
+**Prepared by:** Analytics Coordinator  
+**Date:** April 5, 2025  
+**Reporting Period:** March 1–April 3, 2025  
+
+---
+
+## **1. Summary of Player Offensive Performance (March 1–April 3)**
+
+The following table summarizes key offensive metrics for each player over the past month:
+
+| Player       | AtBats | Hits | HR | RBI | Avg (Hits/AB) | AVG (1B/AB) | OBP | Slugging (%) | wOBA* |
+|--...          </p>
+          <p class="lt-p">
+Rubrics: 17/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.944          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report**  
+*Prepared by: Analytics Coordinator*  
+*Date: April 5, 2025*  
+*For: Coaching Staff – Offensive Development &amp; Batting Practice Optimization*
+
+---
+
+### **Executive Summary**
+
+This report provides a comprehensive assessment of offensive performance across the Riverside Hawks over the past month using integrated data from three primary sources:  
+1. **Team Batting Logs** (AtBats, Hits, HRs, RBIs, Walks, Ks)  
+2. **Pitch-Type Outcomes** (Breakdown by...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **RIVERSIDE HAWKS – INTERNAL COACHING ANALYTICS REPORT**  
+**Date:** April 26, 2025  
+**Prepared For:** Coaching Staff – Hitting and Strategy Committee  
+**Prepared By:** Analytics Coordinator  
+
+---
+
+### **Executive Summary**
+
+This report synthesizes offensive performance data from the past month (March 1 – April 25) across three core datasets: player batting logs, pitch-type outcome frequencies, and swing/execution metrics. The analysis identifies key patterns in hitting efficiency by pitch ty...          </p>
+          <p class="lt-p">
+Rubrics: 17/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.944          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report**  
+**Date:** April 28, 2025  
+**Prepared by:** Analytics Coordinator  
+**Audience:** Coaching Staff (Hitting Coaches, Pitching Coach, Manager)  
+
+---
+
+## **1. Summary of Player Offensive Performance (Last Month)**
+
+Based on the team batting logs, we observed the following key performance trends across the month:
+
+| Player     | AB | Hits | HR | RBIs | Walks | K | Avg | OBP | SLG | ISO | Batting Efficiency (Hits/AB) |
+|-----------|----|------|----|--...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **RIVERSIDE HAWKS – INTERNAL COACHING ANALYTICS REPORT**  
+*Prepared by: Analytics Coordinator*  
+*Date: April 5, 2025*  
+*Subject: Player Offensive Performance, Pitch-Type Efficiency, and Batting Practice Optimization*
+
+---
+
+## **1. Summary of Player Offense (Past Month)**
+
+The following table summarizes offensive performance across the team’s 120 at-bats (12 total players × 10 plate appearances average approximated) over the last month. Key metrics include batting average, on-base percentage (...          </p>
+          <p class="lt-p">
+Rubrics: 17/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.944          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report**  
+**Prepared by: Analytics Coordinator**  
+**Date: April 27, 2024**  
+**Subject: Offensive Performance Analysis &amp; Batting Practice Optimization Recommendations**  
+
+---
+
+## 📌 Executive Summary
+
+This report provides a comprehensive analysis of the Riverside Hawks’ offensive performance over the past month using integrated data from three key sources:  
+1. **Team Batting Logs** (at-bat outcomes: hits, home runs, RBIs, walks, strikeouts)  
+2. **Pitch-...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Internal Analytics Report: Offensive Performance &amp; Batting Practice Optimization**  
+*Prepared for the Riverside Hawks Coaching Staff*  
+*Date: April 27, 2024*  
+*Prepared by: Analytics Coordinator*  
+
+---
+
+## **Executive Summary**
+
+This report synthesizes offensive performance data from the previous month across three key data sources—team batting logs, pitch-type outcomes, and swing-decision metrics—to provide a data-driven assessment of player hitting efficiency, identify patterns in perfor...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report**  
+**Prepared by: Analytics Coordinator**  
+**Date: April 26, 2024**  
+**Subject: Offensive Performance Analysis &amp; Batting Practice Adjustments**
+
+---
+
+## **Executive Summary**
+
+This report provides a data-driven analysis of the Riverside Hawks&#x27; offensive performance over the last month, with a focus on **player-level hitting efficiency**, **pitch-type performance patterns**, and **decision-making behavior** during at-bats. By integrating three data...          </p>
+          <p class="lt-p">
+Rubrics: 17/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.944          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report**  
+**Date:** April 5, 2025  
+**Prepared by:** Analytics Coordinator  
+**Audience:** Head Coach, Hitting Coach, Assistant Coaches, Player Development Team  
+
+---
+
+## **Executive Summary**
+
+This report integrates data from three key datasets—team batting logs, pitch-type outcome metrics, and swing-decision behavior—to provide a comprehensive evaluation of offensive performance over the previous month. It identifies trends in hitting efficiency across ...          </p>
+          <p class="lt-p">
+Rubrics: 17/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.944          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Performance &amp; Strategic Adjustment Report**  
+*Prepared by: Analytics Coordinator*  
+*Date: April 27, 2024*  
+*For: Coaching Staff – Batting Strategy, Player Development, and In-Game Decision Optimization*
+
+---
+
+## **Executive Summary**
+
+This report synthesizes offensive performance data from team batting logs, pitch-type outcomes, and swing-decision metrics to deliver actionable insights for our current batting practice structure. We analyze player efficiency across...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report**  
+**Prepared by: Analytics Coordinator**  
+**Date: April 27, 2024**  
+**Subject: Offensive Performance Review &amp; Batting Practice Optimization**  
+
+---
+
+### **Executive Summary**
+
+This report synthesizes data from three key datasets—team batting logs, pitch-type outcomes, and swing-decision metrics—to evaluate offensive performance, identify patterns in hitting efficiency across pitch types, and recommend data-driven adjustments to our current batti...          </p>
+          <p class="lt-p">
+Rubrics: 16/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.889          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report**  
+*Prepared by: Analytics Coordinator*  
+*Date: April 5, 2024*  
+*For: Head Coach, Hitting Coach, Assistant Coaches &amp; Batting Practice Staff*
+
+---
+
+## **1. Summary of Player Offensive Performance (Last Month)**
+
+### **Overall Team Metrics**
+- **Team AtBats (AB):** 104  
+- **Team Hits:** 34  
+- **Team Home Runs:** 8  
+- **Team RBIs:** 27  
+- **Team Walks:** 9  
+- **Team Strikeouts:** 38  
+
+This marks a **+12% increase in batting average** (from .245...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **Riverside Hawks – Internal Analytics Report**  
+**Date:** April 27, 2024  
+**Prepared by:** Analytics Coordinator  
+**Audience:** Head Coach, Hitting Coordinator, Assistant Coaches  
+
+---
+
+## **Executive Summary**
+
+This report provides a comprehensive analysis of the Riverside Hawks’ offensive performance over the past month, integrating data from **batting logs**, **pitch-type outcomes**, and **swing-decision metrics**. The goal is to identify patterns in hitting efficiency across pitch types...          </p>
+          <p class="lt-p">
+Rubrics: 17/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.944          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: You are the analytics coordinator for the collegiate baseball team, the Riverside Hawks. I need you to draft a comprehensive internal report for the coaching staff that (1) summarizes player offensive...          </p>
+          <p class="lt-p">
+Response: **RIVERSIDE HAWKS – INTERNAL PERFORMANCE ANALYSIS &amp; BATTING PRACTICE REVISION**  
+*Prepared by: Analytics Coordinator*  
+*Date: April 5, 2024*  
+*For: Head Coach, Hitting Coach, and Assistant Coaches*
+
+---
+
+## **1. Summary of Offensive Performance (Last Month)**
+
+We analyze the team’s offensive output over the past month using data from the **team batting logs**, **pitch-type outcomes**, and **swing-decision metrics**.
+
+### Key Performance Metrics (Team-Level Averages):
+| Statistic | Team Averag...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+2878                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+2709                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3353                </td>
+                <td>
+0.944                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.944                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+2884                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3524                </td>
+                <td>
+0.944                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.944                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3184                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3512                </td>
+                <td>
+0.944                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.944                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3219                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3801                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3352                </td>
+                <td>
+0.944                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.944                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3138                </td>
+                <td>
+0.944                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.944                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3030                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3150                </td>
+                <td>
+0.889                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.889                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3077                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+3370                </td>
+                <td>
+0.944                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.944                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+581                </td>
+                <td>
+2387                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates are verified as follows: DataStreamCo renewal is 03-01-2026, SwiftParcel has NO DATE PROVIDED, PeopleHub renewal is 11-30-2025, Northridge Support renewal is 12-15-2025, MetricForge renewal is 10-02-2026, Onboardly renewal is 01-09-2025, and BlueSignal renewal is 05-30-2026. All renewal dates are in the format MM-DD-YYYY.  
+Service category verification confirms that DataStreamCo is IT Services, SwiftParcel is Logistics, PeopleHub is classified as...          </p>
+          <p class="lt-p">
+Rubrics: 24/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.923          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates are verified in the format MM-DD-YYYY: DataStreamCo renewal is 03-01-2026, SwiftParcel has NO DATE PROVIDED, PeopleHub renewal is 11-30-2025, Northridge Support renewal is 12-15-2025, MetricForge renewal is 10-02-2026, Onboardly renewal is 01-09-2025, and BlueSignal renewal is 05-30-2026. Service categories are evaluated against approved ones: DataStreamCo is IT Services, SwiftParcel is Logistics, PeopleHub is listed as Team Apps, which is not an ...          </p>
+          <p class="lt-p">
+Rubrics: 23/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.885          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo are in the format MM-DD-YYYY: 03-01-2026. Renewal date for SwiftParcel is missing and is therefore recorded as NO DATE PROVIDED. Renewal date for PeopleHub is 11-30-2025, which is in the correct format. Renewal date for Northridge Support is 12-15-2025, correctly formatted. Renewal date for MetricForge is 10-02-2026, correctly formatted. Renewal date for Onboardly is 01-09-2025, correctly formatted. Renewal date for BlueSignal is ...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates are verified and formatted as MM-DD-YYYY: DataStreamCo renewal is 03-01-2026, SwiftParcel has NO DATE PROVIDED, PeopleHub renewal is 11-30-2025, Northridge Support renewal is 12-15-2025, MetricForge renewal is 10-02-2026, Onboardly renewal is 01-09-2025, and BlueSignal renewal is 05-30-2026.  
+Service categories are confirmed against approved categories: DataStreamCo is IT Services, SwiftParcel is Logistics, PeopleHub is listed as Team Apps which ...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo are in the format MM-DD-YYYY: 03-01-2026. Renewal date for SwiftParcel is missing and explicitly noted as NO DATE PROVIDED. Renewal date for PeopleHub is 11-30-2025, formatted correctly. Renewal date for Northridge Support is 12-15-2025, formatted correctly. Renewal date for MetricForge is 10-02-2026, formatted correctly. Renewal date for Onboardly is 01-09-2025, formatted correctly. Renewal date for BlueSignal is 05-30-2026, form...          </p>
+          <p class="lt-p">
+Rubrics: 23/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.885          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo are in the format MM-DD-YYYY: 03-01-2026. Renewal date for SwiftParcel is missing and explicitly stated as NO DATE PROVIDED. Renewal date for PeopleHub is 11-30-2025, correctly formatted. Renewal date for Northridge Support is 12-15-2025, correctly formatted. Renewal date for MetricForge is 10-02-2026, correctly formatted. Renewal date for Onboardly is 01-09-2025, correctly formatted. Renewal date for BlueSignal is 05-30-2026, cor...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo, PeopleHub, Northridge Support, MetricForge, and Onboardly are in the format MM-DD-YYYY. The renewal date for SwiftParcel is missing and is explicitly noted as NO DATE PROVIDED. Contract values are expressed in USD with correct dollar sign and comma formatting: $210,000, $62,500, $48,000, $310,000, $19,500, and $80,000. SwiftParcel&#x27;s contract value is listed in GBP (£35,000), which does not conform to the required USD formatting; ...          </p>
+          <p class="lt-p">
+Rubrics: 20/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo are formatted as 03-01-2026, which conforms to MM-DD-YYYY. SwiftParcel has no renewal date provided. The renewal date for PeopleHub is 11-30-2025, which is in the correct format. Northridge Support&#x27;s renewal date of 12-15-2025 is valid. MetricForge&#x27;s renewal date of 10-02-2026 is in the correct format. Onboardly’s renewal date of 01-09-2025 is properly formatted. BlueSignal’s renewal date of 05-30-2026 is correctly formatted. Serv...          </p>
+          <p class="lt-p">
+Rubrics: 20/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo are in the format MM-DD-YYYY: 03-01-2026. Renewal date for SwiftParcel is missing and explicitly stated as &quot;NO DATE PROVIDED&quot;. Renewal date for PeopleHub is 11-30-2025, formatted correctly. Renewal date for Northridge Support is 12-15-2025, formatted correctly. Renewal date for MetricForge is 10-02-2026, formatted correctly. Renewal date for Onboardly is 01-09-2025, formatted correctly. Renewal date for BlueSignal is 05-30-2026, f...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo are in the format MM-DD-YYYY: 03-01-2026. Renewal date for SwiftParcel is missing and thus marked as NO DATE PROVIDED. Renewal date for PeopleHub is 11-30-2025, correctly formatted. Renewal date for Northridge Support is 12-15-2025, correctly formatted. Renewal date for MetricForge is 10-02-2026, correctly formatted. Renewal date for Onboardly is 01-09-2025, correctly formatted. Renewal date for BlueSignal is 05-30-2026, correctly...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo are in the format MM-DD-YYYY as 03-01-2026. Renewal date for SwiftParcel is missing and is therefore marked as NO DATE PROVIDED. Renewal date for PeopleHub is 11-30-2025, formatted correctly. Renewal date for Northridge Support is 12-15-2025, formatted correctly. Renewal date for MetricForge is 10-02-2026, formatted correctly. Renewal date for Onboardly is 01-09-2025, formatted correctly. Renewal date for BlueSignal is 05-30-2026,...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo are in the format MM-DD-YYYY: 03-01-2026. Renewal date for SwiftParcel is missing and marked as NO DATE PROVIDED. Renewal date for PeopleHub is 11-30-2025, which is in the correct format. Renewal date for Northridge Support is 12-15-2025, correctly formatted. Renewal date for MetricForge is 10-02-2026, correctly formatted. Renewal date for Onboardly is 01-09-2025, correctly formatted. Renewal date for BlueSignal is 05-30-2026, cor...          </p>
+          <p class="lt-p">
+Rubrics: 21/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.808          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates are verified and formatted as MM-DD-YYYY: DataStreamCo renewal is 03-01-2026, SwiftParcel has NO DATE PROVIDED, PeopleHub renewal is 11-30-2025, Northridge Support renewal is 12-15-2025, MetricForge renewal is 10-02-2026, Onboardly renewal is 01-09-2025, and BlueSignal renewal is 05-30-2026. Service categories are validated against approved categories: DataStreamCo is IT Services, SwiftParcel is Logistics, PeopleHub is classified as Team Apps, whi...          </p>
+          <p class="lt-p">
+Rubrics: 23/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.885          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo are in the format MM-DD-YYYY as 03-01-2026. Renewal date for SwiftParcel is missing and is explicitly noted as NO DATE PROVIDED. Renewal date for PeopleHub is 11-30-2025, formatted correctly. Renewal date for Northridge Support is 12-15-2025, correctly formatted. Renewal date for MetricForge is 10-02-2026, properly formatted. Renewal date for Onboardly is 01-09-2025, correctly formatted. Renewal date for BlueSignal is 05-30-2026, ...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates are verified and formatted in MM-DD-YYYY: DataStreamCo renewal is 03-01-2026, SwiftParcel has NO DATE PROVIDED, PeopleHub renewal is 11-30-2025, Northridge Support renewal is 12-15-2025, MetricForge renewal is 10-02-2026, Onboardly renewal is 01-09-2025, and BlueSignal renewal is 05-30-2026. Service categories are confirmed: DataStreamCo is IT Services, SwiftParcel is Logistics, PeopleHub is listed as Team Apps which is not in the approved categor...          </p>
+          <p class="lt-p">
+Rubrics: 23/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.885          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to prepare a consolidated vendor-risk assessment summary for our quarterly compliance review. This should cover the seven vendors listed below and produce an output I can paste directly int...          </p>
+          <p class="lt-p">
+Response: (A) Data Accuracy Check  
+Contract renewal dates for DataStreamCo, PeopleHub, Northridge Support, MetricForge, and Onboardly are in the format MM-DD-YYYY. The renewal date for SwiftParcel is missing and is marked as &quot;NO DATE PROVIDED.&quot; All service categories are verified: DataStreamCo is classified under IT Services, SwiftParcel under Logistics, PeopleHub is classified as Team Apps which does not match any approved category and thus is marked as &quot;UNCLASSIFIED: REVIEW REQUIRED,&quot; Northridge Suppor...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+787                </td>
+                <td>
+0.923                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.923                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+719                </td>
+                <td>
+0.885                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.885                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+853                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+711                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+899                </td>
+                <td>
+0.885                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.885                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+791                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+650                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+917                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+922                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+884                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+829                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+845                </td>
+                <td>
+0.808                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.808                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+796                </td>
+                <td>
+0.885                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.885                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+894                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+747                </td>
+                <td>
+0.885                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.885                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+637                </td>
+                <td>
+622                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Forward Plan&lt;/subject&gt;
+
+&lt;greeting&gt;Dear Members of the Board of Overseers,&lt;/greeting&gt;
+
+&lt;intro&gt;This email provides a concise summary of Harbor Point Community Church’s operational performance through the 2025 fiscal year and outlines key strategic initiatives for the coming year.&lt;/intro&gt;
+
+&lt;year1_summary&gt;Weekly attendance began at 74 and increased to 231 by year-end, with an average of 162 across the full year. Attendance demographics show 21% aged...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;
+&lt;subject&gt;2025 Review and 2026 Direction&lt;/subject&gt;
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;
+
+&lt;intro&gt;Harbor Point Community Church completed its first full year of operation in 2025 with measurable growth in attendance, financial performance, and community programming. The year established foundational services and engagement models that will inform strategic priorities for the upcoming year.&lt;/intro&gt;
+
+&lt;year1_summary&gt;Weekly attendance rose from 74 to 231, with an average of 162 across...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Outlook&lt;/subject&gt;
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;
+
+&lt;intro&gt;Harbor Point Community Church completed its first full year of operations in 2025 with measurable growth in attendance, financial stability, and community programming. The year established foundational services, operational systems, and measurable engagement across demographic groups. This briefing outlines the performance and strategic direction for the coming year.&lt;/intro...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Direction&lt;/subject&gt;
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;
+
+&lt;intro&gt;The board is provided with a consolidated operational overview of Harbor Point Community Church’s first full year in 2025, including key performance indicators, strategic milestones, and planned initiatives for 2026.&lt;/intro&gt;
+
+&lt;year1_summary&gt;Weekly attendance began at 74 and increased to 231 by year-end, averaging 162 over the course of the year. Attendance distribution in...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Outlook&lt;/subject&gt;
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;
+
+&lt;intro&gt;The Church’s first full year under operational review completed in December 2025, with measurable progress across attendance, giving, and community programming. All metrics reflect consistent movement toward structured growth and operational clarity.&lt;/intro&gt;
+
+&lt;year1_summary&gt;Weekly attendance started at 74 and increased to 231 by year’s end, averaging 162 across the year. At...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;subject&gt;Harbor Point 2025 Summary and 2026 Direction&lt;/subject&gt;  
+
+&lt;greeting&gt;Dear Members of the Board of Overseers,&lt;/greeting&gt;  
+
+&lt;intro&gt;The first full year of Harbor Point Community Church began with 74 weekly attenders and concluded with 231, averaging 162 across the year. Attendance reflected a demographic distribution of 21% ages 18–27, 38% ages 28–40, 26% ages 41–55, and 15% ages 56 and over. The church achieved a 37% increase in giving compared to initial projections, with 57% o...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;
+&lt;subject&gt;Harbor Point 2025 Summary and 2026 Pathway&lt;/subject&gt;
+
+&lt;greeting&gt;Dear Members of the Board of Overseers,&lt;/greeting&gt;
+
+&lt;intro&gt;The first full year of Harbor Point Community Church has been marked by measurable engagement growth and structured program development across demographics and operational functions.&lt;/intro&gt;
+
+&lt;year1_summary&gt;Weekly attendance began at 74 and increased to 231 by year-end, with an average of 162 attenders across the period. Attendance by age group included 21% ...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Plan&lt;/subject&gt;  
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;  
+
+&lt;intro&gt;Harbor Point Community Church completed its first full year of operation in 2025 with measurable growth in attendance, participation, and financial stability. The church convened at a level of consistent engagement across demographic segments and achieved sustained operational outcomes through structured programming and fiscal discipline. Attendance increased from 74 to ...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Direction&lt;/subject&gt;  
+
+&lt;greeting&gt;Dear Members of the Board of Overseers,&lt;/greeting&gt;  
+
+&lt;intro&gt;Harbor Point Community Church completed its first full year of operation in 2025 with measurable progress across attendance, financial performance, and community programming. The year initiated with a foundational operational framework and concluded with expanded participation and structural developments aligned with institutional sustainability goals...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Plan&lt;/subject&gt;  
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;  
+
+&lt;intro&gt;Harbor Point Community Church completed its first full year of operation in 2025 with measurable growth in attendance, giving patterns, and program deployment across key community initiatives.&lt;/intro&gt;  
+
+&lt;year1_summary&gt;Weekly attendance increased from 74 to 231, with an average of 162 across the year, reflecting broad demographic participation across age groups. The atte...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Direction&lt;/subject&gt;
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;
+
+&lt;intro&gt;The organization completed its first full year of operation in 2025 with measurable growth in attendance, financial performance, and community programming.&lt;/intro&gt;
+
+&lt;year1_summary&gt;Weekly attendance began at 74 and peaked at 231, with consistent engagement across age groups including 21% aged 18–27, 38% aged 28–40, 26% aged 41–55, and 15% aged 56 and older. Program initiat...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Priorities&lt;/subject&gt;  
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;  
+
+&lt;intro&gt;Harbor Point Community Church’s first full year of operation concluded in 2025 with measurable engagement across attendance, giving, and community programming. The church established foundational initiatives and achieved financial stability through disciplined budgeting and diversified revenue streams. Operational effectiveness was supported by consistent volunteer...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Plan&lt;/subject&gt;  
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;  
+
+&lt;intro&gt;Harbor Point Community Church completed its first full year of operation in 2025 with established programming, measurable growth in attendance and financial performance, and a foundation for further community and operational development.&lt;/intro&gt;  
+
+&lt;year1_summary&gt;Weekly attendance began at 74 and rose to 231 by year-end, with a year-averaged count of 162, reflecting part...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Direction&lt;/subject&gt;  
+
+&lt;greeting&gt;Dear Members of the Board of Overseers,&lt;/greeting&gt;  
+
+&lt;intro&gt;Harbor Point Community Church completed its first full year of operation in 2025 with measurable growth in attendance, financial performance, and community programming. The fiscal year demonstrated operational stability and a capacity to scale key initiatives in alignment with organizational objectives. This briefing outlines the performance and strat...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Outlook&lt;/subject&gt;  
+
+&lt;greeting&gt;Dear Board of Overseers,&lt;/greeting&gt;  
+
+&lt;intro&gt;Harbor Point Community Church completed its first full year in 2025 with measurable growth in attendance, financial performance, and community programming. The period established foundational operational structures that support scalability and stewardship. Key developments were implemented with clear reporting lines and performance benchmarks. Attendance trends indica...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting a board-ready briefing email summarizing Harbor Point Community Church’s first full year (2025) and outlining our direction for 2026. This email is for our Board of Overseers...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;
+&lt;subject&gt;Harbor Point 2025 Review and 2026 Direction&lt;/subject&gt;
+
+&lt;greeting&gt;Dear Members of the Board of Overseers,&lt;/greeting&gt;
+
+&lt;intro&gt;Harbor Point Community Church completed its first full operating year in 2025 with measurable growth in attendance, engagement, and financial performance. The congregation began the year with 74 weekly attenders and concluded with 231, demonstrating consistent expansion across demographic groups. Attendance was distributed across age cohorts, with a notable...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+417                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+455                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+416                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+437                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+400                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+467                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+423                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+515                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+461                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+431                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+403                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+546                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+450                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+572                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+466                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+691                </td>
+                <td>
+524                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

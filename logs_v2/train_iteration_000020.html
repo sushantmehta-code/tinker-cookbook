@@ -1,0 +1,4907 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 20</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 20  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T13:03:06  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: nul...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associates&quot;: []
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associates&quot;: []
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: []
+  },
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: []
+  },
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: []
+  },
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: []
+  },
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associates&quot;: []
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associates&quot;: []
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associates&quot;: []
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: nul...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: []
+  },
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: []
+  },
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: nul...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associates&quot;: []
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associates&quot;: []
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m recently into play-by-mail games like the examples below and I want to do more research. Could you help me extract all games that contain both publisher and associates released in the 1980s (excep...          </p>
+          <p class="lt-p">
+Response: ```json
+[
+  {
+    &quot;game&quot;: &quot;Australian Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;European Empires&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;Soccer Stats&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games&quot;,
+    &quot;associate&quot;: null
+  },
+  {
+    &quot;game&quot;: &quot;Dark Age&quot;,
+    &quot;released&quot;: null,
+    &quot;publisher&quot;: &quot;Ab Initio Games &amp; Software Simulations&quot;,
+    &quot;associate&quot;: nul...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+3198                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2812                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2799                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+3141                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2864                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+3549                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2864                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2899                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2801                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2800                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+3013                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+3332                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+3140                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2750                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2802                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2113                </td>
+                <td>
+2735                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Great question — this is a real-world scheduling optimization problem with constraints. Let&#x27;s break it down and build a **logical, fair, and efficient schedule** for the **first 3 months of 2026 (January, February, March)** covering the employees across their teams and respecting all your constraints.
+
+---
+
+### 🔍 **Constraints Recap**
+
+1. **Every employee must work in the office at least once per week.**
+2. **No team can have only 1 person in the office on any given day.** → Minimum of **2 peopl...          </p>
+          <p class="lt-p">
+Rubrics: 1/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.077          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed problem. Let&#x27;s break it down and create a **realistic, fair, and compliant schedule** for the **first 3 months of 2026 (January, February, March)** that satisfies all the constraints, while **minimizing the number of employees who are required to work in the office on days they don’t want to**.
+
+---
+
+### 🔍 Constraints Recap:
+
+1. **Each employee must work in the office at least once per week.**
+2. **Employees who answered “y” to &quot;Prefers not to come to office extra&quot; sho...          </p>
+          <p class="lt-p">
+Rubrics: 1/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.077          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s create a **work-from-home (WFH) schedule for the first 3 months of 2026 (January–March)** that satisfies all constraints while minimizing the number of employees who are required to come into the office *beyond* the required one day per week.
+
+---
+
+### ✅ **Constraints Recap**
+
+1. **Each employee must work in the office at least once per week**.
+2. Employees who **strongly prefer not to come to the office extra** (marked `&quot;y&quot;`) should **not** be scheduled on office days beyond the required ...          </p>
+          <p class="lt-p">
+Rubrics: 1/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.077          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s work through this step-by-step to create a **realistic, fair, and compliant work schedule** for the first 3 months of 2026 (January, February, March), based on the constraints and employee preferences.
+
+---
+
+### 🔍 **Constraints &amp; Requirements**
+
+1. **Every employee must work in the office at least once per week.**
+2. **Employees who answered &quot;y&quot; to &quot;prefers not to come to office extra&quot; should not be scheduled for extra office days beyond their required minimum.**
+3. **Each team must...          </p>
+          <p class="lt-p">
+Rubrics: 5/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.385          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Great — let&#x27;s create a **realistic, fair, and constraint-satisfying work-from-home (WFH) schedule** for the first **three months of 2026** based on your detailed requirements.
+
+---
+
+### ✅ **Requirements Recap**
+1. **Every employee must work in the office at least once per week**.
+2. **No team can have only 1 person in the office** — **minimum 2 per team per day**.
+3. **No team can have zero office days more than once per month** — *but* we are to **limit days with zero office attendees per team ...          </p>
+          <p class="lt-p">
+Rubrics: 10/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s solve this step-by-step to create a **smarter, fair, and compliant schedule** for the first 3 months of 2026 (January, February, March) that satisfies all requirements while **minimizing the number of employees who are required to work in the office beyond their needed day** — especially those who *strongly prefer not to* come into the office extra.
+
+---
+
+## 🔍 Step 1: Understand the Constraints
+
+### Key Rules:
+1. **Each employee must work at the office at least once per week.**
+2. **Each t...          </p>
+          <p class="lt-p">
+Rubrics: 5/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.385          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s build a **practical, fair, and compliant office schedule** for the first **3 months of 2026 (January, February, March)** for your team-based flexible remote policy, with the following constraints and goals:
+
+---
+
+### ✅ **Key Constraints:**
+
+1. **Each employee must work at the office at least once per week.**
+2. **Each team must have at least 2 people working in the office on any given day.**
+3. **Avoid having only 1 person in the office per team — minimum of 2.**
+4. **Days with zero...          </p>
+          <p class="lt-p">
+Rubrics: 7/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.538          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s go step by step to build a **fair, compliant, and optimized office work schedule** for the first three months of 2026 (January, February, March) for your company&#x27;s teams.
+
+---
+
+### ✅ **Constraints Summary**
+
+1. **Every employee must work at least 1 day in the office per week.**
+2. **Each team must have at least 2 people scheduled to work in the office each day (no single-person days).**
+3. **No team should have 0 people in the office on more than one day per month.**  
+   (i.e., at ...          </p>
+          <p class="lt-p">
+Rubrics: 10/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re asking for a **realistic, fair, and optimized office scheduling plan** over the first 3 months of 2026 (January, February, March), with clear constraints and a prioritization of minimizing office days for employees who **don’t want to come in extra**.
+
+---
+
+### ✅ **Constraints Recap:**
+
+1. **Every employee must work in the office at least once per week.**
+2. **Each team must have at least 2 people in the office on any given day.** (No solo office days)
+3. **No team should...          </p>
+          <p class="lt-p">
+Rubrics: 7/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.538          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Thanks for the detailed setup! Let&#x27;s break down the problem and create a realistic, optimized **3-month (January–March 2026) office schedule** that meets **all your constraints**, while **minimizing the number of employees who are required to come to the office beyond the minimum (1 day/week)**, especially those who **strongly prefer not to**.
+
+---
+
+### ✅ Goals and Constraints Recap
+
+1. **Everyone must work at the office at least once per week.**
+2. **Each team must have at least 2 people in the...          </p>
+          <p class="lt-p">
+Rubrics: 10/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s break down this scheduling problem step by step to create a **realistic, fair, and efficient 3-month (January–March 2026) office schedule** that meets all constraints while **minimizing forced office days for employees who don’t want them**.
+
+---
+
+### ✅ **Constraints Recap**
+
+1. **Every employee must work at the office at least once per week**.
+2. **Employees who answered &quot;y&quot; to &quot;prefers not to come extra&quot; should NOT be scheduled extra days.**
+3. **Each team must have at least 2 people sch...          </p>
+          <p class="lt-p">
+Rubrics: 2/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.154          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: We&#x27;re tasked with creating a **3-month office schedule (January–March 2026)** for a team-based workforce with the following constraints:
+
+---
+
+### ✅ **Constraints &amp; Requirements**
+
+1. **Each employee works at least one day in the office per week.**
+2. **Must have at least 2 people in the office on any day** (no single-person days).
+3. **Avoid scheduling people who *prefer not to come extra*** (i.e., &quot;y&quot; in the questionnaire) for days beyond their required 1.
+4. **Minimize forcing people who say ...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re looking to create a practical, fair, and policy-compliant **monthly office schedule for the first 3 months of 2026 (January, February, March)** for your employees, based on:
+
+---
+
+### ✅ **Constraints &amp; Goals**
+
+1. **Every employee must work in the office at least once per week.**
+2. **No team has fewer than 2 employees scheduled to work in the office on any given day.**
+3. **Each team can have 0 office days, but no more than once per month.**
+4. **Prioritize employees who...          </p>
+          <p class="lt-p">
+Rubrics: 7/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.538          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re looking for a **balanced, fair, and compliant office schedule** over the first **3 months of 2026**, that:
+
+✅ Ensures **everyone works at least 1 day per week** in the office  
+✅ **Avoids having only 1 person in the office** on any day (minimum 2 per team)  
+✅ **Minimizes forcing employees who don&#x27;t want to come extra** to go to the office  
+✅ **Limits days with 0 office staff per team to once per month**  
+✅ Satisfies all team constraints and preferences  
+
+---
+
+### Step...          </p>
+          <p class="lt-p">
+Rubrics: 6/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.462          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Great question! You&#x27;re looking for a **realistic, fair, and compliant office scheduling plan** for the first 3 months of 2026 (January, February, March) with the following **constraints**:
+
+---
+
+### ✅ **Constraints:**
+
+1. **Every employee must work at the office at least 1 day per week.**  
+2. **No team may have only 1 person scheduled to work in the office on any given day.**  
+   → Must have **at least 2 people per team per day** when office work is scheduled.  
+3. **No team should have 0 peop...          </p>
+          <p class="lt-p">
+Rubrics: 11/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a company with a flexible WFH policy, and I&#x27;m in charge of deciding which days people should be schedules to work at the office vs work at home.
+Every employee has to work at the office at ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s work through this step-by-step to create a **fair, efficient, and compliant office schedule** for the first 3 months of **2026 (January, February, March)** for your company’s flexible WFH policy.
+
+---
+
+## 🎯 **Objective Summary**
+
+We must satisfy the following constraints:
+
+1. **Everyone works at least 1 day per week in the office.**
+2. **No team can have only 1 person in the office on any day** → *Minimum of 2 people per team per day.*
+3. **If an employee prefers *not* to come to the offic...          </p>
+          <p class="lt-p">
+Rubrics: 2/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.154          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+8108                </td>
+                <td>
+0.077                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.077                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+7280                </td>
+                <td>
+0.077                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.077                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+8192                </td>
+                <td>
+0.077                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.077                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+7342                </td>
+                <td>
+0.385                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.385                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+8077                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+6403                </td>
+                <td>
+0.385                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.385                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+5898                </td>
+                <td>
+0.538                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.538                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+6937                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+7017                </td>
+                <td>
+0.538                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.538                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+7343                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+8192                </td>
+                <td>
+0.154                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.154                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+7531                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+4175                </td>
+                <td>
+0.538                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.538                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+6870                </td>
+                <td>
+0.462                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.462                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+8192                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+473                </td>
+                <td>
+8192                </td>
+                <td>
+0.154                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.154                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Manufacturing of Aluminum 6061 Housing Component HX-1127 (Revision B)  
+
+**Purpose**  
+This standard operating procedure (SOP) documents the fabrication process for the aluminum 6061 housing component, part HX-1127, Revision B, with the primary objective of evaluating whether the revised machining sequence reduces chatter during the milling operation compared to Revision A. The process was performed on Monday, August 5, 2024, from 8:42 AM to 9:27 AM, during a controlled fabri...          </p>
+          <p class="lt-p">
+Rubrics: 34/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.850          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Aluminum Housing Component HX-1127 (Revision B)
+
+**Purpose**  
+This procedure documents the successful fabrication of Part HX-1127, Revision B, a housing component designed to evaluate the impact of a revised machining sequence on chatter reduction during milling operations. The manufacturing test was performed on Monday, April 8, 2024, at 8:42 AM, with the primary objective of determining whether the updated milling sequence reduces vibration and chatter—parti...          </p>
+          <p class="lt-p">
+Rubrics: 34/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.850          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Aluminum Housing Component HX-1127 (Revision B)
+
+**Purpose**  
+This standard operating procedure (SOP) documents the fabrication and evaluation of the aluminum housing component HX-1127 (Revision B), performed on April 27, 2024, at 8:42 AM. The primary objective of this fabrication test was to evaluate whether a revised machining sequence reduces chatter during the milling operation, which was a known issue in the prior revision (Revision A). Chatter can lead t...          </p>
+          <p class="lt-p">
+Rubrics: 33/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.825          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Manufacturing of Housing Component HX-1127 (Revision B) – Chatter Reduction Evaluation  
+
+**Purpose**  
+This procedure documents the fabrication of Part HX-1127 (Revision B), a housing component designed to evaluate the effectiveness of a revised machining sequence in reducing chatter during the milling operation. The test was performed on Monday, April 8, 2024, at 8:42 AM, with the primary objective of comparing vibration characteristics and surface finish outcomes between R...          </p>
+          <p class="lt-p">
+Rubrics: 31/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.775          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP-HX-1127-RB: Fabrication and Evaluation of Aluminum Housing Component (Revision B) – Chatter Reduction Assessment
+
+**Purpose**  
+This standard operating procedure (SOP) documents the fabrication and evaluation of the new housing component, part prototype HX-1127, Revision B, to assess whether the revised machining sequence reduces chatter during the milling operation. The manufacturing was performed on Monday, April 8, 2024, at 8:42 AM, in the Mechanical Fabrication Lab. The prima...          </p>
+          <p class="lt-p">
+Rubrics: 31/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.775          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP - Fabrication of Aluminum Housing Component HX-1127 (Revision B)
+
+**Purpose**  
+This standard operating procedure (SOP) documents the manufacturing process for the aluminum housing component HX-1127, Revision B, which was performed on April 26, 2024, at 8:42 AM. The primary objective of this fabrication test was to evaluate whether the new machining sequence reduces chatter during the critical milling step compared to Revision A. Chatter, a common issue in milling operations that...          </p>
+          <p class="lt-p">
+Rubrics: 32/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Aluminum Housing Component HX-1127 (Revision B)
+
+**Purpose**  
+This SOP outlines the manufacturing procedure for the aluminum housing component HX-1127 (Revision B), performed on May 10, 2024, at 8:42 AM. The primary objective of this fabrication was to evaluate whether the optimized machining sequence reduces chatter during the milling step, specifically comparing it to the previous Revision A design. The test focused on improving surface finish, dimensional a...          </p>
+          <p class="lt-p">
+Rubrics: 33/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.825          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Aluminum Housing Component HX-1127 (Revision B)
+
+**Purpose**  
+The purpose of this procedure is to evaluate the effectiveness of a revised machining sequence in reducing chatter during the milling of the aluminum 6061 housing component, part HX-1127 (Revision B), specifically during the pocketing operation. This test was conducted on Monday, April 8, 2024, at 8:42 AM, as part of a continuous improvement initiative to enhance machining stability and part quality...          </p>
+          <p class="lt-p">
+Rubrics: 31/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.775          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Housing Component HX-1127 (Revision B)
+
+**Purpose**  
+This procedure outlines the step-by-step fabrication of the housing component HX-1127 (Revision B) to evaluate whether the new machining sequence reduces chatter during the milling step compared to Revision A. The manufacturing test was performed on Monday, August 26, 2024, beginning at 8:42 AM. The primary objective was to assess the stability and surface quality achieved through changes in tool selection, ...          </p>
+          <p class="lt-p">
+Rubrics: 30/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Machining of Housing Component HX-1127 (Revision B) – Chatter Reduction Evaluation
+
+**Purpose**  
+This procedure outlines the manufacturing and evaluation of the housing component, part prototype HX-1127 (Revision B), with the specific goal of assessing whether a revised machining sequence reduces chatter during the milling operation compared to Revision A. The test was performed on Monday, April 15, 2024, beginning at 8:42 AM. The activity was conducted in the mechanical fab...          </p>
+          <p class="lt-p">
+Rubrics: 32/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Housing Component HX-1127 (Revision B)
+
+**Purpose**  
+This standard operating procedure (SOP) outlines the fabrication process for the housing component HX-1127, Revision B, with the primary objective of evaluating whether the new machining sequence reduces chatter during the milling operation compared to Revision A. The fabrication was performed on Monday, April 15, 2024, at 8:42 AM, and the goal was to validate process stability and surface quality using opti...          </p>
+          <p class="lt-p">
+Rubrics: 29/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.725          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Manufacturing of Housing Component HX-1127 Revision B – Chatter Reduction Evaluation
+
+**Purpose**  
+This procedure was performed on April 27, 2024, to evaluate the effectiveness of a revised machining sequence in reducing chatter during the milling of the housing component HX-1127 Revision B. The primary objective was to determine whether the new tooling strategy and parameter adjustments reduce vibration and tool chatter, particularly during the pocketing operation, as obser...          </p>
+          <p class="lt-p">
+Rubrics: 34/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.850          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Housing Component Part HX-1127 (Revision B)  
+
+**Purpose**  
+This Standard Operating Procedure (SOP) outlines the fabrication process for the housing component Part HX-1127 (Revision B), which was performed on Monday, April 8, 2024, at 8:42 AM. The primary goal of this fabrication was to evaluate whether the revised machining sequence reduces chatter during the milling operation, specifically during the pocketing step, compared to Revision A. This test was crit...          </p>
+          <p class="lt-p">
+Rubrics: 30/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Aluminum Housing Component HX-1127 (Revision B)
+
+**Purpose**  
+This procedure documents the fabrication of the aluminum housing component HX-1127 (Revision B), performed on August 29, 2024, at 8:42 AM. The primary objective was to evaluate whether the revised machining sequence reduces chatter during the milling operation, specifically in the pocketing step, compared to Revision A. Chatter is a known source of surface defects, tool wear, and dimensional inaccur...          </p>
+          <p class="lt-p">
+Rubrics: 32/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Housing Component Part HX-1127 (Revision B)
+
+**Purpose**  
+This SOP outlines the manufacturing process for the housing component part HX-1127, Revision B, conducted on August 22, 2024, with the primary objective of evaluating whether a revised machining sequence reduces chatter during the milling operation compared to Revision A. Chatter, a common issue in high-speed milling that leads to tool wear, surface imperfections, and dimensional inaccuracies, was the k...          </p>
+          <p class="lt-p">
+Rubrics: 33/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.825          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We have recently transitioned to an audio transcription system for our development. The technicians will perform the manufacturing and they will speak directly into the system and the system will prov...          </p>
+          <p class="lt-p">
+Response: **Title**  
+SOP for Fabrication of Aluminum Housing Component HX-1127 (Revision B)
+
+**Purpose**  
+This SOP outlines the manufacturing process for the aluminum housing component HX-1127 (Revision B), specifically designed to evaluate whether the revised machining sequence reduces chatter during the milling step. The fabrication was performed on Monday, August 5, 2024, at 8:42 AM, with the primary objective of assessing process stability, surface quality, and dimensional accuracy compared to Revis...          </p>
+          <p class="lt-p">
+Rubrics: 32/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1438                </td>
+                <td>
+0.850                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.850                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1299                </td>
+                <td>
+0.850                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.850                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1218                </td>
+                <td>
+0.825                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.825                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1427                </td>
+                <td>
+0.775                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.775                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1351                </td>
+                <td>
+0.775                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.775                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1301                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1301                </td>
+                <td>
+0.825                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.825                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1267                </td>
+                <td>
+0.775                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.775                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1274                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1305                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1375                </td>
+                <td>
+0.725                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.725                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1271                </td>
+                <td>
+0.850                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.850                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1270                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1312                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1245                </td>
+                <td>
+0.825                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.825                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1106                </td>
+                <td>
+1293                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re looking to **minimize gear while still being fully capable** of capturing a live 3-piece session with clear, clean, and professional results.
+
+Let’s break this down step-by-step using the **client’s song description**, your **equipment list**, and the **notable recording techniques** provided — all with a focus on **simplicity, live recording, and minimal transport**.
+
+---
+
+### 🎯 Client&#x27;s Goal (Summarized)
+
+- **Live 3-piece band recording**: Acoustic guitar, vocals (lead)...          </p>
+          <p class="lt-p">
+Rubrics: 11/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.733          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re aiming to **keep it minimal, functional, and fully capable** of capturing the entire session as described, while still maintaining high-quality audio and supporting all the required recording techniques.
+
+Let’s break this down **step-by-step** based on the client&#x27;s song structure, your equipment list, and your goal: **minimalist setup with full functionality**.
+
+---
+
+## 🎯 Client’s Requirements (Summarized)
+
+1. **Live band recording (3-piece):**
+   - Acoustic guitar  
+   -...          </p>
+          <p class="lt-p">
+Rubrics: 9/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re looking to **minimize gear while still capturing all the essential tracks** the client wants to record, with a focus on **live band sessions and later overdubs**.
+
+Let’s break down what the client needs, then match it to your equipment list using your established recording techniques and **minimalism** as the goal.
+
+---
+
+### 🔍 Client’s Requirements Summary
+
+1. **3-piece live band recording**:
+   - Acoustic guitar (lead) → **acoustic guitar mic**
+   - Vocals (lead) → **voc...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re aiming for **minimalism without compromise**, which is exactly what makes this kind of remote session successful. Let’s break down exactly what the client wants to record, then map that directly to your gear list **using only what&#x27;s absolutely necessary** and **maximizing setup flexibility**.
+
+---
+
+### 🔊 Client’s Recording Requirements Recap
+
+- **Live 3-piece band recording** (acoustic guitar, vocals, bass with backing vocals, drummer with kick/snare only).
+- All instrume...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Excellent question — you&#x27;ve laid out a very clear and detailed scenario. The goal is to **minimize the number of physical items you need to transport** while still being able to **successfully record everything the client wants**:  
+
+- A live 3-piece band (acoustic guitar, vocals, bass with backing vocals, drummer with kick/snare)  
+- All instruments recorded live together  
+- Overdubs for lead vocals and (possibly) lead electric guitar  
+- No amps provided (so DI boxes are essential)  
+- All li...          </p>
+          <p class="lt-p">
+Rubrics: 10/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — and a very realistic scenario for a sound engineer on the move! You want to **minimize the number of physical items** you transport while still being able to **capture all the elements** the client needs: live band recording (acoustic guitar, vocals, bass, drums), with later overdubs for lead vocals and electric guitar.
+
+Let’s break this down step-by-step using your client’s description and your recording techniques to **identify what is essential**, then **eliminate what’s redu...          </p>
+          <p class="lt-p">
+Rubrics: 10/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re looking to **minimize gear while ensuring full functionality** for a live 3-piece recording session with potential overdubs. Let&#x27;s go through your client&#x27;s needs carefully and match them to the most **compact, essential gear** from your list.
+
+---
+
+### 🔍 Step-by-step Breakdown of the Client’s Requirements
+
+#### 🎤 Live Band Setup (3-piece, recorded live)
+- **You (vocals)**: Acoustic guitar + lead vocals
+- **Bass player**: Bass + backing vocals
+- **Drummer**: Kick + snare o...          </p>
+          <p class="lt-p">
+Rubrics: 9/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re clearly thinking like a professional sound engineer, and this is a smart, practical optimization problem. Let&#x27;s break down **exactly what the client needs**, based on their song description and your recording techniques, and then **select the minimal, viable gear** to take with you — without sacrificing the quality or flexibility of the session.
+
+---
+
+### ✅ Client&#x27;s Requirements (Summarized)
+
+1. **3-piece live band recording**:
+   - **Vocalist**: sings lead (acoustic guit...          </p>
+          <p class="lt-p">
+Rubrics: 12/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re looking to **minimize physical gear** while still being able to **record live as a 3-piece band**, with **overdubs for vocals and electric guitar**, and all the technical requirements covered.
+
+Let’s break this down step-by-step based on the client&#x27;s song description, your equipment list, and the recording techniques you&#x27;ve outlined.
+
+---
+
+## 🎯 **Core Objectives from Client&#x27;s Description**
+
+1. **Record live as a 3-piece**:
+   - Acoustic guitar (player sings lead)
+   - Bas...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re clearly thinking like a professional sound engineer, balancing practicality, technical accuracy, and minimalism. Based on the **client’s song description**, your **recording approach**, and your **goal to minimize gear**, let’s build a **compact, effective, and fully functional live-band recording setup** that captures everything they want — **live tracking (3-piece band)** and **potential overdubs (vocals, electric guitar)** — without bringing excess equipment.
+
+---
+
+###...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re clearly thinking like a professional sound engineer, and your goal of **minimizing gear while still capturing everything the client needs** is spot-on. Let’s break this down strategically using the client’s song description, your equipment list, and the recording techniques you’ve outlined.
+
+---
+
+### 🔍 Step 1: Understand the Client’s Requirements
+
+- **Live band recording (3-piece):**
+  - Acoustic guitarist → sings lead vocals
+  - Bassist → sings backing vocals
+  - Drummer...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re doing something smart by **minimizing gear** while ensuring **full recording capability** for the session. Let&#x27;s go through this step-by-step to match the client’s needs with your equipment list, apply your recording techniques, and **optimize for transportability, simplicity, and completeness**.
+
+---
+
+### 🔍 **Client&#x27;s Recording Goals Recap:**
+
+1. **Live band recording** (3-piece):  
+   - Acoustic guitar (player sings lead)  
+   - Bass player (sings backing vocals)  
+   -...          </p>
+          <p class="lt-p">
+Rubrics: 9/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re clearly thinking like a professional sound engineer, and minimizing gear while preserving flexibility and quality is exactly what you need for a remote, live-band recording session.
+
+Let’s break this down step-by-step using the **client&#x27;s song description**, your **equipment list**, and your **recording techniques**, then pick the **minimal viable setup** that covers everything they want to record — with no amps, full live performance, and overdubs.
+
+---
+
+### ✅ Key Requir...          </p>
+          <p class="lt-p">
+Rubrics: 10/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Excellent question — you&#x27;re thinking like a pro! Given the client&#x27;s **simple 3-piece live recording setup** (acoustic guitar, vocals, bass with backing vocals, drummer with kick/snare), and the fact that they **want to record live together first**, then **overdub vocals and possibly lead electric guitar**, your goal is to **minimize the number of items** while still covering every aspect of the recording.
+
+Let’s break this down step-by-step based on your equipment list, the client’s needs, and t...          </p>
+          <p class="lt-p">
+Rubrics: 10/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re clearly thinking like a professional sound engineer, and it&#x27;s absolutely wise to **minimize gear** while still ensuring a robust, reliable, and high-quality recording setup. Let’s break this down step-by-step based on the **client&#x27;s song description**, the **recording techniques**, and your goal to **keep it compact, live-ready, and efficient**.
+
+---
+
+## 🔊 CLIENT’S REQUIRMENTS SUMMARY:
+- **3-piece live band**:  
+  - **Lead vocal** (acoustic guitar + singing)  
+  - **Bass ...          </p>
+          <p class="lt-p">
+Rubrics: 9/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a sound engineer and have a recording session booked in but the client wants to do the session in a remote location meaning I need to select and transport a compact recording setup taken from the...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re thinking like a pro and want to **minimize gear** while still achieving a high-quality, efficient, and flexible recording setup. Let&#x27;s break this down step-by-step based on your client&#x27;s song description, your equipment list, and the recording techniques you’ve noted.
+
+---
+
+### 🔍 Client Requirements Recap:
+- **Live band recording (3-piece)**:
+  - **You (singer/guitarist)**: acoustic guitar + lead vocals
+  - **Bass player**: bass + backing vocals
+  - **Drummer**: kick, sna...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+3329                </td>
+                <td>
+0.733                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.733                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2473                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2552                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2537                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+3472                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2365                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2275                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2059                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2822                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+1633                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2584                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2760                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2223                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+3274                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2335                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+530                </td>
+                <td>
+2318                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

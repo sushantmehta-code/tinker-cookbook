@@ -1,0 +1,4924 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 10</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 10  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T01:15:33  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step by step, carefully filtering only **October 2024** jobs (as requested), organizing the data properly, and fulfilling every request.
+
+---
+
+## ✅ Step 1: Filter Jobs Completed in October Only
+
+We will **exclude any job with completion date in September or November**.
+
+So we remove:
+- `201 Poplar Rd, Anytown PA` → September 14–17 → ❌
+- `1 Chestnut St, Bigtown PA` → Dates 10/31–11/1 → **11/1 is November → ❌**
+- `1 Chestnut St, Bigtown PA` → 10/31–11/2 → **11/...          </p>
+          <p class="lt-p">
+Rubrics: 16/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s go step by step, as you requested, and make sure everything is accurate and organized exactly as you asked.
+
+---
+
+### ✅ Step 1: Filter jobs completed in **October only**
+Only jobs with dates **in October** (October 1–31) are included. Jobs from September or November are excluded.
+
+---
+
+## 🔹 List of Radon Tests in PA (Completed in October)
+
+**PA Radon Tests (Each = $110)**
+- 222 Main St, Anytown, PA — 10/10  
+- 12 Aslan Ave, Bigtown, PA — 10/26–10/29  
+- 201 Poplar Rd, Anytown,...          </p>
+          <p class="lt-p">
+Rubrics: 27/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.675          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — I’ll help you organize your bookkeeping with precision, as requested. Let&#x27;s go step by step based on your instructions.
+
+---
+
+## ✅ Step 1: List of Radon Tests in PA (completed in October)
+
+We will **only include radon tests completed in PA in October**, and list only the **street address** with **date completed**, in chronological order.
+
+**PA Radon Tests (October only):**
+
+1. 201 Poplar Rd, Anytown, PA — 10/13  
+2. 12 Aslan Ave, Bigtown, PA — 10/26–10/29  
+3. 1 Chestnut St, Bigtown...          </p>
+          <p class="lt-p">
+Rubrics: 23/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.575          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed request. I’ll carefully go through your data and deliver exactly what you asked for — organized, precise, and with clear labeling so you can easily find the information you need.
+
+---
+
+## ✅ **1. Radon Tests Conducted in PA (Completed in October)**
+
+Radon tests in Pennsylvania completed in October.  
+Price per test: **$110**  
+Note: Only list address if it has a radon test completed in October. Ignore dates outside October.
+
+- 201 Poplar Rd, Anytown, PA (10/09–10/10) → ...          </p>
+          <p class="lt-p">
+Rubrics: 18/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.450          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s go through this step-by-step and organize everything clearly, exactly as you requested.
+
+---
+
+## ✅ Step 1: List of Radon Tests Conducted in PA (October Only)
+
+We are only including **radon tests in PA**, completed in **October**.
+
+From your data:
+- 201 Poplar Rd, Anytown, PA – 09/14–09/17 → ❌ Not in October  
+- 12 Aslan Ave, Bigtown, PA – 10/26–10/29 → ❌ This is a **Radon Test**, but only **one** is listed — we check both dates: completed in **October** → ✅  
+- 1 Chestnut St, ...          </p>
+          <p class="lt-p">
+Rubrics: 25/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s go step by step, exactly as you’ve requested, and keep everything organized, accurate, and clearly formatted.
+
+---
+
+## ✅ Step 1: Filter Jobs Completed in October (Only)
+
+We’ll only consider jobs with **dates completed in October**. Any job with a completion date before or after October is excluded.
+
+---
+
+### 📋 List of Radon Tests Conducted in PA (October)
+
+- 222 Main St, Anytown, PA — 10/10 → Radon Test (not listed separately in services, but repeated if applicable)
+- 31 Mario...          </p>
+          <p class="lt-p">
+Rubrics: 23/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.575          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for providing such a detailed set of data. I’ll go step by step to fulfill your full request, organized exactly as you asked.
+
+---
+
+## ✅ Step 1: Lists of Jobs Completed in October (Only)
+
+We are filtering **only jobs completed in October**, and we will separate them into three lists:
+
+1. **PA Radon Tests**  
+2. **NJ Radon Tests**  
+3. **NJ Termite Inspections**
+
+Each list will be numbered, contain only the **street address**, and be sorted by **date completed (earliest to ...          </p>
+          <p class="lt-p">
+Rubrics: 26/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.650          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step with full clarity and precision — exactly as you&#x27;ve requested.
+
+We are only including **jobs completed in October**, per your instruction. All entries outside of October are excluded. We will:
+
+1. **Create three separate lists**:
+   - PA Radon Tests (only those in PA, completed in October)
+   - NJ Radon Tests (only those in NJ, completed in October)
+   - NJ Termite Inspections (only those in NJ, completed in October)
+
+2. **Number each entry, list ...          </p>
+          <p class="lt-p">
+Rubrics: 21/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.525          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step through your request with clarity, accuracy, and organization — all focused on **jobs completed in October** only, as you specified.
+
+---
+
+## ✅ Step 1: Extract All Jobs Completed in October  
+We’ll filter only those completed in **October** (based on date listed).  
+We will now separate the entries into three lists:
+
+### 🔹 List 1: Radon Tests in PA  
+Only radon tests completed in PA in October  
+→ Use the price: **$110 each**
+
+### 🔹 List 2: Radon Tests in NJ  
+O...          </p>
+          <p class="lt-p">
+Rubrics: 23/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.575          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step through your request with precision and clarity, focusing **only on jobs completed in October** as you specified.
+
+---
+
+## ✅ Step 1: Filter Jobs Completed in October Only
+
+We will first extract all entries where the **dates worked on fall entirely in October** (between 10/1 and 10/31). We&#x27;ll ignore any job with dates in September or November.
+
+---
+
+### 📂 Filtered List of Jobs (Completed in October)
+
+We’ll organize them by **date completed**, then extract only th...          </p>
+          <p class="lt-p">
+Rubrics: 26/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.650          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;ll help you organize everything as requested. Let&#x27;s go step-by-step, **only including jobs completed in October** as specified, and follow your exact structure and instructions.
+
+---
+
+## ✅ STEP 1: List of Radon Tests in PA (Completed in October)
+
+Only radon tests completed in PA in October.  
+Each entry: street address, date completed (earliest first).  
+Price: $110 each.  
+
+From your data:
+- **201 Poplar Rd, Anytown, PA** – Dates: 09/14–09/17 → ❌ Not October  
+- **12 Aslan Ave, B...          </p>
+          <p class="lt-p">
+Rubrics: 20/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s go through this step by step according to your request. We’re only focusing on **jobs completed in October**, as per your instruction. I’ll process everything carefully to make sure your bookkeeping is accurate and clear.
+
+---
+
+## ✅ Step 1: Lists of Jobs Completed in October (Only)
+
+We’ll create three separate lists:
+
+1. **All Radon Tests in PA**  
+2. **All Radon Tests in NJ**  
+3. **All Termite Inspections in NJ**
+
+Only entries completed in **October** (not September or Novem...          </p>
+          <p class="lt-p">
+Rubrics: 25/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s go through this step by step, carefully following your detailed instructions.
+
+---
+
+### 🔍 Step 1: Filter Jobs Completed in **October Only**
+
+We will exclude any jobs completed before or after October.  
+We are only interested in jobs completed in **October**.
+
+From your data:
+
+- Removed:  
+  - `09/14–09/17` → September → ❌  
+  - `09/30–10/1` → starts in September → **only partial** (10/1 is in October), so **we need to check if any October-only work exists**
+
+But let&#x27;s be prec...          </p>
+          <p class="lt-p">
+Rubrics: 23/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.575          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step by step, as requested. We&#x27;re **only focusing on jobs completed in October**, as per your instructions.
+
+---
+
+## ✅ Step 1: Filter Jobs Completed in October
+
+We’ll go through your list and **only include jobs where the date(s) completed fall in October**. We’ll exclude any jobs with dates in September or November.
+
+---
+
+### 🔍 List of Radon Tests in PA (Completed in October)
+
+&gt; Only include radon tests **in PA** and completed in October  
+&gt; Price per test: ...          </p>
+          <p class="lt-p">
+Rubrics: 20/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through your request step by step, carefully filtering only **October** jobs, organizing everything as requested, and delivering clear, structured outputs.
+
+---
+
+### ✅ Step 1: Filter jobs completed in **October** only
+
+We exclude any job completed in September, November, or any other time period.
+
+---
+
+## 📋 List of Radon Tests in PA (Completed in October)
+
+**PA Radon Tests only**, $110 each  
+Only include addresses where a **radon test** was completed in October, in PA.
+
+F...          </p>
+          <p class="lt-p">
+Rubrics: 24/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m doing some bookkeeping, and I’d like your help. I need to figure out how much I owe the radon and termite companies I work with. I’m only interested in jobs completed in October, so please don’t i...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed request. I’ll go through your data step by step, organizing it **only by jobs completed in October**, as per your instructions.
+
+---
+
+## 🔍 Step 1: Filter Jobs Completed in October Only
+
+We remove any job with dates in September or November (e.g., 09/14, 11/1, 11/2).  
+Also, we keep only **October** date(s), and only **jobs completed in October**.
+
+### ✅ Filtered Jobs (Completed in October)
+
+| Address | Date(s) | Services | Status |
+|--------|--------|--------|--------|...          </p>
+          <p class="lt-p">
+Rubrics: 21/40 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.525          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+2983                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+3606                </td>
+                <td>
+0.675                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.675                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+3654                </td>
+                <td>
+0.575                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.575                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+2965                </td>
+                <td>
+0.450                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.450                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+4859                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+3812                </td>
+                <td>
+0.575                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.575                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+3819                </td>
+                <td>
+0.650                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.650                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+4464                </td>
+                <td>
+0.525                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.525                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+3244                </td>
+                <td>
+0.575                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.575                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+3800                </td>
+                <td>
+0.650                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.650                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+3118                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+3713                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+6394                </td>
+                <td>
+0.575                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.575                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+3460                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+4139                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1172                </td>
+                <td>
+5715                </td>
+                <td>
+0.525                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.525                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: We are going to analyze the provided table to determine **who still needs a valid passport** to continue working as of **December 31, 2023**, under the following conditions:
+
+---
+
+### ✅ Criteria &amp; Rules
+
+1. **Passport Validity**:
+   - A passport is valid if it **expires on or after January 1, 2024** (i.e., **not expiring in 2023 or before**).
+   - Expiration must be **after December 31, 2023**.
+   - Passport expiration is either **5 years** or **10 years** (except possibly invalid or expired ent...          </p>
+          <p class="lt-p">
+Rubrics: 4/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.308          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: We are creating a **clean, detailed table** of employees who **still need a valid passport** to continue working as of **December 31, 2023**, based on the following criteria:
+
+---
+
+### ✅ Rules Summary:
+1. **Valid Passport**: Passport expiration date is **on or after December 31, 2024** (i.e., expires in 2025 or later).  
+   - Passports are either 5-year or 10-year, expiring **one day prior** to the stated expiry (e.g., &quot;12/04/2032&quot; means valid until Dec 3, 2032).
+2. **Exempt from passport requir...          </p>
+          <p class="lt-p">
+Rubrics: 5/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.385          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: We will go step-by-step through the request to create a **comprehensive table** of employees who **still need a valid passport** to continue working as of **December 31, 2023**, with proper logic for:
+
+- **Passport validity (expired or not) as of 12/31/2023**
+- **Driver&#x27;s License (DL) exemption** if valid in one of: **MI, NY, MN, VT, WA**
+- **Only include non-Captains**
+- **Flag which document is expired: Passport or DL (only DL if eligible)**
+- **Flag potential date reversal issues**
+- **Group ...          </p>
+          <p class="lt-p">
+Rubrics: 7/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.538          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through your request and build an accurate, logically structured output table step by step.
+
+---
+
+### ✅ **Objective Summary**
+
+We are to produce a table showing employees who **still need a valid passport** as of **December 31, 2023**, with the following conditions:
+
+---
+
+### 🔍 **Key Rules &amp; Logic**
+
+1. **Expiration of Passport**:
+   - Valid passport = expires on or after **December 31, 2024** (i.e., **2024 or later**)
+   - If passport expires **before** Dec 31, 2024 → needs r...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through **each step** of your request for clarity and accuracy, and then deliver a **fully compliant, structured output**.
+
+---
+
+## ✅ **Objective Recap**
+
+We are to produce a table of employees who **still need a valid passport** to continue working as of **December 31, 2023**, based on:
+
+### Key Conditions:
+
+1. **Passport Expiration Date**:
+   - Valid if **expires after December 31, 2023** (i.e., 2024 or later).
+   - Passports are either:
+     - 5-year: expires in **5 years – 1 day**...          </p>
+          <p class="lt-p">
+Rubrics: 6/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.462          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully walk through your request and build the correct output table step-by-step, ensuring every requirement is met.
+
+---
+
+### ✅ **Objective Summary**  
+We are to create a table of employees who **still need a valid passport** (i.e., passport expires **before or on December 31, 2023**) and are **not excused** by having a valid driver’s license from one of the following states:  
+- Michigan (MI)  
+- New York (NY)  
+- Minnesota (MN)  
+- Vermont (VT)  
+- Washington (WA)  
+
+As of **December...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s go through your request step-by-step and build a comprehensive, accurate table based on the provided data.
+
+---
+
+### 🎯 **Objective Summary**
+
+We are to **identify employees who still need a valid passport to continue working as of December 31, 2023**, with the following rules:
+
+---
+
+## ✅ Key Rules
+
+1. **Passport validity**:
+   - Valid if **expired after December 31, 2023** → i.e., **expiration date is on or after January 1, 2024**.
+   - If expiration date is **before or on December 31, 202...          </p>
+          <p class="lt-p">
+Rubrics: 6/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.462          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through the requirements step by step and generate a comprehensive, accurate table based on your detailed instructions.
+
+---
+
+## ✅ **Step-by-Step Breakdown of Requirements**
+
+We are to create a table for **non-Captains** who **need a valid passport**, with the following criteria:
+
+### 1. **Passport Validity as of December 31, 2023**
+- A passport is **valid** if expiration date is **after December 31, 2023**.
+- Passports expire **5 or 10 years** (end-of-year minus one day).
+- So, valid...          </p>
+          <p class="lt-p">
+Rubrics: 4/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.308          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s break down and process the requirements step-by-step to generate the **final table** that meets all the criteria you&#x27;ve provided.
+
+---
+
+### ✅ **Objective Recap**
+We are to:
+
+1. **Identify employees who still need a valid passport** as of **December 31, 2023**.
+2. **Exclude captains**, and include **only other positions** (e.g., Chief, AB, OS, etc.).
+3. A person **does not need a passport** if they have a **valid DL from one of these states**:
+   - Michigan (MI)
+   - New York (NY)
+   - Minn...          </p>
+          <p class="lt-p">
+Rubrics: 8/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: We are asked to analyze a list of employees and determine **who still needs a valid passport** to continue working, with several specific rules and constraints. Let’s walk through this step by step and build the final output as requested.
+
+---
+
+### 🔍 **Key Requirements Summary**
+
+We must:
+
+1. **Identify employees who need a valid passport** as of **December 31, 2023**.
+2. A passport is valid **if it expires on or after January 1, 2024**.
+3. Employees **do not need a passport** if they hold a **v...          </p>
+          <p class="lt-p">
+Rubrics: 8/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s work through this step-by-step using the provided data.
+
+---
+
+## ✅ Objective:
+Create a **table of employees who still need a valid passport** to continue working **as of December 31, 2023**, under the following conditions:
+
+### Key Rules:
+
+1. **Passport must be valid as of December 31, 2023.**
+   - Validity: 5-year or 10-year expiration (i.e., if expired on or after January 1, 2024 → **not valid**)
+   - So: Passport expires **on or after January 1, 2024** → **expired as of Dec 31, 2023**
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 1/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.077          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s work through your detailed request step-by-step and produce a **well-organized, accurate, and fully compliant** output table.
+
+---
+
+## 🔎 **Objective Summary**
+
+We are to:
+1. Identify employees who **still need a valid passport** as of **December 31, 2023**, based on expiration date.
+2. **Exempt** employees who have a **valid DL from one of these states**:  
+   → Michigan (MI), New York (NY), Minnesota (MN), Vermont (VT), Washington (WA)  
+   *(Note: NY not in list, so only: MI, MN, VT, WA)...          </p>
+          <p class="lt-p">
+Rubrics: 8/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: We are going to create a **filtered and evaluated table** based on your detailed instructions. Let&#x27;s go step-by-step.
+
+---
+
+### 🎯 **Objective**
+Identify employees who **still need a valid passport** as of **December 31, 2023**, with the following conditions:
+
+#### ✅ Key Rules:
+1. **Passport Validity (as of Dec 31, 2023)**:
+   - Valid if **expiration date ≥ January 1, 2024**.
+   - **Expired if expiration date ≤ December 31, 2023**.
+   - Passport expiration dates are either **5-year or 10-year** (...          </p>
+          <p class="lt-p">
+Rubrics: 7/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.538          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through your detailed request and produce a **complete, accurate, and clearly formatted output** based on the provided data.
+
+---
+
+### ✅ **Objective Summary**
+
+We are to:
+
+1. **Identify employees who still need a valid passport** as of **December 31, 2023**, meaning only those whose **passport expires in 2024 or later** (i.e., after Dec 31, 2023).
+2. **Exclude captains** (they are not required to have a passport under these rules).
+3. Employees **with a valid DL from one of th...          </p>
+          <p class="lt-p">
+Rubrics: 7/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.538          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: We will go step-by-step through your detailed request to produce a **clean, accurate, and fully compliant output table** based on the provided data.
+
+---
+
+## ✅ **Objective Summary (Clarified)**
+
+We are to:
+
+1. **Identify employees who still need a valid passport** to continue working as of **December 31, 2023**.
+2. **Criteria for passport validity**:
+   - Passports valid if **expiration date ≥ January 1, 2024** (i.e., ≥ 2024).
+   - Passports **expired** if expiration date &lt; January 1, 2024.
+   -...          </p>
+          <p class="lt-p">
+Rubrics: 8/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: first name	last name		vessel code	Passport Issue Date	Passport Expiration Date	MMC Issue Date	MMC Expiration Date	TWIC Issue Date	TWIC Expiration Date	USCG Medical Certificate Issue Date	USCG Medical ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s go step-by-step through the query and generate the exact table as requested.
+
+---
+
+## ✅ **Objective Summary**
+
+We need a table that identifies employees who **still need a valid passport** to continue working (as of **December 31, 2023**) and who are **not excused** due to a valid DL from one of these states:
+
+&gt; **Excused states (valid DL = exemption from passport requirement):**
+&gt; - Michigan (MI)
+&gt; - New York (NY)
+&gt; - Minnesota (MN)
+&gt; - Vermont (VT)
+&gt; - Washington (WA)
+
+### Key Rules:
+1. ...          </p>
+          <p class="lt-p">
+Rubrics: 7/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.538          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.308                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.308                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.385                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.385                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.538                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.538                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+6473                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8147                </td>
+                <td>
+0.462                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.462                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.462                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.462                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.308                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.308                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.077                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.077                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+7417                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.538                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.538                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.538                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.538                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+7733                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4070                </td>
+                <td>
+8192                </td>
+                <td>
+0.538                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.538                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to create a clear, accurate table of students who can still submit late work — all based on your rules and today’s date: **November 10, 2025**.
+
+---
+
+### ✅ **Rules Recap**
+
+- **Late work points**:  
+  - Max 100 points.  
+  - Start with 100 points.  
+  - Minus **10 points per day** after absence (only weekdays: Monday–Friday).  
+  - **Weekends and holidays are not counted**.  
+  - If points drop to 0 or below, late work is **not allowed**.
+
+- **Special rule**:  
+...          </p>
+          <p class="lt-p">
+Rubrics: 5/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.172          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step-by-step to generate a clear, accurate, and well-formatted table based on your detailed instructions.
+
+---
+
+### 📌 **Key Rules Recap:**
+
+1. **Late Work Policy:**
+   - **Maximum points:** 100
+   - **Point deduction:** −10 per day **after** the day of absence
+   - **Weekends and holidays are NOT counted** (only weekdays: Mon–Fri)
+   - If the time elapsed exceeds a certain point, the student gets **0 points**
+   - **Students absent 3+ days** get **2 extra days...          </p>
+          <p class="lt-p">
+Rubrics: 15/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.517          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through this step by step to create a clear, accurate, and well-organized table of students who can still submit late work — including how many days they have remaining, and which tests/quizzes they&#x27;ve missed.
+
+---
+
+### 📅 **Key Information &amp; Rules**
+
+- **Today&#x27;s date**: November 10, 2025  
+- **Late work policy**:
+  - Max points: 100
+  - Points deducted: **10 points per day** (after the day of absence), **excluding weekends and holidays**
+  - After a certain time, students get **0 poin...          </p>
+          <p class="lt-p">
+Rubrics: 5/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.172          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s build the full table step-by-step based on your detailed instructions.
+
+---
+
+### 📅 Important Details:
+- **Today is: November 10, 2025**
+- **Late work rules:**
+  - Max late work points = **100**
+  - **-10 points per day** after their absence date (weekends and holidays **do not count**)
+    - So, only **school days** (Mon–Fri) count toward the clock
+    - Holidays/weekends are skipped
+  - If absence is **3 days or more**, they get **2 extra days** to reach 100 (i.e., extended deadline)
+  - ...          </p>
+          <p class="lt-p">
+Rubrics: 9/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.310          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s go step-by-step to build your **organized table** of students who can still turn in late work, based on **absence dates**, **today&#x27;s date (November 10, 2025)**, and the **time-based point system** you described.
+
+---
+
+### ✅ Key Rules Recap:
+
+- **Late work rule:**
+  - Max of **100 points** allowed.
+  - **Minus 10 points per day** (excluding weekends and holidays).
+  - If the time since absence exceeds a threshold, they get **0 points**.
+  - Students absent **3+ days** get **2 extra d...          </p>
+          <p class="lt-p">
+Rubrics: 10/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.345          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s walk through this step-by-step, then build the final clean table as requested.
+
+---
+
+### 📅 **Today’s Date:** November 10, 2025  
+We will calculate **days remaining** for each student to submit late work, **excluding weekends and holidays** (since those don’t count toward the 10-point-per-day rule).
+
+We’ll follow these rules:
+
+1. **Late work deduction:**  
+   - Start with a **maximum of 100 points**.  
+   - **Minus 10 points per day** since the day of absence (only weekdays — Mon–Fri...          </p>
+          <p class="lt-p">
+Rubrics: 12/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.414          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step to create a **clear, accurate table** of students who can still turn in late work, based on:
+
+---
+
+### 📅 **Key Rules Recap:**
+
+1. **Late work points**: Max of **100 points**.
+2. **Points decrease by 10 per day** since the day of absence.
+   - **Weekends and holidays are not counted** (only school days).
+   - So, only **school days** (Mon-Fri) count toward the &quot;days since absence.&quot;
+3. **If absence is 3 days or more**, they get **2 extra days** to r...          </p>
+          <p class="lt-p">
+Rubrics: 12/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.414          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through this step by step to build the accurate table.
+
+---
+
+### 📅 **Given Information**
+
+- **Today&#x27;s date**: November 10, 2025
+- **Late work rules**:
+  - For each day **after** the absence (excluding weekends and holidays), students lose **10 points**.
+  - **Maximum late work points = 100**
+  - If more than 10 days have passed (excluding weekends/holidays), they get **0 points**.
+  - If a student was absent **3 days or more**, they get **2 extra days** to earn 100 points (i.e., their...          </p>
+          <p class="lt-p">
+Rubrics: 12/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.414          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step to build an accurate and well-organized table.
+
+---
+
+### **Goal:**
+Determine:
+- Which students **can still turn in late work** (with points based on days since absence),
+- **Days remaining** for late work (with rules),
+- Whether they **missed a quiz or test** (based on absence dates),
+- Order students by **days remaining**, then by **earliest absence date** in case of ties,
+- Today is **November 10, 2025**.
+
+---
+
+## 📌 **Late Work Rules Summary:**
+...          </p>
+          <p class="lt-p">
+Rubrics: 13/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.448          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step and build a **clear, accurate table** based on your detailed instructions.
+
+---
+
+### 📅 Important Dates &amp; Rules:
+
+- **Today’s date:** November 10, 2025  
+- **Late work policy:**
+  - **Max points:** 100
+  - **Points deduction:** –10 points per day **since the day of absence** (weekends and holidays do not count — only weekdays)
+  - **If it&#x27;s been too long**, points go to **0**
+  - **Students absent 3 or more days** get **2 extra days** to earn 100 p...          </p>
+          <p class="lt-p">
+Rubrics: 14/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.483          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through this step by step to build the accurate table.
+
+---
+
+### 📅 **Today&#x27;s Date**: November 10, 2025  
+We are calculating **how many days remain** for each student to submit late work, **excluding weekends and holidays**.
+
+📌 **Late work rule**:
+- Maximum late work points: **100**
+- Points decrease by **10 per weekday** (weekend/holidays not counted)
+- If **more than 10 days** have passed (including only weekdays), they get **0 points**
+- Students absent **3+ days** get **2 extra day...          </p>
+          <p class="lt-p">
+Rubrics: 14/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.483          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step and create a clean, accurate table based on your detailed instructions.
+
+---
+
+### 📅 **Key Rules Summary**  
+We are calculating **days remaining** for late work submission as of **November 10, 2025**, with the following rules:
+
+1. **Late work points**:
+   - Max 100 points.
+   - **Starts at 100** and **decreases by 10 per day** (each day since absence).
+   - **Weekends and holidays do not count** — only weekdays (Mon–Fri) are considered.
+   - If stu...          </p>
+          <p class="lt-p">
+Rubrics: 8/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.276          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down step by step and build a clear, accurate table based on your instructions.
+
+---
+
+### 📅 **Key Rules Recap:**
+
+- **Today’s date:** November 10, 2025  
+- **Late work points rules:**
+  - Maximum **100 points** for late work.
+  - **−10 points per day** after the day of absence.
+  - **Weekends and holidays are not counted** — only **school days** (Mondays to Fridays).
+  - If it&#x27;s been **too long**, score = **0**.
+  - Students absent **3 days or more** get **2 extra da...          </p>
+          <p class="lt-p">
+Rubrics: 12/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.414          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to create the accurate and well-structured table you&#x27;re looking for.
+
+---
+
+### 🔍 **Key Rules Recap**
+
+- **Today&#x27;s date:** November 10, 2025  
+- **Late work policy:**  
+  - Max 100 points for late work.  
+  - **-10 points per day** after the absence date (weekends and holidays do **not** count).  
+  - If it&#x27;s been **too long**, they get **0 points**.  
+  - Students absent **3+ days** get **2 extra days** to earn 100 points (i.e., their late work window is extende...          </p>
+          <p class="lt-p">
+Rubrics: 7/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.241          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step to build the accurate table you&#x27;re looking for.
+
+---
+
+### 📅 Key Rules Recap:
+- **Today is: November 10, 2025**
+- **Late work deduction**:  
+  - Starts at **100 points**.  
+  - **Minus 10 points per calendar day** (excluding weekends and holidays).  
+  - **Maximum of 100 points** (so if it drops below 0, it&#x27;s 0).  
+  - **Weekends and holidays do not count** toward the 10-point deduction.  
+    ➤ So only **weekday days (Monday–Friday)** count toward...          </p>
+          <p class="lt-p">
+Rubrics: 15/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.517          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to know which students can still turn in late work, based on a list of absent students and the dates.
+It is based on time frame. The longer it’s been since their day of absence, the fewer poin...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s go step by step to create a **complete and accurate table** based on your request.
+
+---
+
+### 📅 **Given Information**
+
+- **Today&#x27;s date:** November 10, 2025
+- **Late work policy:**
+  - Max points: **100**
+  - **Starts at 100**, subtracts **10 points per day** after the absence date (excluding weekends and holidays)
+  - If **too long**, gets **0 points**
+  - Students absent **3+ days** get **2 extra days** to get 100 points (i.e., they get 100 points if they submit within 2 days **after the ...          </p>
+          <p class="lt-p">
+Rubrics: 14/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.483          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.172                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.172                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.517                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.517                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.172                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.172                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.310                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.310                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+6296                </td>
+                <td>
+0.345                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.345                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.414                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.414                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.414                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.414                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.414                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.414                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.448                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.448                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.483                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.483                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.483                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.483                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.276                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.276                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.414                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.414                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.241                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.241                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.517                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.517                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+462                </td>
+                <td>
+8192                </td>
+                <td>
+0.483                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.483                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **clear, realistic, and stress-free exam prep schedule** tailored to your exact needs, preferences, and constraints.
+
+---
+
+### ✅ Your Key Constraints &amp; Preferences Recap:
+| Item | Details |
+|------|--------|
+| **Classes &amp; Exams** | Forensic Psych (Apr 13), Sexuality (Apr 15), Stats (Apr 16), Anatomy (Apr 18), Biochem (Apr 25) |
+| **Flashcards** | Needed for: Biochemistry (1 full day), Sexuality (Part III, half day). **No flashcards for Stats** |
+| **Time per section stu...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **clear, realistic, and stress-free exam prep schedule** tailored to your situation. We’ll consider:
+
+- Your exam dates and timing  
+- Time needed per class (including flashcards and content review)  
+- Your availability (start date, vacation, exam days)  
+- Your study preferences (flashcards, section-based review)  
+- The fact that you don’t need to study on exam days or during your mini-vacation  
+- Day-before review blocks for each class (except Stats)  
+
+---
+
+### 🔍 ...          </p>
+          <p class="lt-p">
+Rubrics: 10/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.435          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **clear, realistic, and stress-free exam prep schedule** based on your detailed information. We&#x27;ll account for:
+
+- Exam dates and times  
+- Time needed per class (flashcards, section reviews, full-day work)  
+- Daily study capacity  
+- Rest days (mini-vacation, exam days)  
+- Overall reviews (one half-day per class, one day before exam)  
+- What to skip (Statistics flashcards, no review on exam day)  
+
+---
+
+### 📅 Key Facts from Your Input
+
+| Class | Exam Date | Study Ti...          </p>
+          <p class="lt-p">
+Rubrics: 13/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.565          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **clear, realistic, and stress-free exam prep schedule** tailored to your needs, your classes, your preferred study method (virtual flashcards), and your constraints.
+
+---
+
+## 🔍 Goal
+Prepare for **5 exams** with a focus on **active study**, **flashcard creation**, and **strategic review blocks**, while respecting:
+- Time constraints (e.g., only half-day during classes, full day after)
+- Exam dates and logistics
+- Study load per class
+- No studying on vacation
+- No revi...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **clear, realistic, and stress-free exam prep schedule** based on your detailed input. We’ll consider:
+
+- Your **exam dates and times**
+- The **time required per topic/class**
+- Your **study preferences** (flashcards, section reviews, final review days)
+- Your **availability** (classes until April 6th, vacation after Anatomy exam, full-day study starting April 21st)
+- Your **crunch points** (Biochemistry = full day, Sexuality Part III = half day)
+- No studying on vacat...          </p>
+          <p class="lt-p">
+Rubrics: 11/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.478          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! I’d be happy to help you create a **clear, realistic, and stress-free exam prep schedule** based on all the details you’ve provided. Let’s break this down step by step so it’s easy to follow, and then I’ll present the final schedule with dates, tasks, and time allocations.
+
+---
+
+### ✅ Your Key Constraints &amp; Preferences
+
+#### 📅 Exam Dates &amp; Times:
+- **Forensic Psychology** – April 13, 12:30 PM  
+- **Sexuality** – April 15, 4:00 PM  
+- **Statistics** – April 16, 9:00 AM  
+- **Anatomy**...          </p>
+          <p class="lt-p">
+Rubrics: 15/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.652          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **smart, realistic, and stress-free exam prep schedule** tailored to your needs, your time constraints, your preferences (like virtual flashcards), and your class-specific study requirements.
+
+---
+
+### 🎯 Your Goals:
+- Study for **5 classes** with exams on:
+  - Forensic Psychology: Apr 13 (12:30 PM)
+  - Sexuality: Apr 15 (4:00 PM)
+  - Statistics: Apr 16 (9:00 AM)
+  - Anatomy: Apr 18 (9:00 AM)
+  - Biochemistry: Apr 25 (9:00 AM)
+- **Make flashcards** for:
+  - **Biochemist...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **clear, realistic, and stress-free exam prep schedule** based on all the details you’ve given. We’ll consider:
+
+- Your **exam dates and times**
+- The **study time needed per class**
+- Your **available days and time constraints**
+- Your **preferences** (no studying during vacation, no review on exam day, no flashcards for Stats, full day for Biochem, etc.)
+
+---
+
+## ✅ Key Facts Summary
+
+| Class | Exam Date | Time | Study Type | Time Required |
+|------|----------|------|-...          </p>
+          <p class="lt-p">
+Rubrics: 12/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.522          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **clear, realistic, and stress-free exam prep schedule** based on all the details you&#x27;ve provided. We’ll structure it so that:
+
+- You get **consistent, manageable study time**
+- You **avoid burnout**, especially with the heavy Biochemistry load
+- You **don’t study on vacation** or the day of the exam
+- You **review each class individually** before the exam
+- You **save time and mental energy** by skipping unnecessary prep (like Stats)
+- You **allocate full day blocks** ...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **clear, realistic, and stress-free exam prep schedule** tailored to your specific needs, timeline, and study preferences.
+
+---
+
+## 🎯 Your Goals:
+- Study for **5 classes** with exams on specific dates.
+- Use **virtual flashcards** (except for Statistics).
+- Focus on **section-by-section review** with dedicated time blocks.
+- Include **1 half-day overall review per class** (day *before* exam), except Statistics.
+- **No studying on mini-vacation** (after Anatomy exam).
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **clear, realistic, and stress-free exam prep schedule** that considers your constraints, priorities, and learning style — especially your focus on **virtual flashcards** and **structured studying by class**.
+
+---
+
+## 🎯 Your Key Constraints &amp; Goals (Summarized)
+
+### ✅ Learning Preferences
+- You make **virtual flashcards** for most classes → *focus on flashcard prep* for Biochemistry (full day) and Part III of Sexuality (half day).
+- **No flashcards for Statistics** (no...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s create a **clear, realistic, and stress-free exam prep schedule** that fits your preferences, class materials, time constraints, and exam dates.
+
+---
+
+## 🔍 Your Goals &amp; Key Constraints
+
+✅ **Classes &amp; Exam Dates:**
+- Forensic Psychology (April 13, 12:30 PM)
+- Sexuality (April 15, 4:00 PM)
+- Statistics (April 16, 9:00 AM)
+- Anatomy (April 18, 9:00 AM)
+- Biochemistry (April 25, 9:00 AM)
+
+✅ **Studying Preferences:**
+- Use **virtual flashcards** for most classes (except Statistics)....          </p>
+          <p class="lt-p">
+Rubrics: 15/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.652          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **clear, realistic, and stress-minimized exam prep schedule** based on your detailed needs, constraints, and preferences. We&#x27;ll aim for **efficiency, balance, and sustainability** — no burnout, and everything aligned with your actual study time, class content, and exam dates.
+
+---
+
+### ✅ Key Facts from Your Input:
+- **Classes and Exam Dates**:
+  - Forensic Psychology (April 13, 12:30 PM)
+  - Sexuality (April 15, 4:00 PM)
+  - Statistics (April 16, 9:00 AM)
+  - Anatomy (...          </p>
+          <p class="lt-p">
+Rubrics: 11/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.478          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a clear, realistic, and stress-free **exam prep schedule** tailored to your specific classes, time constraints, and preferences — especially around flashcard creation, studying time, and exam days.
+
+---
+
+## ✅ Your Key Constraints &amp; Preferences Recap
+
+### 📅 Exam Dates:
+- **Forensic Psychology**: April 13 – 12:30 PM  
+- **Sexuality**: April 15 – 4:00 PM  
+- **Statistics**: April 16 – 9:00 AM  
+- **Anatomy**: April 18 – 9:00 AM  
+- **Biochemistry**: April 25 – 9:00 AM  
+
+###...          </p>
+          <p class="lt-p">
+Rubrics: 16/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.696          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Thanks for the detailed and thoughtful breakdown — this makes creating a realistic, stress-free, and effective exam prep schedule *so* much easier. Let’s build a **clear, balanced, and practical study schedule** based on your goals, constraints, and class dynamics.
+
+---
+
+## ✅ Your Key Goals &amp; Constraints
+
+### ✅ What You Know:
+- **Exams:**
+  - Forensic Psychology (April 13 – 12:30 PM)
+  - Sexuality (April 15 – 4:00 PM)
+  - Statistics (April 16 – 9:00 AM)
+  - Anatomy (April 18 – 9:00 A...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create my exam prep schedule? I’m in five classes and all of them have exams: Forensic Psychology (April 13th at 12:30PM), Sexuality (April 15th at 4:00PM), Statistics (April 16...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **clear, realistic, and stress-free exam prep schedule** tailored to your needs, based on the information you’ve given.
+
+---
+
+## ✅ YOUR GOALS &amp; CONSTRAINTS (SUMMARIZED)
+
+### ✅ **Classes &amp; Exam Dates**
+- **Forensic Psychology** – April 13th, 12:30 PM  
+- **Sexuality** – April 15th, 4:00 PM  
+- **Statistics** – April 16th, 9:00 AM  
+- **Anatomy** – April 18th, 9:00 AM  
+- **Biochemistry** – April 25th, 9:00 AM  
+
+### ✅ Study Logistics
+- **Flashcards**:  
+  - Make **all fl...          </p>
+          <p class="lt-p">
+Rubrics: 17/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.739          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+3120                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+2616                </td>
+                <td>
+0.435                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.435                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+3333                </td>
+                <td>
+0.565                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.565                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+2392                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+2941                </td>
+                <td>
+0.478                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.478                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+2804                </td>
+                <td>
+0.652                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.652                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+3920                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+4063                </td>
+                <td>
+0.522                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.522                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+2636                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+3207                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+4743                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+2396                </td>
+                <td>
+0.652                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.652                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+2189                </td>
+                <td>
+0.478                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.478                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+2202                </td>
+                <td>
+0.696                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.696                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+2905                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+670                </td>
+                <td>
+3008                </td>
+                <td>
+0.739                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.739                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,4654 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 7</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 7  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T00:55:00  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Certainly! Here&#x27;s your fully developed **NCCCO Crane Inspection Report Template** — professionally written, polished, and structured exactly as you requested. The content flows naturally from your original checklist, with each section expanded into clear, formal paragraphs. It includes:
+
+- Three concise, professional **summary versions** (no deficiencies, minor deficiencies, major deficiencies)  
+- A dedicated **Deficiencies Table** with placeholder columns  
+- A section for **photos** (with a s...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your professionally polished, fully structured **NCCCO Crane Inspector Sample Inspection Report Template**. It includes:
+
+- Three concise, professional **summary versions** (no deficiencies, minor deficiencies, major deficiencies)  
+- Each section of your checklist now written as a **clear, paragraph-formatted section** with placeholders for field notes  
+- A designated **Deficiencies Table** with columns: *Deficiency Category*, *Deficient Part*, *Severity*  
+- A **Photos** p...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your fully polished, professional, and practical **NCCCO Crane Inspection Report Template** based on your checklist. The structure is clean, logical, and easy to fill in after each inspection. It includes:
+
+- Three concise, professional **summary versions** (no deficiencies, minor, major)  
+- Clearly labeled **deficiency table**  
+- A dedicated **photos section**  
+- All content written in formal, paragraph-style with placeholders for your data  
+- Maintains original section ...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **professional, polished, and fully structured inspection report template**, built from your original checklist. It includes:
+
+- Three concise, tone-appropriate **summary versions** (no deficiencies, minor, major)  
+- Expanded **paragraph-style sections** for each checklist item (in order)  
+- A **Deficiencies Table** with clear labeling: *Deficiency Category*, *Deficient Part*, *Severity*  
+- A dedicated **Photos** section (placeholder)  
+- All sections maintain your or...          </p>
+          <p class="lt-p">
+Rubrics: 15/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your fully expanded **NCCCO Crane Inspector Report Template**, now professionally formatted with:
+
+- Three **summary versions** (no deficiencies, minor, major)  
+- Paragraph-style expansion of each checklist section in the same order  
+- A **Deficiencies Table** with clearly labeled columns  
+- A dedicated **Photos** section  
+- Professional, clear, and concise language with no filler — tailored for real-world inspection use  
+
+---
+
+**Inspector Name:** _______________________...          </p>
+          <p class="lt-p">
+Rubrics: 15/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **fully expanded, professionally worded NCCCO Crane Inspection Report template** with the requested enhancements:
+
+---
+
+**Inspector name:** _________________________  
+**Date:** ____________  
+**Company:** _________________________  
+**Crane ID:** __________________  
+**Make/Model:** __________________  
+**Serial #:** ______________  
+**Hours:** _______  
+
+---
+
+### **Summary**
+
+**No Deficiencies Found:**  
+The crane has been inspected and is in full compliance with appli...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your professionally polished, comprehensive **Crane Inspection Report Template** based on your checklist. It includes:
+
+- Three concise, tailored **summary versions** (no deficiencies, minor deficiencies, major deficiencies)  
+- Expanded **paragraph-style sections** corresponding directly to your checklist (in the same order)  
+- A clear **Deficiency Log Table** with columns: *Deficiency Category, Deficient Part, Severity*  
+- A dedicated **Photos** section with a placeholder...          </p>
+          <p class="lt-p">
+Rubrics: 15/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s your professionally polished, fully structured **Crane Inspection Report Template**. It includes:
+
+- Three concise, tone-appropriate **summary versions** (no deficiencies, minor, major)  
+- Paragraph versions of each checklist section in proper order  
+- A clean, easy-to-fill-in **deficiency table**  
+- A dedicated **Photos** placeholder section  
+- All sections retained in the same order as your checklist  
+- Professional, clear, and compliant language without filler, while ...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your professionally polished and fully structured **NCCCO Crane Inspection Report Template**, including:
+
+- Three concise, professional summary versions (no deficiencies, minor, major)  
+- Paragraph-style expansion of each section from your checklist (in same order)  
+- A dedicated **Deficiencies Table** with clear labels  
+- A **Photos** placeholder section  
+- Clear, clean formatting for easy filling in post-inspection  
+
+All sections follow your original checklist sequence...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s your professionally polished, comprehensive **NCCCO Crane Inspection Report Template** with all the requested elements seamlessly integrated. The structure follows your checklist exactly, with clear section headings in **bold**, expanded paragraph-style descriptions, placeholders for your field notes, and the addition of **three summary versions**, a **deficiency table**, and a **photos section**.
+
+---
+
+**Inspector name:** _________________________  
+**Date:** ____________  
+...          </p>
+          <p class="lt-p">
+Rubrics: 16/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your fully polished, professional, and organized **Sample Crane Inspection Report Template**, based on your checklist. It includes:
+
+- Three versions of a concise, professional **summary** (no deficiencies, minor, major) — all under 125 words  
+- Expanded **paragraph-style sections** for each checklist item, in the exact same order  
+- A clear **Deficiency Table** with placeholder headers for easy data entry  
+- A dedicated **Photos** section  
+- A clean, structured format fo...          </p>
+          <p class="lt-p">
+Rubrics: 16/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your fully expanded and professionally formatted **Crane Inspection Report Template**, including:
+
+- Three concise, professional summary versions (no deficiencies, minor deficiencies, major deficiencies)  
+- Paragraphized, descriptive sections based on your checklist (in original order)  
+- A clear table format for deficiencies with **Deficiency Category**, **Deficient Part**, and **Severity**  
+- A dedicated **Photos** section with a placeholder  
+- A clean, logical, and eas...          </p>
+          <p class="lt-p">
+Rubrics: 15/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your professionally crafted **NCCCO Crane Inspection Report Template**. It includes:
+
+- Three concise, appropriate **summary versions** (no deficiencies, minor deficiencies, major deficiencies)  
+- Paragraph-style descriptions of each section in your checklist (in the same order)  
+- A section for **photos** with a placeholder  
+- A clear **deficiency table** with three columns: *Deficiency Category*, *Deficient Part*, and *Severity*  
+- Maintained professionalism, clarity, a...          </p>
+          <p class="lt-p">
+Rubrics: 15/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your professionally crafted **sample inspection report template**, fully expanded from your checklist into detailed, polished paragraph format with all requested elements: three versioned summaries, a deficiency table, a photo placeholder, and proper sectioning. The tone remains professional, clear, and constructive — avoiding harshness even when deficiencies are noted.
+
+---
+
+**Inspector Name:** _________________________  
+**Date:** ____________  
+**Company:** _______________...          </p>
+          <p class="lt-p">
+Rubrics: 15/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your professionally polished, comprehensive **NCCCO Crane Inspector Report Template**, built from your checklist and expanded into a formal, paragraph-based format with all your requested enhancements.
+
+---
+
+**Inspector name:** _________________________  
+**Date:** ____________  
+**Company:** _________________________  
+**Crane ID:** __________________  
+**Make/Model:** __________________  
+**Serial #:** ______________  
+**Hours:** _______  
+
+---
+
+### **Summary**
+
+**No Defici...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just got approved to take my NCCCO crane inspector exam, so I want to start planning and getting everything in order so that I can take customers and start doing inspections as soon as I pass. Below...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your fully completed **NCCCO Crane Inspector Sample Report Template**, professionally formatted with clear, polished language. It includes:
+
+- Three concise, professional summary versions (no deficiencies, minor deficiencies, major deficiencies)  
+- Paragraphized versions of each inspection checklist section (in the same order)  
+- A structured deficiency table with placeholders  
+- A dedicated &quot;Photos&quot; section  
+- All sections named and labeled as requested  
+
+This version m...          </p>
+          <p class="lt-p">
+Rubrics: 15/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1634                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1747                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1611                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1715                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1653                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1498                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1639                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1673                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1626                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+3142                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1596                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1880                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1678                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1603                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1605                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1488                </td>
+                <td>
+1632                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a warm, easy-going journey through the science of tight junctions and glutathione—two fascinating parts of how our bodies keep things balanced, from gut health to energy and emotional well-being. This isn’t just a textbook lecture; it’s like a friendly chat between two wise friends who both love health and wellness. 🌿✨
+
+---
+
+**What Are Tight Junctions and Glutathione? (The Gut’s VIP Gatekeepers and Our Body’s Natural Protector)**
+
+Imagine your small intestine as a bustling...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a cozy, friendly, and a bit playful journey through the world of tight junctions and glutathione — two super-intriguing topics that are like the guardians and bodyguards of your digestive health. Whether you&#x27;re a grad student in clinical nutrition or chiropractic care, this isn’t just textbook stuff — it’s about how your body’s inner gatekeepers work, how food connects to emotion, and what happens when the system gets a little “tight” or “stuck.”
+
+---
+
+🌱 Imagine your small...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a warm, engaging walk through a topic that’s both fascinating and very real for your daily health—tight junctions and glutathione. Think of this as your body’s VIP security system and its inner antioxidant guardian. We’re going to explore this in a friendly, easy-to-digest way—no fancy jargon, just clear insights with a sprinkle of wisdom from traditional Chinese medicine (TCM). 🌿✨
+
+---
+
+**Imagine your intestines as a two-way gate**  
+It&#x27;s not just about letting food in—it...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a cozy, friendly dive into something fascinating—how your body&#x27;s gut barrier and internal balance work together, especially for those of you diving deep into clinical nutrition and chiropractic care. Think of this like a warm evening chat over herbal tea, where we explore how food, emotions, and your body’s energy flow actually connect in beautiful, subtle ways.
+
+---
+
+✨ *A Friendly Overview: Tight Junctions &amp; Glutathione – The Gut’s Gatekeepers* ✨
+
+Imagine your small intes...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a warm, friendly, and slightly playful journey through a topic that might sound a bit science-heavy — tight junctions and glutathione — but is actually *super* relevant to how your body keeps itself balanced, especially when it comes to digestion, energy, and emotional wellness. Think of this not as something dense and intimidating, but more like a cozy conversation with a friendly nutrition coach who knows a little bit of biology and a lot of real-life wisdom — including ...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a cozy, friendly stroll through the world of tight junctions and glutathione — two little superheroes working hard inside your body, especially at the frontline of your gut and your overall wellness. Think of this as a gentle science tea you’d enjoy with a friend over a morning cup of herbal chamomile. No jargon without a translation — just clear, calm, and real.
+
+---
+
+🌱 **Tight Junctions &amp; Glutathione: A Gut Health Duo Explained (Like a Friendly Neighborhood Watch)**
+
+Ima...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a warm, friendly, and easy-to-digest walk through a topic that’s both fascinating and super relevant—**tight junctions and glutathione**—for graduate-level clinical nutrition and chiropractic students. We’ll keep it simple, real, and full of connections, like a delicious herbal tea that warms the body from the inside out. 🍵🔥
+
+---
+
+🌞 **Warm-Up Moment: The Gatekeepers of Our Gut**  
+Imagine your small intestine as a bustling market. The vendors (nutrients) come in from food,...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s take a friendly, easy-to-digest (pun intended!) walk through a topic that&#x27;s both fascinating and vital—tight junctions and glutathione—especially for clinical nutrition and chiropractic students who care about the body’s inner balance. Think of this as a cozy afternoon chat with a wellness-savvy friend, full of real-life connections and practical takeaways.  
+
+---
+
+🌱 **Tight Junctions &amp; Glutathione: The Body’s Security Gates and Nature’s Antioxidant Squad** 🌱  
+
+Imagine your sm...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a warm, friendly, and easy-to-digest (pun intended) dive into the fascinating world of tight junctions and glutathione — especially how they relate to gut health, energy, and even emotions from a traditional Chinese medicine (TCM) perspective. Think of this as your friendly wellness coach giving you a relaxing, insightful, and slightly science-savvy tour right before your exam or next client session.
+
+---
+
+🌟 **A Friendly Guide to Tight Junctions &amp; Glutathione for Clinical ...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s wrap this all up in a warm, friendly, and easy-to-digest way — like we’re having a cozy coffee chat with some good snacks and a shared passion for health. 😊
+
+---
+
+🌿 **A Gentle Overview: Tight Junctions, Glutathione, and the Gut-Body Connection**  
+(Just for Grad Students in Clinical Nutrition &amp; Chiropractic)
+
+So, imagine your gut like a big, cozy house with a strong, flexible door system — the tight junctions. These little gatekeepers line the edges of the cells in your small i...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a warm, friendly, and slightly conversational stroll through the world of tight junctions and glutathione — especially as it relates to clinical nutrition and chiropractic students. Think of this like a cozy tea chat with a seasoned nutritionist and a wise herbalist sharing insights over a bowl of soothing herbal tea. No jargon overload, just clear, heartfelt science, with a touch of traditional wisdom.
+
+---
+
+🌳 So, imagine your small intestine as a well-designed, beautiful...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a warm, friendly, and grounded walk through a topic that sounds a bit science-heavy — **tight junctions and glutathione** — but can actually feel like a gentle conversation about how your body’s inner system keeps everything balanced and protected. Think of it like a well-maintained garden: the plants are healthy, the soil is rich, and the roots stay secure. In the body, that garden is your gut, and just like a garden needs good soil and water to thrive, your cells need th...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s dive into a friendly, engaging, and easy-to-digest summary — no jargon overload, just clear insights — tailored for graduate-level clinical nutrition and chiropractic students. Think of this as a cozy conversation over coffee, where we gently explore the science behind how our bodies keep things orderly — especially the walls between our gut and the rest of us.
+
+---
+
+🌱 **The Gut-Liver-Brain Connection: When Your Intestinal Gates Are Strong (And Your Glutathione Is High!)**
+
+Ima...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a warm, friendly, and easy-to-follow walk through the world of tight junctions and glutathione — two important pillars that keep our bodies balanced, especially for clinical nutrition and chiropractic students who care about how food, stress, and lifestyle affect health. We’ll keep it simple, connect it to real-life wellness, and even sneak in a little TCM wisdom along the way — because true healing is holistic!
+
+---
+
+🌱 **A Friendly Peek Into Tight Junctions &amp; Glutathione*...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s take a warm, friendly, and easy-to-digest journey into the world of tight junctions and glutathione — two superheroes protecting your gut and helping your body stay balanced. Whether you&#x27;re a grad student in clinical nutrition or chiropractic care, understanding the connection between your gut health, nutrient absorption, and emotional well-being can really deepen your holistic practice.
+
+---
+
+📘 Imagine your small intestine as a well-organized school hallway. The walls are made...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using a friendly tone, summarize the most appropriate module presentation for graduate level clinical nutrition and chiropractic students on the topic of tight junctions and glutathione. Do not only u...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s weave together a warm, friendly, and easy-to-digest (pun intended!) explanation for graduate-level clinical nutrition and chiropractic students—without getting too technical or overwhelming. Think of this as a cozy coffee-shop chat where we dive into the fascinating world of tight junctions and glutathione, all while connecting it to real-life body function, nutrition, and even emotions. ☕️🌱
+
+---
+
+🌿 *The Gut’s Security Gate: A Friendly Tour of Tight Junctions and Glutathione*
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+2094                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+1963                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+1680                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+1903                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+2365                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+1737                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+2093                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+2076                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+2053                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+1758                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+2011                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+2047                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+1847                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+2050                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+1733                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+135                </td>
+                <td>
+1953                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### ✅ **Board Report Summary: Collective Financial Counseling Session Summary (February 25 – March 26)**
+
+Over the past four sessions (February 25, March 2, March 4, and March 26), three clients (A, C, and E) engaged in counseling sessions focused on budgeting, debt management, income stability, and financial resilience. The sessions spanned both in-person and virtual formats, with a strong emphasis on personalized financial planning, identifying obstacles, and providing targeted resources.
+
+Key...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: **Board Report Summary: Financial Counseling Session Summary (February 25 – March 26)**
+
+This period encompasses six financial counseling sessions with three clients (Client A, Client B, and Client E), with one session (Client C) conducted in person and the others either virtual or rescheduled. Client B missed their scheduled session on March 26, resulting in a no-show. Client A began a comprehensive financial assessment with a detailed review of income, expenses, and debt. Client C faced a redu...          </p>
+          <p class="lt-p">
+Rubrics: 10/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.588          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Collective Financial Counseling Session Summary**
+
+Over the course of the reviewed period, three clients (A, C, and E) participated in financial counseling sessions, with one client (B) rescheduling and one (B) missing their scheduled session. The sessions focused on budgeting, debt management, income stability, and financial goal setting. Client A faced significant challenges related to income sharing, high insurance costs, and questionable debt offers. Client C expe...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Financial Counseling Sessions (February 25 – March 26)**
+
+Over the course of the period from February 25 to March 26, a total of **four clients** participated in financial counseling sessions, with **three sessions held in person and one virtual session**. The sessions collectively focused on budgeting, debt management, income stability, and financial behavior change. Clients engaged with tools to assess their financial health, address identified obstacles, and set ac...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### ✅ **Board Report Summary: Collective Financial Counseling Session Summary**  
+*(February 25 – March 26)*
+
+Over the span of the reporting period, three clients (Clients A, C, and E) engaged in financial counseling sessions with the financial counseling team. Client B was rescheduled and missed one scheduled session. Client A began with a thorough financial review, revealing significant stress around household responsibilities, escalating debt, and poor credit. Client C faced a reduction in in...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Financial Counseling Session Notes (2/25 – 3/26)**
+
+Over the course of the reporting period, a total of **4 financial counseling sessions** were completed with three clients (Client A, Client B, Client C, and Client E), one of which was rescheduled (Client B) and one of which was a no-show (Client B). The sessions were conducted in person and virtually, with Client A and Client C meeting in person, and Client E meeting virtually. Client B had a follow-up scheduled on ...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Financial Counseling Sessions (February 25 – March 26)**
+
+Over the course of this period, three distinct financial counseling sessions were completed with Clients A, E, and C. One session (Client B) was rescheduled, and one (Client B) resulted in a no-show. A virtual session with Client E and an in-person session with Client C and Client A were conducted, with additional follow-up and goal tracking.
+
+**Collective Summary:**
+The clients presented with diverse financial...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Financial Counseling Sessions (February 25 – March 26)**
+
+Over the course of the reporting period, three clients (A, C, and E) participated in structured financial counseling sessions. Client B rescheduled and did not attend the scheduled session. Client A, a single father, presented with significant financial strain due to inconsistent family support and high insurance costs, along with concerning signs of predatory debt activity. Client C reported a reduction in wor...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Collective Financial Counseling Session Summary (February 25 – March 26)**
+
+Over the period from February 25 to March 26, five financial counseling sessions were scheduled and conducted with three clients (Client A, Client B, and Client E, with Client C attending two sessions). Of these, three sessions were held: in-person (Client A, Client C), one virtual (Client E), and one no-show (Client B).
+
+The sessions collectively focused on budgeting, debt management, income ...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Financial Counseling Sessions – February 25 to March 26**
+
+Over the past three weeks, four clients participated in financial counseling sessions, with two sessions held in person and two virtual. The sessions focused on budgeting, debt management, income changes, emergency preparedness, and behavioral strategies to improve financial stability. Clients faced a range of financial obstacles, including income loss, high debt, poor credit, and concerns about family respons...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Financial Counseling Session Collective Summary**  
+
+Over the course of the last few weeks, three clients (A, C, and E) engaged in financial counseling sessions, with one rescheduling and one missing a scheduled appointment. Clients participated in both in-person and virtual sessions, with key objectives centered on budgeting, debt management, identity of financial obstacles, and establishing financial safeguards.  
+
+_client A_ began with a comprehensive review of his...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Collective Financial Counseling Session Summary (February 25 – March 26)**
+
+Over the period from February 25 to March 26, four distinct financial counseling sessions were conducted with three clients (Client A, Client B, and Client E; Client C’s session was on March 4). Client B rescheduled on February 26 and did not attend the scheduled session on March 26. Client A, Client C, and Client E were actively engaged in the financial counseling process, with sessions held ...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Collective Financial Counseling Session Summary**  
+
+Over the course of the period reviewed, three clients (A, C, and E) participated in financial counseling sessions, with one client (B) rescheduling and one (B) missing a scheduled session. The sessions focused on budgeting, debt management, income fluctuations, and financial habits. Client A addressed concerns around income sharing with his son, high debt, questionable debt consolidation offers, and poor credit. Cli...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: **Board Report Summary – Collective Financial Counseling Session Summary**  
+
+Over the course of the reporting period, five financial counseling sessions were conducted with three clients (Clients A, B, and E), with one session (Client B) not occurring as scheduled. Client A initiated a new financial planning journey, reviewing fixed expenses, credit challenges, and questionable debt-related solicitations. Client B was rescheduled but missed their session. Client E successfully advanced her budg...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Financial Counseling Session Notes (February 25 – March 26)**
+
+Over the course of the evaluation period, four clients (A, B, C, and E) engaged in financial counseling sessions, with one (Client B) missing a scheduled appointment. The sessions collectively focused on budgeting, debt management, income fluctuations, and financial behavior change. Clients addressed personal financial stressors related to income loss, family dynamics, high debt, and lack of financial tool...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a board report summary from the included financial counseling session notes. Summarize the sessions collectively. Then, provide analytics from your summary; include the following: Clien...          </p>
+          <p class="lt-p">
+Response: ### **Board Report Summary: Collective Financial Counseling Session Summary**
+
+Over the course of the period reviewed, three clients (Client A, Client C, and Client E) participated in financial counseling sessions, with one client (Client B) failing to attend a scheduled session. The sessions were primarily focused on budgeting, debt management, income stability, and consumer protection. Key themes included financial stress due to income changes, household dynamics, debt concerns, and lack of fi...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1408                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1031                </td>
+                <td>
+0.588                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.588                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1131                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1049                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1108                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1203                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1115                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1105                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+993                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1045                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1166                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1109                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1085                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1198                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1089                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+900                </td>
+                <td>
+1064                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through this **step-by-step** to create a fair, safe, and practical **referee rota** for your 8-team football tournament tomorrow.
+
+---
+
+## 🔍 **Step 1: Understand the Match Schedule**
+
+### 📅 Group Stage Matches (Round Robin)
+
+| Time | Match |
+|------|-------|
+| 10:00 | Harriers v Joiners; Pacers v Jets; Irons v Bulls; Masons v Comets |
+| 10:50 | Harriers v Pacers; Joiners v Jets; Bulls v Masons; Irons v Comets |
+| 11:40 | Harriers v Jets; Pacers v Joiners; Bulls v Comets; ...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through a **logically sound, fitness-conscious, and fair referee rota** for your 8-team football tournament tomorrow, based on all the constraints you&#x27;ve provided.
+
+---
+
+## 🏁 Tournament Structure Recap
+
+### **Group Stages (Round Robin – 3 rounds, 6 matches total)**
+- Group A: Harriers, Joiners, Pacers, Jets  
+- Group B: Irons, Bulls, Masons, Comets  
+- Each team plays 3 matches (one against each of the other 3 teams)
+
+**Match Schedule:**
+
+| Time | Matches |
+|------|-------...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Great question — this is a very detailed and well-structured tournament planning problem. Let&#x27;s work through a **logically sound, realistic, and compliant** rota for referees that considers:
+
+---
+
+### ✅ Key Requirements Recap:
+
+#### 1. **Group Stage Matches (3 rounds)**
+- 4 matches per group → 8 group matches total
+- **Only 1 referee per match**, no line judges
+- All matches start at:
+  - 10:00 (Round 1)
+  - 10:50 (Round 2)
+  - 11:40 (Round 3)
+
+#### 2. **Post-Group Stage Matches**
+- **Semi-Final...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through this **step-by-step** to create a **fair, practical, and safe rota** for referees in your 8-team football tournament, respecting all the constraints you&#x27;ve provided.
+
+---
+
+## 🏁 **Tournament Structure Summary**
+
+### **Groups**
+- **Group A**: Hammersmith Harriers, Johnstone Joiners, Paisley Pacers, Jedburgh Jets  
+- **Group B**: Inverness Irons, Banbury Bulls, Maidstone Masons, Clapham Comets  
+
+### **Group Stage**
+- Round-robin (3 rounds)
+- Matches:
+  - 10:00: Harri...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through a **logic-based, fair, and realistic rota** for referees across your 8-team football tournament — considering:
+
+---
+
+### ✅ **Key Requirements Summary**
+
+#### 📋 Tournament Structure
+- **Group Stage (Round Robin)**: 3 rounds of 4 matches (Group A &amp; B each)
+- **Semi-Finals**: 2 matches
+- **Bronze Medal Match**: 1 match
+- **Final**: 1 match
+- Total: 7 matches (3 group rounds × 2 groups = 6 group matches + 3 post-group = 9 matches)
+
+&gt; ⚠️ Note: 6 group matchdays (10:00, ...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Great — let&#x27;s work through this **step-by-step** to create a realistic, fair, and feasible referee rota for your 8-team football tournament tomorrow.
+
+---
+
+## 🏁 Tournament Structure Recap
+
+### 📋 Groups
+- **Group A:** Harriers, Joiners, Pacers, Jets  
+- **Group B:** Irons, Bulls, Masons, Comets
+
+### ⚽ Group Stage (3 rounds, 6 matches)
+All matches are **30 minutes**, with a **20-minute break** between matches.
+
+| Time | Matches |
+|------|--------|
+| 10:00 | Harriers vs Joiners; Pacers vs Jets; Iro...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and well-structured scenario! Let&#x27;s work through a **practical, fair, and safe rota** for referees throughout the entire tournament, taking into account all of your constraints.
+
+---
+
+## 🔍 **Key Objectives &amp; Constraints**
+
+### ✅ Match Schedule Breakdown
+
+| Time              | Match (Group Stage) |
+|-------------------|----------------------|
+| 10:00             | Harriers vs Joiners; Pacers vs Jets; Irons vs Bulls; Masons vs Comets |
+| 10:50             | Harriers vs P...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through this step by step to create a **feasible, fair, and safe rota for referees** for your 8-team football tournament tomorrow.
+
+---
+
+## 🏁 Tournament Structure Summary
+
+### Group Stage (Round Robin)
+- **Group A**: Hammersmith Harriers, Johnstone Joiners, Paisley Pacers, Jedburgh Jets  
+- **Group B**: Inverness Irons, Banbury Bulls, Maidstone Masons, Clapham Comets  
+
+Each group plays three matches (round-robin), one match per day.
+
+✅ Matches:
+- 10:00 – Harriers v Joiner...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Great — thank you for the detailed and well-structured scenario! Let&#x27;s work through a **referee rota** for your 8-team football tournament tomorrow, following all your constraints.
+
+---
+
+## 🔍 Step-by-step Summary of the Tournament Structure
+
+### Group Stage (3 rounds)
+- 4 matches per round (total: 6 matches)
+- Group A: Hammersmith Harriers, Johnstone Joiners, Paisley Pacers, Jedburgh Jets  
+- Group B: Inverness Irons, Banbury Bulls, Maidstone Masons, Clapham Comets
+- Matches:
+  - **10:00**: Harr...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through a **practical, fair, and realistic rota** for referees for your 8-team football tournament, keeping all constraints in mind.
+
+---
+
+## 🏁 Tournament Structure Summary
+
+### **Group Stage (3 rounds, 6 matches total):**
+- **Round 1 (10:00)**  
+  Hammersmith Harriers vs Joiners  
+  Pacers vs Jets  
+  Irons vs Bulls  
+  Masons vs Comets  
+
+- **Round 2 (10:50)**  
+  Harriers vs Pacers  
+  Joiners vs Jets  
+  Bulls vs Masons  
+  Irons vs Comets  
+
+- **Round 3 (11:40)**  
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through this step-by-step to create a **fair, realistic, and safe rota** for referees based on your detailed scenario.
+
+---
+
+## 🔍 **Step 1: Understand the Tournament Structure**
+
+### ✅ Group Stage (3 rounds, 6 matches per group — 12 total matches)
+- **Group A**: Hammersmith Harriers, Johnstone Joiners, Paisley Pacers, Jedburgh Jets  
+- **Group B**: Inverness Irons, Banbury Bulls, Maidstone Masons, Clapham Comets
+
+Each group plays **round robin** (3 matches per group).
+
+###...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and thoughtful setup — this is a well-structured tournament scenario. Let&#x27;s break down and create an **optimal referee rota** that considers:
+
+---
+
+### ✅ **Key Requirements Summary**
+
+1. **Group Stage (3 rounds × 4 matches = 6 matches)**  
+   - Each match requires **1 referee**  
+   - Total group matches: 6 → 6 referees needed (but can reuse if under limits)
+
+2. **Post-Group Stage Matches (Semi-Finals, Bronze, Final)**  
+   - 3 matches → **each requires 2 referees** (1...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through a **practical, compliant, and safe referee rota** for your 8-team football tournament tomorrow, taking into account:
+
+---
+
+## 🔍 Key Requirements &amp; Constraints Recap
+
+### 📅 Match Schedule &amp; Structure
+1. **Group Stage (3 rounds, 6 matches total)**  
+   - 3 rounds: 10:00, 10:50, 11:40 → **6 matches**  
+   - Each match: 30 min + 20 min break → total per match ≈ 50 min  
+   - Group A: Harriers, Joiners, Pacers, Jets  
+   - Group B: Irons, Bulls, Masons, Comets  
+
+2. **P...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s work through a **logical, fair, and practical referee rota** for your 8-team football tournament with all the constraints you&#x27;ve provided.
+
+---
+
+## ✅ **Tournament Structure Summary**
+
+### Group Stage (Round Robin – 3 rounds)
+- **Group A**: Hammersmith Harriers, Johnstone Joiners, Paisley Pacers, Jedburgh Jets  
+- **Group B**: Inverness Irons, Banbury Bulls, Maidstone Masons, Clapham Comets  
+
+Each group plays 3 matches (round robin).  
+Group standings: 1st &amp; 2nd progress → Semi Fina...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through a **well-balanced, realistic, and safe rota** for referees in your 8-team football tournament with all your constraints.
+
+---
+
+## ✅ **Overview of Tournament Structure**
+
+### Group Stage (3 Rounds – 6 matches total)
+- **Group A (4 teams):** Hammersmith Harriers, Johnstone Joiners, Paisley Pacers, Jedburgh Jets  
+- **Group B (4 teams):** Inverness Irons, Banbury Bulls, Maidstone Masons, Clapham Comets  
+
+Each group plays a **round-robin**:
+- 3 matches per group → 6 m...          </p>
+          <p class="lt-p">
+Rubrics: 16/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.640          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a rota for referees for a 8 team football tournament tomorrow. 
+
+The teams will but split into two groups, Group A and Group B. Group A contains Hammersmith Harriers, Johnstone Join...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s work through a **clear, fair, and practical rota** for referees in this 8-team football tournament, taking into account **all the constraints and conditions** you&#x27;ve provided.
+
+---
+
+## 🏁 Tournament Structure Recap
+
+### 🔁 Group Stage (Round Robin)
+- **Group A**: Hammersmith Harriers, Johnstone Joiners, Paisley Pacers, Jedburgh Jets  
+- **Group B**: Inverness Irons, Banbury Bulls, Maidstone Masons, Clapham Comets  
+- 3 matches per group (3 rounds), total of 6 group matches.
+
+👉 *...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+8192                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+7143                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+5421                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+7703                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+8181                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+5811                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+7838                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+8192                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+7784                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+5445                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+6642                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+8192                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+6710                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+5224                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+7592                </td>
+                <td>
+0.640                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.640                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+908                </td>
+                <td>
+7244                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

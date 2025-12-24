@@ -1,0 +1,4538 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 11</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 11  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T01:19:47  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **The Medieval Period: Foundations of Melodic and Chordal Thought**  
+Western classical music began in the Medieval period (approximately 500–1400 CE), marked by a focus on liturgical chant and the development of notation systems. The core stylistic element was *plainchant*, a monophonic, unaccompanied vocal tradition used in Christian worship. This era laid the groundwork for future polyphony, where multiple independent melodies were woven together. Key composers such as *Guido d&#x27;Arezzo*, whose...          </p>
+          <p class="lt-p">
+Rubrics: 23/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.852          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music: The Foundations of Western Composition**  
+Western classical music originates in the Medieval period (c. 500–1400), where chant served as the primary form. Monophonic, unaccompanied melodies—later termed *plainchant* or *Gregorian chant*—formed the bedrock of liturgical music, emphasizing liturgical function over emotional expression. Melody was carefully structured with modal scales (such as Dorian, Phrygian, and Lydian), and improvisation was common. The structure of music wa...          </p>
+          <p class="lt-p">
+Rubrics: 25/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.926          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music: The Foundations of Western Classical Tradition**  
+Medieval music, spanning from the 5th to the 15th century, laid the foundational pillars for Western classical music. Characterised by monophonic textures—single melodic lines without harmony—this period featured Gregorian chant, which was notable for its modal scales and repetition. Despite the absence of complex harmonies, the emphasis on liturgical function and vocal clarity created a structured framework for future developm...          </p>
+          <p class="lt-p">
+Rubrics: 26/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.963          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music: Foundations of Choral and Monophonic Tradition**  
+Western classical music began in the Medieval period (c. 500–1400), characterized by monophonic textures and liturgical emphasis. The primary form was Gregorian chant, a species of unaccompanied, single-voice sacred music used in church services. Musical notation developed significantly during this time, with the invention of the neume system, later refined into the staff notation used throughout the centuries. Key stylistic el...          </p>
+          <p class="lt-p">
+Rubrics: 22/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.815          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music: Foundations of Polyphony and Liturgical Expression**  
+Medieval music, spanning from the 6th to the 14th century, was deeply rooted in liturgical practices and church functions. Its core stylistic elements include monophonic chants, known as *plainchant* or *Gregorian chant*, which featured a single unaccompanied melodic line with set modes. These chants emphasized modal scales and a strict tonal hierarchy. The development of *polyphony*—the layering of independent melodic line...          </p>
+          <p class="lt-p">
+Rubrics: 25/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.926          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music: Foundations of Choral and Polyphonic Tradition**  
+Western classical music began in the Medieval period (c. 500–1400 CE), marked by the development of monophonic chant and early forms of polyphony. The most prominent feature was *plainchant*—a single melodic line sung in Latin, exemplified by the *Gregorian chant*, which served liturgical functions in the Catholic Church. Over time, composers began layering melodies to create *polyphony*, where multiple independent melodic line...          </p>
+          <p class="lt-p">
+Rubrics: 20/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.741          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music: Foundations of Church and Monastic Tradition**  
+Medieval music (c. 500–1400) was primarily rooted in liturgical settings and served religious functions within the Christian Church. The core stylistic elements included monophonic chant, using unaccompanied melodies in modes, and strict adherence to Gregorian polyphony. Melody was central, with limited harmonic development, and rhythmic patterns were often irregular. Key composers of this era include *St. Augustine*, whose influ...          </p>
+          <p class="lt-p">
+Rubrics: 23/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.852          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Foundations**  
+Western classical music began in the Medieval period (c. 500–1400), characterised by Gregorian chant—a monophonic, modal style with a focus on sacred text and unaccompanied melody. The use of modes (such as Dorian and Mixolydian) rather than major or minor scales defined the tonal framework. Polyphony emerged gradually, with the development of organum and, later, the imitation of voices in interlacing melodies. Key figures such as *Notker the Stammerer*, *Guillaume de ...          </p>
+          <p class="lt-p">
+Rubrics: 26/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.963          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Foundations: The Birth of Musical Structure**  
+Western classical music traces its roots to the Medieval period (c. 500–1400), a time when monophonic, chant-based music dominated. The primary form was *plainchant*, consisting of unaccompanied melody lines with a single vocal line, often used in liturgical settings. Melody and mode were central, with the church modes creating a distinct tonal system. This era laid the groundwork for future developments in harmony and structure. Key com...          </p>
+          <p class="lt-p">
+Rubrics: 24/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.889          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music (c. 500–1400)**  
+Medieval music, rooted in monophonic chant, laid the foundation for Western classical traditions. Central to this era was the use of Gregorian chant, characterized by a single unaccompanied melodic line, modal scales, and a strong emphasis on liturgical function. Melodic lines were often based on four to seven modes, each with a distinct tonal character. Musical structure was primarily functional, serving religious purposes rather than artistic expression. Key ...          </p>
+          <p class="lt-p">
+Rubrics: 26/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.963          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **The Medieval Era: Foundations of Sacred Harmony**  
+Western classical music began in the Medieval period (c. 500–1400 CE), primarily centered on liturgical functions. The core stylistic elements included monophonic chant, such as Gregorian chant, which featured single melodic lines without harmonic accompaniment. Melody and text were inseparable, and rhythm was often free and cyclical. The use of modes—distinct pitch systems—gave songs their unique tonal character. Composers like *Jerome of To...          </p>
+          <p class="lt-p">
+Rubrics: 26/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.963          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music: Foundations of Polyphony and Sacred Expression**  
+Western classical music originated in the Medieval period (circa 500–1400 CE), primarily within liturgical settings. Stylistically, Medieval music emphasized chant—specifically Gregorian chant—characterized by modal scales and unaccompanied, monophonic lines. By the 12th century, polyphony began to emerge, with multiple independent melodic lines interweaving. Key composers such as *Léonin*, *Pérotin*, and *Guillaume de Machaut*...          </p>
+          <p class="lt-p">
+Rubrics: 23/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.852          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Foundations: Harmony and Chant**  
+Western classical music began in the Medieval period (c. 500–1400) with monophonic plainchant, exemplified by the *Gregorian chant*. These unaccompanied, single-line melodies were central to liturgical worship and reflected a spiritual focus on sacred text. Stylistically, Medieval music emphasized modal scales, typically organized in a system of church modes (such as Dorian and Lydian), and relied on a simple melodic structure lacking harmonic comple...          </p>
+          <p class="lt-p">
+Rubrics: 19/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.704          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music: Foundations of Western Classical Tradition**  
+Medieval music, spanning roughly from the 5th to the 14th century, laid the foundational structures for later Western classical traditions. The central stylistic element was liturgical chant, particularly *Gregorian chant*, which featured monophonic texture, modal scales, and a simple, straightforward melodic line. Music served primarily religious functions, and the use of plainsong allowed for sacred texts to be sung in a direct, ...          </p>
+          <p class="lt-p">
+Rubrics: 26/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.963          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Music: Foundations of Aural Tradition**  
+Medieval music, spanning from the 6th to the 14th centuries, laid the essential groundwork for Western classical traditions. Characterized by monophonic texture—single melodic lines without harmony—this era emphasized liturgical chant, most notably Gregorian chant. The core stylistic element was the use of modal scales, which offered a distinct set of tonalities without a clearly defined tonic center. The use of *modes* (such as Dorian and Mix...          </p>
+          <p class="lt-p">
+Rubrics: 25/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.926          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write an essay on the history of Western music, by which I mean classical music. In 5 paragraphs, briefly cover the core stylistic elements of Medieval, Renaissance, Baroque, Classical, and Romantic m...          </p>
+          <p class="lt-p">
+Response: **Medieval Foundations: Monophony and Sacred Text**
+
+Western classical music traces its roots to the Medieval period (circa 500–1400 CE), marked by the emergence of monophonic chant, where a single melodic line without harmonies dominated. This style, primarily found in Gregorian chant, emphasized liturgical function and vocal purity, with strict modal scales that dictated the tonal structure. Text setting was central, with melodies designed to support the meaning of sacred texts. Key composers ...          </p>
+          <p class="lt-p">
+Rubrics: 26/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.963          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1430                </td>
+                <td>
+0.852                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.852                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1518                </td>
+                <td>
+0.926                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.926                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1539                </td>
+                <td>
+0.963                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.963                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1740                </td>
+                <td>
+0.815                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.815                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1424                </td>
+                <td>
+0.926                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.926                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1505                </td>
+                <td>
+0.741                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.741                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1431                </td>
+                <td>
+0.852                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.852                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1429                </td>
+                <td>
+0.963                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.963                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1346                </td>
+                <td>
+0.889                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.889                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1464                </td>
+                <td>
+0.963                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.963                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1626                </td>
+                <td>
+0.963                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.963                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1538                </td>
+                <td>
+0.852                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.852                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1613                </td>
+                <td>
+0.704                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.704                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1558                </td>
+                <td>
+0.963                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.963                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1607                </td>
+                <td>
+0.926                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.926                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+144                </td>
+                <td>
+1485                </td>
+                <td>
+0.963                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.963                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below are two professionally crafted, engaging, and culturally relevant **monthly real estate newsletters** for **December 2025 and January–February 2026**, tailored specifically to your audience in **Hill East, Washington, DC**. Each includes all four requested elements: a humorously timely intro, a buyer education section, a ranked list of recommended properties, and your contact information with a monthly closing quote from a historic DC figure.
+
+---
+
+## 📩 **Hill East Home Monthly...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **monthly real estate newsletter** for **December 2025, January 2026, and February 2026**, crafted specifically for Hill East, Washington, DC — with humor, DC relevance, buyer education, property recommendations, and an inspirational closing quote featuring a historic figure from DC.
+
+All content is tailored to your local market, prioritized based on area code (20003), value per square foot, and affordability (under $6,000/month). The top 5 properties are ranked according...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below are two **monthly real estate newsletters** for **December 2025** and **January–February 2026**, tailored specifically for your clients in **Hill East, Washington, DC**. Each includes all four required elements: a humorous DC-relevant intro, a buyer education section on a DC-specific homebuying program, a ranked list of top 5 recommended properties (prioritized by ZIP code, cost-per-square-foot, and affordability), and your contact information with a monthly inspirational closi...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below are two **monthly real estate newsletters** tailored for your clients and prospective homebuyers in **Hill East, Washington, DC**, for **December 2025 and January–February 2026**. Each includes your requested 4 elements: a humorous, temporally relevant DC-real estate joke, a DC-specific buyer education section, a ranked list of top 5 recommended properties (using your criteria), and your contact info with a rotating inspirational closing quote from a historic DC figure.
+
+---
+
+#...          </p>
+          <p class="lt-p">
+Rubrics: 12/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.632          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here are two monthly real estate newsletters tailored for **December 2025** and **January–February 2026**, featuring all four required elements as you requested — with humor, DC-specific buyer education, a ranked property list (based on your criteria), and a closing quote from a DC-born historic figure.
+
+Each newsletter is both timely and rooted in the local culture of Washington, D.C., while staying true to your branding as a Hill East-focused agent.
+
+---
+
+## 📝 **December 2025 – Hil...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s your professionally crafted, seasonal, and locally relevant **monthly real estate newsletter** for **December 2025 and January–February 2026**, tailored for your clients and prospective homebuyers in **Hill East, Washington, DC**. Each month includes all four required elements: a humorous DC-themed opener, a buyer education segment on a DC-specific homebuying program, a ranked list of top 5 recommended properties (based on your criteria), and your contact info with a monthly i...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s your **monthly real estate newsletter** for **December 2025** and **January–February 2026**, crafted with a local DC flavor, humor, buyer education, property recommendations, and monthly inspirational quotes—perfect for keeping your clients engaged and informed.
+
+---
+
+## 📢 **December 2025 Newsletter – “The Holiday Home Front”**
+
+**1. Humorous &amp; Intro-Seasonal Moment (DC-Focused &amp; Temporally Relevant):**  
+When DC finally gets snow, it’s not because the heating system failed—it...          </p>
+          <p class="lt-p">
+Rubrics: 16/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.842          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **monthly real estate newsletter** for **December 2025 and January–February 2026**, tailored specifically for **Hill East, Washington, DC**, with all four required elements, reflective of seasonal relevance, DC-specific insights, and real estate value.
+
+---
+
+## 📢 **December 2025 Newsletter – &quot;The Season of Snow, Sleighs, and Subpar Roof Repairs&quot;**
+
+&gt; *Why do we say &quot;chill&quot; in December? Because the temperature is officially &quot;absolute&quot; — and so is the deadline to apply for ...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a set of **two monthly newsletters** for your clients and prospective homebuyers — one for **December 2025** and one for **January–February 2026** — each fully tailored to your real estate practice in **Hill East, Washington, DC**. Each includes the four requested elements with humor, education, property rankings, and a closing inspirational quote from a historic DC resident.
+
+---
+
+## 🌆 **December 2025 Newsletter – &quot;The Great National Holiday Housing Crisis&quot;**
+
+### 🎄 1. A Humo...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **December 2025 – February 2026 Monthly Newsletter Series** for Hill East, Washington, DC — crafted with humor, local flavor, buyer education, and a strong focus on value-driven recommendations. Each month includes all four key elements as requested.
+
+---
+
+## 📩 **Hill East Home Monthly: December 2025**  
+*When the snow starts falling, so does the spirit of seasonal charm — and that’s when you know you’re in the right neighborhood.*
+
+**Humorous Intro (DC-Seasonal &amp; Tempora...          </p>
+          <p class="lt-p">
+Rubrics: 12/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.632          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **monthly real estate newsletter** tailored for **Hill East, Washington, DC**, for **December 2025** and **January–February 2026**. Each includes the four requested elements with a blend of humor, education, actionable property recommendations, and a closing quote from a historic DC figure — all grounded in local flavor and timely relevance.
+
+---
+
+## 📝 **Hill East Home Monthly Newsletter**  
+*December 2025*  
+
+---
+
+### 🤣 1. A Humorous &amp; Temporally Relevant Intro  
+Decembe...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a set of two professionally crafted, engaging, and temporally relevant monthly newsletters for **December 2025 and January–February 2026**, tailored for your real estate clients in **Hill East, Washington, DC**. Each newsletter includes all four required elements with authentic humor, DC-specific buyer education, thoughtful property recommendations (ranked per your criteria), and a closing quote from a historic DC-based figure.
+
+---
+
+## 📝 **December 2025 Newsletter – “The Seas...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your professionally crafted, engaging, and temporally relevant monthly real estate newsletter for **December 2025, January 2026, and February 2026**, tailored specifically for Hill East, Washington, DC. Each includes all four required elements, with a DC-specific tone, humor, and accurate buyer education — all while giving you a fresh, inspiring closing quote from a historic figure who died in DC.
+
+---
+
+## 🎄 **December 2025 Newsletter: &quot;The Winter Wonderland of Washington&quot;** 🎄...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **December 2025 and January–February 2026** monthly real estate newsletter for **Hill East, Washington, DC**, fully tailored to your specifications — with a humorous, seasonally relevant opener, DC-specific buyer education, a ranked list of top properties (using your criteria), and a closing quote from an inspiring historic figure who died in DC.
+
+---
+
+## 📢 *December 2025 – The Holiday Home Showdown (And Why the Washington Winter is Extra Icy)*
+
+**Why is the holiday seaso...          </p>
+          <p class="lt-p">
+Rubrics: 12/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.632          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **December 2025 to February 2026** monthly newsletter for your Hill East, Washington, DC clients — crafted with humor, DC flavor, real estate relevance, and actionable buyer education. Each month includes all four requested elements, tailored for seasonal tone, local specificity, and client engagement.
+
+---
+
+## 🌟 **December 2025 — &quot;The Real Estate Version of a Holiday Reset&quot;** 🌟  
+
+**Humorous Intro (DC-Local, Seasonal):**  
+In December, the winter chill sets in — but only...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a real estate agent in Hill East, Washington, DC. I need to generate a monthly newsletter for my clients / prospective homebuyers. Generate them for December &#x27;25 and Jan-Feb &#x27;26. Each monthly news...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a professionally crafted, engaging, and temporally relevant **monthly real estate newsletter** for your clients in **Hill East, Washington, DC**, covering **December 2025, January 2026, and February 2026**. Each includes all four required elements, tailored to the season, DC culture, and your client needs.
+
+---
+
+## 📢 **Hill East Home Newsletters**  
+*Delivered with pride, precision, and a bit of D.C. charm*  
+By John Doe, Your Washington, DC Real Estate Agent  
+
+---
+
+### ✅ DEC...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+2143                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3370                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3027                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+2432                </td>
+                <td>
+0.632                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.632                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3387                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3408                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3384                </td>
+                <td>
+0.842                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.842                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3466                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+2574                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3188                </td>
+                <td>
+0.632                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.632                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3157                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3069                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3376                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3352                </td>
+                <td>
+0.632                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.632                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3419                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1558                </td>
+                <td>
+3133                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: ### **Curriculum Alignment Evaluation Report**  
+**Grade Level:** Middle School Biology  
+**Subject Area:** Life Sciences  
+**Review Focus:** Alignment between Unit Plans, Assessments, and Academic Standards  
+
+---
+
+## **1. Standards Coverage Matrix**
+
+| **Standard ID** | **Standard Description** | **Units Addressed** | **Learning Objectives Included** | **Assessments Measuring It** | **Assessment Alignment Status** |
+|----------------|----------------------------|---------------------|---------...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: **Curriculum Alignment Evaluation Report**  
+*Subject: Science (Biology &amp; Environmental Science)*  
+*Date: April 5, 2024*  
+*Prepared for: Instructional Leadership Team*
+
+---
+
+## **1. Standards Coverage Matrix**
+
+| Unit ID | Unit Title                     | Learning Objectives | Associated Standards | Assessment(s) | Assessment Alignment (YES/NO) | Notes on Alignment |
+|--------|-------------------------------|--------------------|------------------------|---------------|------------------------...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: **Comprehensive Curriculum Alignment Review**  
+*For: Biology Curriculum Package (Grade 9)*  
+*Based on Unit Plans, Assessments, and Standards List*  
+
+---
+
+## 🔍 **1. Alignment Analysis by Unit**
+
+---
+
+### **Unit U1: Foundations of Biology**  
+**Learning Objectives**:  
+- Describe the structure and function of cells  
+- Understand the role of DNA in inheritance  
+- Learn about photosynthesis  
+
+**Mapped Standards**:  
+| Objective | Standard | Alignment Status | Justification |
+|--------|--------...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: **Curriculum Alignment Evaluation: Biology Unit Package**  
+*Based on Unit Plans, Assessments, and Standards List*
+
+---
+
+### ✅ **1. Standards Coverage Matrix**
+
+| **Standard ID** | **Standard Description** | **Unit(s) Addressed** | **Learning Objectives in Unit** | **Assessment(s) Measuring It** | **Assessment Alignment** | **Coverage Category** |
+|----------------|--------------------------|------------------------|----------------------------------|-------------------------------|-------------...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: Certainly. Below is a **complete, detailed curriculum alignment evaluation** based on the provided data, following your exact instructions. The analysis covers:
+
+- Mapping of unit learning objectives to standards  
+- Assessment-to-standard alignment (including gaps, over- and under-assessment)  
+- Identification of structural issues  
+- Rewriting of unclear or misaligned objectives  
+- A standards coverage matrix  
+- A narrative summary of alignment quality  
+- Concrete, actionable recommendatio...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: **Curriculum Alignment Review Report**  
+*For Biology Program – Grades 9–12*  
+
+---
+
+## 📊 Standards Coverage Matrix
+
+| Unit ID | Unit Title | Learning Objectives (Original) | Mapped Standards | Assessments &amp; Alignment | Status |
+|--------|-----------|-------------------------------|------------------|--------------------------|--------|
+| **U1** | Foundations of Biology | • Describe the structure and function of cells&lt;br&gt;• Understand the role of DNA in inheritance&lt;br&gt;• Learn about photosynthesis...          </p>
+          <p class="lt-p">
+Rubrics: 8/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: ### **Curriculum Alignment Evaluation Report**  
+**Grade Level:** Middle School Biology  
+**Subject:** Biology  
+**Review Scope:** Unit Plans, Assessments, and Standards List (as provided)  
+
+---
+
+## **I. Standards Coverage Matrix**
+
+| **StandardID** | **Standard Description** | **Units Addressed** | **Learning Objectives Aligned** | **Assessments Measuring It** | **Assessment Depth / Match** |
+|---------------|---------------------------|----------------------|----------------------------------...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: **COMPREHENSIVE CURRICULUM ALIGNMENT EVALUATION**  
+*Based on Unit Plans, Assessments, and Standards*  
+
+---
+
+## ✅ **1. Standards Coverage Matrix**
+
+| **Standard ID** | **Standard Description** | **Unit(s) Addressed** | **Learning Objectives (Mapped)** | **Assessment(s) That Measure It** | **Assessment Alignment (Cognitive Depth &amp; Skill Type)** |
+|----------------|---------------------------|------------------------|----------------------------------|------------------------------------|--------...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: Certainly. Below is a **comprehensive, evidence-based curriculum alignment review** based on the provided data. The evaluation covers unit plans, assessment descriptions, and standards, with detailed analysis of alignment, gaps, mismatches, and structural issues. It concludes with a **standards coverage matrix**, a **narrative summary**, and **actionable redesign recommendations**.
+
+---
+
+## 📚 CURRICULUM ALIGNMENT REVIEW: BIOLGY SEQUENCES (U1–U3)
+
+### 🔍 OVERVIEW
+This review evaluates the alignmen...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: Certainly. Below is a **comprehensive curriculum alignment evaluation**, fully adhering to your instructions. The analysis covers:
+
+- Mapping of unit learning objectives to standards  
+- Assessment-to-standard alignment  
+- Identification of gaps, over-assessment, and mismatches  
+- Structural issues  
+- Rewriting of misaligned or unclear objectives  
+- A detailed **standards coverage matrix**  
+- A **narrative summary of alignment quality**  
+- **Detailed recommendations for curriculum redesign...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: ---
+
+# **Curriculum Alignment Review: Biology Unit Plans, Assessments, and Standards**
+
+---
+
+## **1. Standards Coverage Matrix**
+
+| Unit ID | Unit Title | Targeted Standards | Learning Objectives | Assessed Standards | Assessment IDs | Assessment Alignment (Meets Standard?) | Notes |
+|--------|-----------|--------------------|----------------------|--------------------|----------------|----------------------------------------|-------|
+| U1 | Foundations of Biology | S1, S2, S3 | - Describe the s...          </p>
+          <p class="lt-p">
+Rubrics: 8/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: ### **Curriculum Alignment Evaluation Report**  
+**Subject:** Biology (Grades 9–12)  
+**Materials Reviewed:** Unit Plans, Assessments, and Academic Standards  
+**Evaluation Criteria:** Alignment, Consistency, Measurability, Cognitive Depth, Structural Integrity  
+
+---
+
+## 🔍 **1. Unit-by-Unit Alignment Analysis**
+
+### **Unit U1: “Foundations of Biology”**  
+**Learning Objectives:**  
+- Describe the structure and function of cells  
+- Understand the role of DNA in inheritance  
+- Learn about photo...          </p>
+          <p class="lt-p">
+Rubrics: 7/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.700          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: # **Curriculum Alignment Review: Biology Curriculum**  
+**Date:** April 5, 2025  
+**Reviewer:** Curriculum Alignment Specialist  
+
+---
+
+## **Overview**
+
+This report evaluates the alignment between instructional materials (unit plans, assessments) and the stated academic standards in a high school biology curriculum. The analysis focuses on three core components:  
+1. **Learning objective-to-standard mapping**  
+2. **Assessment-to-standard alignment**  
+3. **Structural issues, gaps, and recommend...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: ### **Curriculum Alignment Review: Biology Program**  
+*Based on Unit Plans, Assessments, and Standards List*  
+
+---
+
+## **I. Standards Coverage Matrix**
+
+| **Standard ID** | **Standard Description** | **Units Addressed** | **Learning Objectives Mapped** | **Assessments Measuring It** | **Assessment Match Quality** |
+|----------------|---------------------------|----------------------|----------------------------------|-------------------------------|------------------------------|
+| **S1** | St...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: ### **Curriculum Alignment Review: Biology Unit Plans, Assessments, and Standards**
+
+---
+
+## **1. Standards Coverage Matrix**
+
+| Standard ID | Standard Description | Unit(s) Addressing | Learning Objective(s) Aligned | Assessment(s) Measuring | Alignment Status (Assessment-Objective Match) |
+|-----------|------------------------|--------------------|-------------------------------|--------------------------|---------------------------------------------|
+| S1 | Students will describe and model th...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help reviewing a complete curriculum alignment package to determine how well the instructional materials match the required academic standards. I’m giving you three sets of documents: unit...          </p>
+          <p class="lt-p">
+Response: ### **Curriculum Alignment Review Report**  
+**Subject:** Biology (Grades 9–12)  
+**Scope:** Unit Plans, Assessments, and Academic Standards  
+**Review Methodology:** Objective-standard mapping, assessment fidelity analysis, structural and cognitive consistency checks, gap identification, objective refinement, and coverage matrix construction  
+
+---
+
+## **Part 1: Standards Coverage Matrix**
+
+| **Standard** | **Unit(s) Claiming Coverage** | **Assessment(s) Measuring It** | **Assessment Fidelity (...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3069                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3154                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3327                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3133                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3617                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+2921                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3072                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+2581                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3091                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3473                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3159                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3308                </td>
+                <td>
+0.700                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.700                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3766                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+2895                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3127                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+775                </td>
+                <td>
+3223                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Beyond the Familiar: Exploring Obscure Greco-Roman Mythology**  
+*12-Week Syllabus*
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the foundational framework for the course, defining key concepts such as cosmology, divine hierarchy, myth function, and the cultural contexts of Greco-Roman belief systems. We’ll explore how myths served political, religious, and philosophical purposes across different periods and cultures.  
+- *Homework 1 (2.5%):* Short ans...          </p>
+          <p class="lt-p">
+Rubrics: 35/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.854          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Myth Beyond the Muses – Exploring Obscure Greco-Roman Figures**  
+*12-Week Syllabus*  
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the foundation by exploring the origins, diversity, and cultural functions of myth in ancient Greece and Rome. We will examine how myths serve as explanations for natural phenomena, human behavior, and the cosmos, while also highlighting the differences between Greek and Roman mythological traditions. This week builds esse...          </p>
+          <p class="lt-p">
+Rubrics: 33/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.805          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Myth Beyond the Mainstream**  
+*An Introductory Survey of Greco-Roman Mythology with a Focus on Obscure Figures*  
+**12-Week Syllabus**
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+*Overview:* This foundational week introduces students to the origins, structure, and cultural significance of Greco-Roman myths—how stories were created, transmitted, and used by ancient societies. We’ll explore key differences between Greek and Roman mythologies and examine how these nar...          </p>
+          <p class="lt-p">
+Rubrics: 35/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.854          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 201: Beyond the Bricks: Exploring Obscure Figures of Greco-Roman Mythology**  
+*12-Week Syllabus*
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the foundation by introducing the scope, sources, and functions of myth in ancient Greek and Roman cultures. We explore how myths served religious, political, and cultural purposes and examine key themes such as fate, heroism, and divine intervention. We’ll also consider how modern retellings reshape these stories.  ...          </p>
+          <p class="lt-p">
+Rubrics: 36/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.878          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Beyond the Familiar – Exploring Obscure Greco-Roman Mythology**  
+*12-Week Syllabus*
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the foundation by exploring the origins, functions, and cultural significance of myth in ancient Greek and Roman societies. We will examine how myths functioned as religious narratives, political tools, and cultural memory systems, and introduce key differences between Greek and Roman mythological traditions.  
+- *Quiz: Shor...          </p>
+          <p class="lt-p">
+Rubrics: 38/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.927          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Beyond the Familiar — Exploring Obscure Greco-Roman Mythology**  
+*12-Week Syllabus*
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the foundation by defining the scope, structure, and significance of Greco-Roman mythology. We’ll examine how myths functioned in ancient societies—both as cultural reflections and tools of identity—and explore key themes such as fate, divine intervention, heroism, and transformation. We’ll also consider the differences and ...          </p>
+          <p class="lt-p">
+Rubrics: 37/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.902          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Beyond the Canon – Exploring Obscure Greco-Roman Mythology**  
+*12-Week Syllabus*  
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the stage by defining key concepts in Greco-Roman myth: cosmology, divine hierarchy, heroism, and the role of myth in culture. We’ll explore how myths function—not just as stories but as cultural memory and philosophical reflection—before narrowing our focus to the range of figures we’ll study, from the familiar to the elusiv...          </p>
+          <p class="lt-p">
+Rubrics: 36/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.878          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Beyond the Olympians – Exploring Obscure Greco-Roman Mythology**  
+*12-Week Syllabus*
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week provides a foundational overview of the origins, structures, and functions of myth in both Greek and Roman cultures. We will explore how myths serve as cultural narratives, moral guides, and explanations of natural phenomena, and examine the key differences and continuities between Greek and Roman traditions.  
+
+- *Homework 1 (2...          </p>
+          <p class="lt-p">
+Rubrics: 35/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.854          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Beyond the Familiar — Exploring Obscure Greco-Roman Mythology**  
+*12-Week Syllabus*
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the foundation by exploring the origins, functions, and diverse contexts of Greco-Roman myth—how myths reflect values, explain natural phenomena, and serve cultural identity. We will examine source materials, differences between Greek and Roman traditions, and the evolution of mythological thought through time.  
+- *Quiz (5%...          </p>
+          <p class="lt-p">
+Rubrics: 35/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.854          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Beyond the Olympians – An Exploration of Greco-Roman Mythology**  
+*12-Week Syllabus*  
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week introduces the scope, structure, and significance of Greco-Roman mythological traditions. We’ll examine how myths functioned in ancient societies, their roles in religion, politics, and literature, and how they’ve influenced Western culture. We’ll also explore key sources—Homer, Hesiod, Ovid, and others—and how the myths have ...          </p>
+          <p class="lt-p">
+Rubrics: 35/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.854          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Mythologies Unearthed – From Zeus to the Obscure**  
+*12-Week Syllabus*
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week introduces the foundational concepts of Greco-Roman mythology: origins, structure, functions, and the interplay between gods, heroes, and human affairs. We’ll explore how myths reflect ancient worldviews, serve cultural and political purposes, and are transmitted across generations. We’ll also examine the differences between Greek and Roman m...          </p>
+          <p class="lt-p">
+Rubrics: 38/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.927          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Beyond the Familiar: Exploring Obscure Figures of Greco-Roman Mythology**  
+*12-Week Syllabus*  
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This foundational week introduces students to the origins, structure, and significance of Greco-Roman mythology—its cultural context, narrative functions, and philosophical underpinnings. We will explore how myths serve as both stories and frameworks for understanding identity, the natural world, and human destiny. By the end o...          </p>
+          <p class="lt-p">
+Rubrics: 36/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.878          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Myth Beyond the Mainstream**  
+*An In-Depth Exploration of Greco-Roman Mythology – From the Familiar to the Forgotten*
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the foundation by defining core concepts in Greco-Roman myth: cosmology, divine roles, heroism, and the interplay between myth and human experience. We will explore the function of myths in ancient society and examine how they reflect values, fears, and cultural identities. We will also iden...          </p>
+          <p class="lt-p">
+Rubrics: 35/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.854          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Beyond the Canon — Exploring Obscure Figures in Greco-Roman Mythology**  
+*12-Week Syllabus*
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the foundation for the course by defining key concepts in Greco-Roman mythology: creation myths, divine hierarchy, heroism, and the relationship between gods and humans. We will examine how myths function as cultural narratives and explore the differences between Greek and Roman myths, while introducing the structura...          </p>
+          <p class="lt-p">
+Rubrics: 35/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.854          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Myth, Memory, and the Margins of Greco-Roman Thought**  
+*12-Week Syllabus*  
+
+---
+
+**Week 1: Introduction to Greco-Roman Mythology**  
+This week sets the foundation for the course by exploring the origins, purposes, and cultural functions of myth in ancient Greece and Rome. We’ll examine how myths were not just stories but tools for understanding the divine, natural order, human identity, and social values. We’ll also consider the differences between Greek and Roman myths, and h...          </p>
+          <p class="lt-p">
+Rubrics: 38/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.927          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create a draft syllabus for the Classics class I&#x27;ll be teaching this upcoming semester at the university. It&#x27;s 12 weeks long and we&#x27;ll be covering Greco-Roman mythology, but the syllabi ...          </p>
+          <p class="lt-p">
+Response: **Classics 101: Myth in the Margins – An Expansive Journey Through Greco-Roman Mythology**  
+*12-Week Syllabus*
+
+---
+
+**Week 1: Foundations of Greco-Roman Mythology**  
+This week introduces the structure, cultural role, and enduring appeal of myth in ancient Greece and Rome. We’ll explore core themes—cosmology, heroism, divinity, fate—and examine how myth functioned in society, religion, and literature. The focus will be on establishing a foundational understanding of the mythological world befo...          </p>
+          <p class="lt-p">
+Rubrics: 35/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.854          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+2070                </td>
+                <td>
+0.854                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.854                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+5607                </td>
+                <td>
+0.805                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.805                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+2193                </td>
+                <td>
+0.854                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.854                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+1848                </td>
+                <td>
+0.878                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.878                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+1747                </td>
+                <td>
+0.927                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.927                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+2083                </td>
+                <td>
+0.902                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.902                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+2006                </td>
+                <td>
+0.878                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.878                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+1912                </td>
+                <td>
+0.854                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.854                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+1827                </td>
+                <td>
+0.854                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.854                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+1859                </td>
+                <td>
+0.854                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.854                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+1788                </td>
+                <td>
+0.927                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.927                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+2268                </td>
+                <td>
+0.878                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.878                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+3782                </td>
+                <td>
+0.854                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.854                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+3895                </td>
+                <td>
+0.854                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.854                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+1904                </td>
+                <td>
+0.927                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.927                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+654                </td>
+                <td>
+1981                </td>
+                <td>
+0.854                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.854                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

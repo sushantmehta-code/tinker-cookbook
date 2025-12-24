@@ -1,0 +1,4496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 16</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 16  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T11:56:10  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a fun, decodable set of five stories for your first graders — all centered around a cheerful pig and a cow named **Pip** and **Bessie** who live on a sunny farm. Each story focuses on one long vowel-silent *e* pattern (a, i, o, u), with one final story combining all four for review.  
+
+The stories are simple, use only single-syllable or two-syllable words (no complex words), and include **bolded target words** to help students recognize the pattern. Each story is exactly nine ...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a beautifully structured, **comprehension-focused, decodable set of five stories** for your first graders—perfect for teaching the **long vowel-silent e** patterns. All stories are about **Piggy** and **Bella**, a pig and a cow who live on a quiet farm. Each story is **nine sentences long**, uses only **one-syllable words**, and highlights one long vowel silent *e* pattern at a time. The **target words are bolded** and **italicized in the questions** to match the visual learni...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a set of **five decodable stories** perfectly tailored for first graders learning the **long vowel–silent e** patterns. Each story focuses on one long vowel sound with silent *e* (a, i, o, u)—plus a final review story that combines all four patterns.  
+
+All stories are:  
+✅ 9 sentences each  
+✅ Use only **1- or 2-syllable words** (simplified for independence)  
+✅ Feature **bold** target words with silent *e*  
+✅ Focus on a **pig and a cow living on a farm**  
+✅ Include **3 mul...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a complete, engaging, and decodable set of **five stories** designed specifically for **first graders** learning the **long vowel + silent e** patterns. Each story is simple, one-syllable focused, and follows the structure you requested.
+
+---
+
+### 🐷 🐄 **Story 1: Brrr! The Big Farm Pig – Long A Silent E**  
+**Focus:** *Long A + silent e* (as in *lake, bake, trap, shape, tape, same, cake, flare, make*)  
+
+**Story:**  
+The pig named **Pip** lives on a big farm.  
+He loves to **ba...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a complete, decodable set of **five stories** for your first graders — each carefully designed to focus on **one long vowel-silent e pattern** (a-e, i-e, o-e, u-e), with one **review story** combining all four.  
+
+The stories follow your exact requests:  
+✅ Simple, one-syllable words only  
+✅ Each story has **nine sentences**  
+✅ **Bold** the target long vowel-silent e words  
+✅ Clear **title** and **focus sound pattern** stated  
+✅ **Three comprehension questions** with **ita...          </p>
+          <p class="lt-p">
+Rubrics: 12/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.632          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a set of **five decodable stories** specifically designed for **first graders** to help them master the **long vowel-silent *e* patterns**. Each story is focused on one long vowel (a, i, o, u) with silent *e*, or combines them for review. All stories feature **a pig and a cow on a farm**, use **only one-syllable words**, and include **bolded target words** (with silent *e*) so students can practice the pattern.  
+
+Each story includes **9 sentences**, **three multiple-choice co...          </p>
+          <p class="lt-p">
+Rubrics: 10/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.526          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a complete, ready-to-use set of **five decodable stories** for your first graders, focused on the **long vowel-silent e patterns** (a, i, o, u). Each story is clean, leveled, and designed for **independent reading** with **no multisyllabic words**.  
+
+The stories follow a farm theme featuring a **pig and a cow**. Each story focuses on **one long vowel-silent e pattern**, with the **target words bolded** and **comprehension questions in the same format** (with correct answers *...          </p>
+          <p class="lt-p">
+Rubrics: 8/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.421          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a complete, engaging, and decodable set of five stories for your first graders—perfect for introducing and reinforcing **long vowel–silent e** patterns in a meaningful, farm-themed context.  
+
+Each story is:  
+✅ 9 simple sentences (no more than one syllable per word)  
+✅ Focuses on **one long vowel silent e pattern** (a, i, o, u) or **all four patterns combined**  
+✅ Features bolded target words with silent e patterns  
+✅ Includes **three comprehension questions** with *italic...          </p>
+          <p class="lt-p">
+Rubrics: 10/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.526          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a complete, decodable set of five stories designed specifically for **first graders** who are just beginning to learn **long vowel-silent e** patterns. Each story features **nine simple sentences**, focuses on one long vowel (a, i, o, u) with silent *e*, and ends with a **review story** combining all four patterns.  
+
+All words are **one syllable**, the **target long vowel-silent e patterns are bolded**, and comprehension questions follow the exact same formatting (with *itali...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a set of **five decodable stories** designed specifically for **first graders** who are beginning to learn **long vowel-silent *e* patterns** (a-e, i-e, o-e, u-e). Each story is **simple, single-syllable words**, follows a clear progression, and builds into a **cohesive farm story** with **pig and cow characters**.  
+
+Each story focuses on one target long vowel-silent *e* pattern, and the fifth story combines all four.  
+
+Stories are formatted clearly:  
+- **Title**  
+- **Focu...          </p>
+          <p class="lt-p">
+Rubrics: 7/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.368          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a set of **five decodable stories** specifically designed for **first-grade students** learning the **long vowel-silent *e* pattern (a, i, o, u)**. Each story centers on **a pig and a cow** living on a farm. The stories are crafted to be **simple, sequential, and self-contained**, with **only one-syllable words** and clear, repeated patterns.  
+
+Each story includes:
+- A **title** and **sound pattern focus** (e.g., long A silent e)
+- **Exactly nine sentences**
+- **Bold** words ...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a set of **five decodable stories** specifically designed for first graders just beginning to learn **long vowel-silent e** patterns. Each story is simple, uses only **1-syllable words**, and features **only one target long vowel-silent e pattern** (a, i, o, u) in the first four stories, with the fifth reviewing all four.  
+
+The stories follow a farm theme, centering on **a pig and a cow** who live on a farm.  
+✨ **Bold** = target long vowel + silent e word  
+✨ *Italics* = cor...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a set of **five decodable, theme-based stories** designed specifically for **first graders** learning the **long vowel-silent *e* pattern**. Each story features a **simple, repeatable plot** centered on a **pig and a cow** living on a farm.  
+
+Each story is:
+- Exactly **9 sentences**
+- Focuses on **one long vowel-silent *e*** pattern (a, i, o, u)
+- Uses **only one-syllable words** (to support independent reading)
+- Contains **bolded target words** with the silent *e* pattern
+-...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a set of **five beautifully structured, decodable stories** for your first graders, all centered around **Pig Puddle** and **Cow Clover**, who live on a cozy farm. Each story focuses on one **long vowel + silent *e*** pattern, with simple, one-syllable words and clear, repeated patterns.  
+
+We’ve included:  
+✅ A title and clear focus on the **target sound pattern**  
+✅ Exactly **nine sentences** per story  
+✅ **Bolded target words** (e.g., *bake*, *lake*, *hope*) that show the...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a complete, decodable set of **five engaging, structured stories** for first graders, all centered around **a pig and a cow on a farm**. Each story focuses on **one long vowel-silent e pattern** (a, i, o, u), with one final story combining all four for review.  
+
+All stories follow your specific requests:  
+✔️ 9 sentences each  
+✔️ Only one-syllable words  
+✔️ **Bolded target words** showing the silent *e* pattern  
+✔️ Clear, simple content tied to the farm theme (pig and cow)...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hey! I need a set of decodable stories for my first graders. We are just beginning to learn the long vowel-silent e patterns. It’s really helpful if the stories go together to make one big story. Each...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a set of **five decodable stories** tailored for **first graders** just beginning to learn the **long vowel-silent *e*** patterns. Each story is focused on one of the core long vowel sounds with silent *e*: **a, i, o, u**, and a final **review story** that combines all four.  
+
+All stories follow your guidelines:
+- **Nine sentences each**, simple and decodable  
+- **Focus on one long vowel-silent e pattern** per story  
+- **Bold** the target words with silent *e*  
+- **Italici...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+1780                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+1976                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+1959                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+1840                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+4091                </td>
+                <td>
+0.632                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.632                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+1980                </td>
+                <td>
+0.526                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.526                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+1889                </td>
+                <td>
+0.421                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.421                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+1725                </td>
+                <td>
+0.526                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.526                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+2057                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+1833                </td>
+                <td>
+0.368                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.368                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+2116                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+2012                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+2438                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+1780                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+2086                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+262                </td>
+                <td>
+2054                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It seems there’s a misunderstanding in your question. There is no widely known or historically recognized cricket series known as the &quot;Bodyline Series&quot; that matches the description you’re referring to—particularly not one involving a specific &#x27;Bodyline&#x27; series featuring political controversy or a direct clash with cricket’s gentlemanly image in a way that’s documented in mainstream historical sports literature.
+
+However, you are likely thinking of **the 1932–33 Ashes series between England and A...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there is a misunderstanding in your query. **There is no known cricketing series or historical event called the &quot;Bodyline Series.&quot;** The term &quot;Bodyline&quot; is famously associated with a **highly controversial 1932–33 Ashes series** between **Australia and England**, commonly known as the **&quot;Bodyline series&quot;** or the **&quot;Bodyline affair.&quot;** This is the reference most likely intended.
+
+Let’s provide a clear, factual, and comprehensive overview of the **Bodyline series**, addressing all of y...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there&#x27;s a misunderstanding in your question. The **Bodyline Series** is not a fiction or a standalone narrative you can &quot;read about&quot; in the way a novel or story might be. Rather, it is a **real historical cricketing controversy** that took place in **1932–33**, between **Australia and England**, and is widely regarded as one of the most controversial moments in cricket history.
+
+Let me give you a comprehensive, factual, and balanced overview based on your request—covering the story, c...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there is a misunderstanding in your question. **There is no known cricket series or historical event called the &quot;Bodyline Series&quot; that involves a direct clash with political figures or a narrative involving controversy around body targeting in cricket.** The term &quot;Bodyline&quot; is often used in reference to a **specific controversial cricket match during the 1932–33 Ashes series between England and Australia**, which is more accurately known as the **Bodyline affair** or **Bodyline tactic...          </p>
+          <p class="lt-p">
+Rubrics: 9/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It looks like there’s a misunderstanding in your question. There is **no known cricket series or historical event called the &quot;Bodyline Series&quot;** that matches the description you&#x27;ve provided in terms of being a major, well-documented cricketing controversy involving body targeting and political figures.
+
+However, you&#x27;re likely referring to the **1932–33 Bodyline Series**, a highly controversial Test cricket series between **Australia and England**. This series is famously known as the &quot;Bodyline S...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there is a misunderstanding in your question. There is no well-known or historically significant cricket series known as the &quot;Bodyline Series&quot; that is commonly referenced in cricket history as a standalone event with political or public controversy. However, the term *Bodyline* refers to a controversial period in cricket history — specifically, the **1932–33 Ashes series between England and Australia**, during which Australian players, under the leadership of don Bradman and supported...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It seems there may be a small mix-up in your question. The **&quot;Bodyline Series&quot;** is not a fictional story or novel — it refers to a **real historical cricket series** played in 1932–33 between **Australia and England**, famously known as the **Bodyline Series**. It is one of the most controversial and pivotal moments in cricket history, and it dramatically clashed with the traditional image of cricket as a &quot;gentleman&#x27;s game.&quot;
+
+Below is a comprehensive and balanced overview of the Bodyline Series...          </p>
+          <p class="lt-p">
+Rubrics: 10/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It seems there’s a misunderstanding in your query. There is **no historical cricket series known as the &quot;Bodyline Series&quot;** that corresponds to a major event in cricket history with a narrative of controversy involving politicians or a direct clash with the &quot;gentleman’s pursuit&quot; of cricket in the way you described.
+
+However, you are almost certainly referring to the **Bodyline Series of 1932–33**, a highly controversial and pivotal match between **Australia and England** in Australia. This serie...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there is a misunderstanding in your query. **There is no known cricket series or historical event called the &quot;Bodyline Series&quot; that is widely recognized in cricketing historiography.** However, you are likely referring to the **Bodyline series of 1932–33**, a pivotal and highly controversial tour of Australia by the British (English) cricket team, led by **Lord Harris** and featuring **Alec Barnes** as a key player, though the most famous figure associated with the strategy was **Godf...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there is a misunderstanding in your query. **There is no known cricket series or historical event called the &quot;Bodyline Series&quot; that is widely recognized in mainstream cricket history.** However, you are likely referring to the **Bodyline series of 1932–33**, a highly controversial and pivotal cricket series between **Australia and England**, which took place during the summer of 1932–33. This is the most likely origin of your question.
+
+Let’s provide a comprehensive and accurate overv...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there is a misunderstanding in your question. There is **no well-known historical or fictional story called &quot;The Bodyline Series&quot;** that corresponds to a major cricket narrative involving controversy, key political figures, or a clash with cricket&#x27;s gentlemanly image — at least not in a widely documented, factual sense.
+
+However, you may be referring to the **1932–33 Bodyline Series**, a real and highly controversial cricket tour of Australia by England, which is famously known as the...          </p>
+          <p class="lt-p">
+Rubrics: 9/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It seems there&#x27;s a mix-up in your question. The **&quot;Bodyline Series&quot;** you&#x27;re referring to is not a fictional story or a book, but rather a **real historical cricket controversy** that took place during the **1932–33 Australian tour of England**. This series is famously known as the **Bodyline series** due to a highly controversial and aggressive bowling strategy employed by the English team, which targeted the Australian batsmen&#x27;s bodies.
+
+Let me provide you with a clear, accurate, and well-stru...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there may be a misunderstanding in your question. There is **no known literary or historical work titled &quot;The Bodyline Series&quot;** that is widely recognized as a standalone story or book. However, the term *Bodyline* refers to a **controversial cricketing strategy** that took place during the **1932–33 Ashes series** between England and Australia. This series is famously known as the **&quot;Bodyline Series&quot;** in cricket history.
+
+Your question seems to be about **cricket history**, not a na...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there&#x27;s a mix-up in your question. There is no known cricket series called &quot;The Bodyline Series&quot; that is a widely recognized or historically documented event in cricketing literature. However, you are likely referring to the **Bodyline Series of 1932–33**, a pivotal and highly controversial Test cricket series between **Australia and England** that took place in Australia.
+
+Let’s correct and fully explore the history you&#x27;re interested in — the **Bodyline Series of 1932–33**, its conte...          </p>
+          <p class="lt-p">
+Rubrics: 9/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It seems there is a misunderstanding in your query — **&quot;The Bodyline Series&quot; is not a story or book** you can read about in the way that a novel or film might be. Instead, you are likely referring to the **1932–33 Ashes series between England and Australia**, commonly known as **the Bodyline series**. This series is known for its controversial and aggressive bowling tactics, particularly the use of short-pitched deliveries aimed at the batter&#x27;s body (specifically the head and torso), which spark...          </p>
+          <p class="lt-p">
+Rubrics: 6/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: The Bodyline Series has been something I&#x27;ve been reading about more. Give me an overview of the story, controversial points, key figures, including politicians (link sources), and present both sides. ...          </p>
+          <p class="lt-p">
+Response: It appears there’s a misunderstanding in your query. The **Bodyline Series** you&#x27;re referring to is not a fictional story or a piece of literature, but rather a **historical cricket series** that took place in **1932–33** between **Australia and England**. This series is one of the most controversial moments in cricket history, and it profoundly influenced how the sport is perceived — especially regarding tactics, sportsmanship, and the ethical boundaries of aggressive bowling.
+
+Let’s clarify an...          </p>
+          <p class="lt-p">
+Rubrics: 10/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2787                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2779                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2696                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2391                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2501                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2709                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2602                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+4794                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2560                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2646                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2471                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2181                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2846                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2429                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+3263                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+90                </td>
+                <td>
+2272                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build an equitable, labor-compliant, and tax-aware weekly shift schedule for the week of **December 21–12/27**, respecting all requests, shift preferences, time-off rules, labor laws, and OT constraints. We’ll ensure:
+
+✅ All staff get **at least one full day off** as requested (by seniority)  
+✅ **Lunch breaks** (30 minutes) are scheduled **between hours 2–5** of each shift  
+✅ **Minimum of two staff on floor between 8a–8p**  
+✅ Only **one staff required** during **6a–8a** and ...          </p>
+          <p class="lt-p">
+Rubrics: 3/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.107          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **complete, equitable, and legally compliant work schedule** for the week of **December 21 – December 27**, taking into account all your constraints:
+
+---
+
+### ✅ Key Constraints Addressed:
+- ✅ All staff get **at least one full day off** they requested (honored by seniority where needed).
+- ✅ **Lunch break of 30 minutes required** between hours 2–5 of any shift (per labor law).
+- ✅ **Minimum of 2 staff on floor between 8am–8pm** (except 6am–8am and 8pm–10pm when only 1 need...          </p>
+          <p class="lt-p">
+Rubrics: 5/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.179          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **fair, legal, and equitable weekly schedule** for **December 21–27**, honoring:
+
+- **Time-off requests (in seniority order)**  
+- **Labor laws (30-minute lunch between hours 2–5)**  
+- **Minimum staff coverage (2 on floor 8a–8p, 1 during 6a–8a &amp; 8p–10p)**  
+- **No overtime (&gt;40 hours total per staff)**  
+- **Priority pay only on 12/24–25 (1.5x base salary, max 8 hours/day)**  
+- **Manager availability (9a–5p, off 12/25, no weekend work)**  
+- **Each employee gets at le...          </p>
+          <p class="lt-p">
+Rubrics: 19/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.679          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a fair, compliant, and equitable weekly schedule from **12/21 to 12/27**, honoring all time-off requests, labor laws, shift requirements, and constraints (no OT, required breaks, minimum staffing, priority pay caps, etc.).
+
+---
+
+## ✅ Key Constraints &amp; Rules Recap:
+
+- **Lunch must be scheduled between hours 2–5** of each shift (required by labor law); 30-minute break.
+- **Minimum 2 staff on floor from 8am–8pm** → all shifts that overlap 8am–8pm must have at least two staff...          </p>
+          <p class="lt-p">
+Rubrics: 6/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.214          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **fully detailed, equitable, compliant, and realistic weekly staff schedule** for the week of **December 21–December 27**, incorporating:
+
+- All requested time-offs (honored by seniority where possible)
+- Labor law-compliant lunch breaks (30 mins, starting between hours 2–5)
+- Minimum staffing requirements:
+  - **2 staff required between 8a–8p**
+  - **1 staff required between 6a–8a and 8p–10p** for opening/closing
+- No overtime (max 40 hours/week)
+- Only one hour of manage...          </p>
+          <p class="lt-p">
+Rubrics: 15/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.536          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **comprehensive, equitable, and compliant weekly schedule** from **December 21 to December 27**, honoring:
+
+✅ All time-off requests (in order of seniority)  
+✅ Labor law requirements (lunch break 2–5 pm, min 2 staff from 8a–8p, 1 staff during 6a–8a &amp; 8p–10p)  
+✅ No overtime (max 40 hours/week)  
+✅ All staff get **at least one full requested day off**  
+✅ Priority pay (24th &amp; 25th, 1.5x base, max 8 hrs/day)  
+✅ Manager cover only (max 1 hour at a time, max 2 hours/day), ...          </p>
+          <p class="lt-p">
+Rubrics: 9/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.321          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **fair, compliant, equitable, and legally sound** weekly schedule from **December 21–December 27**, respecting all constraints.
+
+---
+
+## ✅ Key Constraints &amp; Rules Recap
+
+- **Lunch required between hours 2–5** of shift (30 minutes, exactly).
+- **Minimum 2 staff required between 8a–8p** (except 6a–8a and 8p–10p, where only 1 staff needed).
+- **Only 1 staff needed during 6a–8a and 8p–10p** for opening/closing tasks.
+- **Every employee must have at least 2 full days off** d...          </p>
+          <p class="lt-p">
+Rubrics: 0/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s create a **comprehensive, equitable, and legally compliant schedule** for the week of **December 21–27**, while respecting **time off requests, labor laws, shift limitations, manager coverage, and priority pay constraints**.
+
+---
+
+## ✅ Key Constraints &amp; Requirements Recap
+
+- **Lunch required:** 30 minutes between **hours 2–5** of a shift (only if working &gt; 6 hrs).  
+- **Minimum staff on floor:**  
+  - **8 AM – 8 PM:** **2 staff** (at all times)  
+  - **6 AM – 8 AM &amp; 8 PM – 10 ...          </p>
+          <p class="lt-p">
+Rubrics: 3/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.107          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **fully detailed, equitable, compliant, and realistic weekly shift schedule** for the week of **December 21 – December 27**, accounting for:
+
+- All requested time off (honored by seniority, with equity ensured)
+- Labor law compliance (30-minute lunch between hours 2–5)
+- Minimum staffing (2 staff during 8am–8pm, 1 during 6am–8am and 8pm–10pm)
+- No overtime (max 40 hours/week)
+- Manager availability (9am–5pm, off on 12/25)
+- Priority pay on 12/24 and 12/25 (max 8 hours/day ...          </p>
+          <p class="lt-p">
+Rubrics: 12/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s build a fair, compliant, and equitable shift schedule for the week of **December 21–December 27**, taking into account all your detailed constraints.
+
+---
+
+## ✅ **Key Rules &amp; Constraints Recap**
+
+### ⚙️ **Shifts &amp; Rules**
+- Standard shifts:
+  - Morning: 6a–2p
+  - Swing: 10a–6p
+  - Night: 2p–10p
+- **Lunch required between hour 2–5** of shift → must include 30-min lunch break during 2–5 PM (can&#x27;t be scheduled at 6a or later without lunch, unless during morning shift and lunch be...          </p>
+          <p class="lt-p">
+Rubrics: 9/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.321          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s build a **comprehensive, equitable, and legally compliant weekly schedule** from **December 21 to December 27**, respecting all conditions, labor laws, requested time off, seniority, priority pay rules, and remaining constraints.
+
+---
+
+### 🔍 **Key Constraints &amp; Rules Recap**
+
+#### ✅ **Labor Law Requirements**:
+- **Lunch must occur between hours 2–5 of shift** (30 minutes minimum).
+- **Two staff on floor 8am–8pm** (this includes both lunch and active shifts).
+- **One staff required during 6...          </p>
+          <p class="lt-p">
+Rubrics: 6/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.214          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **fully detailed, equitable, and legally compliant schedule** for the week of **December 21–27**, incorporating:
+
+- All requested time off (honored in order of seniority)
+- Lunch breaks (30 minutes, required beginning between hours 2–5 of shift)
+- Minimum staffing levels (2 staff between 8am–8pm, 1 during 6am–8am and 8pm–10pm)
+- No overtime (no shift &gt; 8 hours without a corresponding 1-hour lunch break)
+- No employee exceeds 40 hours total in the week
+- Priority pay only on...          </p>
+          <p class="lt-p">
+Rubrics: 11/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.393          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **fully detailed, equitable, and legally compliant weekly schedule** for the week of **December 21–December 27**, with thoughtful consideration of:
+
+- Labor laws (30-minute lunch required between hours 2–5 of shift),
+- Minimum staffing (2 staff 8a–8p, 1 staff 6a–8a and 8p–10p),
+- No overtime (≤40 total hours per staff),
+- Managing time off requests by seniority (while ensuring **every employee gets at least one full day off they requested**),
+- Priority pay on 12/24 and 12...          </p>
+          <p class="lt-p">
+Rubrics: 11/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.393          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and thoughtful request. Below is a **comprehensive, equitable, and legally compliant weekly schedule** for the week of **December 21–December 27**, considering all constraints:
+
+---
+
+### ✅ **Key Constraints Honored**
+- **Lunch break**: 30 minutes required between **hours 2–5** of any shift (i.e., lunch must start between 2a and 5p).
+- **Minimum staffing**:
+  - **8a–8p**: At least **2 staff** on floor.
+  - **6a–8a and 8p–10p**: Only **1 staff** required (for opening/clo...          </p>
+          <p class="lt-p">
+Rubrics: 12/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build a **fair, compliant, and equitable weekly schedule** for the week of **December 21–December 27**, honoring all constraints:
+
+---
+
+### ✅ KEY GOALS &amp; RULES RECAP
+
+- **No overtime**: Max 40 hours per staff, no shifts over 12 hours without 1-hour lunch break (lunch required between hours 2–5 of shift).
+- **Lunch requirement**: Must start between hour 2–5 of shift (every shift must include 30-minute lunch during that window).
+- **Coverage rules**:
+  - Minimum **2 staff on flo...          </p>
+          <p class="lt-p">
+Rubrics: 11/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.393          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me create a schedule for the week of 12/21-12/27 while taking into account folks requested time off and avoiding scheduling OT. 
+
+Make sure the schedule includes time for each staff to get a 30...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s carefully build a **fair, compliant, and equitable weekly shift schedule** for the week of **December 21–27, 2024**, respecting all constraints:
+
+---
+
+## ✅ Key Constraints Recap
+
+### ⚙️ **Operational Requirements**
+- **Lunch break required**: 30 minutes between hours 2–5 of the shift (no overnight or night shifts without lunch if in that window).
+- **Floor coverage**:
+  - **8a–8p**: At least **2 staff on floor** (must have lunch between 2–5)
+  - **6a–8a and 8p–10p**: Only **1 ...          </p>
+          <p class="lt-p">
+Rubrics: 9/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.321          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+7291                </td>
+                <td>
+0.107                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.107                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.179                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.179                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.679                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.679                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.214                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.214                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.536                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.536                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.321                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.321                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+6708                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.107                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.107                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+3960                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.321                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.321                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.214                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.214                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.393                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.393                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8189                </td>
+                <td>
+0.393                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.393                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.393                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.393                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+855                </td>
+                <td>
+8192                </td>
+                <td>
+0.321                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.321                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**  
+
+Step into a space where movement, sound, and stillness come together in harmony. The garden has been thoughtfully designed to invite presence—soft light filters through the trees, the air carries a quiet warmth, and the natural rhythm of the site becomes part of your experience.  
+
+Begin with a flowing Vinyasa practice that encourages mindful breath and grounded movement. Follow with a sound bath, where gentle vibrations settle into your body, offering a deep sens...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a space where movement, stillness, and quiet presence meet. In a thoughtfully designed garden retreat, natural light bathes the scene as soft sounds fill the air—gentle breaths, the rhythm of flowing movements, and the deep resonance of a sound bath. Begin with flowing Vinyasa yoga, a practice that links breath and motion with patience and intention. Follow with a shared sound bath, where layered tones invite the body and mind into a contemplative stillnes...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**  
+
+Step into a space where movement, stillness, and presence meet. This quiet afternoon is designed for those who enjoy a mindful moment beneath the trees, where the stillness of the garden feels like a natural rhythm.  
+
+You’ll begin with a flowing Vinyasa yoga session that connects breath and motion, offering a grounded way to feel your body engaged and aware. Followed by a sound bath — a gentle immersion in harmonic vibrations that invite the mind to soften and se...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a quiet place where movement meets stillness, and the rhythm of breath aligns with the natural flow of the day. This gentle invitation is designed for those who want to pause, connect, and explore what happens when attention deepens — not through escape, but through presence.
+
+Golden afternoon light spills over the garden as a flowing Vinyasa yoga session begins, grounding you in your body’s motion. Following that, the space opens to a sound bath, where su...          </p>
+          <p class="lt-p">
+Rubrics: 20/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.952          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a quiet space where movement meets stillness, and the rhythm of breath aligns with nature’s quiet pulse. This afternoon invites you to begin a mindful journey through gentle physical practice and deep listening — not to escape the world, but to engage with it more fully.  
+
+Begin with a flowing session of Vinyasa yoga that moves with intention, connecting your breath to your body. Follow with a sound bath — a chamber of resonant tones that unfold through t...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**  
+
+Step into a peaceful space where movement, sound, and stillness come together. The afternoon begins with gentle Vinyasa yoga, designed to flow with your breath and body. After the practice, an immersive sound bath welcomes you into a deeper state of presence, followed by a structured meditation to ground you in the moment. You’ll have time to rest in a warm, covered area, surrounded by natural light and quiet.  
+
+Refreshments are provided, featuring fresh, plant-b...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**  
+
+Step into a gentle rhythm of movement and stillness beneath the afternoon sun. This is more than a session—it’s a place where the body and breath meet, where focus is found in flow and silence.  
+
+Begin with a flowing practice of Vinyasa yoga, where movement follows breath and intention. After, sink into a sound bath—a soft, resonant immersion that shifts the senses without demanding attention. The session closes with a guided meditation, offering space to return ...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a peaceful afternoon where movement, sound, and stillness come together in a gentle flow. This is not about escaping the world — it’s about re-engaging with your body and breath in a grounded, sensory way.  
+
+You’ll begin with a mindful Vinyasa yoga session that invites rhythm and presence, carried through softly lit spaces infused with natural light. Afterward, a sound bath will open your awareness to deeper frequencies, offering a quiet moment of resonan...          </p>
+          <p class="lt-p">
+Rubrics: 12/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a space where quiet presence meets gentle movement. The garden offers a peaceful setting—sun-dappled, softly lit, and filled with the quiet hum of nature and intention. As the day unfolds, you’ll move through a flowing practice of Vinyasa yoga, allowing breath and motion to align in a natural rhythm. Afterward, enter a wave of stillness with a sound bath—calm tones resonating through the air, helping you return to your inner balance. The session ends with ...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**  
+
+Step into a space where movement and stillness meet—where the gentle rhythm of breath flows alongside the quiet hum of nature. This afternoon is designed for presence, not performance. Begin with a flowing Vinyasa session that moves with your natural pace, followed by a sound bath that invites gentle resonance through the body. Then, settle into a guided meditation to return to a grounded awareness.  
+
+After the practice, enjoy a small selection of nourishing, pla...          </p>
+          <p class="lt-p">
+Rubrics: 17/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.810          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a quiet, sun-drenched space where movement and stillness meet. Here, the rhythm of breath aligns with the pulse of nature—no rush, no noise, just presence. You’ll begin with a flowing Vinyasa yoga session that invites curiosity and connection through motion. Afterward, immerse yourself in a sound bath, a gentle field of vibrations that open space within. Close the session with a guided meditation, allowing thoughts to drift without direction.
+
+The garden i...          </p>
+          <p class="lt-p">
+Rubrics: 17/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.810          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a space where the quiet hum of the afternoon meets the gentle rhythm of breath and movement. Nestled in a private, thoughtfully designed garden, this serene setting invites you to connect with your body and presence in a grounded way.  
+
+The day begins with a flowing Vinyasa session that moves with intention—offering a balance of strength and stillness. Afterward, a sound bath washes over you with deep, resonant tones, helping your sense of self settle. Th...          </p>
+          <p class="lt-p">
+Rubrics: 14/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a quiet space where movement meets stillness, and the air carries the scent of greenery and calm. This afternoon is designed for presence—where breath becomes rhythm, and posture finds its balance. You’ll begin with a flowing Vinyasa session that connects body and motion through mindful focus. Afterward, settle into a sound bath, where gentle vibrations ripple through you, offering a different kind of awareness. Wrap it up with a guided meditation that inv...          </p>
+          <p class="lt-p">
+Rubrics: 18/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**  
+
+Step into a peaceful space where movement, sound, and presence come together. Sunlight filters through the leaves as the garden breathes with calm, and the air carries the quiet hum of stillness. This afternoon is made for being deeply present — not just physically, but with your senses and heart.  
+
+Begin with a flowing Vinyasa yoga session that connects breath and motion, supporting balance and alignment. Follow with a sound bath, where gentle vibrations ripple ...          </p>
+          <p class="lt-p">
+Rubrics: 18/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a space where calm meets natural beauty. Nestled in a softly curated garden, this gathering offers a peaceful pause rooted in body and breath. Begin with a flowing Vinyasa session that moves with rhythm and intention, then transition into a sound bath, where gentle vibrations open the senses and invite stillness. Follow with a guided meditation that grounds you in presence, without distraction.  
+
+After the practice, enjoy lightly spiced, plant-based treat...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write the copy for a marketing pamphlet for a wellness event in a Spa Garden. The spa garden is a spa that a private homeowner has developed in their own back garden - this shouldn&#x27;t go into the copy ...          </p>
+          <p class="lt-p">
+Response: **Introduction to Wellness**
+
+Step into a space where stillness meets movement, and quiet meets connection. The afternoon begins with a flowing Vinyasa class that brings breath and body into rhythm. Following that, you’ll experience a sound bath—soft vibrations that settle into your presence. Close with a guided meditation, offering space to feel grounded, gentle, and centered.  
+
+After the practice, gather for lightly sweet, plant-based treats made with care and whole ingredients. The warm, cov...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+385                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+311                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+296                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+303                </td>
+                <td>
+0.952                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.952                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+339                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+279                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+302                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+302                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+285                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+295                </td>
+                <td>
+0.810                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.810                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+306                </td>
+                <td>
+0.810                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.810                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+288                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+276                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+268                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+266                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+409                </td>
+                <td>
+244                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,14 @@
+tinker_cookbook.utils.ml_log:475 [INFO] Logging to: logs_v2p5
+tinker_cookbook.checkpoint_utils:21 [INFO] No checkpoints found at ./logs_v2p5/checkpoints.jsonl
+tinker_cookbook.checkpoint_utils:52 [INFO] No checkpoints found with key state_path in ./logs_v2p5
+tinker.lib.public_interfaces.service_client:66 [INFO] ServiceClient initialized for session ff294c55-4903-5df2-bcbf-011d7ea33244
+tinker.lib.public_interfaces.service_client:147 [INFO] TrainingClient initialized for model ff294c55-4903-5df2-bcbf-011d7ea33244:train:0
+tinker_cookbook.recipes.rlvr.rlvr_env:77 [INFO] Loading RLVR dataset from /Users/sushantmehta/Desktop/clones_final/tinker-cookbook-main/tinker_cookbook/recipes/rlvr/data/single_turn_if_sample_1k.json
+tinker_cookbook.recipes.rlvr.rlvr_env:107 [INFO] Loaded 1000 samples with rubrics
+tinker_cookbook.recipes.rlvr.rlvr_env:119 [INFO] Train: 900, Test: 100
+tinker_cookbook.rl.train:1104 [INFO] Will train on 57 batches
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting save_checkpoint
+tinker_cookbook.utils.misc_utils:23 [INFO] save_checkpoint took 2.28 seconds
+tinker_cookbook.utils.misc_utils:20 [INFO] Starting run_evals
+tinker_cookbook.utils.misc_utils:23 [INFO] run_evals took 199.03 seconds
+openai._base_client:1621 [INFO] Retrying request to /chat/completions in 0.461200 seconds

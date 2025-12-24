@@ -1,0 +1,4728 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 2</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 2  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-19T23:33:33  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely — this is a complex and highly detailed student allocation problem that requires systematic, rule-based processing. We’ll go step-by-step as per your instructions.
+
+---
+
+## ✅ **Phase 1: Initial Allocation Table (Ignoring Capacity &amp; Min Size)**  
+We apply only the following rules at this stage:
+
+- Prioritise highest-ranked eligible preference per slot (based on student preferences).
+- Only assign students to **eligible** sessions (based on eligibility rules and academic/behavioural con...          </p>
+          <p class="lt-p">
+Rubrics: 16/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.593          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s go step-by-step through the full assignment process with precision and care, respecting all your rules.
+
+---
+
+## ✅ **PART 1: INITIAL ALLOCATION TABLE (Eligibility, Preferences, Offsite, High Intensity, Rowan/Mira Rule)**
+
+We are only using:
+- **Eligibility rules** (including subject band thresholds)
+- **Offsite limitations** (no student in more than one offsite session)
+- **High intensity limits** (Maths Boost / Literacy Lab — no student in more than one)
+- **Rowan &amp; Mira not ...          </p>
+          <p class="lt-p">
+Rubrics: 18/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Great — thank you for the detailed and structured dataset. This is a complex, multi-layered assignment problem involving **preferences, eligibility, constraints, capacity, tiered support, and behavioural rules**. We’ll proceed systematically through all three parts as requested.
+
+---
+
+## ✅ PART 1: INITIAL ALLOCATION TABLE (Based Only on Eligibility, Preferences, Offsite Limits, Support Flags, Rowan/Mira Rule)
+
+We will:
+- Apply eligibility rules for each student and session per slot
+- Respect stu...          </p>
+          <p class="lt-p">
+Rubrics: 19/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.704          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely — this is a detailed and complex allocation problem with multiple interlocking constraints. We&#x27;ll go step by step exactly as requested in **three parts**:
+
+---
+
+## ✅ **Part 1: Initial Allocation Table (Ignoring Capacity &amp; Minimum Sizes)**
+
+We will:
+- Apply eligibility rules per session.
+- Respect offsite limits (no more than one offsite session per student).
+- Respect high intensity limits: no more than one **Maths Boost** or **Literacy Lab** per student (due to SupportFlag).
+- Apply ...          </p>
+          <p class="lt-p">
+Rubrics: 16/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.593          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s tackle your request step by step with precision and care, following **all the rules** you’ve provided.
+
+We’ll go through:
+
+1. **Initial allocation table** (ignoring capacity, min/max, only using eligibility, preferences, offside rules, and Rowan/Mira separation)
+2. **List of all issues** identified from the initial allocation (over-subscribed, under-subscribed, offsite overuse, high intensity limits, Rowan/Mira conflict)
+3. **Final allocation table** after resolving all issues...          </p>
+          <p class="lt-p">
+Rubrics: 17/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.630          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely — this is a complex but well-structured assignment problem. Let&#x27;s walk through it **step-by-step** with full clarity and due diligence. We&#x27;ll follow your precise instructions in three parts:
+
+---
+
+# ✅ **PART 1: Initial Allocation (Ignoring Capacity, Min/Max Sizes)**
+
+We will:
+- Apply **eligibility rules** per session
+- Respect **offsite and high intensity limits**
+- Apply **Rowan/Mira separation rule**
+- Respect **student preferences**, using only eligible options
+- Only assign if a s...          </p>
+          <p class="lt-p">
+Rubrics: 14/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.519          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s go through this step by step as per your detailed instructions. This is a complex, multi-layered allocation process involving preferences, eligibility, constraints, and rebalancing. I&#x27;ll structure the answer in **three clear parts** exactly as requested:
+
+---
+
+## ✅ **Part 1: Initial Allocation Table (using only eligibility, offsite, high intensity, and Rowan/Mira rule)**
+
+We begin with *only eligibility, offsite, high intensity, and Rowan/Mira separation rules* applied. We ign...          </p>
+          <p class="lt-p">
+Rubrics: 18/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Let&#x27;s proceed step-by-step with precision and care as per your detailed instructions.
+
+---
+
+## ✅ PART 1: INITIAL ALLOCATION (Only Eligibility, Offsite, High Intensity, Rowan/Mira Rule, Preference Order)
+
+We will **ignore capacity (min/max)** and **session sizes** in this phase. We will:
+
+- Only assign students to **eligible sessions** in each slot based on **eligibility rules**.
+- Apply **preference ranking** — go top-down, skipping ineligible options.
+- Apply **Rowan &amp; Mira separati...          </p>
+          <p class="lt-p">
+Rubrics: 11/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.407          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely. This is a complex but extremely well-structured assignment. I’ll proceed step-by-step, following your detailed rules precisely.
+
+---
+
+## 📌 **Part 1: Initial Allocation Table (Ignoring Capacity &amp; Min Size)**  
+We begin by assigning each student to their *first eligible* preference in each slot, based on eligibility rules, offsite counts, high-intensity limits, and the Rowan/Mira constraint.
+
+We will:
+
+- Only consider preferences that meet eligibility.
+- Apply the Rowan/Hale–Mira/Solen...          </p>
+          <p class="lt-p">
+Rubrics: 10/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.370          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: We’re assigning Year 10 students to after-school intervention and enrichment sessions with strict rules across eligibility, preferences, capacity, constraints, and behavioural conditions.
+
+---
+
+## ✅ PART 1: INITIAL ALLOCATION TABLE (Based on Eligibility, Preferences, Offsite Limits, High Intensity, Rowan/Mira Rule)
+
+&gt; We **ignore minimum/max group sizes** and **capacity limits** in this first pass.  
+&gt; We apply:
+&gt; - Eligibility rules per session
+&gt; - Offsite rule: no more than one offsite session...          </p>
+          <p class="lt-p">
+Rubrics: 14/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.519          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this carefully, step by step, in the three required parts.
+
+---
+
+## ✅ **PART 1: INITIAL ALLOCATION TABLE (Ignoring Capacity, Only Eligibility &amp; Constraints)**  
+
+We will:
+
+- Assign each student to their **highest-ranked eligible** session in each slot.
+- Apply **eligibility rules** strictly.
+- Enforce:
+  - Offsite limits (max one offsite session per student)
+  - High intensity limits (no more than one ‘Maths Boost’ or ‘Literacy Lab’ per student)
+  - At Risk studen...          </p>
+          <p class="lt-p">
+Rubrics: 16/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.593          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s proceed **step by step**, as you requested, with full accuracy and care for all constraints.
+
+---
+
+## ✅ **PART 1: INITIAL ALLOCATION TABLE (ELIGIBILITY &amp; PREFERENCES ONLY)**
+
+We begin by **assigning students to their top eligible preference in each slot**, based on:
+
+- Eligibility rules (by subject band or flag)
+- Offsite limits (no more than one offsite session per student)
+- High intensity limits (no more than one *Maths Boost* or *Literacy Lab* per student)
+- Rowan and Mira...          </p>
+          <p class="lt-p">
+Rubrics: 15/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Thank you for the clear and detailed problem statement. This is a complex, multi-layered assignment with constraints, eligibility rules, preferences, capacity limits, and behavioural rules. I&#x27;ll walk through **each part systematically**, ensuring all rules are respected and applied in the correct order.
+
+---
+
+## ✅ **PART 1: INITIAL ALLOCATION (Ignoring Capacity &amp; Minimum Sizes)**
+
+We begin by assigning each student to a session in each slot **based only on eligibility and preferences**, moving d...          </p>
+          <p class="lt-p">
+Rubrics: 18/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Let’s step through your detailed request methodically, broken into the **three required parts** as specified:
+
+---
+
+## ✅ **Part 1: Initial Allocation Table (Using Eligibility, Preferences, Offsite, High Intensity, Rowan/Mira Rule)**
+
+We will:
+- Filter each student’s eligible options **per slot** based on eligibility rules.
+- Apply **preference ranking** only among eligible options.
+- Apply **Max 1 offsite session per student** and **Max 1 high-intensity session (Maths Boost / Literac...          </p>
+          <p class="lt-p">
+Rubrics: 15/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: Absolutely — this is a detailed and multi-layered scheduling problem requiring careful adherence to eligibility, preferences, constraints, tiered support, and capacity rules.
+
+I will proceed step-by-step as requested, in **three parts**:
+
+---
+
+## ✅ Part 1: Initial Allocation Table (Using Only Eligibility, Preferences, Offsite Limits, High Intensity Limits, Rowan/Mira Rule)
+
+We begin by assigning each student to a session in each slot based **only** on:
+
+- Eligibility rules per session
+- Preferen...          </p>
+          <p class="lt-p">
+Rubrics: 11/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.407          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their after school intervention and enrichment sessions for next half-term. We run four fixed slots each week, Slot 1, Slot 2, Slot 3, and Slot 4, an...          </p>
+          <p class="lt-p">
+Response: We are now going to carry out this complex and carefully structured allocation process step-by-step as per your instructions.
+
+---
+
+## 🔍 **Step 1: Initial Allocation Table (Based on Eligibility, Preferences, and Constraints)**  
+*Ignore capacities and minimums at this stage. Only use eligibility, offsite rules, high intensity limits, Rowan/Mira separation rule, and preference ranking.*
+
+---
+
+### 📚 **Step 1.1: Categorise Students by Band**
+| Student | OverallAvg | Band | At Risk? | On Track? | Hi...          </p>
+          <p class="lt-p">
+Rubrics: 16/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.593          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.593                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.593                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+7523                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.704                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.704                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.593                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.593                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.630                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.630                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.519                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.519                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.407                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.407                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.370                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.370                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.519                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.519                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.593                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.593                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.407                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.407                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2093                </td>
+                <td>
+8192                </td>
+                <td>
+0.593                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.593                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **detailed, scientifically rigorous**, yet **accessible breakdown** of each planet in our solar system—crafted specifically for high school science teachers to use in a unit designed to foster deep scientific literacy. The content includes:
+
+- **General characteristics** (size, distance from the Sun, composition, atmosphere, surface features, rotation, orbit)
+- **Discovery context** (only when attributable to a single individual)
+- A **modern or historically significant qu...          </p>
+          <p class="lt-p">
+Rubrics: 10/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a detailed, professionally structured, and educationally valuable breakdown of **each planet in our solar system**, tailored for high-school science teachers and students who are entering adulthood and will need exposure to rigorous scientific language and reasoning.  
+
+Each entry includes:
+- **General characteristics** (size, composition, structure, atmosphere, temperature, rotation, orbital features)
+- **Relevant discovery context** (only where associated with a single pers...          </p>
+          <p class="lt-p">
+Rubrics: 9/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **detailed, scientifically rigorous**, yet **accessible and pedagogically structured** breakdown of each planet in our solar system—formatted for clarity and readiness, with advanced scientific terminology in **bold**, a relevant historical or modern quote from a noted scientist, and a thorough summary of key space missions (probes, rovers, satellites, international collaboration). Pluto’s status is addressed clearly and historically.
+
+---
+
+## **The Planets of Our Solar Sys...          </p>
+          <p class="lt-p">
+Rubrics: 9/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a comprehensive, scientifically rigorous, and pedagogically structured breakdown of each planet in our solar system—designed specifically for a high school science teacher preparing students for advanced scientific literacy. The format is clear and accessible, yet includes advanced vocabulary in **bold** to build scientific vocabulary mastery. Each entry includes general characteristics, a concise note on discovery (only when attributable to a singular individual), a relevant...          </p>
+          <p class="lt-p">
+Rubrics: 9/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **detailed, advanced yet student-accessible breakdown** of each planet in our solar system—designed with high-school science educators in mind, structured for clarity and scientific depth. The content is tailored to prepare students for future scientific literacy, with **bolded advanced terms**, **historical/astrophysical quotes**, and a full **list of international space missions** including probes, rovers, and orbiters. The inclusion of Pluto’s reclassification is clearl...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a detailed, educationally rigorous, and accessible breakdown of each planet in our solar system. The content is designed for high school science students with an early exposure to advanced scientific language, while remaining clear and structured. Each entry includes:
+
+- **General characteristics** (size, composition, atmosphere, temperature, rotation, orbit, etc.)  
+- **Discovery context** (only where attributed to a single individual)  
+- A **modern or historical quote** fr...          </p>
+          <p class="lt-p">
+Rubrics: 10/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **detailed, scientifically rigorous, yet accessible breakdown** of each planet in our solar system—structured for high-school science teachers and students who are ready to engage with advanced concepts. Each entry includes:
+
+- General characteristics (size, composition, orbit, rotation, atmosphere, surface features)
+- A **single, relevant discovery attribution** (only if clearly attributable to one individual)
+- A **modern quote** from a noted astrophysicist or historian
+...          </p>
+          <p class="lt-p">
+Rubrics: 6/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **detailed, scientifically rigorous, yet accessible breakdown** of each planet in our solar system—tailored for high-school science students who will soon become adults. This structure balances **precision and clarity**, emphasizes **scientific language**, and includes **strategic use of advanced terminology in bold** for future reference. Each section follows your requested format:
+
+- General characteristics  
+- Discovery context (only if attributed to a singular individu...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a detailed, science-accurate, and pedagogically rich breakdown of each planet in our solar system—structured for clarity and depth, with attention to scientific terminology, historical context, and interplanetary exploration. The format is designed for ease of reading and teaching, while incorporating **advanced scientific terms in bold** to emphasize key concepts. 
+
+At the end, you&#x27;ll find a **comprehensive glossary** of all **bolded terms**, ideal for classroom reference.
+...          </p>
+          <p class="lt-p">
+Rubrics: 9/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **detailed, scientifically rigorous, yet accessible** breakdown of each planet in our solar system — designed specifically for high school science teachers and students on the cusp of adulthood. The format prioritizes clarity while embedding rich, advanced scientific terminology in context. Key scientific terms are **bolded** and defined at the end for pedagogical use. Each entry includes:
+
+- General characteristics (size, mass, composition, atmosphere, temperature, orbital...          </p>
+          <p class="lt-p">
+Rubrics: 10/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **detailed, scientifically rigorous yet accessible** breakdown of each of the **eight planets in our solar system**, formatted for clarity and educational depth. The content is structured to serve both as a classroom teaching tool and a foundation for deeper scientific inquiry—tailored for high-school science students who will soon become informed citizens of a scientific age.
+
+Each entry includes:
+- Key **general characteristics** (size, composition, atmosphere, temperatu...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **detailed, scientifically rigorous, yet accessible breakdown** of each planet in our solar system—designed specifically for high school science teachers aiming to prepare students for deeper scientific literacy. It includes:
+
+- **General planetary characteristics** (size, composition, motion, atmosphere, etc.)  
+- **Discovery attribution** (only where a single individual made a seminal contribution)  
+- A **modern or historically significant quote** from a prominent astro...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely — here is a **detailed, scientifically rigorous, yet accessible** breakdown of each planet in our solar system, formatted for high-school-level science instruction. This resource is designed to build scientific literacy in a way that prepares students for deeper study in college or beyond. Each planet includes:
+
+- **General characteristics** (size, composition, atmosphere, temperature, axial tilt, etc.)  
+- **Discovery details** (only where attributed to a single individual)  
+- A **m...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **detailed, accessible, yet scientifically rigorous** breakdown of each planet in our solar system, tailored specifically for a high-school science teacher preparing students for a deeper understanding of astronomy. The content includes:
+
+- General planetary characteristics  
+- Key scientific discoveries (only where attributable to a singular individual)  
+- A quote from a modern astrophysicist or historian (with historical figures acknowledged where appropriate)  
+- A lis...          </p>
+          <p class="lt-p">
+Rubrics: 10/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **detailed, scientifically rigorous, yet accessible breakdown** of each planet in our solar system — designed specifically for high-school science teachers and students who are ready to engage with advanced scientific concepts. The structure prioritizes clarity through **structured formatting**, includes **key scientific terminology in bold**, and concludes with **a glossary of those terms**.  
+
+Each planet features:  
+- General characteristics  
+- Discovery context (only i...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a high-school science teacher, and our unit on the solar system is coming up. I need a detailed breakdown of each planet in our solar system-- including a reference to Pluto being declassified an...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a detailed, scientifically rigorous, yet accessible breakdown of each of the **eight recognized planets** in our solar system—presenting them in a clear, student-friendly format that emphasizes **advanced scientific concepts** without oversimplifying. Where appropriate, **bolded terms** are used to highlight key scientific vocabulary, which will be optionally defined at the end of the unit. The text avoids redundant historical claims about ancient observation and focuses on *...          </p>
+          <p class="lt-p">
+Rubrics: 11/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.917          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5341                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5520                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5658                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5204                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5878                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5622                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+4927                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+4668                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5584                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5870                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5539                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5351                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+6363                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5527                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+6124                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+328                </td>
+                <td>
+5835                </td>
+                <td>
+0.917                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.917                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s build a **complete, realistic, and fair delivery schedule** for **Big Boi’s Chips** based on your detailed requirements.
+
+---
+
+## ✅ **Key Requirements Recap &amp; Constraints**
+
+- **25 stores**, each receiving **5 lbs** of chips (except **Gillys, Delaware City DE → 10 lbs**).
+- 4 trucks (Truck 1–4)
+- 14 drivers, ranked by **seniority** (longest experience gets longest routes)
+- **Delivery days**: Tuesday, Wednesday, Thursday, Friday, Saturday  
+  → **Kevin Gates, Suzy Schrieber, Ty...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a detailed and thoughtful setup — it&#x27;s great to work with a company that values its people and operations. Let’s build a **comprehensive and fair delivery schedule** for **Big Boi&#x27;s Chips**, based on your parameters.
+
+---
+
+## 🔍 **Objective Summary**
+
+- 26 stores to deliver to **once per week** (each store gets 5 lbs, except **Gillys, Delaware City DE → 10 lbs**).
+- 4 trucks (Truck 1, 2, 3, 4).
+- 14 employees, assigned via **seniority** (longer tenure = longer route)....          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Absolutely, Big Boi&#x27;s Chips — great name! 😊 Let&#x27;s take your detailed request and break it down into a **practical, realistic, and legally compliant delivery schedule** based on real-world logistics, seniority, driver availability, route constraints, and operational best practices.
+
+---
+
+### 🔍 **Key Requirements &amp; Constraints**
+
+1. **Stores** (32 total)  
+   → Each store receives **5 lbs** of chips, **except Gillys, Delaware City (DE)** → **10 lbs**
+
+2. **Trucks** → 4 trucks (Truck 1 to Truck 4) ...          </p>
+          <p class="lt-p">
+Rubrics: 8/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and thoughtful description of **Big Boi&#x27;s Chips**! Let&#x27;s take your request step by step and build a realistic, compliant, and practical delivery schedule that respects:
+
+- Seniority-based route length (longer routes for more experienced drivers)
+- No Saturday work for Kevin Gates, Suzy Schrieber, Tyler Williamson, or Marty Coppinger
+- Maximum 200 miles per shift
+- Deliveries only on **Tuesday–Saturday**
+- 14 drivers (with years of experience)
+- 14 stores, each getting ...          </p>
+          <p class="lt-p">
+Rubrics: 1/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.071          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Great! You&#x27;re running **Big Boi&#x27;s Chips** — a solid name for a chip brand with a strong local identity. Let’s take this step by step to create a **realistic, efficient, and fair delivery schedule** that honors your business rules, employee seniority, truck capacity, time constraints, and delivery requirements.
+
+---
+
+## ✅ OBJECTIVE:
+Create a **weekly delivery schedule** for **28 stores** (delivering once a week), scheduled across **Tuesday to Saturday**.
+
+### Key Constraints:
+- 4 trucks (Truck 1 ...          </p>
+          <p class="lt-p">
+Rubrics: 4/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.286          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build a **professional, practical, and fair delivery schedule** for **Big Boi’s Chips**, based on all the information you&#x27;ve provided.
+
+---
+
+## 🚚 **Big Boi’s Chips Weekly Delivery Schedule (Wilmington, DE)**  
+*Deliveries: Monday–Saturday: Only Tuesday, Wednesday, Thursday, Friday, Saturday*  
+*Each store delivers once per week | 5 lbs per store | Gillys → 10 lbs*  
+*4 trucks available | 14 drivers | Seniority-based route assignment | Max 200 miles per shift*  
+*No Saturday fo...          </p>
+          <p class="lt-p">
+Rubrics: 6/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Great question! Let’s build a **realistic, practical, and fair delivery schedule** for **Big Boi&#x27;s Chips** based on your detailed requirements.
+
+---
+
+## ✅ **Key Requirements Recap**
+
+- **4 Trucks** (Truck 1–4)
+- **27 Stores** (delivering once weekly)
+- **14 Employees**, ranked by seniority (longer tenure = longer route)
+- **Delivery Days**: Tuesday–Saturday (no Saturday for Kevin Gates, Suzy, Tyler, Marty)
+- **Max 200 miles per shift**
+- **Truck assignment** (1–4)
+- **Mileage per driver**: must ...          </p>
+          <p class="lt-p">
+Rubrics: 7/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Great! You&#x27;re running **Big Boi&#x27;s Chips** out of **Wilmington, DE**, and you&#x27;re looking to create a **realistic, seniority-based delivery schedule** that respects:
+
+- Weekly delivery frequency (once per week per store)  
+- Route limits (≤200 miles per shift)  
+- Driver seniority (longer tenure gets longer routes)  
+- Workday restrictions (Trucks operate Tue–Sat; Gates, Suzy, Tyler, Marty do not work Saturday)  
+- Weight per store (5 lbs except Gillys = 10 lbs)  
+- Truck assignments (4 trucks ava...          </p>
+          <p class="lt-p">
+Rubrics: 7/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **practical, realistic, and fair delivery schedule** for **Big Boi&#x27;s Chips** based on your detailed input.
+
+---
+
+## 🚚 **BIG BOI’S CHIPS – DELIVERY SCHEDULE**
+
+**Company:** Big Boi’s Chips  
+**Location:** Wilmington, DE  
+**Delivery Days:** Tuesday, Wednesday, Thursday, Friday, Saturday  
+**Trucks Available:** 4 (Truck #1, #2, #3, #4)  
+**Employees (14 total):**  
+- Kevin Gates (25 years) ✅ Senior, *does not work Sat*  
+- Suzy Schrieber (19 years) ✅ Senior, *does not wor...          </p>
+          <p class="lt-p">
+Rubrics: 4/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.286          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Thank you for sharing such a detailed and well-organized request! Let’s dive in and build a **professionally structured, realistic, and fair delivery schedule** for **Big Boi&#x27;s Chips**, based on your parameters.
+
+---
+
+## ✅ **Overview: Big Boi’s Chips Delivery Schedule**
+
+### 🏢 Stores (Grouped by Location)
+We have **30 stores** in total, each receiving **5 lbs** of chips **except Gillys (Delaware City DE)**, which receives **10 lbs**.
+
+&gt; So total chip delivery =  
+&gt; (29 stores × 5 lbs) + (1 store...          </p>
+          <p class="lt-p">
+Rubrics: 4/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.286          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Thanks for providing such a detailed and well-structured request! Let’s build a **professional, realistic, and fair delivery schedule** for **Big Boi’s Chips**, based on your specific requirements.
+
+---
+
+## 🚚 **Big Boi’s Chips – Weekly Delivery Schedule (Wilmington, DE)**
+
+---
+
+### ✅ Key Constraints &amp; Rules Applied:
+
+1. **Delivery Frequency**: Each store receives **once per week** (Tuesday–Saturday).
+2. **Delivery Volume**:
+   - Most stores: **5 lbs** of chips.
+   - **Gillys, Delaware City DE**:...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Great question — this is a fully detailed logistics scheduling challenge for **Big Boi&#x27;s Chips**, with real-world constraints like **route length, driver seniority, work days, truck capacity, delivery volume, and mileage tracking**.
+
+Let’s walk through this step by step and deliver a **complete, realistic, and actionable weekly delivery schedule** that meets *all* your requirements.
+
+---
+
+## ✅ OVERVIEW OF REQUIREMENTS:
+
+- **25 stores** (each delivered **once weekly**)
+- **4 trucks** (use truck 1...          </p>
+          <p class="lt-p">
+Rubrics: 5/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.357          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a detailed and comprehensive overview of Big Boi&#x27;s Chips! Let&#x27;s break this down carefully and build a **realistic, efficient, and fair delivery schedule** based on your rules and constraints.
+
+---
+
+## 🚚 **BIG BOI’S CHIPS — DELIVERY SCHEDULE**  
+**Company:** Big Boi&#x27;s Chips  
+**Location:** Wilmington, DE  
+**Delivery Days:** Tuesday, Wednesday, Thursday, Friday, Saturday  
+**Trucks Available:** 4 (Truck 1, 2, 3, 4)  
+**Employees (14):** 14 drivers with seniority from ...          </p>
+          <p class="lt-p">
+Rubrics: 8/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Great! You&#x27;ve provided a detailed request for building a **delivery schedule** for Big Boi’s Chips — a responsible, organized, and driver-centric operation. Let’s break it down step by step to meet all your requirements with care and precision.
+
+---
+
+## 🚚 **Big Boi’s Chips Delivery Schedule**  
+**Location:** Wilmington, DE  
+**Delivery Days:** Tuesday, Wednesday, Thursday, Friday, Saturday  
+**Trucks Available:** 4 (Truck #1 to Truck #4)  
+**Driver Seniority Rule:** More experience = longer rout...          </p>
+          <p class="lt-p">
+Rubrics: 4/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.286          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s build a well-structured, realistic, and fair delivery schedule for **Big Boi’s Chips** — based on your detailed input.
+
+---
+
+## 🚚 **Big Boi’s Chips Delivery Schedule (Wilmington, DE)**  
+*Deliveries: Weekly (Tues–Sat), 1x per store, 5 lbs per store; Gillys = 10 lbs.*
+
+---
+
+### ✅ **Key Rules Applied**
+1. **Seniority-Based Routing**  
+   Drivers with longer service get longer routes (prioritized based on years of experience).
+
+2. **No Saturday Shifts** for:  
+   - Kevin Gates  
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 6/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a potato chip company based out of Wilmington DE called Big Boi&#x27;s Chips. I need to make a schedule for my delivery drivers. We have four trucks at our disposal. Here are the stores we deliver to...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed request — this is a complex logistics scheduling problem with clear operational rules. Let&#x27;s break it down systematically to provide you with a **realistic, operational, and fair delivery schedule** for **Big Boi&#x27;s Chips** based on your constraints.
+
+---
+
+## ✅ **Overview of Requirements**
+
+### Delivery Details
+- **Stores**: 28 stores (14 locations × 2, one with different volume)
+- **Delivery Frequency**: Once per week (on **Tuesday–Saturday**)
+- **Volume**:
+  - All sto...          </p>
+          <p class="lt-p">
+Rubrics: 8/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+7013                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+7221                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+6522                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+8192                </td>
+                <td>
+0.071                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.071                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+5842                </td>
+                <td>
+0.286                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.286                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+6793                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+4607                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+7297                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+6257                </td>
+                <td>
+0.286                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.286                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+7545                </td>
+                <td>
+0.286                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.286                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+3372                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+7934                </td>
+                <td>
+0.357                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.357                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+6464                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+6539                </td>
+                <td>
+0.286                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.286                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+7684                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+650                </td>
+                <td>
+6886                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s create a clear, realistic, and compliant weekly schedule for **The Crystal Ball** based on your detailed requirements.
+
+---
+
+### 🔍 **Store Hours &amp; Requirements Summary**
+
+- **Open**: Tuesday through Sunday  
+- **Hours**:
+  - **Tue–Fri**: 10 AM – 6 PM (8 hours/day)  
+  - **Sat–Sun**: 12 PM – 8 PM (8 hours/day)  
+- **Full-time employees**:
+  - Work **all hours** open (must have **at least 30 hours**, no more than 40)
+  - Scheduled for **both first and second shifts** (only full-time)
+- **Par...          </p>
+          <p class="lt-p">
+Rubrics: 12/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **clear, realistic, and compliant employee schedule** for **The Crystal Ball** next week, based on your detailed requirements.
+
+---
+
+### 🛍️ **Store Hours Overview**
+- **Tuesday–Friday**: 10:00 AM – 6:00 PM → 8 hours per day (2 shifts)
+- **Saturday–Sunday**: 12:00 PM – 8:00 PM → 8 hours per day (2 shifts)
+- **Workshops on Saturday &amp; Sunday** → 1 workshop per shift, requiring an **extra employee**
+
+---
+
+### 📋 **Staff &amp; Roles**
+
+| Name       | Type       | Shifts Availabl...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **clear, realistic, and compliant employee schedule** for **The Crystal Ball** for next week (Monday through Sunday), based on your requirements.
+
+---
+
+### 📅 **Store Hours**
+- **Tuesday – Friday**: 10:00 AM – 6:00 PM → 8 hours per day  
+- **Saturday – Sunday**: 12:00 PM – 8:00 PM → 8 hours per day (each day)
+
+&gt; **Note**: Workshops occur **during each shift** on Saturday and Sunday.  
+&gt; Requires **one additional employee per shift** (total 2 extra employees on Sat/Sun)....          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **clear, fair, and compliant schedule** for **The Crystal Ball** for next week (Monday through Sunday), based on your detailed requirements and employee qualifications.
+
+---
+
+### 📅 **Store Hours Overview**
+
+| Day       | Opening | Closing | Workshops? | Shifts Needed |
+|----------|--------|--------|-----------|---------------|
+| Tuesday–Friday | 10 AM | 6 PM | No | First &amp; Second Shift (each needs: Cashier, Stocker, Tarot Reader) |
+| Saturday–Sunday | 12 PM | 8 PM | Ye...          </p>
+          <p class="lt-p">
+Rubrics: 15/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.682          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **clear, realistic, and compliant weekly schedule** for *The Crystal Ball* based on your detailed requirements.
+
+---
+
+## 🌟 STORE INFO: The Crystal Ball  
+**Operating Hours:**  
+- **Tue–Fri:** 10 AM – 6 PM (8 hours per day)  
+- **Sat–Sun:** 12 PM – 8 PM (8 hours per day)  
+- **Workshops on Sat &amp; Sun:** One per day, one during each shift (1st &amp; 2nd shift)  
+  → Requires an **extra employee** (only qualified staff can lead workshops)
+
+---
+
+## 🚀 SCHEDULE RULES  
+✅ **Full-ti...          </p>
+          <p class="lt-p">
+Rubrics: 14/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s create a clear, realistic, and compliant employee schedule for **The Crystal Ball** next week, based on the detailed requirements you provided.
+
+---
+
+## 🗓️ **The Crystal Ball – Weekly Employee Schedule (Next Week)**  
+**Operating Hours:**  
+- **Tue–Fri:** 10:00 AM – 6:00 PM  
+- **Sat–Sun:** 12:00 PM – 8:00 PM  
+
+### ⚙️ Shift Structure:
+- **First Shift:** 10:00 AM – 4:00 PM  
+- **Second Shift:** 4:00 PM – 8:00 PM  
+
+**Coverage needed per shift:**  
+- 1 Cashier  
+- 1 Stocker  
+- 1 Tarot Read...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a clear, compliant, and practical employee schedule for **The Crystal Ball** for next week (Monday through Sunday), following all your rules and constraints.
+
+---
+
+### 🛍️ **Store Hours Summary**
+- **Tuesday–Friday**: 10 AM – 6 PM (8 hours per day)  
+  → Two shifts:  
+  - **First shift**: 10 AM – 4 PM  
+  - **Second shift**: 4 PM – 8 PM  
+- **Saturday–Sunday**: 12 PM – 8 PM (8 hours per day)  
+  → Two shifts:  
+  - **First shift**: 12 PM – 4 PM  
+  - **Second shift**: 4 PM...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully build your store’s employee schedule for **next week (Tuesday through Sunday)** based on all the constraints you&#x27;ve provided.
+
+---
+
+## 📚 STORE NAME: The Crystal Ball  
+**Operating Hours:**
+
+- **Tuesday–Friday:** 10:00 AM – 6:00 PM (8 hours/day)  
+- **Saturday–Sunday:** 12:00 PM – 8:00 PM (8 hours/day)  
+- **Workshops on Saturday &amp; Sunday:** One per shift (in each shift block)
+
+---
+
+## 🚩 Key Constraints Recap:
+
+1. **Shifts:**
+   - First shift: 10 AM – 4 PM (e.g., Tues–Fri: 10 AM–4...          </p>
+          <p class="lt-p">
+Rubrics: 14/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **clear, feasible, and compliant employee schedule** for **The Crystal Ball** for next week (Tuesday through Sunday), based on your detailed requirements.
+
+---
+
+## 🗓️ Store Schedule Overview:  
+- **Open**: Tuesday–Sunday  
+- **Hours**:  
+  - **Tue–Fri**: 10:00 AM – 6:00 PM → **8 hours/day**  
+  - **Sat–Sun**: 12:00 PM – 8:00 PM → **8 hours/day**  
+- **Shifts**:  
+  - **First Shift**: 10:00 AM – 2:00 PM (noon–2 PM on Sat/Sun)  
+  - **Second Shift**: 2:00 PM – 6:00 PM (4...          </p>
+          <p class="lt-p">
+Rubrics: 19/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.864          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s create a clear, realistic, and compliant employee schedule for **The Crystal Ball** for **next week (Monday to Sunday)** based on your detailed requirements.
+
+---
+
+### 📍 **Store Hours**
+- **Tuesday–Friday**: 10 AM – 6 PM (8 hours)
+- **Saturday–Sunday**: 12 PM – 8 PM (8 hours)
+- **Workshops on Saturday &amp; Sunday**: One per shift (during first or second shift), requiring **an extra employee**.
+
+---
+
+### 🧑‍💼 **Employee Profiles**
+
+| Name       | Type       | Shifts               | Qualificatio...          </p>
+          <p class="lt-p">
+Rubrics: 16/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a clear, balanced, and compliant weekly schedule for **The Crystal Ball**, keeping all constraints in mind.
+
+---
+
+### 📅 **Store Hours &amp; Shift Structure**
+- **Tuesday – Friday**: 10:00 AM – 6:00 PM  
+  → 8 hours per day → **First Shift (10 AM – 4 PM)**, **Second Shift (4 PM – 8 PM)**  
+  → 2 shifts, 4-hour blocks per shift (so 8 hours/day)
+
+- **Saturday &amp; Sunday**: 12:00 PM – 8:00 PM  
+  → 8 hours per day → **First Shift (12 PM – 4 PM)**, **Second Shift (4 PM – 8 PM)**  
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 14/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a clear, efficient, and compliant schedule for **The Crystal Ball** next week based on your detailed requirements.
+
+---
+
+### 🛍️ **Store Operating Hours**  
+- **Tuesday–Friday:** 10:00 AM – 6:00 PM  
+- **Saturday–Sunday:** 12:00 PM – 8:00 PM  
+
+### 🔎 **Shifts**  
+- **First Shift:** 10:00 AM – 4:00 PM (Tuesday–Friday); 12:00 PM – 4:00 PM (Sat–Sun)  
+- **Second Shift:** 4:00 PM – 8:00 PM (Tue–Fri); 4:00 PM – 8:00 PM (Sat–Sun)  
+
+&gt; *(Note: On weekends, 12 PM–4 PM is first sh...          </p>
+          <p class="lt-p">
+Rubrics: 14/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a clean, efficient, and compliant weekly schedule for **The Crystal Ball**, based on all your requirements.
+
+---
+
+## 🌟 THE CRYSTAL BALL – WEEKLY SCHEDULE (Next Week)
+
+### 📅 Store Hours:
+- **Tuesday–Friday**: 10:00 AM – 6:00 PM  
+- **Saturday–Sunday**: 12:00 PM – 8:00 PM  
+
+### 🚨 Key Rules:
+- **Full-time employees** work **both shifts** (10 AM–6 PM Tue–Fri; 12 PM–8 PM Sat–Sun) → **Minimum 30 hours, max 40 hours**.
+- **Part-time employees** work **one 4-hour shift per day*...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a clear, realistic, and compliant employee schedule for **The Crystal Ball** for next week (Monday–Sunday), based on your detailed requirements.
+
+---
+
+## 📅 **The Crystal Ball – Weekly Employee Schedule (Next Week)**
+
+### General Rules Recap:
+- **Store Hours:**
+  - **Tues–Fri:** 10 AM – 6 PM → 8 hours per day
+  - **Sat–Sun:** 12 PM – 8 PM → 8 hours per day
+- **Shifts:**
+  - First shift: 10 AM – 2 PM (for Tues–Fri), 12 PM – 4 PM (Sat–Sun)
+  - Second shift: 2 PM – 6 PM (Tue...          </p>
+          <p class="lt-p">
+Rubrics: 15/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.682          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **clear, realistic, and compliant weekly schedule** for **The Crystal Ball**, based on your requirements and employee details.
+
+---
+
+## 📅 Weekly Schedule Overview  
+**Store: The Crystal Ball**  
+**Business Hours:**  
+- **Tuesday–Friday:** 10:00 AM – 6:00 PM (8 hours)  
+- **Saturday–Sunday:** 12:00 PM – 8:00 PM (8 hours)  
+- **Workshops:** One per day, one during each shift (Saturday &amp; Sunday only)  
+
+### Staffing Requirements:
+- **Each shift requires:**  
+  - 1 **Cashi...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create my employee&#x27;s schedule for next week. I own a store called The Crystal Ball. We&#x27;re open Tuesday through Sunday. Tuesday through Friday our hours are 10AM to 6PM. Saturday and Sunday our hours a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s carefully build a clear, realistic, and compliant employee schedule for **The Crystal Ball** for next week (Tuesday through Sunday), based on your detailed requirements.
+
+---
+
+## 📅 **Store Hours Overview**
+- **Tuesday–Friday:** 10:00 AM – 6:00 PM (8 hours shift)
+- **Saturday–Sunday:** 12:00 PM – 8:00 PM (8 hours shift)
+- **Workshops:** Saturday &amp; Sunday – one per shift (6:00 PM workshop on Saturday, 3:00 PM workshop on Sunday).  
+  → Requires **extra employee** per shift.
+
+---
+...          </p>
+          <p class="lt-p">
+Rubrics: 16/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+6559                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+6506                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+6183                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+5495                </td>
+                <td>
+0.682                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.682                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+6884                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+8192                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+8192                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+8192                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+8192                </td>
+                <td>
+0.864                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.864                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+8192                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+6791                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+4619                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+7257                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+8192                </td>
+                <td>
+0.682                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.682                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+5540                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+6044                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

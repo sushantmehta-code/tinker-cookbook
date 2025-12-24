@@ -1,0 +1,4897 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 1</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 1  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-19T23:28:45  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s build a **12-week job schedule** for your dorm’s 21 guys, meeting all your constraints.
+
+---
+
+### ✅ **Constraints Recap:**
+
+- **Total Jobs**:  
+  - 15 base jobs:  
+    - Dishwasher 1, Dishwasher 2  
+    - Floor washing 1, Floor washing 2  
+    - Waiter 1, Waiter 2  
+    - Vacuumer (1)  
+    - Gym floor cleaner (1)  
+    - Table setter 1, Table setter 2  
+    - Classroom 1 cleaner, Classroom 2 cleaner  
+    - Junk removal (1)  
+  → Total: **17 jobs** (we’ll count below)
+
+- **Additional jobs...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through this step by step to create a **fair, balanced 12-week job rotation schedule** for your 21 dorm mates, with the constraints you&#x27;ve outlined.
+
+---
+
+### ✅ **Step 1: List of Jobs**
+Total jobs per week:
+- Dishwasher 1  
+- Dishwasher 2  
+- Floor washing 1  
+- Floor washing 2  
+- Waiter 1  
+- Waiter 2  
+- Vacuum  
+- Gym floor cleaner  
+- Table setter 1  
+- Table setter 2  
+- Classroom 1 cleaner  
+- Classroom 2 cleaner  
+- Junk removal  
+→ **13 base jobs**
+
+Plus:
+- **Week...          </p>
+          <p class="lt-p">
+Rubrics: 4/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.267          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **12-week job schedule** for your dorm, following all your constraints. We’ll build it carefully step-by-step to meet all requirements:
+
+---
+
+### ✅ **Requirements Summary**
+
+- **21 people**: All names in alphabetical order.
+- **Total jobs per week**:
+  - Base jobs: 14 (dishwasher 1, 2; floor washing 1, 2; waiter 1, 2; vacuumer; gym floor cleaner; table setter 1, 2; classroom 1, 2 cleaner; junk removal)
+  - Week 10: +2 jobs → **Hospitality guy**, **Driver**
+  - Total we...          </p>
+          <p class="lt-p">
+Rubrics: 4/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.267          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s build a fair, balanced, and realistic 12-week job schedule for your dorm based on your detailed constraints.
+
+---
+
+### ✅ **Requirements Recap**
+
+- **Total jobs per week**:  
+  Base jobs:  
+  - Dishwasher 1, 2 → 2  
+  - Floor washing 1, 2 → 2  
+  - Waiter 1, 2 → 2  
+  - Vacuumer → 1  
+  - Gym floor cleaner → 1  
+  - Table setter 1, 2 → 2  
+  - Classroom 1, 2 cleaner → 2  
+  - Junk removal → 1  
+  → Total: **15 base jobs**
+
+- **Additional jobs in Week 10 (guests)**:  
+  - Hospitality ...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **12-week schedule** for your dormitory, satisfying all the constraints and goals you&#x27;ve outlined:
+
+---
+
+### ✅ **Requirements Recap**
+
+- **21 people** in the dorm.
+- **17 regular jobs**:
+  - Dishwasher 1, Dishwasher 2
+  - Floor washing 1, Floor washing 2
+  - Waiter 1, Waiter 2
+  - Vacuum cleaner
+  - Gym floor cleaner
+  - Table setter 1, Table setter 2
+  - Classroom 1 cleaner, Classroom 2 cleaner
+  - Junk removal
+- **Two extra jobs in week 10**:
+  - Hospitality guy
+  - D...          </p>
+          <p class="lt-p">
+Rubrics: 4/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.267          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s construct a well-balanced, fair, and realistic **12-week job rotation schedule** for your dormitory, with all the constraints you&#x27;ve specified.
+
+---
+
+### ✅ **Constraints Recap**
+
+- **Total people**: 21
+- **Total jobs per week**:
+  - Base jobs: 14
+  - Week 10: +2 extra jobs → **16 jobs/week**
+- **Each week**, every job must be assigned to **one person**.
+- Each person may have **breaks** (not assigned to any job).
+- **No one should have a break two weeks in a row**.
+- **No one should...          </p>
+          <p class="lt-p">
+Rubrics: 5/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **fair, balanced 12-week job schedule** for your dormitory, following **all your constraints**.
+
+---
+
+### 🔍 **Key Constraints Recap:**
+
+1. **Jobs List (21 jobs total):**
+   - Dishwasher 1, Dishwasher 2  
+   - Floor Washing 1, Floor Washing 2  
+   - Waiter 1, Waiter 2  
+   - Vacuumer  
+   - Gym Floor Cleaner  
+   - Table Setter 1, Table Setter 2  
+   - Classroom 1 Cleaner, Classroom 2 Cleaner  
+   - Junk Removal  
+   → Total: **14 jobs**
+
+2. **People (21 names):**  
+   E...          </p>
+          <p class="lt-p">
+Rubrics: 4/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.267          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a fair, balanced, 12-week job assignment schedule for your dorm, with all your constraints clearly met.
+
+---
+
+### ✅ **Constraints Summary**
+
+- **Total jobs per week:** 15 base jobs + 2 extra in week 10 (Hospitality guy, Driver) → **17 jobs per week**
+- **Total people:** 21 (Elvis, Frankie, John, Paul M., George, Ringo, Tom, Roy, Kenny, Charlie, Paul S., Ebert, Sam, Kevin, Daniel, Larry, Robert, Trevor, Jason, Tony, Dylan)
+- **Total weeks:** 12
+- **Each job must appear onc...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **12-week job schedule** for your 21-person dorm, following all your constraints and requirements.
+
+---
+
+### ✅ **Requirements Summary &amp; Constraints**
+
+- **Jobs (21 total):**
+  - Dishwasher 1, Dishwasher 2  
+  - Floor washing 1, Floor washing 2  
+  - Waiter 1, Waiter 2  
+  - Vacuumer  
+  - Gym floor cleaner  
+  - Table setter 1, Table setter 2  
+  - Classroom 1 cleaner, Classroom 2 cleaner  
+  - Junk removal  
+  - **Tenth week:** +2 jobs: **Hospitality guy**, **Driver**...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a fair, balanced, and compliant 12-week job schedule for your dorm based on your detailed constraints.
+
+---
+
+### ✅ **Constraints Recap**
+
+- **Total people**: 21  
+- **Total jobs per week**:
+  - Standard jobs: 14  
+  - Week 10 (guests): +2 → **16 jobs**  
+- **Total weeks**: 12  
+- **Each job must be assigned exactly once per week** → so 14 × 12 = 168 job assignments (standard), plus 2 × 1 = 2 extra in week 10 → **170 assignments**  
+- **Goal**: Assign jobs evenly, with **a...          </p>
+          <p class="lt-p">
+Rubrics: 5/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s create a **fair, balanced 12-week schedule** that meets **all your constraints**, including:
+
+- Every job is assigned **once per week** (12 weeks × 21 jobs = 252 job-weeks)
+- 21 people → so each week, **21 - 12 = 9 breaks** (because 12 jobs per week)
+- No one has:
+  - A break **two weeks in a row**
+  - The **same job twice in a row**
+  - Any job repeated **more than twice**, **except George**, who may have exceptions (but **not waiters or dishwashers** due to food allergies)
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 5/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a fair, balanced, and fully compliant 12-week job schedule for your dorm group of 21 guys.
+
+---
+
+### ✅ **Key Requirements &amp; Constraints Recap**
+
+- **Total jobs per week**:  
+  Base jobs: 14  
+  Week 10 extra jobs: 2 → **Total jobs per week = 16**  
+  (14 base + 2 guest jobs in week 10)
+
+- **Total guys**: 21  
+- Each job must be assigned **once per week** (14 base jobs + 2 extra in week 10)
+- Each person has a **maximum of 2 repetitions** of any job (except George, who ha...          </p>
+          <p class="lt-p">
+Rubrics: 4/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.267          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a fair, balanced, and detailed **12-week job schedule** for your dorm&#x27;s 21 members with all your constraints.
+
+---
+
+### ✅ **Constraints Recap:**
+
+- **Jobs (22 total)**:
+  - Dishwasher 1, Dishwasher 2
+  - Floor washing 1, Floor washing 2
+  - Waiter 1, Waiter 2
+  - Vacuumer (1)
+  - Gym floor cleaner (1)
+  - Table setter 1, Table setter 2
+  - Classroom 1 cleaner, Classroom 2 cleaner
+  - Junk removal (1)
+  - **Tenth week: +2 jobs** (Hospitality guy, Driver)
+
+- **Total people...          </p>
+          <p class="lt-p">
+Rubrics: 3/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a fair, balanced, 12-week schedule for your dormitory job rotation, satisfying all your constraints.
+
+---
+
+### 📌 **Objective Summary:**
+
+- **Total jobs per week (base):**  
+  21 jobs → Dishwasher 1, 2 | Floor Wash 1, 2 | Waiter 1, 2 | Vacuumer | Gym Floor Cleaner | Table Set 1, 2 | Classroom 1, 2 Cleaner | Junk Removal → total: **15 jobs**
+- **Plus 2 extra jobs in Week 10:**  
+  Hospitality guy, Driver → total: **17 jobs in Week 10**
+
+- **Total people:** 21  
+- **Total we...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s create a fair, balanced, and practical **12-week job schedule** for your dorm, with all the constraints you&#x27;ve specified.
+
+---
+
+### ✅ **Constraints Recap**
+
+- **Total jobs (per week):**  
+  Base jobs:  
+  - Dishwasher 1, Dishwasher 2  
+  - Floor Washing 1, Floor Washing 2  
+  - Waiter 1, Waiter 2  
+  - Vacuumer (1)  
+  - Gym floor cleaner (1)  
+  - Table setter 1, Table setter 2  
+  - Classroom 1 cleaner, Classroom 2 cleaner  
+  - Junk removal (1)  
+  → Total: **14 base jobs** per w...          </p>
+          <p class="lt-p">
+Rubrics: 4/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.267          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m in charge of assigning jobs each week to the guys in my dormitory. Here are the list of jobs: dishwasher 1, dishwasher 2, floor washing 1, floor washing 2, waiter 1, waiter 2, vacuumer, gym floor ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **12-week job rotation schedule** for your 21 guys in the dorm, following all your constraints — even job distribution, no two consecutive breaks, no repeating the same job more than twice (except George, if needed), George excluded from waiters/dishwashers due to food allergies, special absences in weeks 4 and 8, and the addition of two new jobs (Hospitality guy and Driver) in week 10.
+
+---
+
+### ✅ Key Constraints Recap:
+
+- **Total jobs per week:**  
+  Base jobs: 15  
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 2/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.133          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+8192                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+6258                </td>
+                <td>
+0.267                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.267                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+6518                </td>
+                <td>
+0.267                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.267                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+7039                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+7217                </td>
+                <td>
+0.267                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.267                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+6110                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+7933                </td>
+                <td>
+0.267                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.267                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+5968                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+8192                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+6491                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+8192                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+7519                </td>
+                <td>
+0.267                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.267                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+7902                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+8150                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+4659                </td>
+                <td>
+0.267                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.267                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+361                </td>
+                <td>
+6708                </td>
+                <td>
+0.133                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.133                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – meals: Tacos, Chicken Stir-Fry, Spaghetti, Chicken Fettuccine Alfredo, Steak &amp; Potatoes, Frozen Meals + Budget Fruits)**  
+*Organized by department with rough cost estimate (approx. total: $75–$85)*
+
+---
+
+### **Produce Department**  
+*(Fruits &amp; Vegetables – includes budget-friendly options)*  
+- Onions (3 medium) – $1.50  
+- Garlic (1 head) – $1.00  
+- Bell peppers (1 red, 1 yellow, 1 green) – $2.00  
+- Broccoli (1 head) – $2.00  
+- Carrots (10) – $1.50  
+...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – meals: Tacos, Chicken Stir-Fry, Spaghetti, Chicken Fettuccini Alfredo, Steak and Potatoes, 2 Frozen Meals + Budget Fruits)**  
+*Organized by Department | Rough Cost Estimate: ~$75–$85*
+
+---
+
+### **Dairy &amp; Eggs**
+- Milk (whole or 2%) – 2 liters ($3.50)  
+- Eggs (large, carton of 12) – 1 carton ($4.00)  
+- Butter (unsalted, block or stick) – 1 pack (8 oz) ($2.50)  
+- Cream (heavy or half-and-half) – 1 carton (16 oz) ($4.00)  
+- Parmesan cheese – 1 small bloc...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (Organized by Department) – For 3 People**  
+*Estimates based on average U.S. retail prices (2024), rounded to nearest dollar.*
+
+---
+
+### **Produce Department**  
+*(Includes fresh fruits &amp; vegetables for meals and snacks)*  
+- Bell peppers (red, green, yellow) – 3 units (100g each) – $4.00  
+- Onions (yellow) – 3 units (100g each) – $3.00  
+- Garlic (bulbs) – 3 units (1 each) – $2.00  
+- Carrots – 1 pkg (250g) – $2.50  
+- Zucchini – 1 large (200g) – $2.00  
+- Fresh spinac...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List – Organized by Department**  
+*For 3 people – Feeding 3 (Tacos, Chicken Stir-Fry, Spaghetti, Chicken Fettuccini Alfredo, Steak &amp; Potatoes, Frozen Meals) + Budget-Friendly Fruits*  
+*Rough Total Estimated Cost: $65 – $75*
+
+---
+
+**1. Dry Goods &amp; Cereals**  
+- Rice (white or brown) – 2 lbs (1 kg) – $3.50  
+- Oats (old-fashioned or steel-cut) – 1 lb (0.45 kg) – $2.00  
+- Pasta (spaghetti, fettuccine) – 2 lbs (0.9 kg) – $4.00 (spaghetti: 1 lb, fettuccine: 1 lb)  
+- Couscous – ...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – meals: Tacos, Chicken Stir-Fry, Spaghetti, Chicken Fettuccini Alfredo, Steak &amp; Potatoes, 2 Frozen Meals + Budget Fruits)**  
+*Organized by department with estimated cost (approx. USD)*  
+
+---
+
+### **Dairy &amp; Eggs**  
+- Whole milk – 1 carton (12 oz)  
+- Low-fat or 2% cheese – 1 block (8 oz)  
+- Cream – 1 container (8 oz)  
+- Eggs – 12 large  
+- Butter – 1 pack (4 oz)  
+- Olive oil – 1 bottle (16 oz)  
+- Condiments: Mayonnaise (1 container), Salsa (1 containe...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – 7 days of meals)**  
+*Organized by department with rough cost estimate (approx. USD)*  
+
+---
+
+**Produce (Fruits &amp; Vegetables)**  
+- Potatoes – 4 lbs (medium-sized) – $1.80  
+- Broccoli – 1 head – $2.00  
+- Carrots – 1 lb – $1.20  
+- Onions – 3 (medium) – $1.50  
+- Garlic – 1 bulb (10 cloves) – $1.00  
+- Bell peppers (any color, 3) – $2.50  
+- Chicken breasts (for stir-fry and fettuccine) – 2 lbs – $6.00  
+- Fresh spinach or kale – 1 large pack – $2.40  
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – all meals &amp; pantry staples)**  
+*Organized by department with estimated cost (approx. $75–$85)*
+
+---
+
+### 🛒 **Produce Department**  
+*(Fruits &amp; Vegetables – includes budget-friendly options)*  
+- Onions (2 large) – $1.50  
+- Garlic (1 bulb) – $1.00  
+- Carrots (1 bunch, ~10 pieces) – $1.50  
+- Broccoli (1 head) – $2.00  
+- Green beans (1 bag, 1 lb) – $2.50  
+- Spinach (1 bag, 1 lb) – $2.00  
+- Bell peppers (1 red, 1 yellow) – $1.50  
+- Celery (1 bunch) – $...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – 7 days of meals)**  
+*Organized by department with rough cost estimate (USD)*  
+
+---
+
+### **Dry Goods / Cereals &amp; Grains**  
+- **Medium-sized pasta (spaghetti, fettuccine)** – 1 lb each (2 lbs total) – $3.00  
+- **Brown rice** – 2 lbs – $2.50  
+- **Oats** – 1 lb – $1.50  
+- **Whole wheat flour** – 1 lb – $2.00  
+- **All-purpose flour** – 1 lb – $1.80  
+- **Baking powder** – 1 box – $1.50  
+- **Baking soda** – 1 box – $1.00  
+- **Canned beans (black beans o...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – meals: Tacos, Chicken Stir-Fry, Spaghetti, Chicken Fettuccini Alfredo, Steak &amp; Potatoes, Frozen Meals + Budget Fruits)**  
+*Organized by department with rough cost estimate (approx. $65–$75 total)*  
+
+---
+
+**1. DRY GOODS &amp; PANTRY STAPLES**  
+*(Essential bases for all meals)*  
+- Rice (long-grain, white or brown) – 3 lbs ($4.50)  
+- Pasta (spaghetti &amp; fettuccini) – 1 lb each ($2.50)  
+- Oats (for future oatmeal) – 1 lb ($2.00)  
+- Flour (all-purpose) – 1 lb...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (Organized by Department) – For 3 People**  
+*Includes staples, meal ingredients, and budget-friendly fruits. Estimated total cost: $78–$85*
+
+---
+
+### 🛒 **Produce (Fruits &amp; Vegetables)**
+- **Leafy greens** (for stir-fry, spaghetti, fettuccine):  
+  - Spinach – 1 bunch (12 oz)  
+  - Kale – 1 head (12 oz)  
+- **Starchy vegetables**:  
+  - Potatoes – 4 lbs (approx. 1.8 kg)  
+  - Carrots – 1.5 lbs (700g)  
+  - Onions – 3 (medium)  
+  - Garlic – 1 head (10–12 cloves)  
+- **Sid...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – 7-day meal plan)**  
+*Organized by department with rough cost estimate (per meal plan, based on average U.S. prices)*  
+
+---
+
+### 🛒 **Produce (Fruits &amp; Vegetables)**  
+*– 4–5 servings per week*  
+- **Root Vegetables**:  
+  – 1 large potato (for steak &amp; potatoes)  
+  – 1 medium onion (for stir-fry, stir-fry)  
+  – 1 large carrot (for stir-fry)  
+  – 1 cabbage (for stir-fry, chopped)  
+  – 1 green bell pepper (for stir-fry)  
+- **Leafy Greens**:  
+  – 1 bag ...          </p>
+          <p class="lt-p">
+Rubrics: 9/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – 7 days of meals)**  
+*Organized by department with rough cost estimate (approx. $65–$75 for all items)*
+
+---
+
+### 🛒 **Dry Goods &amp; Cereals (Pantry Staples)**
+- **Whole grains (for 3 people):**  
+  - Brown rice – 2 lbs ($4.00)  
+  - Quinoa – 1 lb ($3.50)  
+  - Oats – 1 lb ($2.50)  
+  - Flour (all-purpose) – 1 lb ($2.00)  
+  - Gluten-free flour (optional, for dietary needs) – 1 lb ($4.00)  
+- **Canned goods:**  
+  - Diced tomatoes – 1 can (14 oz) ($1.00)  
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (Organized by Department) – Feeding 3 People**  
+*Estimated Total Cost: $78 – $90*
+
+---
+
+### 🛒 **Dry Goods / Granular Staples**  
+*(Essential pantry items)*  
+- Flour (all-purpose) – 2 lbs (1 kg) – $4.00  
+- Rice (long-grain white or brown) – 2 lbs (1 kg) – $3.00  
+- Oats (instant or steel-cut) – 1 lb (500g) – $3.50  
+- Pasta (spaghetti &amp; fettuccine) – 2 lbs (1 kg) – $5.00  
+- Bread flour (optional, for fettuccine if needed) – 1 lb – $2.50 (skip if using all-purpose)  
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – all meals, pantry staples, and budget-friendly fruits)**  
+*Organized by department with rough cost estimate (based on average U.S. prices per item)*
+
+---
+
+### 🛒 **Produce Department**  
+*(Fruits &amp; Vegetables)*  
+- Bell peppers (red, yellow, green) – 4 (1 per meal) – $2.50  
+- Onions (yellow, white) – 6 (1 per meal) – $2.00  
+- Garlic (cloves) – 10 – $1.50  
+- Carrots – 1 lb – $1.00  
+- Celery – 1 bunch – $1.20  
+- Garlic chives – 1 bunch – $1.00  
+- Brocc...          </p>
+          <p class="lt-p">
+Rubrics: 13/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.722          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List – For 3 People (Feeding 3, Over 1 Week)**  
+*Organized by Department | Budget-Friendly Fruits Included | Recipes at End*
+
+---
+
+### 🛒 **Produce (Fresh Vegetables &amp; Fruits)**
+- **Vegetables (for stir-fry, spaghetti, fettuccine, and sides)**  
+  - Bell peppers (red, yellow, green) – 3 medium (1.5 lbs)  
+  - Broccoli – 1 head (1 lb)  
+  - Carrots – 1 lb  
+  - Onions – 3 (medium, 1 lb total)  
+  - Garlic – 1 head (1 small bunch)  
+  - Zucchini – 1 medium (1 lb)  
+  - Spinach o...          </p>
+          <p class="lt-p">
+Rubrics: 15/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just moved into my new place and I&#x27;m getting ready for our first grocery shop. I have absolutely nothing except spices and condiments. I need all the usual pantry staples and want to make these meal...          </p>
+          <p class="lt-p">
+Response: **Grocery Shopping List (for 3 people – all meals, pantry staples, and budget-friendly fruits)**  
+*Organized by department with rough cost estimate (approx. US Dollars)*
+
+---
+
+### **Dairy Department**  
+- Whole milk – 1 gallon ($3.50)  
+- Butter – 4 sticks ($3.00)  
+- Eggs – 1 dozen (large) ($3.00)  
+- Plain yogurt – 1 container (16 oz, non-fat) ($2.50)  
+- Cheddar cheese – 1 block (8 oz, sharp) ($2.00)  
+- Cream cheese – 1 tub (8 oz) ($2.50)  
+- Coconut milk (for sauces) – 1 can (12 oz, full f...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2030                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2279                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2584                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2404                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2016                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+1892                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2030                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2149                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2156                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2088                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2081                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2284                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2092                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2263                </td>
+                <td>
+0.722                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.722                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2295                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+179                </td>
+                <td>
+2125                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m glad you reached out! Let&#x27;s work through this thoughtfully so your client gets a well-balanced, compliant 5-day meal plan with all the requirements you&#x27;ve specified.
+
+---
+
+### ✅ **Requirements Recap (for clarity):**
+
+- **5 days (Mon–Fri)**: Breakfast, Lunch, Dinner, 1 Snack  
+- **Dessert on 2 random days** (chosen after fulfilling all other constraints)  
+- **No meat on Friday**  
+- **Main proteins (not in breakfast)** must **not appear two days in a row**  
+- **Breakfast food o...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m here to help you support your client with a well-structured, nutritionally balanced 5-day meal plan that meets **all the specific requirements**.
+
+Let’s go step-by-step to ensure:
+
+✅ 1600 kcal/day (±100)  
+✅ 120g protein/day (±5g)  
+✅ Lunch is the **highest-calorie meal** and has **≥40g protein**  
+✅ Breakfast has **≥20g protein**  
+✅ Dinner has **≤40g protein**  
+✅ No meat on **Friday**  
+✅ Main proteins (any meal except breakfast) do **not appear two days in a row**  
+✅ Breakf...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m happy to help! You&#x27;re in a tight spot, and I’ll create a **balanced, achievable 5-day meal plan (Mon–Fri)** that meets **all your detailed requirements**, without overwhelming you with logistics.
+
+Let’s go through each requirement clearly and ensure the plan is grounded in your provided meals:
+
+---
+
+### ✅ **Requirements Recap**
+- **Daily goal**: 1600 calories (±100)
+- **Daily protein goal**: 120g (±5g)
+- **Meal breakdown**:
+  - **Breakfast**: At least 20g protein
+  - **Lunch**: ...          </p>
+          <p class="lt-p">
+Rubrics: 1/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.056          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m glad you reached out. Even though you&#x27;re swamped, I’ll step in to create a **5-day (Mon-Fri) meal plan** that meets **all your specific nutrition goals** and constraints. Let’s break it down clearly and precisely.
+
+---
+
+## ✅ Key Rules &amp; Goals Recap
+
+| Requirement | Detail |
+|-----------|--------|
+| **Daily Calorie Goal** | 1600 ±100 → 1500–1700 kcal/day |
+| **Daily Protein Goal** | 120g ±5g → 115–125g/day |
+| **Meal Breakdown** | Breakfast, Lunch, Dinner, Snack (1 snack/day) &lt;br...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely! I&#x27;m happy to help you create a tailored, balanced 5-day meal plan for your nutrition client with all the constraints and nutritional goals you&#x27;ve specified.
+
+---
+
+🎯 **Client Goals Recap:**
+- **Total daily calories:** 1600 ± 100
+- **Daily protein:** 120g ± 5g
+- **Breakfast:** ≥20g protein
+- **Lunch:** Highest calorie meal of the day; ≥40g protein
+- **Dinner:** ≤40g protein
+- **Snacks:** ≥10g protein
+- **Main proteins (non-breakfast):** No duplicates across consecutive days
+- **No meat...          </p>
+          <p class="lt-p">
+Rubrics: 1/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.056          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m happy to help your nutrition client with a realistic, well-balanced 5-day meal plan that meets all their dietary requirements. Let&#x27;s carefully build this step-by-step while ensuring:
+
+✅ 1600 calories/day (±100)  
+✅ 120g protein/day (±5g)  
+✅ Lunch is the highest-calorie meal and has **at least 40g protein**  
+✅ Breakfast has **at least 20g protein**  
+✅ Dinner has **≤40g protein**  
+✅ Snacks have **≥10g protein**  
+✅ Main proteins (non-breakfast) **do not appear two days in a ro...          </p>
+          <p class="lt-p">
+Rubrics: 8/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m happy to help your nutrition client without taking time from your conference prep. Let’s build a **5-day (Mon–Fri) meal plan** that meets **all the nutritional and structural requirements** you’ve outlined.
+
+---
+
+### ✅ Key Requirements Recap:
+
+- **Daily calories**: 1600 ±100 (so 1500–1700)
+- **Daily protein**: 120g ±5g (so 115–125g)
+- **Breakfast**: ≥20g protein
+- **Lunch**: Highest calorie meal of the day, ≥40g protein
+- **Dinner**: ≤40g protein
+- **Snack**: ≥10g protein (must ...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m happy to help! Let&#x27;s create a **5-day (Mon–Fri) meal plan** that fits your client’s goals and constraints, while keeping you from having to dive in with a frantic schedule. I’ll make sure everything aligns with your detailed requirements:
+
+---
+
+## ✅ **Key Rules &amp; Goals Recap**  
+- **Daily Goal:** 1600 calories (+/-100)  
+- **Protein:** 120g/day (+/-5g)  
+- **Breakfast:** ≥20g protein  
+- **Lunch:** Highest calorie meal of day, ≥40g protein  
+- **Dinner:** ≤40g protein  
+- **Snac...          </p>
+          <p class="lt-p">
+Rubrics: 10/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely! I&#x27;m glad you reached out — no problem at all. Since you&#x27;re swamped with your conference prep, I’ll create a **well-balanced, realistic, and nutritionally sound 5-day meal plan (Mon–Fri)** that meets *all* your specifications — including protein distribution, calorie targets, restrictions, and the unique meal requirements.
+
+---
+
+### ✅ Summary of Key Rules Applied:
+- **Daily goal:** 1600 calories (±100)
+- **Daily protein goal:** 120g (±5g)
+- **Lunch = highest calorie meal** (≥40g prote...          </p>
+          <p class="lt-p">
+Rubrics: 3/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.167          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m glad you reached out! Since you&#x27;re wrapping up a conference presentation, and your client needs a personalized, balanced, and protein-focused 5-day meal plan, I&#x27;ve designed a plan that meets **all your specific requirements** with care and precision.
+
+---
+
+### ✅ **Key Requirements Met:**
+- **Daily goal: 1600 calories (±100)**
+- **Daily protein: 120g (±5g)**
+- **Lunch = highest calorie meal of the day (≥40g protein)**
+- **Breakfast = ≥20g protein**
+- **Dinner = ≤40g protein**
+- *...          </p>
+          <p class="lt-p">
+Rubrics: 1/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.056          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m happy to help you out! Since you&#x27;re swamped with your conference presentation, I’ll create a **balanced, realistic 5-day meal plan (Mon–Fri)** that meets *all* of your specific requirements.
+
+---
+
+### 📝 Key Rules Applied:
+- **Daily goal:** 1600 calories (±100)  
+- **Daily protein goal:** 120g (±5g)  
+- **No meat on Friday**  
+- **Main proteins (not breakfast)** must not appear **two days in a row**  
+- **Breakfast foods only at breakfast**  
+- **Lunch must be highest calorie mea...          </p>
+          <p class="lt-p">
+Rubrics: 10/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I’m happy to help your nutrition client! Let’s create a **well-balanced, nutritionally sound 5-day (Mon–Fri) meal plan** that meets *all* your specific goals and constraints.
+
+---
+
+## ✅ Key Requirements Recap:
+
+- **Daily goal:** 1600 calories (±100)
+- **Daily protein goal:** 120g (±5g)
+- **Meals per day:** Breakfast, Lunch, Dinner, Snack (Dessert on **2 random days**)
+- **No meat on Friday** (so no beef, pork, chicken, lamb, turkey, etc. — only plant-based or seafood options)
+- **Ma...          </p>
+          <p class="lt-p">
+Rubrics: 7/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.389          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m happy to help your nutrition client with a well-balanced, protein-optimized, and calorie-controlled 5-day meal plan that meets all their specific requirements.
+
+Let’s go through the constraints and build a realistic, practical, and nutritionally sound plan:
+
+---
+
+### ✅ **Requirements Recap:**
+
+- **5 days (Mon–Fri)**: Breakfast, Lunch, Dinner, Snack
+- **Dessert on 2 random days only** (not every day)
+- **Main proteins** (not breakfast) **must not appear two days in a row** → no d...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m happy to help! Let&#x27;s build a **5-day (Monday–Friday) meal plan** that meets **all of your client’s specific nutritional and scheduling goals**, while keeping your work life manageable.
+
+---
+
+## ✅ Goals Recap:
+- **Total daily calories**: 1600 ±100 (so 1500–1700)
+- **Daily protein**: 120g ±5g (115–125g)
+- **Breakfast**: ≥20g protein
+- **Lunch**: highest calorie meal of the day, ≥40g protein
+- **Dinner**: ≤40g protein
+- **Snacks**: ≥10g protein
+- **Main proteins (non-breakfast)**: ...          </p>
+          <p class="lt-p">
+Rubrics: 8/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely! I&#x27;m happy to help your nutrition client with a balanced, goal-aligned 5-day meal plan that meets all their specific requirements. Let&#x27;s walk through everything carefully.
+
+---
+
+### ✅ **Requirements Recap**
+
+- **Daily goal:** 1600 kcal (±100)
+- **Daily protein goal:** 120g (±5g)
+- **No meat on Friday**
+- **Main protein (not breakfast) cannot appear on two consecutive days**
+- **Breakfast food only appears at breakfast**
+- **Lunch = highest calorie meal of the day** and **≥40g protein*...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a nutrition client who needs a little extra assistance, but I’m currently swamped trying to wrap up a presentation for a conference this weekend, can you help me? I need you to create a 5-day (...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m glad you reached out. No problem at all. Let’s create a **well-balanced, realistic 5-day (Mon–Fri) meal plan** that meets **all your nutrition client’s goals**, while ensuring:
+
+✅ 1600 calories/day ±100  
+✅ 120g protein/day ±5g  
+✅ Lunch is the highest-calorie meal and has **at least 40g protein**  
+✅ Breakfast has **at least 20g protein**  
+✅ Dinner has **≤40g protein**  
+✅ No meat on Friday  
+✅ No same main protein in consecutive days (except breakfast)  
+✅ Snacks have **≥10g ...          </p>
+          <p class="lt-p">
+Rubrics: 2/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.111          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+6481                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+7833                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+5524                </td>
+                <td>
+0.056                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.056                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+7923                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+8192                </td>
+                <td>
+0.056                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.056                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+8192                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+7680                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+7756                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+7002                </td>
+                <td>
+0.167                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.167                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+5947                </td>
+                <td>
+0.056                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.056                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+8111                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+7860                </td>
+                <td>
+0.389                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.389                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+8186                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+7698                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+8192                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+739                </td>
+                <td>
+8192                </td>
+                <td>
+0.111                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.111                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Great! We’re going to design a **comprehensive, realistic, and equitable ML pull-out group schedule** for your 5th-grade and K-5 students, meeting all the **student availability**, **teacher availability**, **service requirements**, and **group size constraints**.
+
+---
+
+## ✅ Goals of the Schedule
+1. Meet or exceed **minimum service requirements** (4-5x/week for 25–35 min groups; 3x/week for 45+ min groups).
+2. Respects **student availability windows** by grade level.
+3. Fits within **teacher ava...          </p>
+          <p class="lt-p">
+Rubrics: 29/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.829          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **feasible, equitable, and compliant ML pull-out group schedule** for your middle and elementary school, based on all constraints.
+
+---
+
+## 🎯 **Goals &amp; Constraints Summary**
+
+### ✅ Minimum Service Requirements:
+- **All grade levels** must meet:
+  - **Minimum 45 minutes** of instruction **3x/week**, OR
+  - **Minimum 25–35 minutes** **4–5x/week**
+- **Grade levels 2–5** can have **one group of 5 students** (for highest proficiency) meeting **2–3x/week**, 25–35 minutes.
+- *...          </p>
+          <p class="lt-p">
+Rubrics: 19/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.543          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **comprehensive, feasible, and equitable ML pull-out schedule** that meets **all requirements** — including **student availability**, **teacher availability**, **minimum service time**, **group size limits**, and **planning block needs** — while maximizing access and minimizing scheduling conflicts.
+
+---
+
+## ✅ **Key Goals &amp; Constraints (Summarized)**
+
+### 🎯 **Minimum Service Requirements**
+- **All grades** must meet **4–5x/week** of **25–35 minutes** instruction (ideal)...          </p>
+          <p class="lt-p">
+Rubrics: 15/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed information. Below is a **comprehensive, realistic, and compliant ML pull-out group schedule** that meets all the constraints and minimum requirements for:
+
+- **Student availability by grade level**  
+- **Teacher availability and constraints**  
+- **Group size limits (7 max, 10 max)**  
+- **Minimum service time (25–45 minutes, 3–5x/week)**  
+- **Daily and weekly teacher planning blocks (1x 35-min lunch + 1x 45-min or 2x 30-min planning)**  
+- **Grade-specific timing an...          </p>
+          <p class="lt-p">
+Rubrics: 25/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s create a **comprehensive and feasible ML (Mathematics/Language/Learning) pull-out group schedule** that:
+
+✅ Meets or exceeds **minimum service requirements** (4–5x/week for 25–35 minutes, or 45 minutes 3x/week)  
+✅ Respects **student availability by grade level**  
+✅ Fits within **teacher availability constraints**  
+✅ Keeps group sizes **≤10**, ideally **7 or fewer**  
+✅ Accounts for **teacher scheduling constraints** (availability, lunch &amp; planning blocks)  
+✅ Allocates groups to meet **...          </p>
+          <p class="lt-p">
+Rubrics: 27/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.771          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a detailed and thoughtful scenario. We need to create a **realistic, equitable, and compliant ML pull-out group schedule** that meets:
+
+---
+
+### ✅ **Student Needs**
+- Grade-level availability constraints
+- Minimum service requirements (4–5x/week for 25–35 min; or 3x/week for 45+ min)
+- **Maximum group size**: 10 students (ideal: 7 or fewer)
+- Special exception: Grades 2–5 can have one small **high-proficiency group** (5 students, 2–3x/week, 25–35 min)
+
+---
+
+### ✅ **T...          </p>
+          <p class="lt-p">
+Rubrics: 24/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.686          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s create a **comprehensive, realistic, and fair ML pull-out group schedule** that meets **all constraints**, including:
+
+---
+
+### ✅ Key Requirements Recap:
+
+#### 🎯 **Service Standards (Minimums)**
+- **K**: Minimum 4x/week, each session **≥25 min**, ideally 35 min
+- **Grades 1–5**: Minimum **4–5x/week** for **≥25 min**, ideally **35 min**  
+  *(Exception: Grades 2–5 can have a small group of 5 students, 2–3x/week, 25–35 min for highest proficiency students)*
+- **Total weekly time...          </p>
+          <p class="lt-p">
+Rubrics: 21/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **comprehensive, equitable, and feasible ML pull-out schedule** that:
+
+✅ Meets or exceeds **minimum service requirements** (4–5x/week for 25–35 min, or 45 min × 3x/week)  
+✅ Respects **grade-level availability windows**  
+✅ Fits **teacher availability (limited, split-time)**  
+✅ Keeps **group sizes ≤10**, with **ideal group size of 7 or fewer**  
+✅ Includes **planning time** (1x 35-min lunch block OR 2x 30-min planning blocks per teacher per day)  
+✅ Accounts for **tota...          </p>
+          <p class="lt-p">
+Rubrics: 29/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.829          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **comprehensive, realistic, and compliant ML (Math Language) pull-out group schedule** that:
+
+✅ Meets **minimum service requirements** (4–5x/week for most groups, 3x/week for smaller/higher proficiency groups)  
+✅ Respects **student availability** by grade level  
+✅ Matches **teacher availability** (with the constraint that Teacher A and B are split and have limited time)  
+✅ Ensures **planning time requirements** per teacher  
+✅ Keeps **group sizes ≤10**, ideally 7 or ...          </p>
+          <p class="lt-p">
+Rubrics: 16/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.457          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s design a **realistic, equitable, and compliant ML (Math/ETS/Content) pull-out group schedule** that:
+
+- Meets or exceeds **minimum service requirements** (e.g., 4–5x/week for 25–35 minutes; 3x/week for 45 minutes; or 3x/week of 50-min blocks where needed),
+- Respects **student availability** by grade level,
+- Respects **teacher availability** and planning needs,
+- Keeps group sizes **≤10**, ideally **7 or fewer**,
+- Schedules only during **available time slots**,
+- Accounts for...          </p>
+          <p class="lt-p">
+Rubrics: 15/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: We will create a **comprehensive, feasible, and equitable ML pull-out group schedule** that meets all conditions:
+
+---
+
+## ✅ **Objective Summary**
+
+- Meet **minimum service requirements** (each student gets 4–5x/week for 25–35 minutes, or 3x/week for 45+ minutes).
+- Use **three teachers** with **limited availability** (only 1 is full-time ML).
+- Respect **grade-level availability times** (only specific times available for pulls).
+- Groups: **7 students max**, **absolute max 10**.
+- Each teacher ...          </p>
+          <p class="lt-p">
+Rubrics: 20/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: We need to create a **realistic, equitable, and compliant ML pull-out schedule** that:
+
+✅ Meets **minimum service requirements**  
+✅ Respects **student availability by grade level**  
+✅ Respects **teacher availability**  
+✅ Maintains **group size limits** (max 10, ideally 7)  
+✅ Includes **planning time for each teacher** (as required)  
+✅ Schedules group meetings for **minimum 25–45 minutes, 3–5x/week**  
+✅ Accounts for **split teacher schedules** and **limited availability**  
+✅ Includes **spe...          </p>
+          <p class="lt-p">
+Rubrics: 27/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.771          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **comprehensive and feasible ML (Math Literacy or Math/Literacy) pull-out group schedule** that:
+
+- Respects the **student availability by grade level**  
+- Matches **teacher availability**  
+- Meets **minimum service requirements** (4–5x/week for 25–35 min, or 3x/week for 45 min)  
+- Keeps group size **≤10 students**, ideally **7 or fewer**  
+- Ensures **each teacher gets required planning time** (one 35-min lunch block or one 45-min or two 30-min blocks)  
+- Distribu...          </p>
+          <p class="lt-p">
+Rubrics: 14/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed information. We&#x27;ll develop a **comprehensive and realistic ML pull-out group schedule** that:
+
+✅ Meets all **student availability constraints** by grade level  
+✅ Respects **teacher availability and scheduling limitations**  
+✅ Includes **minimum service requirements** (4–5x/week for 25–35 minutes, or 45 minutes 3x/week)  
+✅ Respects **planning time requirements** for each teacher (35 min lunch + 1x 45 min or 2x 30 min planning blocks)  
+✅ Keeps **group size ≤10 studen...          </p>
+          <p class="lt-p">
+Rubrics: 20/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **practical, efficient, and equitable Math Learning (ML) pull-out group schedule** that meets **all constraints** while ensuring:
+
+✅ Minimum service requirements (4–5x/week for 25–35 min, or 3x/week for 45+ min)  
+✅ Fits student availability by grade  
+✅ Respects teacher availability and split-time constraints  
+✅ Groups ≤ 10 students (ideally 7 or fewer)  
+✅ Teachers get required planning time  
+✅ Avoids scheduling conflicts due to overlapping availability  
+
+---
+
+### ...          </p>
+          <p class="lt-p">
+Rubrics: 22/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.629          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need a schedule for ML student pull-out groups. There are 3 teachers. One is split with another department and has limited availability. One is split with another school and has limited availability...          </p>
+          <p class="lt-p">
+Response: Thanks for the detailed input. Let&#x27;s build a **realistic, compliant, and equitable ML pull-out group schedule** that:
+
+✅ Meets **minimum service requirements** (4–5x/week for most groups, or 3x/week for 45-min sessions)  
+✅ Respects **student availability** by grade level  
+✅ Honors **teacher availability and constraints** (with a split teacher having limited hours)  
+✅ Keeps **group sizes ≤10**, ideally 7 or fewer  
+✅ Assigns group times that **overlap with both student availability and teacher...          </p>
+          <p class="lt-p">
+Rubrics: 19/35 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.543          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+7561                </td>
+                <td>
+0.829                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.829                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+5432                </td>
+                <td>
+0.543                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.543                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+4945                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+3787                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+4846                </td>
+                <td>
+0.771                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.771                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+6494                </td>
+                <td>
+0.686                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.686                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+7252                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+5783                </td>
+                <td>
+0.829                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.829                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+5451                </td>
+                <td>
+0.457                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.457                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+5480                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+7254                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+4855                </td>
+                <td>
+0.771                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.771                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+5412                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+4813                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+5026                </td>
+                <td>
+0.629                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.629                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+567                </td>
+                <td>
+6695                </td>
+                <td>
+0.543                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.543                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

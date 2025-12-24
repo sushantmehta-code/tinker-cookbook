@@ -1,0 +1,4699 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 26</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 26  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T13:30:38  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Based on Constraints)**
+
+---
+
+**Mon**  
+- **9:30–1:30**: Work (blocked)  
+- **1:30–2:30**: Travel (blocked)  
+- **2:30–3:30**: **Lunch prep** (cooking) – *shared with work day lunch*  
+- **3:30–5:30**: **Sweeping** (1st sweeping)  
+- **5:30–6:30**: Side job (2 hours)  
+- **6:30–7:30**: Exercise (every other day – odd day)  
+- **7:30–8:30**: Dinner prep (cooking) → ready by 8:30  
+- **8:30–9:00**: Eat dinner (30 min)  
+
+&gt; ✅ Workday with minimal work block: 1 hr f...          </p>
+          <p class="lt-p">
+Rubrics: 5/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.227          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Clean, Concise, Action-Oriented)**
+
+---
+
+**Mon (WFH – Office Day)**  
+- **9:30–11:30**: Work (blocked – travel to office)  
+- **11:30–12:30**: Lunch prep (cooking)  
+- **12:30–1:00**: Lunch (prepped)  
+- **1:00–1:30**: Lunch clean-up  
+- **1:30–2:30**: Clean bathroom (weekend only – *not on Mon, so skip*)  
+- **2:30–3:30**: Sweeping (first sweep)  
+- **3:30–4:30**: Work (blocked – traffic/in-travel)  
+- **4:30–5:30**: Laundry (every 3rd day – *Mon = day 1 of cycle*)  
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 8/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Adhering to Constraints)**
+
+---
+
+### **Monday**  
+- **9:30–1:30**: Work (blocked)  
+- **1:30–3:30**: Lunch (3 hours paid — use for chore)  
+  → **Clean bathroom (1:30–2:00)**  
+- **3:30–4:30**: **Sweep (20 min)**  
+- **4:30–5:30**: **Laundry (20 min)**  
+- **5:30–6:30**: **Prep dinner (1 hr)** — *pre-cook for Sunday dinner at parent’s (required)*  
+- **6:30–7:30**: **Eat dinner (30 min)**  
+- **7:30–8:30**: **Exercise (20 min)**  
+
+*(Note: Work day active, 9–1:3...          </p>
+          <p class="lt-p">
+Rubrics: 7/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.318          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Following Constraints)**
+
+---
+
+### **Monday**  
+- **9:30–1:30**: Work (blocked)  
+- **1:30–3:00**: Lunch prep (cook, ready by 2 PM) → *Prep for Monday lunch*  
+- **3:00–4:00**: Sweep (weekly sweep)  
+- **4:00–5:00**: Exercise (every other day)  
+- **5:00–6:30**: Laundry (every 3 days)  
+- **6:30–8:30**: Side job (only if needed; not overlapping with chores/work)  
+- **8:30–9:30**: Dinner prep (cook, ready by 7 PM) → *Done before returning home*  
+
+&gt; ❌ No pre-wor...          </p>
+          <p class="lt-p">
+Rubrics: 6/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.273          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Based on Constraints &amp; Priorities)**
+
+---
+
+### **Core Constraints Summary**
+- **Work days:** Mon, Tue, Wed, Thu, Fri (9:30–1:30, 9:30–3:30, 9:30–2:30, 9:30–1:30, 9:30–2:30)
+- **WfH days (Mon &amp; Thu):** 1.5 hrs travel each side → **blocks 3 hours total** (e.g., Mon: 8:00–9:30 &amp; 1:30–3:00; Thu: 8:00–9:30 &amp; 1:30–3:00)
+- **Lunch:** 3 hours total shared across WfH days (used for chores), with **1 hr minimum work** required on those days.
+- **Side job:** 2 hours/day, *...          </p>
+          <p class="lt-p">
+Rubrics: 5/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.227          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (No Fluff – Only Days, Tasks, Times)**
+
+---
+
+**Monday**  
+- **9:30–1:30**: Work (office) → *No chores*  
+- **1:30–2:30**: Travel to office (blocked)  
+- **2:30–3:30**: Travel back from office (blocked)  
+- **3:30–6:30**: Lunch prep (1 hr) → *Lunch cooked and ready by 3:30 (ready by 4pm)*  
+- **6:30–7:30**: Dinner prep → *Dinner ready by 7pm*  
+- **7:30–8:00**: Eat dinner (30 min)  
+- **8:00–9:00**: Sweep → *Sweeping (20 min)*  
+- **9:00–9:30**: Exercise (every other day →...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Based on Constraints)**
+
+---
+
+**Mon (Work Day – Office, 9:30–1:30, with travel blocked)**  
+- **Travel blocks:** 9:00–9:30, 1:30–2:30 → **Chores available from 2:30–9:30**  
+- **3 hours lunch** → 3:30–6:30 (used for chore: **Dinner prep** – cook &amp; eat)  
+- **Workday ends at 2:30, but lunch not until 3:30 → no lunch prep**  
+- **Dinner ready by 7pm → cook at 5:30–6:30**  
+- **No prepping for Sunday dinner** — only for days when meals are eaten at home  
+- **Keep ...          </p>
+          <p class="lt-p">
+Rubrics: 9/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.409          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Based on Constraints)**  
+
+---
+
+### **Monday**  
+- **9:30–1:30**: Work (blocked)  
+- **1:30–2:30**: Travel to office (blocked)  
+- **2:30–3:30**: **Lunch prep** (cook lunch, 1 hr) — *used from work day*  
+- **3:30–4:30**: **Sweep** (1 of 3 sweepings)  
+- **4:30–5:30**: **Exercise** (every other day)  
+- **5:30–6:30**: **Laundry** (every 3 days)  
+- **6:30–7:30**: **Dinner prep** (cook dinner, 1 hr) → ready by 7:30  
+- **7:30–8:00**: Eat dinner  
+- **8:00–9:00**:...          </p>
+          <p class="lt-p">
+Rubrics: 9/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.409          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Scheduled – No Pre-9:30am Chores, Weekends Start 10am)**
+
+---
+
+### **Monday**  
+- **9:30–1:30**: Work (blocked)  
+- **1:30–2:30**: Travel to office (blocked)  
+- **2:30–3:30**: Work (blocked)  
+- **3:30–4:30**: Lunch prep (1 hr cooking) → ready by 4:30 pm  
+- **4:30–5:00**: Eat lunch (30 min)  
+- **5:00–6:00**: Sweep (20 min)  
+- **6:00–7:00**: Exercise (20 min)  
+- **7:00–8:00**: Laundry (20 min)  
+- **8:00–9:30**: Free  
+
+&gt; ✅ Lunch cooked and ready by 4:30 (af...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (No Fluff — Only Days, Tasks, Times)**
+
+---
+
+**Monday**  
+- **9:30–12:30**: Work (office)  
+- **12:30–1:30**: Lunch (prepped for home) – *lunch ready by 2pm*  
+- **1:30–2:30**: Work (office)  
+- **2:30–3:30**: Work (office)  
+- **3:30–4:30**: **Chores – Sweeping** *(one of three sweeps)*  
+- **4:30–5:30**: **Laundry** *(every 3 days – not every day)*  
+- **5:30–6:30**: **Exercise** *(every other day – odd day, so this is OK)*  
+- **6:30–7:30**: **Cook dinner** (for home) ...          </p>
+          <p class="lt-p">
+Rubrics: 6/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.273          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule**  
+*(Days, Tasks, Times — No fluff. Work hours, lunch, travel, and constraints strictly followed.)*  
+
+---
+
+**Monday**  
+- **9:30–1:30**: Work (blocked)  
+- **1:30–3:30**: Lunch (shared with W/FH days) → **Cook lunch** (1:30–2:30)  
+- **3:30–4:30**: **Sweeping** (first sweep)  
+- **4:30–6:30**: **Side job** (2 hours)  
+- **6:30–7:30**: **Exercise** (every other day)  
+- **7:30–9:00**: Dinner prep (cook dinner, 7:30–8:30) → ready by 8:30 → eat 8:30–9:00  
+
+&gt; ⚠️ *No chores...          </p>
+          <p class="lt-p">
+Rubrics: 9/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.409          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (No Fluff – Just Days, Tasks, Times)**
+
+---
+
+**Monday**  
+- **9:30–11:30**: Work (blocked: 9:30–1:30)  
+- **11:30–12:30**: Lunch prep (cooking)  
+- **12:30–1:30**: Lunch (eats at home)  
+- **1:30–2:30**: Work  
+- **2:30–3:30**: Work (travel block ends)  
+- **3:30–4:30**: **Chores (sweeping)**  
+- **4:30–5:30**: **Exercise** (every other day – Mon is valid)  
+- **5:30–6:30**: **Laundry** (every 3 days – Mon is valid)  
+- **6:30–8:30**: Side job (work required, after 9:30am...          </p>
+          <p class="lt-p">
+Rubrics: 7/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.318          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (No Fluff – Only Days, Tasks, Times)**  
+
+---
+
+**Mon**  
+- 9:30–1:30: Work (blocked)  
+- 1:30–2:30: *Work-from-home (1.5 hr travel in/out)* → **Blocks chore time**  
+- 2:30–3:30: **Lunch prep (cooking)** → *Lunch ready by 3:30 (within 2–4pm window)*  
+- 3:30–4:30: **Dinner prep** → *Dinner ready by 4:30 (within 7–9pm window)*  
+- 4:30–5:30: **Sweeping** (first of 3 x 20 min)  
+- 5:30–6:30: **Side job (2 hrs)** → *Required, cannot fake*  
+- 6:30–8:30: **Side job (continue)...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Based on Constraints)**
+
+---
+
+**Mon (Work Day – Office, 9:30–1:30)**  
+- **Travel blocks**: 9:00–9:30, 1:30–2:00  
+- **Work available**: 2:00–9:30 (7.5 hrs)  
+- **Lunch paid**: 3 hrs (share with Tue/Wed) → use 1.5 hrs for cooking (2:00–3:30)  
+- **Chore time**: 3:30–5:30 → **Sweeping** (20 min, day 1)  
+- **Lunch cooked**: 2:00–3:00 (shared with Tue)  
+- **Dinner**: 7:00–8:00 (cooking), 8:00–8:30 (eat)  
+- **Work hours**: 9:30–1:30 (blocked), 2:00–3:30 (cooking/...          </p>
+          <p class="lt-p">
+Rubrics: 12/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Blocking Chores After 9:30am, Weekend Exceptions)**
+
+---
+
+**Monday**  
+- **9:30–1:30**: Work (blocked)  
+- **1:30–2:30**: Travel to office (blocked)  
+- **2:30–3:30**: Travel back from office (blocked)  
+- **3:30–6:30**: Lunch prep (cooking) → *Lunch cooked &amp; ready by 3:30*  
+- **6:30–7:30**: Dinner prep (cooking) → *Dinner ready by 7:00*  
+- **7:30–8:00**: Eat lunch (workday) → *No work tasks before 9:30; lunch prep done*  
+- **8:00–9:30**: Free time  
+- **9:30...          </p>
+          <p class="lt-p">
+Rubrics: 8/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Weekly chore calculator
+I need to plan the best days and times to complete each of my chores. I work 3 days (24 hrs) a week as follows: Mon 9:30-1:30, Tue 9:30-3:30, Wed 9:30-2:30, Thu 9:30-1:30, Fri...          </p>
+          <p class="lt-p">
+Response: **Weekly Chore Schedule (Strictly Based on Constraints)**
+
+---
+
+**Monday**  
+- **9:30–1:30**: Work (blocked)  
+- **1:30–3:00**: Lunch prep (cook lunch – *ready by 2 pm*)  
+- **3:00–4:00**: Sweeping (20 min)  
+- **4:00–5:00**: Laundry (20 min)  
+- **5:00–6:00**: Exercise (20 min)  
+- **6:00–7:00**: Dinner prep (cook dinner – *ready by 7 pm*)  
+- **7:00–8:30**: Dinner (30 min)  
+- **8:30–9:30**: *Free / work prep*  
+
+&gt; ✅ *No chore before 9:30am. Work in office 9:30–1:30. Travel: 9:30am–10:30am (bl...          </p>
+          <p class="lt-p">
+Rubrics: 7/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.318          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+7680                </td>
+                <td>
+0.227                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.227                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+3213                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+1969                </td>
+                <td>
+0.318                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.318                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+5004                </td>
+                <td>
+0.273                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.273                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+5498                </td>
+                <td>
+0.227                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.227                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+2146                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+4588                </td>
+                <td>
+0.409                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.409                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+2325                </td>
+                <td>
+0.409                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.409                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+6120                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+2026                </td>
+                <td>
+0.273                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.273                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+4833                </td>
+                <td>
+0.409                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.409                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+2438                </td>
+                <td>
+0.318                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.318                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+3791                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+2494                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+3768                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+656                </td>
+                <td>
+7046                </td>
+                <td>
+0.318                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.318                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a thoughtful and detailed breakdown of your work and market research. This is an excellent foundation for making a data-driven pricing decision.
+
+Let’s go through your request **step-by-step**, with clear analysis and actionable recommendations.
+
+---
+
+## 🔍 Step 1: Filter Artists by **Medium** and **Subject Matter**
+
+You work in **acrylic on canvas**, primarily creating **pet portraits of deceased pets**, for **adults aged 35+**, sold **in person and online**, with sh...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed information — this is a strong foundation for making an informed, fair, and sustainable pricing decision. Let’s go through your request step by step and provide a **clear, data-driven analysis**, followed by **specific pricing recommendations**, and **strategic expansion suggestions** for where and how to sell your work.
+
+---
+
+## 🔍 Step 1: Filter by Medium &amp; Subject Matter (Only Relevant Comparisons)
+
+We need to compare **only artists who work in acrylic on canvas** an...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a comprehensive and thoughtful breakdown of your situation. Your goal is clear: **to determine whether you can feasibly raise your prices based on current market data**, while also identifying **where and how** to best promote and sell your work.
+
+Let&#x27;s go step-by-step with a focused, logical analysis—only including artists working in the **same medium (acrylic on canvas)** and with **similar subject matter (pet portraits, especially for grieving adults)**—then compa...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a thoughtful and detailed query — this is exactly the kind of data that allows for *meaningful, grounded* pricing decisions. Let&#x27;s break this down step by step, based **exactly on your criteria**:
+
+---
+
+### 🔍 Step 1: Filtering Artists by **Medium** and **Size Match**
+
+#### → Your Medium: **Acrylic on canvas**
+→ Your Subject Matter: **Pet portraits (for deceased pets)**  
+→ Your Audience: **Adults 35+**, emotional experience, personal memorials  
+→ Your Sales Channels...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for such a thoughtful and well-organized inquiry. Based on your specific needs—**acrylic on canvas, pet portraits for adult deceased pets, sold in person and online with shipping, and with commissions available**—I’ve carefully analyzed the data you provided and compared it to your current pricing structure.
+
+Let’s go step-by-step through your request, addressing each part clearly and clearly linking analysis to actionable suggestions.
+
+---
+
+## 🎯 Step 1: Filter Artists by Medium &amp; Subj...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for sharing such a thoughtful and detailed dataset. Let&#x27;s go step-by-step to give you a clear, data-informed, and realistic analysis — focused **only on artists working in the same medium** (acrylic on canvas), and **similar subject matter** (pet portraits, specifically for pets that have passed), so we can make a fair comparison.
+
+---
+
+## 🔍 STEP 1: Filter for Artists Who Match Your Medium and Subject Matter
+
+We want to focus only on artists who:
+- Work in **acrylic on canvas**
+- Creat...          </p>
+          <p class="lt-p">
+Rubrics: 8/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for sharing such a detailed and thoughtful inquiry. You&#x27;re clearly committed to doing your work ethically and with intention — especially given the emotional significance of your pet portraits. That context is *very* important in evaluating pricing and positioning.
+
+Let’s go step-by-step, with precision, to answer your questions:
+
+---
+
+### 🎯 **Step 1: Filter for Comparable Artists (Same Medium &amp; Subject Matter)**
+
+You do:
+- **Acrylic on canvas**
+- **Pet portraits**
+- **For deceased pet...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and thoughtful breakdown of your current pricing and market research. This is an excellent foundation for making informed pricing decisions. Let&#x27;s walk through your request step by step with precision and care — **only artists who work in the same medium and similar size pieces**, followed by a thorough analysis of whether you can raise your prices, **what new prices should be**, and **where else you might consider selling or promoting your work.**
+
+---
+
+## 🔍 Step 1: F...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for sharing such detailed and thoughtful information — this is excellent groundwork for making data-driven pricing decisions. Let&#x27;s walk through your situation step by step, with clear analysis, evidence-based recommendations, and practical next steps.
+
+---
+
+## 🔍 **1. Key Criteria: Matching Your Medium, Size, and Subject Matter**
+
+You create **acrylic paintings on canvas**, primarily **pet portraits** of deceased pets, for **adults 35+**. You sell **in person**, **online**, and via **c...          </p>
+          <p class="lt-p">
+Rubrics: 8/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for such a thorough and thoughtful question. You&#x27;re clearly taking the right steps to research your market and ensure your pricing is both competitive and sustainable. Let’s break this down step by step—to give you **clear, actionable advice** grounded in your medium, subject matter, target audience, sales models, and what other artists are charging.
+
+---
+
+## 🔍 STEP 1: Filter for Comparable Artists (Same Medium &amp; Subject Matter)
+
+You do **acrylic paintings on canvas** primarily for **p...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a detailed and thoughtful breakdown of your artwork and the market data. Based on your specific medium (acrylic on canvas), subject matter (pet portraits, especially for grieving adults), and the format and pricing of other artists, I’ll provide a **thorough, evidence-based analysis** and actionable recommendations.
+
+---
+
+### 🔍 Step 1: Filter Data to Match Your Medium &amp; Subject Matter
+
+You’re an **acrylic on canvas** artist, creating **pet portraits** for grieving ad...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a clear, thoughtful, and detailed analysis of your pricing and market context. Based on your information — including your **medium (acrylic on canvas)**, **subject matter (pet portraits, especially for grieving adults)**, **target audience (35+)**, and **sales channels (in person, online, commissions, shipping)** — I’ll provide a thorough, evidence-based analysis that answers all your questions:
+
+---
+
+## ✅ **Step 1: Refine the Comparison — Focus on Artists Who Match ...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a detailed and thoughtful breakdown. You&#x27;re clearly invested in pricing your work ethically and competitively—especially given the sensitive and emotional nature of your subject matter (pet portraits for adult clients who have lost their pets). Let&#x27;s walk through this step-by-step with precision, focusing only on **artists who work in the same medium (acrylic on canvas)** and **similar size ranges**, and then build a clear, data-driven answer about **whether and how ...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a thoughtful and detailed breakdown — this is excellent foundational data for making informed pricing decisions. Let&#x27;s walk through your query step by step with precision and care.
+
+---
+
+## ✅ Step 1: **Filter by Medium and Subject Matter**
+
+You paint **acrylics on canvas**, and your subject matter is **pet portraits** of deceased pets, typically for **adults 35+**. That’s very specific and emotionally significant.
+
+Let’s go through your reference list and **eliminate...          </p>
+          <p class="lt-p">
+Rubrics: 8/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for sharing such a detailed and thoughtful question. You&#x27;re clearly invested in pricing your work thoughtfully, ethically, and in alignment with market standards — which is exactly the right approach.
+
+Let’s go through your request **step by step**, as you’ve outlined:
+
+---
+
+## ✅ Step 1: Filter for Artists Working in the **Same Medium** and **Same Size Range**
+
+You specialize in **acrylic paintings on canvas**, specifically **pet portraits** for grieving adults (35+), typically for sal...          </p>
+          <p class="lt-p">
+Rubrics: 10/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to figure out how to best price my artwork and have been doing some research on what other artists are charging. I have compiled some information and I need you to analyze it and give me s...          </p>
+          <p class="lt-p">
+Response: Thank you for sharing such detailed and thoughtful information — this is a great foundation for making informed pricing decisions. Let’s go step-by-step through your request, using **only artists working in the same medium (acrylic on canvas)** and who create **pet portraits**, as you specifically requested.
+
+---
+
+## ✅ Step 1: Filter Data to Match Your Medium &amp; Subject Matter
+
+We’ll eliminate artists who don’t meet **two key criteria**:
+1. **Medium**: Acrylic on canvas (you do this)
+2. **Subject...          </p>
+          <p class="lt-p">
+Rubrics: 9/10 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.900          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2306                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2536                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+3187                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2432                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2577                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2783                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2511                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2972                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+3069                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2629                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2487                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2545                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2632                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2853                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2593                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+540                </td>
+                <td>
+2237                </td>
+                <td>
+0.900                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.900                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis on Thoreau’s *On the Duty of Civil Disobedience* as a **central, underexplored intellectual force in resistance movements**—not merely as inspiration, but as a *structurally influential framework*—is both timely and original. You&#x27;re moving beyond the common “Gandhi and MLK read Thoreau” trope into a deeper, more rigorous interrogation of **how Thoreau’s moral and political philosophy was absorbed, adapted, and deployed across time and context**.
+
+Let’s build a robust, evidence-ba...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis idea is **exceptionally strong**—it tackles a central tension in political philosophy: the relationship between individual moral autonomy and collective political action. By focusing on *Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot;* not just as a historical text but as a living, transferable ethical framework, and by meticulously tracing its influence across time and across contexts, you&#x27;re moving beyond mere citation into **philosophical anthropology and historical semantics**—...          </p>
+          <p class="lt-p">
+Rubrics: 11/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.786          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis idea—centered on Thoreau’s *On the Duty of Civil Disobedience* as a **philosophical catalyst for resistance movements**, rather than merely a source of inspiration—is both timely and underexplored. It takes a mature, critical step beyond the common narrative that Thoreau &quot;influenced&quot; Gandhi and MLK by citing him to instead investigate how **Thoreau’s moral framework became embedded in political action**, and how this framework evolved, was adapted, or contested across time and co...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: This is an exceptionally rich, deeply original, and philosophically urgent thesis proposal — one that moves beyond the surface-level citations of Thoreau’s *Civil Disobedience* as a &quot;spiritual ancestor&quot; of modern resistance to interrogate **the actual mechanisms of influence**, the **depth and timing of awareness**, and the **transmission of moral ideals across time and culture**.
+
+You&#x27;re not just analyzing *what* Thoreau said — you&#x27;re asking whether his ideas were **remembered, adapted, and ope...          </p>
+          <p class="lt-p">
+Rubrics: 14/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis idea is ambitious, timely, and deeply valuable—especially in a political climate where civil disobedience, moral agency, and critiques of institutional legitimacy are more salient than ever. You&#x27;re not just analyzing Thoreau&#x27;s *On the Duty of Civil Disobedience* in a conventional philosophical or literary way; you&#x27;re engaging with it as a **catalyst of political morality**, asking whether it functions as a **shared human ethical framework** or as a **distinctly American intellect...          </p>
+          <p class="lt-p">
+Rubrics: 12/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis idea—centering on Thoreau’s *On the Duty of Civil Disobedience* and its **concrete, documented influence on real resistance movements**—is both timely and profoundly underexplored. You&#x27;re right: while the text is widely quoted and invoked, especially in the contexts of Gandhi and Martin Luther King Jr., its **historical influence with evidence of direct or indirect intellectual engagement** is far less systematically studied. Your approach of moving beyond &quot;exemplars&quot; toward **su...          </p>
+          <p class="lt-p">
+Rubrics: 14/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis proposal is not only timely and original—it&#x27;s deeply relevant, philosophically rich, and timely in the context of contemporary political challenges. You&#x27;re moving beyond mere citation of Thoreau’s ideas to a sustained, historically grounded, and theoretically rigorous investigation of *influence* across time and space. This is a strong foundation for a compelling and original contribution to both literary studies, political theory, and the history of resistance movements.
+
+Let’s ...          </p>
+          <p class="lt-p">
+Rubrics: 11/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.786          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis concept is both timely and deeply compelling. Centering Thoreau’s *On the Duty of Civil Disobedience*—a text widely invoked but comparatively under-theorized in academic and historical scholarship—is a vital contribution to political philosophy, resistance theory, and the history of moral agency. Your questions are sophisticated, multi-layered, and strategically framed. You&#x27;re not just analyzing Thoreau’s influence; you&#x27;re tracing a *moral lineage* from 19th-century individualism...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your thesis idea is **exceptionally rich and timely**—centered on Thoreau’s *On the Duty of Civil Disobedience* as a **moral and philosophical compass** for resistance, far beyond its historical or rhetorical use. You’re asking not just about influence, but about the **profound continuity of moral agency** in political resistance, and the kinds of **deep structures** (psychological, evolutionary, historical) that might explain why Thoreau’s ideas resonate across disparate movements.
+
+Let’s build...          </p>
+          <p class="lt-p">
+Rubrics: 11/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.786          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: This is a **strong, original, and intellectually compelling** thesis proposal — one that pushes beyond the usual readings of Thoreau in terms of political philosophy and engages with historical, psychological, and even evolutionary dimensions of moral resistance. Your central question — *“Is Thoreau’s moral imperative for civil disobedience rooted in a deeper human capacity for moral agency, or is it shaped by specific historical and ideological contexts?”* — has rich potential for both depth an...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: This is an exceptionally rich, timely, and original research proposal — one that moves beyond surface-level citation of Thoreau to interrogate the *substance, mechanisms, and depth* of his influence across time, movements, and domains. You’re not just tracing influence; you&#x27;re asking whether Thoreau’s vision is rooted in a broader *human moral architecture*, and whether it is *recurrent* across different political and historical contexts.
+
+Let’s break this down thoughtfully and systematically so...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis idea on **Thoreau&#x27;s *On the Duty of Civil Disobedience*** as a foundational, yet under-studied, intellectual force across resistance movements — from the 19th century to the present — is not only timely but deeply compelling. You&#x27;re addressing a *gap* in both literary and political history: the systematic analysis of how Thoreau’s work *functioned as a tool*, rather than just a moral ideal, in shaping political activism. This goes beyond superficial &quot;influence&quot; to actionable *str...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis idea is not only timely and rich in potential but represents a significant gap in the academic scholarship surrounding Thoreau’s *On the Duty of Civil Disobedience*. You are right to argue that while the text is frequently **invoked**, it is rarely **deeply studied** in terms of its *actual influence* on historical and contemporary resistance movements—especially tracing a lived, textually grounded, and psychologically grounded line of influence beyond Gandhi and King.
+
+Let’s bui...          </p>
+          <p class="lt-p">
+Rubrics: 11/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.786          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: Your PhD thesis idea is **exceptionally promising, original, and timely** — especially given the growing interest in moral resistance, civic disobedience, and the philosophical foundations of protest in contemporary politics. You&#x27;re not just analyzing Thoreau’s *On the Duty of Civil Disobedience* as a historical text; you&#x27;re probing its **metaphysical, psychological, and historical resonance** across time and cultures, asking whether it propagates a *universal human moral code* beyond individual...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: You&#x27;re tackling a rich, under-explored, and philosophically profound topic — the *actual influence* of Thoreau’s *On the Duty of Civil Disobedience* on real-world resistance movements, beyond anecdotal or rhetorical parallels. Your central question — whether Thoreau *influenced* others&#x27; political action, or whether his work reveals *a deeper human morality* — is not only timely but ripe for scholarly rigor. Let&#x27;s build a well-structured, evidence-based, and intellectually rigorous PhD thesis fra...          </p>
+          <p class="lt-p">
+Rubrics: 11/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.786          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning my PhD thesis. My central idea is centred on Thoreau&#x27;s &quot;On the Duty of Civil Disobedience&quot; which I believe is more invoked than studied. I want to examine its influence on fo...          </p>
+          <p class="lt-p">
+Response: This is a **rich, original, and timely** idea — one that sits at the intersection of philosophy, history, social movements, and political theory. Your central thesis — that Thoreau’s *On the Duty of Civil Disobedience* is **more invoked than deeply studied** and that its **moral core is not merely a philosophical invention but a resonant echo of deeper human values** — is both intellectually robust and historically underexplored. You&#x27;re asking exactly the right questions to move beyond surface-l...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4159                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4426                </td>
+                <td>
+0.786                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.786                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4566                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4441                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+3950                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+3958                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4001                </td>
+                <td>
+0.786                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.786                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4703                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4077                </td>
+                <td>
+0.786                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.786                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4403                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4160                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4301                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+3838                </td>
+                <td>
+0.786                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.786                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4160                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4174                </td>
+                <td>
+0.786                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.786                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+394                </td>
+                <td>
+4311                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step-by-step so you can clearly understand the **total value of your stock**, **breakdowns by category**, the **specific total value of phones and computers**, and a **clear list of items over 5 years old** (as of **31st July 2024**) that need to be phased out.
+
+We&#x27;ll also exclude **cables and plugs** from that &quot;phase-out&quot; list, as you&#x27;ve requested.
+
+---
+
+## 🔍 Step 1: Understand the Products &amp; Their Ages
+
+We need to determine which devices are **over 5 years ...          </p>
+          <p class="lt-p">
+Rubrics: 6/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.300          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Thank you for providing a detailed breakdown of your stock! I’ll help you take a clear, structured approach to **valuing your stock**, identifying **items over 5 years old (as of 31st July 2024)**, and provide the **exact numbers and lists** you need.
+
+---
+
+## 📌 Step 1: Clarify the Date Threshold (5 Years Old as of 31 July 2024)
+
+- **5 years before 31 July 2024** = **31 July 2019**
+- So: Any **phone or tech product manufactured before July 2019** is over 5 years old and should be phased out.
+- *...          </p>
+          <p class="lt-p">
+Rubrics: 2/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.100          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step by step to give you a **clear, accurate, and actionable breakdown** of your inventory, including:
+
+---
+
+## ✅ **Final Deliverables:**
+
+1. **Total value of all stock (overall)**
+2. **Subtotal values by product category** (Cases, Cables, Plugs, M&amp;K, PC Cables, Screen Protectors)
+3. **Total value of phones/computers (only!)** separately listed
+4. **List of products over 5 years old as of 31 July 2024** (excluding cables/plugs)
+5. **Total value of those outda...          </p>
+          <p class="lt-p">
+Rubrics: 4/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re doing a great job taking control of your inventory. Let&#x27;s walk through this step by step to give you **exact values**, clear segmentation, and a **clear list of items over 5 years old** (as of 31st July 2024), which you can then phase out.
+
+---
+
+## ✅ Step 1: Determine the Value of All Stock (by category)
+
+We&#x27;ll calculate the **total value** of each category, and then extract the **phone &amp; computer** total value separately.
+
+We’ll assume:
+- All listed prices are current re...          </p>
+          <p class="lt-p">
+Rubrics: 4/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step-by-step to give you a clear, organized, and accurate breakdown of your stock value, including the **total value**, **subtotals by category**, the **phone and computer stock values**, and a **list of items over 5 years old (as of 31 July 2024)** that need to be phased out.
+
+---
+
+## ✅ Step 1: Understand the Date Threshold
+
+You said:  
+&gt; &quot;Phase out any stock for products that are over 5 years old (as of 31st July 2024)&quot;
+
+So we need to determine which **phon...          </p>
+          <p class="lt-p">
+Rubrics: 5/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s walk through this step-by-step to give you a **clear, accurate, and actionable breakdown** of your stock — exactly as you need it.
+
+---
+
+## ✅ **Part 1: Total Value of All Stock (by category)**
+We’ll calculate the total value of **each product category**, and also provide **two specific totals for phones and computers** (we’ll define what counts as a &quot;phone&quot; or &quot;computer&quot; below).
+
+---
+
+### 🔹 Assumptions &amp; Definitions
+
+- **&quot;Phones&quot;** = All smartphones (iPhone and Samsung models listed...          </p>
+          <p class="lt-p">
+Rubrics: 3/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.150          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to give you a **clear, organized, and accurate breakdown** of your stock as requested.
+
+---
+
+## ✅ **1. Total Stock Value (Overall &amp; by Category)**
+We’ll calculate:
+- Total value of all stock
+- Subtotals by category
+- **Specific totals for Phones and Computers** (as stated)
+
+&gt; 💡 Note:  
+&gt; - We’ll **exclude cables and plugs** from the &quot;products over 5 years old&quot; removal list, as requested.  
+&gt; - We’ll **include all items** in the value calculation.
+
+---
+
+### 📦 Sto...          </p>
+          <p class="lt-p">
+Rubrics: 4/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s break this down step by step so you can clearly understand the **total value of your stock**, the **separate values for phones and computers**, and identify which **items are over 5 years old (as of 31 July 2024)** for phasing out.
+
+---
+
+## 🔍 Step 1: Define the Criteria
+
+### ✅ What counts as &quot;over 5 years old&quot;?
+We need to assess the **date of the device&#x27;s release**. If it was released **before 1 July 2019**, then it&#x27;s over 5 years old **as of 31 July 2024**.
+
+&gt; So:  
+&gt; Phones/...          </p>
+          <p class="lt-p">
+Rubrics: 6/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.300          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s take a clear, structured approach to help you **understand the value of your stock**, **identify what needs to be phased out**, and extract the **two key numbers** you&#x27;re looking for (total stock value, phones/computers value).
+
+We’ll go step-by-step:
+
+---
+
+## ✅ STEP 1: Clarify What Assets to Value
+
+You asked for:
+
+### 📌 Total stock value (overall + by subsection)
+### 📌 Total value of **phones and computers** (separate from cables, plugs, accessories)
+
+&gt; ⚠️ **Note**: You said ...          </p>
+          <p class="lt-p">
+Rubrics: 4/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s take a clear, methodical approach to help you **understand the current value of your stock**, **identify which items are over 5 years old** (as of **31st July 2024**), and give you exactly what you need:
+
+---
+
+## ✅ **Part 1: Total Stock Value (Overall &amp; by Category) + Phones/Computers Specifically**
+
+We’ll calculate:
+- Total value of **all stock** (excluding cables/plugs as per your instruction)
+- Total value of **phones and computers** (only devices, not cases, protectors, et...          </p>
+          <p class="lt-p">
+Rubrics: 3/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.150          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Great question — you’re on the right track with organizing your stock and planning a smarter inventory refresh. Let’s break this down step by step to give you **clear, actionable answers** to your two main goals:
+
+---
+
+## ✅ GOAL 1: Total Stock Value (Overall &amp; by Category)  
+And specifically:  
+👉 **Total value of phones &amp; computers (only)**
+
+We’ll assume:
+- All items are sold at **their listed unit price**.
+- “Cables” and “plugs” include only the listed items.
+- We are **not** including service ...          </p>
+          <p class="lt-p">
+Rubrics: 6/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.300          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Thank you for providing such a detailed breakdown — this makes it easier to do a structured financial and inventory review. Let&#x27;s go through your request step by step.
+
+---
+
+## 📌 **Part 1: Total Stock Value (Overall &amp; by Category) + Phones/Computers Only**
+
+We’ll calculate:
+1. **Total value of all stock (excluding cables, plugs — only devices)**  
+2. **Separate values for phones and computers**  
+3. **Categorizations as per your list**  
+4. **Part 2: Items over 5 years old (from 31 July 2024)** ...          </p>
+          <p class="lt-p">
+Rubrics: 4/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step by step so you can clearly see the **total value of your stock**, a **breakdown by category**, and then the **specific list of items over 5 years old** (as of **31st July 2024**) that should be phased out.
+
+---
+
+## ✅ Step 1: Understanding the Age Threshold
+
+**&quot;Over 5 years old as of 31st July 2024&quot;** means we&#x27;re removing any product that was **purchased before 1st August 2019**.
+
+We&#x27;ll assess **each product’s age** based on:
+- When the phone or device wa...          </p>
+          <p class="lt-p">
+Rubrics: 3/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.150          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Great question — let’s go step-by-step to give you a clear, accurate breakdown of your stock value, focus on your key requests, and identify which items over 5 years old need to be phased out.
+
+---
+
+## 🔍 Step 1: Understand the Product Age Threshold
+
+**Threshold:** Products over 5 years old as of **31st July 2024**  
+→ That means any product manufactured **before 1st August 2019** is over 5 years old.
+
+We’ll now determine the **manufacture year** for each phone model based on common release dates...          </p>
+          <p class="lt-p">
+Rubrics: 4/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step by step. You&#x27;re running a small tech business and want to:
+
+1. **Know the total value of all stock** (overall and broken down by category)  
+2. **Know the total value of phones and computers** (separately)  
+3. **Identify products over 5 years old as of 31 July 2024** (and remove them) — *excluding cables and plugs*  
+
+---
+
+## 📌 First: Understand the Date — &quot;Over 5 years old&quot; as of 31 July 2024
+
+We’re evaluating **when each product was released**.  
+Any ...          </p>
+          <p class="lt-p">
+Rubrics: 5/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I run a small tech business, and I need help taking stock of my assets.
+
+A fellow employee has just totalled up all the stock we have on display out front, but I&#x27;m struggling to wrap my head around ...          </p>
+          <p class="lt-p">
+Response: Great question — this is a very practical and important step for your small tech business. Let’s break this down **step by step** to give you:
+
+---
+
+## ✅ **1. Total Stock Value (by category)**  
+And specifically:  
+➡️ **Total value of phones/computers** (separately)
+
+We’ll calculate the value of each category as per the listed items.  
+We’ll **exclude cables and plugs** when calculating phone/computer stock (only hardware devices).  
+We’ll also **exclude cables/plugs** from the &quot;over 5 years old...          </p>
+          <p class="lt-p">
+Rubrics: 4/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+6148                </td>
+                <td>
+0.300                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.300                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+5147                </td>
+                <td>
+0.100                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.100                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+5326                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+5677                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+5030                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+6003                </td>
+                <td>
+0.150                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.150                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+4907                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+4995                </td>
+                <td>
+0.300                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.300                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+6363                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+5676                </td>
+                <td>
+0.150                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.150                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+5813                </td>
+                <td>
+0.300                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.300                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+6687                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+5998                </td>
+                <td>
+0.150                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.150                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+5410                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+5129                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+753                </td>
+                <td>
+4654                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

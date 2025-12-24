@@ -1,0 +1,4663 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 15</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 15  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T11:42:15  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **comprehensive, structured, and assignment-ready response** to your prompt, based **specifically on Hall’s excerpt** and **Jamaica Kincaid’s *Lucy***.
+
+This includes:
+
+1. **Identification of the two views of cultural identity with relevant quotations**  
+2. **3–4 point suggestions (independent of Hall’s views)** with **specific examples from *Lucy***  
+3. **3 points per view using the PQA pattern (Point, Quote, Analysis — but no analysis as instructed)**  
+4. **Introductio...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, instructor-friendly plan** to help you approach your essay successfully. It follows your request exactly:  
+
+- Identifies **Hall’s two views of cultural identity**, with relevant **quotations**.  
+- Gives **3–4 points (independent of Hall&#x27;s views)** that you can use to explain and develop each view, each with a **specific, novel-related example** (tweakable for your own use).  
+- Provides **3 specific, analytical points (in PQA format)** for **each view**,...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s work through your assignment step by step with precision, based *only* on the excerpt you&#x27;ve provided and focused on **Jamaica Kincaid’s *Lucy***.
+
+---
+
+## 🔍 **STUART HALL’S TWO VIEWS OF CULTURAL IDENTITY (WITH QUOTATIONS AND EXPLANATIONS)**
+
+### ✅ View 1: *Cultural Identity as a Shared &quot;One True Self&quot; (Essentialist &quot;Oneness&quot;)*
+&gt; *“The first position defines &#x27;cultural identity&#x27; in terms of one, shared culture, a sort of collective &#x27;one true self&#x27;, hiding inside the many other,...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **comprehensive, assignment-ready plan** for your essay, based *only* on the excerpt you provided from Stuart Hall’s *“Cultural Identity and Diaspora”*, and firmly grounded in **Jamaica Kincaid’s *Lucy***. The structure follows your instructor’s expectations: **clear identification of Hall’s two views**, with relevant quotations, **three to four point examples from the novel**, organized in **PQA format**, and **focused, background-specific examples** tailored to the text.
+...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a comprehensive and focused plan for your essay, tailored specifically to the assignment prompt. This includes:
+
+1. **Clear identification of Hall&#x27;s two views of cultural identity**, with relevant quotations and definitions  
+2. **Three specific, nuanced points** (independent of Hall’s views) that deepen the discussion and can be applied to *Lucy*  
+3. **Three point-by-point examples** from *Lucy* using the **PQA pattern** (Point → Quote → Analysis — *without analysis*) per v...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s a fully structured, instructor-ready response to your assignment, following your specific instructions precisely. This includes:
+
+1. **Clear identification of Hall’s two views** with relevant quotations  
+2. **Three to four independent, novel points** (not derived from Hall) with **specific, novelistic examples from *Lucy***  
+3. **Three points per view**, using the **PQA pattern (Point, Quote, Analysis)** — *but only the quote and point, with no analysis*  
+4. **Introductory...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **clear, structured, and instructor-friendly** breakdown of your assignment, based **directly** on the excerpt you provided and tailored specifically to **Jamaica Kincaid’s *Lucy***. This response follows your instructions exactly:  
+
+---
+
+## 🔍 Hall’s Two Views of Cultural Identity (With Quotations)
+
+### **View 1: Cultural Identity as a Shared, Essential &quot;One True Self&quot;**
+&gt; *“Our cultural identities reflect the common historical experiences and shared cultural codes which p...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **fully structured, assignment-ready response** to your question, tailored to your instructor’s expectations. The plan follows your instructions precisely:  
+
+- Identifies and defines **Hall’s two views of cultural identity**, with **direct quotations** from the extract.  
+- Provides **3–4 points (independent of Hall&#x27;s views)** that can enrich your discussion, each with a **specific, novel-related example** in point form.  
+- Applies the **PQA pattern (Point, Quote, Analysi...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **complete, structured, and instructor-friendly** response to your assignment, based strictly on the provided excerpt from Stuart Hall’s essay and Jamaica Kincaid’s *Lucy*. This includes:
+
+1. **Clear identification of Hall’s two views of cultural identity**, with relevant quotations and definitions.  
+2. **3–4 independent, novel points** (not derived from Hall’s views) that help explain the ideas — each with a **specific, novelistic example from *Lucy*** you can easily twea...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step with precision so your essay is structured, insightful, and meets your instructor&#x27;s expectations.
+
+---
+
+## 🔍 **Step 1: Identify Hall’s Two Views of Cultural Identity (with quotations)**
+
+Based on the excerpt, Hall identifies **two distinct ways of thinking about cultural identity**:
+
+---
+
+### **View 1: &quot;One True Self&quot; – Cultural Identity as Shared Essence (Essentialism)**
+&gt; _&quot;The first position defines &#x27;cultural identity&#x27; in terms of one, shared c...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **clear, structured, and instructor-ready plan** for your essay on **Stuart Hall’s two views of cultural identity** and how they are illustrated in **Jamaica Kincaid’s *Lucy***, using only the given excerpt.
+
+---
+
+## ✅ **Step 1: Hall’s Two Views of Cultural Identity (with quotations and definitions)**
+
+### 🔹 **View 1: &quot;The One True Self&quot; — Cultural Identity as a Shared, Essential, Static Identity**
+- **Core idea**: A fixed, unchanging &quot;essence&quot; of cultural identity rooted i...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a comprehensive, assignment-ready response tailored to your prompt, fully grounded in the provided extract from Hall’s *“Cultural Identity and Diaspora”*, and specifically linked to **Jamaica Kincaid’s *Lucy*** using the **PQA (Point, Quote, Analysis)** structure as requested. All examples are drawn from the novel’s background and content, and your instructor&#x27;s requirements — especially specificity and originality in introduction — are met.
+
+---
+
+## **Two Views of Cultural Id...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a fully developed, structured, and instructor-friendly response to your assignment question, tailored to the **excerpt from Stuart Hall’s &quot;Cultural Identity and Diaspora&quot;**, with specific attention to **Jamaica Kincaid’s *Lucy***.
+
+---
+
+## **Stuart Hall’s Two Views of Cultural Identity – Explained with Quotations**
+
+### **View 1: &quot;One True Self&quot; (Essentialist, Static Identity)**  
+Hall describes this as a vision of cultural identity rooted in a **shared, unchanging essence** ...          </p>
+          <p class="lt-p">
+Rubrics: 9/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.562          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **comprehensive, assignment-ready plan** for your essay based only on the **excerpts from Stuart Hall’s “Cultural Identity and Diaspora”**, and **Jamaica Kincaid’s *Lucy***. This structure follows your instructions precisely: it identifies the two views, includes relevant quotations, provides 3–4 **independent analytical points** (each with a novel-specific example), uses the **PQA pattern** (Point, Quote, Analysis — *without analysis* — as requested), and offers a **fresh ...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **complete, tailored plan** for your essay, following your instructions closely. This includes:
+
+1. **Clear identification of Hall’s two views of cultural identity**, with key quotations.  
+2. **3–4 independent, novel points** (not from Hall) to support the discussion, each with a **specific, novelistic example from *Lucy* by Jamaica Kincaid**, in point form.  
+3. **Three points (PQA-style)** for **each of Hall’s two views**, using *Lucy* and strictly following the PQA pat...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need some help planning for the following question, which I was given as an assignment. I will include the extract of Hall&#x27;s essay below, which you will use; do not refer to Hall&#x27;s full essay. 
+ 
+...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **comprehensive, structured, and fully tailored** response to your assignment, based **strictly** on the provided excerpt from Stuart Hall’s *“Cultural Identity and Diaspora”*, and with focused close analysis of **Jamaica Kincaid’s *Lucy***.
+
+---
+
+## **Part 1: Hall’s Two Views of Cultural Identity – Definition and Quotations**
+
+### **View 1: The “One True Self” / Essentialist View of Cultural Identity**
+
+- **Definition:** This view holds that cultural identity is rooted in ...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2111                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2287                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2732                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2507                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2460                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2299                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2624                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2249                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2175                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2993                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2731                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2260                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2535                </td>
+                <td>
+0.562                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.562                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2585                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2328                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1140                </td>
+                <td>
+2500                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names: Sharon Allerton, David McKenzie**  
+**Inspection Date: Tuesday, 26/09/2024**  
+**Inspection Focus: Early Years Foundation Stage, Safeguarding**  
+**Meeting List: Headteacher, EYFS Lead, Governors, Parent Group**  
+**School Data to be sent: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Plan...          </p>
+          <p class="lt-p">
+Rubrics: 11/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.458          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names: Sharon Allerton, David McKenzie**  
+**Inspection Date: Tuesday, 26/09/2024**  
+**Inspection Focus: Early Years Foundation Stage, Safeguarding**  
+**Meeting List: Headteacher, EYFS Lead, Governors, Parent Group**  
+**School Data to be sent: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Plan...          </p>
+          <p class="lt-p">
+Rubrics: 10/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names: Sharon Allerton, David McKenzie**  
+**Inspection Date: Tuesday, 26/09/2024**  
+**Inspection Focus: Early Years Foundation Stage, Safeguarding**  
+**Meeting List: Headteacher, EYFS Lead, Governors, Parent Group**  
+**School Data to be sent: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Plan...          </p>
+          <p class="lt-p">
+Rubrics: 11/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.458          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names:** Sharon Allerton, David McKenzie  
+**Inspection Date:** Tuesday, 26/09/2024  
+**Inspection Focus:** Early Years Foundation Stage, Safeguarding  
+**Meeting List:** Headteacher, EYFS Lead, Governors, Parent Group  
+**School Data to be sent:** Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Pl...          </p>
+          <p class="lt-p">
+Rubrics: 11/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.458          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names:** Sharon Allerton, David McKenzie  
+**Inspection Date:** Tuesday, 26/09/2024  
+**Inspection Focus:** Early Years Foundation Stage, Safeguarding  
+**Meeting List:** Headteacher, EYFS Lead, Governors, Parent Group  
+**School Data to be sent:** Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Pl...          </p>
+          <p class="lt-p">
+Rubrics: 10/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+**Subject:** Upcoming school Ofsted Inspection  
+
+**Date:** 24/09/2024  
+
+**To:** Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Dear Team,  
+
+Please find below the key details of the upcoming **Office for Standards in Education, Children’s Services and Skills (Ofsted)** inspection for the Nursery and Early Years Foundation Stage (EYFS):  
+
+1. **Inspector names:** Sharon Allerton, David McKenzie  
+2. **Inspection Date:** Tuesday, 26/09/2024  
+3. **Inspection Focus:** Ear...          </p>
+          <p class="lt-p">
+Rubrics: 11/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.458          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names:** Sharon Allerton, David McKenzie  
+**Inspection Date:** Tuesday, 26/09/2024  
+**Inspection Focus:** Early Years Foundation Stage, Safeguarding  
+**Meeting List:** Headteacher, EYFS Lead, Governors, Parent Group  
+**School Data to be sent:** Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Pl...          </p>
+          <p class="lt-p">
+Rubrics: 12/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names:** Sharon Allerton, David McKenzie  
+**Inspection Date:** Tuesday, 26/09/2024  
+**Inspection Focus:** Early Years Foundation Stage, Safeguarding  
+**Meeting List:** Headteacher, EYFS Lead, Governors, Parent Group  
+**School Data to be sent:** Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Pl...          </p>
+          <p class="lt-p">
+Rubrics: 10/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names: Sharon Allerton, David McKenzie**  
+**Inspection Date: Tuesday, 26/09/2024**  
+**Inspection Focus: Early Years Foundation Stage, Safeguarding**  
+**Meeting List: Headteacher, EYFS Lead, Governors, Parent Group**  
+**School Data to be sent: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Plan...          </p>
+          <p class="lt-p">
+Rubrics: 9/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.375          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names: Sharon Allerton, David McKenzie**  
+**Inspection Date: Tuesday, 26/09/2024**  
+**Inspection Focus: Early Years Foundation Stage, Safeguarding**  
+**Meeting List: Headteacher, EYFS Lead, Governors, Parent Group**  
+**School Data to be sent: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Plan...          </p>
+          <p class="lt-p">
+Rubrics: 9/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.375          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names: Sharon Allerton, David McKenzie**  
+**Inspection Date: Tuesday, 26/09/2024**  
+**Inspection Focus: Early Years Foundation Stage, Safeguarding**  
+**Meeting List: Headteacher, EYFS Lead, Governors, Parent Group**  
+**School Data to be sent: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Plan...          </p>
+          <p class="lt-p">
+Rubrics: 10/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+1. **Inspector names**: Sharon Allerton, David McKenzie  
+2. **Inspection Date**: Tuesday, 26/09/2024  
+3. **Inspection Focus**: Early Years Foundation Stage, Safeguarding  
+4. **Meeting List**: Headteacher, EYFS Lead, Governors, Parent Group  
+5. **School Data to be sent**: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School...          </p>
+          <p class="lt-p">
+Rubrics: 11/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.458          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names: Sharon Allerton, David McKenzie**  
+**Inspection Date: Tuesday, 26/09/2024**  
+**Inspection Focus: Early Years Foundation Stage, Safeguarding**  
+**Meeting List: Headteacher, EYFS Lead, Governors, Parent Group**  
+**School Data to be sent: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Plan...          </p>
+          <p class="lt-p">
+Rubrics: 11/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.458          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names: Sharon Allerton, David McKenzie**  
+**Inspection Date: Tuesday, 26/09/2024**  
+**Inspection Focus: Early Years Foundation Stage, Safeguarding**  
+**Meeting List: Headteacher, EYFS Lead, Governors, Parent Group**  
+**School Data to be sent: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Plan...          </p>
+          <p class="lt-p">
+Rubrics: 10/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**  
+Date: 24/09/2024  
+
+To: Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+Subject: Upcoming school Ofsted Inspection  
+
+**Inspector names: Sharon Allerton, David McKenzie**  
+**Inspection Date: Tuesday, 26/09/2024**  
+**Inspection Focus: Early Years Foundation Stage, Safeguarding**  
+**Meeting List: Headteacher, EYFS Lead, Governors, Parent Group**  
+**School Data to be sent: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School Improvement Plan...          </p>
+          <p class="lt-p">
+Rubrics: 10/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help sending email communication to the School Leadership Team (SLT) regarding the upcoming Office for Standards in Education, Children&#x27;s Services and Skills (Ofsted) inspection for the school&#x27;...          </p>
+          <p class="lt-p">
+Response: **Email 1**
+
+Subject: Upcoming school Ofsted Inspection  
+
+Date: 24/09/2024  
+
+To Katie McVey, Nicola Barron, Ian Critchley, Anne Barton  
+
+1. **Inspector names**: Sharon Allerton, David McKenzie  
+2. **Inspection Date**: Tuesday, 26/09/2024  
+3. **Inspection Focus**: Early Years Foundation Stage, Safeguarding  
+4. **Meeting List**: Headteacher, EYFS Lead, Governors, Parent Group  
+5. **School Data to be sent**: Early Years Foundation Stage Performance Data, Attendance Data, copy of the School I...          </p>
+          <p class="lt-p">
+Rubrics: 15/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+384                </td>
+                <td>
+0.458                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.458                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+384                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+384                </td>
+                <td>
+0.458                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.458                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+372                </td>
+                <td>
+0.458                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.458                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+847                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+689                </td>
+                <td>
+0.458                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.458                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+787                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+714                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+384                </td>
+                <td>
+0.375                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.375                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+384                </td>
+                <td>
+0.375                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.375                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+384                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+396                </td>
+                <td>
+0.458                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.458                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+384                </td>
+                <td>
+0.458                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.458                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+384                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+384                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+612                </td>
+                <td>
+390                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! So exciting news — we’re boosting our rewards this year with a $50 bonus for every qualifying credit card sign-up you complete through the end of the year! 🚀 With Black Friday just around the corner, this is a perfect time to drive traffic and encourage customers to sign up for credit cards, which will directly contribute to our goals. All bonuses will be paid as a lump sum at the end of January, separate from your regular paycheck, for all valid sign-ups.  
+
+To qualify, the customer m...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Exciting news! 🚀 We’re thrilled to announce a new $50 bonus incentive for each employee who successfully completes a qualifying credit card sign-up by the end of the year. With Black Friday just around the corner, this is a perfect time to boost sales and drive more traffic through our credit card promotions—your efforts will directly contribute to our success!  
+
+To qualify, the customer must open a credit card before year’s end and charge at least $100 on it during that time. All bonuses will ...          </p>
+          <p class="lt-p">
+Rubrics: 8/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! Exciting news — we’re rolling out a $50 bonus incentive for every qualifying credit card sign-up you help complete through the end of the year! 🎉 With Black Friday right around the corner, this is a fantastic chance to drive sales and earn extra rewards. The bonus will be paid as a lump sum at the end of January, separate from your regular paycheck, and applies only to customers who open a credit card before December 31 and charge at least $100 on it before that date.  
+
+Please remembe...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey everyone! 🎉 Just a quick update with some exciting news—starting now, every employee who completes a qualifying credit card sign-up will receive a $50 bonus! This is a fantastic opportunity to boost our numbers, especially ahead of Black Friday, when more customers are spending and signing up. To qualify, the card must be opened by a customer before year’s end and the customer must charge at least $100 on that card—no exceptions. These bonuses will be paid out as a lump sum at the end of Jan...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! 🚀  
+
+We’ve got some exciting news—starting now through the end of the year, every employee who completes a qualifying credit card sign-up will earn a $50 bonus! This is a perfect opportunity to take advantage of the growing excitement leading up to Black Friday. The bonus will be paid as a lump sum at the end of January, separate from your regular paycheck. To qualify, the customer must open the card before December 31 and charge at least $100 on it before that date. Please note: no te...          </p>
+          <p class="lt-p">
+Rubrics: 11/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.786          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! Exciting news 🎉 — we’re celebrating a major win with a new $50 bonus incentive for every credit card sign-up you complete through the end of the year! With Black Friday just around the corner, this is a fantastic opportunity to drive enrollment and support our sales growth. Each qualifying sign-up — where a customer opens a card before December 31 *and* charges at least $100 on it before the end of the year — earns you a $50 bonus, paid as a lump sum in late January, separate from your...          </p>
+          <p class="lt-p">
+Rubrics: 9/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.643          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! So exciting news—🎉 we’re rolling out a $50 bonus for every qualifying credit card sign-up you complete by the end of the year! With Black Friday just around the corner, this is a fantastic time to drive customer engagement and boost conversions. Every qualifying sign-up—where a customer opens a card before year’s end and charges at least $100 on it—will earn you a $50 bonus, paid as a lump sum at the end of January, separate from your regular paycheck.
+
+Remember, we’re serious about in...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Exciting news! 🎉 We’re thrilled to announce a new $50 bonus incentive for every credit card sign-up completed by our team through the end of the year—perfect timing as Black Friday approaches and customer traffic is expected to spike!  
+
+The bonus will be paid as a lump sum at the end of January, separate from your regular paycheck, to recognize your hard work and customer engagement. To qualify, the credit card must be opened by a customer before December 31 and the customer must charge at leas...          </p>
+          <p class="lt-p">
+Rubrics: 8/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! What a great time to be here! 🚀  
+
+We’re excited to share some great news—starting now, every employee who successfully completes a credit card sign-up through the end of the year will receive a $50 bonus! This is a fantastic opportunity, especially with Black Friday just around the corner. Bonuses will be paid as a lump sum at the end of January, separate from your regular paycheck. To qualify, the customer must open the card before December 31 and charge at least $100 on it by that d...          </p>
+          <p class="lt-p">
+Rubrics: 9/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.643          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! 👏 This is some great news—starting now, every employee who completes a qualifying credit card sign-up will earn a $50 bonus by the end of the year! With Black Friday just around the corner, this is a perfect time to drive those sign-ups, especially since customers are making big purchases and looking to upgrade their payment methods.  
+
+The bonus will be paid as a lump sum in January, separate from your regular paycheck. To qualify, the card must be opened by a customer before December...          </p>
+          <p class="lt-p">
+Rubrics: 9/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.643          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Exciting news! 🎉 We’re thrilled to announce a $50 bonus incentive for every qualifying credit card sign-up completed through the end of the year—perfect timing as Black Friday approaches and more customers are looking to upgrade their shopping experiences!  
+
+Each employee will earn $50 for every valid sign-up, with the bonus paid as a lump sum at the end of January, separate from their regular paycheck. To qualify, the credit card must be opened by a customer before December 31 and must have a ...          </p>
+          <p class="lt-p">
+Rubrics: 8/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Exciting news everyone! 🎉 We’re thrilled to announce a new $50 bonus incentive for every qualifying credit card sign-up you help complete through the end of the year—perfect timing as Black Friday approaches and more customers are looking to upgrade their shopping experiences!  
+
+To qualify, the card must be opened by a customer before year’s end, and that customer must charge at least $100 on the card by December 31. These bonuses will be paid as a lump sum at the end of January, separate from ...          </p>
+          <p class="lt-p">
+Rubrics: 8/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! 💡 Just some exciting news to share — starting now, every employee who completes a qualifying credit card sign-up will earn a $50 bonus! This is a perfect opportunity to take advantage of the upcoming Black Friday shopping season, when more customers are likely to be looking to purchase and finance items.  
+
+To qualify, the card must be opened by a customer before the end of the year, and the customer must have charged at least $100 on that card by year’s end. Bonuses will be paid as a ...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! 🚀 This is some exciting news—we’re rolling out a $50 bonus incentive for every qualifying credit card sign-up you complete through the end of the year! With Black Friday just around the corner, this is a fantastic opportunity to boost our numbers and celebrate our fantastic customer service.  
+
+Each bonus will be paid as a lump sum in January, separate from your regular paycheck, for sign-ups where the customer opens a card before year’s end and charges at least $100 on it before Decem...          </p>
+          <p class="lt-p">
+Rubrics: 8/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! 🚀 Just a quick update on some exciting news—starting now, each of you will earn a $50 bonus for every qualifying credit card sign-up you complete through the end of the year! With Black Friday right around the corner, this is a perfect opportunity to drive more customer conversions and boost our numbers.  
+
+Bonuses will be paid as a lump sum at the end of January, separate from your regular paycheck. To qualify, the customer must open a credit card before December 31 AND charge at leas...          </p>
+          <p class="lt-p">
+Rubrics: 8/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to send out an email to my team at Dick&#x27;s Sporting Goods where I&#x27;m the manager. Make it no longer than 2 paragraphs not counting a short intro sentence and a short closing sentence. Make it fri...          </p>
+          <p class="lt-p">
+Response: Hey team! Exciting news! 🎉 We’re proud to announce a new $50 bonus incentive for every qualifying credit card sign-up you complete through the end of the year—perfect timing with Black Friday just around the corner!  
+
+Each qualifying sign-up requires the customer to open the card before December 31 and charge at least $100 on it before year’s end. The bonus will be paid as a lump sum in January, separate from your regular paycheck. Remember—manipulating the system by having friends or family si...          </p>
+          <p class="lt-p">
+Rubrics: 9/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.643          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+202                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+172                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+181                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+187                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+179                </td>
+                <td>
+0.786                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.786                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+191                </td>
+                <td>
+0.643                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.643                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+186                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+177                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+180                </td>
+                <td>
+0.643                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.643                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+181                </td>
+                <td>
+0.643                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.643                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+178                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+166                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+178                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+161                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+177                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+263                </td>
+                <td>
+148                </td>
+                <td>
+0.643                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.643                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s go through your inventory list thoroughly and reformat it exactly according to your detailed instructions.
+
+---
+
+### ✅ Key Goals Achieved:
+- Sorted **by Bin Number** (ascending), not alphabetically.
+- **Highlighted part numbers starting with &quot;P&quot;** in *normal text*, and *non-P* part numbers in **bold**.
+- **Bolded part names** if they are **not faucet-related** (to flag potential non-faucet items).
+- Included a `&lt;Bin x Missing&gt;` tag for any **missing bin numbers** in sequence.
+...          </p>
+          <p class="lt-p">
+Rubrics: 2/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.133          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your **fully reformatted, organized, and annotated inventory list** based on your detailed requirements.
+
+---
+
+### ✅ **Reformatted Inventory List (Sorted by Bin Number, Ascending)**  
+All parts are now listed in **ascending bin order**, with:
+- Bold formatting for **non-faucet parts** (toilets, urinals, etc.)  
+- **Bold part numbers** beginning with non-&quot;P&quot; prefixes (to flag supplier gaps)  
+- Missing bin numbers flagged with `&lt;Bin x Missing&gt;` or `&lt;Bin x, y, z Missing&gt;`  
+- S...          </p>
+          <p class="lt-p">
+Rubrics: 2/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.133          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s your fully reformatted and structured inventory list, organized by **Bin Number** as requested, with all your specific formatting and filtering rules applied:
+
+---
+
+- **Bin 1**:  
+  **Brasstech Strainer for Shower Drain Oil Rubbed Bronze** – PART#: 245/10B  
+  Quantity: 2 | Price: $40.60 | Total Value: $81.20  
+  *(Note: Part number does not start with &quot;P&quot; — highlighted in bold)*
+
+- **Bin 113**:  
+  **Aquaseal Generic Diaphragm** – P001-411  
+  Quantity: 42 | Price: $3.66 | T...          </p>
+          <p class="lt-p">
+Rubrics: 2/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.133          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through your detailed request step-by-step and reformat your inventory list according to your specific requirements.
+
+---
+
+### ✅ **Summary of Actions Taken:**
+
+1. **Sorted by Bin Number (ascending)** – All entries are now ordered from lowest to highest bin number.
+2. **Highlighted non-P part numbers in bold** – Any part number that does *not* start with `&quot;P&quot;` is shown in **bold**.
+3. **Identified bin gaps** – Where bin numbers are missing in sequence (e.g., 1, 2, 4), added a...          </p>
+          <p class="lt-p">
+Rubrics: 0/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **fully reformatted, organized, and prioritized inventory list** according to **Bin Number in ascending order**, with all requested formatting rules applied:
+
+---
+
+- **Bin 114**: American Standard Aquaseal Stem -RH Hot or Cold  
+  *American Standard Aquaseal Stem -RH Hot or Cold*  
+  Part Number: P099-021R  
+  Quantity: 5  
+  Price: $4.87  
+  Total Value: $24.35  
+  ✅ *Faucet Part (Hot/Cold stem)*  
+
+- **Bin 115**: American Standard Cadet Stem -RH Hot or Cold  
+  *America...          </p>
+          <p class="lt-p">
+Rubrics: 4/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.267          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your fully reorganized and enhanced inventory list, formatted exactly as requested:
+
+---
+
+- **ACE 1-1/4&quot; Chrome Shower Drain Strainer** – Part #: ACE: 4264123 – Bin: 150 – Quantity: 1 – Price: $11.99 – Total Value: $11.99  
+- **ACE 2-1/2&quot; D Polished Chrome Stainless Steel Sink Strainer Silver** – Part #: ACE: 40289 – Bin: 151 – Quantity: 1 – Price: $11.99 – Total Value: $11.99  
+- **American Standard Ace 1/2” D Plastic Aqua-Seal Washers 2 pack** – Part #: ACE: 43606 – Bin: 353...          </p>
+          <p class="lt-p">
+Rubrics: 2/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.133          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **fully reorganized, formatted, and enhanced** inventory list based on your detailed instructions:
+
+---
+
+- **Bin 109**: American Standard Colony Balancing Cartridge (P099-048)  
+  Quantity: 2 | Price: $37.25 | Total Value: $74.50  
+
+- **Bin 111**: Danze/Global Union 3 Valve Tub &amp; Shower Diverter Cartridge (P099-05090D)  
+  Quantity: 4 | Price: $10.49 | Total Value: $41.96  
+
+- **Bin 113**: Aquaseal Generic Diaphragm (P001-411)  
+  Quantity: 42 | Price: $3.66 | Total Value...          </p>
+          <p class="lt-p">
+Rubrics: 3/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your fully restructured, professionally formatted inventory list — sorted **by Bin Number** in ascending order, with all requested formatting applied:
+
+---
+
+- **Bin 1**:  
+  **ACE 1-1/4&quot; Chrome Shower Drain Strainer** – Part Number: ACE: 4264123 – Quantity: 1 – Price: $11.99 – Total Value: $11.99  
+  *(Note: Not a P-number – highlighted in bold)*  
+
+- **Bin 113**:  
+  **Aquaseal Generic Diaphragm** – Part Number: P001-411 – Quantity: 42 – Price: $3.66 – Total Value: $153.72  
+...          </p>
+          <p class="lt-p">
+Rubrics: 2/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.133          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s carefully rework your inventory list according to your detailed instructions. We&#x27;ll perform the following transformations:
+
+---
+
+✅ **Sort by Bin Number (ascending)**  
+✅ **Highlight non-P-part numbers in bold**  
+✅ **Bold non-faucet parts (if clearly not faucet/relevant)**  
+✅ **Identify and flag missing bin numbers with `&lt;Bin x Missing&gt;` or `&lt;Bin x,y,z Missing&gt;`**  
+✅ **Mark bins with quantity &lt; 5 with an asterisk after the bin number**  
+✅ **Group entries with duplicate bin n...          </p>
+          <p class="lt-p">
+Rubrics: 2/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.133          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your **fully reformatted, organized, and annotated inventory list**, structured exactly as you requested:
+
+---
+
+- **Bin 113**:  
+  **Aquaseal Generic Diaphragm** – P001-411 (Qty: 42, Price: $3.66, Total: $153.72)  
+  **Cadet Diaphragms OEM (PAIR)** – P001-410 (Qty: 13, Price: $16.34, Total: $212.42)  
+
+- **Bin 114**:  
+  American Standard Aquaseal Stem -RH Hot or Cold – P099-021R (Qty: 5, Price: $4.87, Total: $24.35)  
+
+- **Bin 115**:  
+  American Standard Cadet Stem -RH Hot ...          </p>
+          <p class="lt-p">
+Rubrics: 3/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your fully reformatted, organized, and actionable inventory list, meticulously restructured to meet **all your requirements**:
+
+---
+
+- **Bin 114**: American Standard Aquaseal Stem -RH Hot or Cold  
+  *Part Name:* American Standard Aquaseal Stem -RH Hot or Cold  
+  *Part Number:* P099-021R  
+  *Quantity:* 5  
+  *Price:* $4.87  
+  *Total Value:* $24.35  
+
+- **Bin 115**: American Standard Cadet Stem -RH Hot or Cold  
+  *Part Name:* American Standard Cadet Stem -RH Hot or Cold  
+...          </p>
+          <p class="lt-p">
+Rubrics: 4/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.267          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;ve carefully reviewed and reorganized your inventory list according to your detailed specifications. Below is the fully reformatted, readable, and actionable version of your inventory list with all the requested features applied:
+
+---
+
+- **Bin 109**: American Standard Colony Balancing Cartridge (P099-048) – Quantity: 2 – Price: $37.25 – Total Value: $74.50  
+- **Bin 110**: B&amp;K 3 Valve Tub &amp; Shower Diverter Cartridge New Style (P099-05092D) – Quantity: 12 – Price: $9.96 – Total Val...          </p>
+          <p class="lt-p">
+Rubrics: 3/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your **fully reformatted, cleaned, and organized inventory list** based on your detailed instructions.
+
+---
+
+- **Sort by Bin Number (ascending)**  
+- **Highlight non-P-part numbers in bold**  
+- **Highlight non-faucet parts (non-shower/lavatory/kitchen) in bold**  
+- **Any part with quantity &lt; 5 → asterisk after Bin Number**  
+- **Gaps in bin sequence → include &lt;Bin x Missing&gt; tag**  
+- **Multiple parts in same bin → show with (*Multiple Parts*)**  
+- **Missing bin numbers (...          </p>
+          <p class="lt-p">
+Rubrics: 3/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely. Here&#x27;s your fully reformatted and logically organized inventory list — restructured to be **in ascending order by Bin Number**, with all requested formatting rules applied meticulously:
+
+---
+
+- **Bin 1**:  
+  **Ace 1-1/4&quot; Chrome Shower Drain Strainer** – Part Number: ACE: 4264123 – Quantity: 1 – Price: $11.99 – Total Value: $11.99  
+  *Note: Not a P-numbered part → highlighted in bold*  
+
+- **Bin 11**:  
+  **American Standard Aquaseal Stem -LH Cold** – Part Number: P099-021L – Quanti...          </p>
+          <p class="lt-p">
+Rubrics: 3/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your fully reworked, professionally formatted inventory list, following **all your specific instructions**:
+
+---
+
+- **ACE 1-1/4&quot; Chrome Shower Drain Strainer**  
+  Part Number: ACE: 4264123  
+  Bin Number: 150  
+  Quantity: 1  
+  Price: $11.99  
+  Total Value: $11.99  
+  *(Faucet Part — Yes)*  
+
+- **ACE 2-1/2&quot; D Polished Chrome Stainless Steel Sink Strainer Silver**  
+  Part Number: ACE: 40289  
+  Bin Number: 151  
+  Quantity: 1  
+  Price: $11.99  
+  Total Value: $11.99  
+  *...          </p>
+          <p class="lt-p">
+Rubrics: 5/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m working on slowly overhauling my company&#x27;s inventory system and need help on formatting. You&#x27;ll find a list of parts below with a Part Name, Part Number, Bin Number, Quantity, Price, and Total Val...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s your fully reformatted, logically organized, and clearly annotated inventory list based on your detailed requirements.
+
+---
+
+- **Sorting**: Items now ordered by **ascending Bin Number**  
+- **Highlighting**:  
+  - Part numbers **not starting with &quot;P&quot;** are **bolded**  
+  - Parts **not clearly faucet-related** are **bolded** (per your request)  
+- **Missing bins**: All gaps in bin sequence are flagged with a `&lt;Bin x, y, z Missing&gt;` tag  
+- **Low stock**: Any part with **quanti...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.133                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.133                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.133                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.133                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.133                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.133                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.267                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.267                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.133                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.133                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.133                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.133                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.133                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.133                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.267                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.267                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+5852                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4383                </td>
+                <td>
+8192                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

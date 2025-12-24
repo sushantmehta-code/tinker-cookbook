@@ -1,0 +1,45 @@
+{
+  "os": "macOS-15.7.2-arm64-arm-64bit-Mach-O",
+  "python": "CPython 3.14.0",
+  "startedAt": "2025-12-22T21:38:14.712081Z",
+  "args": [
+    "model_name=Qwen/Qwen3-4B-Instruct-2507",
+    "groups_per_batch=16",
+    "group_size=16",
+    "learning_rate=4e-5",
+    "max_tokens=8192",
+    "log_path=./logs_v2p5",
+    "wandb_project=tinker-RLVR",
+    "num_substeps=2"
+  ],
+  "program": "-m tinker_cookbook.recipes.rlvr.train",
+  "git": {
+    "remote": "https://github.com/thinking-machines-lab/tinker-cookbook.git",
+    "commit": "8f32fc851c7b1df9bede74d449e559c626083174"
+  },
+  "email": "sushantmehta@surgehq.ai",
+  "root": "logs_v2p5",
+  "host": "Sushants-MacBook-Pro.local",
+  "executable": "/Users/sushantmehta/Desktop/clones_final/tinker-cookbook-main/.venv/bin/python",
+  "cpu_count": 14,
+  "cpu_count_logical": 14,
+  "disk": {
+    "/": {
+      "total": "494384795648",
+      "used": "163120701440"
+    }
+  },
+  "memory": {
+    "total": "25769803776"
+  },
+  "apple": {
+    "name": "Apple M4 Pro",
+    "ecpuCores": 4,
+    "pcpuCores": 10,
+    "gpuCores": 20,
+    "memoryGb": 24,
+    "swapTotalBytes": "24696061952",
+    "ramTotalBytes": "25769803776"
+  },
+  "writerId": "dw51w72sfxq7gjzhhd8agwo17aof9jwv"
+}

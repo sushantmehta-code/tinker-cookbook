@@ -1,0 +1,4744 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 24</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 24  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T13:21:24  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **realistic, fair, and compliant evening shift schedule** for your employees from **September 10 to September 24, 2023**, based on all your constraints and notes.
+
+---
+
+## 📅 **Schedule Overview: September 10 – September 24, 2023**
+
+### Key Rules Recap:
+- **Team lead required per day** (1 person per day for inventory/receiving).
+- **Minimum of 3 people on weekdays (Mon–Fri), 4 on weekends (Sat–Sun)**.
+- **Friday, 9/15: Must have at least 4 people on shift.**
+- **Bill and...          </p>
+          <p class="lt-p">
+Rubrics: 12/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.632          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **comprehensive and fair evening shift schedule** for your employees from **September 10 to September 24, 2023**, with all constraints taken into account.
+
+---
+
+## 🔍 **Key Constraints Recap**  
+We are scheduling **evening shifts** from **9/10 to 9/24 (15 days)**.
+
+### ⚠️ Constraints:
+- **Bill and Sherry cannot be scheduled together on the same day**.
+- **Candice is off on 9/12 and 9/13**.
+- **Matt is off on 9/21**.
+- **Team lead required per day** (1 per day) for invent...          </p>
+          <p class="lt-p">
+Rubrics: 12/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.632          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a detailed, fair, and compliant evening shift schedule for your team from **September 10 – September 24, 2023**, following all of your requirements.
+
+---
+
+### 🔍 **Key Requirements Recap**
+- **Dates:** September 10 – September 24, 2023 (inclusive) = 15 days  
+- **Shifts:** Evening shift (we assume 5 days per week are covered)
+- **Team Lead Requirement:**  
+  - **One team lead per day** (required for inventory/receiving)  
+  - Team leads can work other days without being p...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely, let&#x27;s build a detailed and fair evening shift schedule for your employees from **September 10 to September 24, 2023**, considering all constraints.
+
+---
+
+## 📅 **Shift Period:**  
+**September 10 – September 24, 2023**  
+→ 15 days total (includes 5 weekdays, 5 weekends, and 1 special Friday)
+
+---
+
+## ✅ **Constraints &amp; Rules Summary**
+
+1. **No Bill and Sherry together** on the same day (due to incident).
+2. **Candice off on 9/12 and 9/13** → Cannot be scheduled those days.
+3. **Matt off...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Great — thank you for the detailed request! Let’s create a **realistic, fair, and compliant** evening shift schedule for **September 10–September 24, 2023**, covering **all the constraints** you’ve provided.
+
+---
+
+## ✅ SCOPE &amp; CONSTRAINTS RECAP
+
+### Timeframe:
+- **September 10 – September 24, 2023** (15 days)
+
+### Key Rules:
+1. **Bill and Sherry cannot be scheduled together on the same day.**
+2. **Candice is off on 9/12 and 9/13** → do not schedule her on those days.
+3. **Matt is off on 9/21** →...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a detailed, fair, and compliant evening shift schedule for **employees from September 10 to September 24, 2023**, based on all your specific requirements.
+
+---
+
+## ✅ **Schedule Summary &amp; Constraints**
+
+### **Period**:  
+September 10 – September 24, 2023 (15 days)
+
+### **Shift Type**: Evening shift (we assume a single evening shift per day)
+
+---
+
+### 🔑 **Key Constraints**
+
+1. **Bill and Sherry cannot be scheduled together on any day**  
+2. **Candice requested off on 9/12 ...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a detailed, fair, and compliant evening shift schedule for your team from **September 10 to September 24, 2023**, covering **all requirements and constraints**.
+
+---
+
+### 📅 Date Range:  
+**September 10 – September 24, 2023** (15 days total)  
+**Weekdays**: Mon–Fri  
+**Weekends**: Sat–Sun  
+
+---
+
+### ✅ Key Constraints &amp; Requirements Recap:
+
+1. **Bill and Sherry cannot be scheduled together on any day** (due to incident).
+2. **Candice off on 9/12 and 9/13** → do not schedu...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s create a detailed, realistic, and compliant **evening shift schedule** for your employees from **September 10 to September 24, 2023** (inclusive), based on all the constraints and requirements you&#x27;ve provided.
+
+---
+
+## ✅ Key Constraints Recap
+
+### **Shift Requirements**
+- **Minimum 3 people per weekday (Mon–Fri)**  
+- **Minimum 4 people on weekends (Sat &amp; Sun)**  
+- **Friday, 9/15 → minimum of 4 people on shift** (due to sale)  
+- **One team lead per day** (required for inventory/re...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a detailed, realistic, and compliant **evening shift schedule** for employees from **September 10 to September 24, 2023**, based on all your requirements.
+
+---
+
+## 📅 Schedule Overview: September 10 – September 24, 2023  
+**Shift:** Evening Shift  
+**Days:** Monday to Friday (weekdays), Saturday and Sunday (weekends)  
+**Requirements Recap:**
+
+✅ Minimum 3 people per weekday  
+✅ Minimum 4 people on weekends (Sat/Sun)  
+✅ **Minimum of 4 people on Friday, 9/15 (sale day)**  
+...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a detailed and fair **evening shift schedule** for employees from **September 10 to September 24, 2023**, inclusive — covering **15 days** (Week 1: 9/10–9/14, Week 2: 9/15–9/24).
+
+---
+
+### 📅 Key Constraints and Notes Recap:
+
+1. **Team Lead Requirement:**
+   - One **team lead** must be scheduled daily (for inventory/receiving).
+   - Team leads: **Candice, Mike, Carlos** (all qualified).
+   - Other qualified staff can work without being lead.
+
+2. **Availability &amp; Exceptions...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a detailed, realistic, and compliant evening shift schedule for **September 10–September 24, 2023**, with all constraints considered.
+
+---
+
+### 🔍 **Key Constraints Summary**
+
+#### **General Rules:**
+- **Minimum 3 people per weekday** (Mon–Fri)
+- **Minimum 4 people per weekend day** (Sat–Sun)
+- **Friday, 9/15: Must have at least 4 people on shift** (due to sale)
+- **One team lead per day required** (all team leads are qualified)
+- Everyone must get **at least 2 and at mos...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a detailed, **realistic, and compliant** evening shift schedule for your team from **September 10 to September 24, 2023**, with all your requirements in mind.
+
+---
+
+## 🔍 **Key Requirements Summary**
+
+- **Shift Period**: September 10 – September 24, 2023 (inclusive) = 15 days
+- **Schedule Goal**:
+  - **Minimum 3 people per weekday** (Mon–Fri)
+  - **Minimum 4 people per weekend day** (Sat &amp; Sun)
+  - **Friday, 9/15 → Minimum 4 people** (special sale day)
+- **Team Lead Requi...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s carefully build a detailed and fair evening shift schedule for your employees from **September 10 to September 24, 2023**, with the following requirements and constraints:
+
+---
+
+### 📅 **Key Constraints &amp; Requirements Recap:**
+
+1. **Shift Period:**  
+   September 10 – September 24, 2023 (inclusive)  
+   → **15 days total** (Monday, Sep 10 to Sunday, Sep 24)
+
+2. **Minimum Staffing:**
+   - **Weekdays (Mon–Fri):** Minimum of **3 people**
+   - **Weekends (Sat–Sun):** Minimum of **4 ...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a detailed and fair evening shift schedule for **September 10–September 24, 2023**, for your team with all your constraints in mind.
+
+---
+
+### 📅 **Shift Period:**  
+**September 10 – September 24, 2023** (inclusive)  
+→ 15 days (6 weekdays + 2 weekends)
+
+&gt; ✅ **Notes Summary &amp; Constraints:**
+- **Bill &amp; Sherry cannot be scheduled together** on any day.
+- **Candice off on 9/12 &amp; 9/13** → not scheduled those days.
+- **Matt off on 9/21** → not scheduled that day.
+- **Team lead ...          </p>
+          <p class="lt-p">
+Rubrics: 9/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.474          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a reliable, fair, and compliant evening shift schedule from **September 10 to September 24, 2023**, based on your detailed requirements.
+
+---
+
+### ✅ **Schedule Overview: 9/10 – 9/24, 2023 (15 Days)**  
+**Shift:** Evening shift  
+**Constraints:**
+- **Bill &amp; Sherry cannot be scheduled together on any day.**
+- **Candice off on 9/12 &amp; 9/13**
+- **Matt off on 9/21**
+- **Team lead required per day** (one person per day)
+- **Minimum 3 on weekdays**, **4 on weekends** (Sat/Sun)
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 12/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.632          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We are in the process of updating our scheduling system, and that means we are currently scheduling manually. I need help scheduling my employees for the evening shift for the next two weeks, 9/10-9/2...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a detailed, realistic, and fair evening shift schedule for your employees from **September 10 to September 24, 2023**, based on all your constraints.
+
+---
+
+## 📅 **Shift Schedule: September 10 – September 24, 2023**
+
+&gt; **Evening Shift** (Standard 9:00 PM – 6:00 AM or equivalent)  
+&gt; ✅ Minimum of **3 people per weekday**, **4 per weekend days**  
+&gt; ✅ **Team lead required per day** (1 qualified employee each day)  
+&gt; ✅ **Bill and Sherry cannot be scheduled together on any d...          </p>
+          <p class="lt-p">
+Rubrics: 8/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.421          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+5424                </td>
+                <td>
+0.632                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.632                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+8192                </td>
+                <td>
+0.632                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.632                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+6815                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+7497                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+6185                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+7081                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+7055                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+7836                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+7550                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+7185                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+6091                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+7628                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+8192                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+7558                </td>
+                <td>
+0.474                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.474                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+7092                </td>
+                <td>
+0.632                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.632                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+6707                </td>
+                <td>
+0.421                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.421                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Thanks for the detailed breakdown! Let’s create an **efficient, patient-centered, and technically sustainable schedule** for your small vet hospital from **Monday to Saturday**, respecting:
+
+- Doctor availability (M–Th: 9am–6pm, Sat: 10am–4pm)  
+- Surgery restrictions (only Mon/Tue; no surgeries after 12pm)  
+- Tech support needs (especially for sedations, aggressive patients, or procedures like AGE, TNT, injections)  
+- Priority based on **severity of suffering**  
+- No owner waiting between ap...          </p>
+          <p class="lt-p">
+Rubrics: 5/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.312          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build a **compact, efficient, and owner-friendly veterinary schedule** that respects:
+
+- **Staff availability (1 doctor per day, 30-minute slots)**  
+- **Tech time constraints (especially during sedation/surgery)**  
+- **Patient/priority severity** (urgent cases first)  
+- **No surgeries after 12–1 PM**  
+- **Simultaneous tech appointments (TNT/AGE) that need to be grouped appropriately**  
+- **Owners bringing multiple pets → adjacent slots**  
+- **Surgeries only on Monday/Tue...          </p>
+          <p class="lt-p">
+Rubrics: 9/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.562          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s create a **compact, efficient, and patient-centered schedule** for your small veterinary hospital this week (Monday–Saturday), prioritizing **severity of suffering**, **clinical need**, **tech availability**, **doctor workloads**, **surgeon constraints**, and **owner preferences**.
+
+---
+
+### ✅ KEY CONSTRAINTS &amp; RULES SUMMARY
+
+| Rule | Reason |
+|------|--------|
+| **Doctors only one per day**, 30-min slots | Maximize doctor efficiency; each case gets dedicated time |
+| **Tech a...          </p>
+          <p class="lt-p">
+Rubrics: 7/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.438          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s create a **compact, efficient, and clinically appropriate schedule** for your vet hospital this week (Monday–Saturday), while respecting:
+
+---
+
+### ✅ Key Constraints &amp; Priorities:
+1. **Operating Hours:**
+   - Mon–Thu: 9am–6pm
+   - Sat: 10am–4pm  
+   → No surgeries after **12–1pm** (lunch break)
+
+2. **Doctor Availability:**
+   - One doctor per day
+   - Doctor appointments are 30 minutes
+   - **Surgeries only on Mon–Tue**
+   - Surgery durations:
+     - Spay/Neuter/Mass Removal: ...          </p>
+          <p class="lt-p">
+Rubrics: 7/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.438          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build a **compact, efficient, and compassionate schedule** for your small veterinary hospital that:
+
+- Prioritizes **severity of suffering** (e.g., surgeries, fractures, not eating, etc. first)  
+- Respects **tech staffing needs** (especially during sedations, surgeries, or aggressive cases)  
+- Avoids surgeries **after lunch (12–1 PM)**  
+- Maintains **adjacent appointments for same owner**  
+- Is **practical for staff workload**, with minimal gaps  
+- Allows **early closing*...          </p>
+          <p class="lt-p">
+Rubrics: 8/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s create a **compact, efficient, and patient-centered schedule** for your small vet hospital this week (Monday–Saturday), honoring all key constraints, priorities, and logistics.
+
+---
+
+### ✅ Key Principles Used in Scheduling
+
+1. **Prioritize severity**: Cases with high suffering (e.g., femoral fracture, mass removal, surgery) come first.
+2. **Avoid overloading techs**: Technicians are only assigned during their tasks; avoid having them work alone or during high-demand times with...          </p>
+          <p class="lt-p">
+Rubrics: 4/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build a **compact, efficient, and patient-centered** schedule for your small veterinary hospital, honoring all constraints, priorities, and timing rules.
+
+---
+
+### ✅ **Key Constraints &amp; Priorities Recap**
+
+#### 🐾 **Operating Hours**
+- Mon–Thu: 9:00 AM – 6:00 PM  
+- Fri–Sat: 10:00 AM – 4:00 PM  
+- **No surgeries after 12:00 PM** (lunch break)
+
+#### 🚑 **Appointment Types**
+| Type | Duration | Notes |
+|------|--------|------|
+| Doctor Appointments | 30 minutes | One doctor per da...          </p>
+          <p class="lt-p">
+Rubrics: 5/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.312          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **compact, efficient, and patient-centered schedule** for your small veterinary hospital from **Monday to Saturday**, respecting:
+
+- **Doctor availability (one per day, 30-minute slots)**  
+- **Tech appointment times and durations** (TNT, AGE, radiographs, injections)  
+- **Surgeries only on Mon/Tues**, and **no surgeries after 12pm**  
+- **No owner waits between appointments** (pets from same owner are adjacent)  
+- **Priority: Severity of suffering** — urgent cases (e...          </p>
+          <p class="lt-p">
+Rubrics: 6/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.375          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build a **compact, efficient, and patient-centered schedule** for your small veterinary hospital this week (Monday to Saturday), following all your criteria.
+
+---
+
+## 📌 **Key Constraints &amp; Priorities Recap**
+
+✅ **Operating hours:**
+- Mon–Thu: 9am–6pm
+- Sat: 10am–4pm  
+- (No surgeries after 12pm)
+
+✅ **One doctor per day** — each appointment is **30 minutes**  
+✅ **Tech appointments:**  
+- TNT/AGE: 5–15 min (variable, depends on temperament);  
+- Radiographs: **45 minutes** (onl...          </p>
+          <p class="lt-p">
+Rubrics: 8/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build a **compact, efficient, and patient-centered schedule** for your small veterinary hospital this week (Monday–Saturday), respecting:
+
+- Doctor and technician availability
+- Time constraints (especially surgeries before 12 PM)
+- Prioritization of severity (suffering first)
+- Proximity of pet appointments when same owner brings multiple pets
+- No surgeries after lunch
+- Early exit (condense early in day)
+- Tech support needs (especially sedations, aggressive patients, requi...          </p>
+          <p class="lt-p">
+Rubrics: 8/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s build a **compact, efficient, and patient-centered schedule** for your small veterinary hospital from **Monday to Saturday**, based on the constraints and priorities you&#x27;ve outlined.
+
+---
+
+## ✅ **Key Constraints &amp; Rules Recap**
+
+1. **Operating Hours**:
+   - Mon–Thu: 9am–6pm
+   - Fri–Sat: 10am–4pm
+   - **No surgeries after 12pm (lunch break)**
+
+2. **Doctors**:
+   - One doctor per day (rotating)
+   - **Surgeries only Mon–Tue**:
+     - Spay/neuter/mass removal: 1 hour
+     - Other surgeries: ...          </p>
+          <p class="lt-p">
+Rubrics: 8/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build a **highly efficient, patient-first, and staff-respectful schedule** for your small veterinary hospital from **Monday to Saturday**.
+
+---
+
+## ✅ Key Constraints &amp; Priorities
+
+### ⚙️ Operational Constraints:
+- **Doctor appointments**: 30 minutes each, one doctor per day (M–F).
+- **Tech appointments**:
+  - **TNT (nail trim)**: 5–15 min (variable, depends on temperament).
+  - **AGE (anal gland expression)**: 5–15 min (variable).
+  - **Radiographs (rads)**: 45 min.
+- **Surger...          </p>
+          <p class="lt-p">
+Rubrics: 5/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.312          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build a **compact, efficient, and patient-centered schedule** for your small vet hospital this week (Monday–Saturday), based on your detailed constraints.
+
+---
+
+## ✅ Key Constraints Recap (for clarity)
+
+| Rule | Constraint |
+|------|----------|
+| **Hours of operation** | Mon–Thu: 9am–6pm; Sat: 10am–4pm |
+| **Doctor appointments** | 1 per day, 30 min each |
+| **Tech appointments** | Variable: 5–15 min (TNT, AGE); 15 min (most); 45 min (rads) |
+| **Surgeries** | Only **Mon &amp; Tue...          </p>
+          <p class="lt-p">
+Rubrics: 6/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.375          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s build an **efficient, compassionate, and clinically sound schedule** for your small vet hospital this week (Monday to Saturday), honoring all constraints and priorities.
+
+---
+
+## ✅ **Guiding Principles**
+
+1. **Priority by severity** (owner suffering first):
+   - Surgery &amp; emergency cases → Top priority
+   - Radiation (X-rays) → High priority due to time and owner concern
+   - Sedation or aggressive patients → Need tech support
+   - Nail trims / AGE → Lower priority, **only aft...          </p>
+          <p class="lt-p">
+Rubrics: 6/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.375          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Great! Let’s build a **compact, efficient, and owner-friendly schedule** for your small vet hospital week (Monday–Saturday), with a focus on:
+
+✅ Prioritizing severity of illness/owner suffering  
+✅ Avoiding surgeries after 12 PM  
+✅ Keeping simultaneous tech appointments within immediate proximity (no owner waiting between pets)  
+✅ Efficient time use (maximizing capacity without overloading techs)  
+✅ Early closure possibility (condense early in day)  
+✅ Realistic scheduling based on doctor ava...          </p>
+          <p class="lt-p">
+Rubrics: 7/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.438          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me determine a schedule for the following appointments this week (M-Sa). We’re a small vet hospital open from 9am-6pm M-Th and 10am-4pm Saturdays. We have one doctor each day and every doctor app...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s build an **efficient, patient-centered, and realistic schedule** for your small veterinary hospital from **Monday to Saturday**, respecting:
+
+---
+
+### ✅ Key Constraints &amp; Priorities:
+
+1. **Operating Hours:**
+   - Mon–Thu: 9:00 AM – 6:00 PM  
+   - Fri–Sat: 10:00 AM – 4:00 PM  
+   - *No surgeries after 12:00–1:00 PM (lunch break)*
+
+2. **Doctor Appointments:**
+   - One doctor per day (one appointment per day)
+   - 30 minutes each
+   - **Surgeries only on Mon/Tue** (no surgeries a...          </p>
+          <p class="lt-p">
+Rubrics: 4/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+3824                </td>
+                <td>
+0.312                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.312                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+5996                </td>
+                <td>
+0.562                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.562                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+5340                </td>
+                <td>
+0.438                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.438                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+6857                </td>
+                <td>
+0.438                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.438                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+5161                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+3323                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+7113                </td>
+                <td>
+0.312                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.312                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+4825                </td>
+                <td>
+0.375                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.375                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+5735                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+6388                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+4897                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+6221                </td>
+                <td>
+0.312                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.312                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+5458                </td>
+                <td>
+0.375                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.375                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+3837                </td>
+                <td>
+0.375                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.375                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+6398                </td>
+                <td>
+0.438                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.438                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+770                </td>
+                <td>
+5744                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a comprehensive, clinically grounded, and patient-centered framework tailored to your three case studies. It integrates **differential diagnosis**, **hormonal shifts**, **genetic influences**, **menopausal symptom pathophysiology**, **natural and medical interventions**, and **decision-making tools**—all structured to guide practitioners in delivering personalized, evidence-based care.
+
+We begin with **top 3 core clinical differentials** for each case, followed by **underlyi...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, clinically grounded, and practice-ready differential breakdown** for each of your three case studies, tailored to your request with clear medical reasoning, genetic context, hormonal dynamics, and practical recommendations—especially emphasizing **women under age 40 vs over 45**, **natural first-line strategies**, and **pragmatic considerations for HRT, hysterectomy, and long-term health**.
+
+---
+
+## 📌 General Framework &amp; Key Principles (Applies to All Case...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, clinically grounded, and patient-centered** breakdown for each of the three case studies, addressing:
+
+- **Top 3 differential causes of pain and symptomology**  
+- **Hormonal shifts with commentary** (including how they affect symptoms and the role of genetics)  
+- **Why women alternate between frail/thin and overweight/obese in menopause**  
+- **Genetic influence on individual response to hormonal loss**  
+- **Medical and non-pharmaceutical interventions ...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, clinically grounded, and practitioner-ready set of recommendations** for your three case studies. The content integrates the full scope of your request — including **differential diagnosis**, **hormonal shifts**, **genetic influences**, **menopause-related body changes**, **natural and pharmaceutical options**, **cost-benefit analysis**, **probing clarifying questions**, and **practical medical guidance** — with attention to **patient-centered care**, **ri...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, clinically grounded, and gender-sensitive differential framework** for your three case studies—organized by the **top three underlying causes of pain and symptomology**, with attention to **hormonal shifts, genetic predispositions, metabolic and psychological factors**, and **practical, evidence-based medical and natural intervention strategies**.
+
+Each section includes:
+
+- **Top 3 differential diagnostic priorities**
+- **Hormonal shifts and symptomology c...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, clinically grounded, and practice-ready** set of recommendations tailored to your three case studies. This includes:
+
+- Clear **differential diagnosis** of the 3 primary underlying causes of pain and symptoms  
+- **Hormonal dynamics** and commentary on how hormone shifts (especially in perimenopause/menopause) contribute to symptomology  
+- Explanation of **why women alternate between being frail and thin or overweight and obese during menopause**  
+- Role...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, practice-ready clinical breakdown** tailored to your three case studies — including **differential diagnoses**, **underlying hormonal and genetic factors**, **natural and medical interventions**, **cost-benefit analysis**, **genetic influences on menopausal transition**, and **clinically insightful clarifying questions**.
+
+Each section is structured to provide **actionable, current medical guidance** for women in your care, with attention to **menopause-re...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, clinically grounded, and patient-centered** set of recommendations tailored to your three case studies. This includes:
+
+- **Top 3 differential diagnoses** for pain and systemic symptoms  
+- **Hormonal shifts** with commentary on symptomology (especially in menopause context)  
+- **Genetic influences on menopausal experience** and why women differ in weight, mood, frailty, etc.  
+- **Detailed natural and medical intervention pathways** (with prioritization,...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, clinically grounded, and patient-centered differential breakdown** and **actionable clinical recommendations** for each of the three case studies, tailored to your practice context.
+
+This includes:
+
+- Top 3 differential causes of pain and symptomology  
+- Hormonal shifts with commentary on symptom impact  
+- Explanation for why women vary in body composition (frail/thin vs. overweight/obese) during menopause  
+- Role of genetics in individual response to m...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, clinically grounded, and practice-ready protocol** to address each of your three patient cases with the depth, nuance, and specificity you requested. This includes:
+
+- **Differential breakdown** of 3 main potential underlying causes of pain/symptoms  
+- **Hormone shifts analysis** (with commentary on symptomology)  
+- **Genetic influence** + explanation of divergent menopausal outcomes in different women  
+- **Explicit commentary on frailty/thinness vs. we...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, clinically grounded, and practice-ready** set of recommendations for your three case studies — integrating differential diagnosis, hormonal shifts, genetic influences, natural and medical pathways, cost/benefit analysis, and actionable questions to guide patient-centered care.
+
+---
+
+## 🔍 **Top 3 Main Issues to Address Per Case**  
+*(Prioritized for clinical impact, symptom alignment, and treatment feasibility)*
+
+---
+
+### ✅ Case Study 1: Age 52 – Menopausal...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, evidence-based, and clinically grounded** medical and functional differential breakdown for each of your three case studies. This includes:
+
+- Top 3 differential causes of pain and symptomology  
+- Hormonal shifts and their functional impact  
+- Genetics and individual variation in menopausal response  
+- Why some women become frail/thin, others overweight in menopause  
+- Natural, first-line, medically endorsed options (with ratings and interactions)  
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 20/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, evidence-based, and clinically actionable framework** developed specifically for your practice setting, integrating hormonal dynamics, genetic risk, symptomatology, differential diagnosis, lifestyle interventions, and surgical/HRT considerations.
+
+This response is tailored to your **three case studies**, structured around:
+
+1. **Top 3 main differential causes of pain/symptomology**  
+2. **Hormonal shifts (with commentary on symptom impact)**  
+3. **Genetic...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, evidence-based, and clinically grounded medical and practical framework** tailored to your three case studies, addressing **three primary differential diagnoses** for pain, hormonal shifts, metabolic consequences of menopause, genetic influences, and actionable, patient-centered recommendations.
+
+This response includes:
+- Clear **differential breakdowns** (with pathophysiology and symptom relevance)
+- **Genetic influence commentary** and explanations for p...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, evidence-based, and clinically grounded** set of recommendations tailored to your three case studies. This framework addresses:
+
+- **Top 3 differential causes of pain and systemic symptoms**  
+- **Hormonal shifts with symptomology commentary**  
+- **Menopause-related weight changes (frail/thin vs. obese)**  
+- **Genetic influences on hormone response and menopause trajectory**  
+- **Practical, patient-centered medical advice**  
+- **Natural, safe, medical-...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me work out a differential breakdown and optional advice options for patients with these histories. Address 3 main potential underlying causes for pain. When addressing any hormone shifts as a di...          </p>
+          <p class="lt-p">
+Response: Absolutely. Below is a **comprehensive, evidence-based, and clinically grounded differential breakdown** for each of your three case studies, structured to meet your exact request.
+
+We’ve integrated:
+
+- **3 main differential causes of pain**  
+- **Hormonal shifts with symptomology commentary**  
+- **Why women are frail/thin or overweight/obese at menopause**  
+- **Genetic influence on menopausal symptom response**  
+- **Natural, safe, medical-endorsed options (with ratings, interactions, cost-be...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5000                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+4912                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+6186                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5586                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5903                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5165                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+4984                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5603                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5744                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+6404                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+4479                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5486                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5241                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5646                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5075                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+981                </td>
+                <td>
+5325                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**
+
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Insert Date]  
+Subject: Important Updates Following the Acquisition of [Company X]
+
+We are excited to share that [Company X] has successfully completed the acquisition of a strategic technology partner, marking a new chapter in our growth and innovation journey. To ensure a smooth and unified transition, we are implementing several key changes across our operations. Please review the following timeline and policy upda...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**
+
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Insert Current Date]  
+Subject: Important Updates Following the Acquisition of [Company X]
+
+We are excited to share that [Company X] has successfully completed its acquisition of [Company X], and we are committed to ensuring a smooth and seamless integration for all our employees. This transformation will enhance our operations, empower our teams, and strengthen our culture moving forward. Below is a summary of key ch...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMO**  
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Insert Current Date]  
+Subject: Important Updates Following the Acquisition of [Company X]
+
+Dear Team,
+
+We are excited to announce that [Company X] has recently completed the acquisition of a strategic technology partner, marking a new chapter in our journey. To support this transformation and ensure a smooth, unified experience, several changes are being implemented across operations, tools, and workplace practices. These...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**
+
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Current Date]  
+Subject: Important Updates Following the Acquisition of [Company X]
+
+We are excited to announce the successful acquisition of [Company X], a strategic move that reflects our continued commitment to innovation, collaboration, and employee growth. As we transition into this new chapter, several important changes are being implemented to ensure a smooth and unified experience across our organization.
+
+Bel...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **Company-Wide Memo**
+
+Subject: Important Updates Regarding the Acquisition of [Company X] and Associated Changes
+
+Dear Team,
+
+We are excited to announce that [Company X] has successfully completed its acquisition, and as part of this transition, several key changes are being implemented to enhance our operations, technology, and culture. These updates are designed to support greater collaboration, efficiency, and alignment across all departments.
+
+**Key Timeline of Changes:**
+
+- **January 21:**...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**
+
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Current Date]  
+Subject: Announcement of Recent Acquisition and Key Changes Effective January 2025
+
+Dear Team,
+
+We are excited to announce that [Company X] has completed a strategic acquisition to further strengthen our capabilities, expand our service offerings, and enhance our employee experience. This transition brings together complementary cultures and technologies to create even greater value for our customers a...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**  
+**To:** All Employees  
+**From:** [Company X] Leadership Team  
+**Date:** [Current Date]  
+**Subject:** Important Updates Following the Acquisition of [Company X]  
+
+Dear Team,  
+
+We are excited to share that [Company X] has successfully completed the acquisition of [Company Name], and we are now stepping into a new chapter of growth, innovation, and collaboration. As part of this transition, several important updates and new policies are being implemented to support a seamless ...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **Company-Wide Memo**
+
+Subject: Important Updates Following the Acquisition of [Company X]
+
+Dear Team,
+
+We are excited to welcome the recent acquisition of [Company X] and to join forces in creating an even stronger, more cohesive workplace. As part of this transition, several key changes are being implemented to support our enhanced operational structure and improved employee experience. Please review the following updates and timelines to ensure a smooth integration.
+
+**Key Timeline Highlights...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**
+
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Insert Date]  
+Subject: Important Updates Following the Acquisition of [Company X]
+
+Dear Team,
+
+We are excited to share that [Company X] has successfully completed the acquisition of a complementary business, further strengthening our capabilities and expanding our reach. As part of this strategic move, several key changes are now in place to support operational efficiency, employee experience, and alignment across ou...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **Company-Wide Memo**  
+
+**Subject: Important Updates Following the Acquisition of [Company X] – Key Changes, Timeline, and New Policies**  
+
+Dear Team,  
+
+We are excited to announce the successful acquisition of [Company X], a milestone that reflects our shared commitment to innovation, collaboration, and growth. As part of this integration, several important changes are being implemented to ensure a smoother, more aligned workplace experience for all employees.  
+
+Please review the following k...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**
+
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Insert Date]  
+Subject: Important Updates on the Acquisition of [Company X] and Key Changes Effective Immediately  
+
+Dear Team,  
+
+We are excited to announce the successful acquisition of [Company X], a strategic move that strengthens our capabilities, expands our market reach, and enhances employee experiences. As part of this transition, several important changes are being implemented to support our unified vision a...          </p>
+          <p class="lt-p">
+Rubrics: 16/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.640          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **Company-Wide Memo**
+
+Subject: Important Updates Following the Acquisition of [Company X] – Transition and New Policies  
+
+Dear Team,  
+
+We are excited to announce the successful acquisition of [Company X], which marks a significant step in our growth and evolution as an organization. As part of this transition, several important changes are being implemented to align our operations with a more unified, efficient, and employee-focused workplace.  
+
+Below is a brief timeline of upcoming key mile...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**
+
+To: All Employees  
+From: [Company X] Management  
+Date: [Current Date]  
+Subject: Important Updates Following the Acquisition of [Company X] – Key Changes and Next Steps  
+
+Dear Team,  
+
+We are excited to welcome the recent acquisition of [Company X], which marks a pivotal new chapter for our organization. This transition reflects our shared commitment to innovation, collaboration, and operational excellence. As part of this integration, several changes are being implemented to ...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMO**  
+
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Insert Date]  
+Subject: Important Updates Following the Acquisition of [Company X]  
+
+We are excited to announce the successful acquisition of [Company X], marking a new chapter in our journey toward innovation, collaboration, and growth. As part of this transition, several key changes are being implemented to align our operations, technology, and culture with our expanded vision. Below is an overview of the key updates a...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**
+
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Insert Date]  
+Subject: Important Updates Following the Acquisition of [Company X]
+
+Dear Team,
+
+We are excited to announce the successful acquisition of [Company X], a move that reflects our continued commitment to growth, innovation, and employee empowerment. As part of this transformation, several important changes are being implemented across the organization to ensure alignment, efficiency, and a seamless experien...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a company-wide memo regarding the recent acquisition of a company and the resulting changes. The company&#x27;s name is withheld so in your memo, refer to the company as &quot;[Company X]&quot; s...          </p>
+          <p class="lt-p">
+Response: **MEMORANDUM**
+
+To: All Employees  
+From: [Company X] Leadership Team  
+Date: [Current Date]  
+Subject: Important Updates Following the Acquisition of [Company X]
+
+Dear Team,
+
+We are excited to share that [Company X] has recently completed the acquisition of a strategic partner to further strengthen our operations, technology, and employee experience. As part of this transition, several important changes are being implemented to support a unified,高效, and forward-thinking workplace. Please take a...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+564                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+561                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+597                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+612                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+561                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+616                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+572                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+581                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+621                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+647                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+563                </td>
+                <td>
+0.640                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.640                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+571                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+603                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+600                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+596                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+511                </td>
+                <td>
+650                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

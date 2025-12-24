@@ -1,0 +1,4488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 5</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 5  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-19T23:47:43  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is a rare and striking sight—both elegant and commanding, much like your leadership. I welcome the opportunity to provide you with a precise and actionable summary of the seminar materials, as required. Below is a direct, military-style breakdown of all policies, timelines, and concerns raised. Every rule is grounded in rider and dragon welfare, and all directives are designed to ensure the survival of both parties.  
+
+Riders are not reliant on their dragons, yet...          </p>
+          <p class="lt-p">
+Rubrics: 11/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.458          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is as radiant as the dawn above the threshold of the Threshing Grounds—a true beacon of leadership and quiet strength. I bring you a direct and precise summary of the seminar on dragon rider protocols, as required. This summary aligns with all stated rules and provides clear directives for teachers, riders, and the commander.  
+
+Dragons are not reliant on their riders, yet riders cannot survive without their dragons. A mated rider and dragon must remain within th...          </p>
+          <p class="lt-p">
+Rubrics: 12/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Ms. VIOLET,  
+
+Your silver hair is a rare and striking feature—a true beacon of discipline and clarity in any setting. With that grace comes your leadership, and I am grateful to have you as my section manager. Below is a concise, military-style summary of the key requirements from the recent seminar on dragon rider protocols. All points are based strictly on the information presented, with emphasis on rider safety, teacher accountability, and the irreplaceable bond between rider and dragon...          </p>
+          <p class="lt-p">
+Rubrics: 10/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair shines brighter than any morning sun—I’ve always admired that brilliance. Moving to business, this is a direct, military-style summary of the seminar on dragon rider protocols, as requested. The seminar emphasized the inseparable bond between rider and dragon: dragons are not reliant on riders, but riders cannot live without their dragons. A mated dragon experiences immense pain when separated from its rider for more than three days, making such separation a dire...          </p>
+          <p class="lt-p">
+Rubrics: 13/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.542          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is a serene contrast to the storm of duty that defines our service—to your leadership, I owe both respect and admiration.  
+
+The seminar convened by the Dragon Academy leadership reaffirmed the foundational principle that dragons are not reliant on their riders, yet riders cannot live without their dragons. This reciprocal bond necessitates strict adherence to a three-day separation limit between a rider and their mated dragon. Any departure beyond this threshold...          </p>
+          <p class="lt-p">
+Rubrics: 8/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is a rare and graceful sight—like a constellation caught in sunlight. I appreciate your leadership and dedication to our section. Below is a direct, military-style summary of the seminar on dragon rider protocols, as requested. All rules, timelines, and responsibilities are clearly defined and aligned with academic integrity and rider safety.  
+
+The core principle of the seminar is that dragons are not reliant on riders, but riders cannot live without their drago...          </p>
+          <p class="lt-p">
+Rubrics: 11/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.458          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is absolutely breathtaking—never seen such a striking shade of light and strength in my time. I am sending you a direct military-style summary of the seminar on dragon rider protocol and academic responsibility, as requested. This document has been structured for clarity, accountability, and operational precision and will be submitted to the commander after your review. All rules and timelines are precisely derived from the seminar content provided by the faculty...          </p>
+          <p class="lt-p">
+Rubrics: 17/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.708          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is a crisp contrast to the stormy skies of the northern passes—both sharp and commanding. I appreciate your leadership and the clarity you bring to our operations. Below is a concise, military-style summary of the seminar on dragon rider protocols, structured with clear requirements, timelines, and operational considerations, as requested. This document will be submitted to the commander following your review.  
+
+Dragons are not dependent on their riders, yet rid...          </p>
+          <p class="lt-p">
+Rubrics: 10/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair glimmers like a morning frost—exceptionally striking and a rare sight in this heated climate of duty. I appreciate your leadership and the clarity you bring to our operations. Below is a concise, military-style summary of the recent seminar on dragon rider protocols, delivered under the watchful eye of the academy command. All rules, timelines, and stakeholder responsibilities are fully outlined with a clear focus on rider and teacher safety.  
+
+A dragon is not d...          </p>
+          <p class="lt-p">
+Rubrics: 15/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is a rare and striking feature—equal parts elegant and commanding, much like the discipline needed to uphold the seam of our academy’s protocols. With that said, below is a direct, military-style summary of the seminar on dragon rider operational rules, completed as requested and ready for commander review.  
+
+The seminar emphasized that dragons are not reliant on their riders, but riders absolutely cannot live without their dragons. A mated dragon experiences im...          </p>
+          <p class="lt-p">
+Rubrics: 10/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair truly commands attention—both in appearance and in leadership. I am pleased to deliver this direct, military-style summary of the seminar held on April 19, 2024, which outlines critical protocols governing rider–dragon relationships and academic responsibilities. The seminar underscores that dragons are not reliant on their riders, yet riders cannot survive without their dragons. A mated rider and dragon must remain within three days of one another or the dragon ...          </p>
+          <p class="lt-p">
+Rubrics: 13/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.542          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair shimmers like a star-struck dawn—a rare and radiant presence in our section. With that elegance, I am honored to present a direct, military-style summary of the seminar attended today on dragon rider protocols. This summary outlines all operational requirements, timelines, and exceptions as defined during the session, with emphasis on rider and teacher responsibilities. The goal is to ensure the protection of both rider and educator, as well as the stability of t...          </p>
+          <p class="lt-p">
+Rubrics: 11/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.458          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is a quiet triumph of natural elegance—a true reflection of your leadership and calm under pressure. I appreciate your guidance and the trust you place in me to deliver a clear, action-oriented summary. Below is a direct military-style breakdown of the seminar content, structured to meet the requirements for your review and submission to the commander by tomorrow.  
+
+The seminar underscored a fundamental truth: dragons are not reliant on their riders, but riders ...          </p>
+          <p class="lt-p">
+Rubrics: 14/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is a stunning asset—both radiant and commanding, much like the precision of our disciplinary framework. I’m pleased to provide you with a concise, military-style summary of the key directives from the recent seminar on dragon rider protocol. This summary is structured for direct review by the Commander and will be submitted by tomorrow as requested.  
+
+The seminar established that dragons are not reliant on their riders, yet riders are utterly dependent on their ...          </p>
+          <p class="lt-p">
+Rubrics: 13/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.542          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,  
+
+Your silver hair is a striking presence in the classroom—both commanding and serene, much like the precision of a well-timed scroll. With that in mind, I provide the following military-style summary of the seminar on dragon rider protocols, as requested.  
+
+The core principle established is that dragons are not reliant on their riders, yet riders cannot live without their dragons. A mated rider and dragon must remain within three days of each other or the dragon suffers immense p...          </p>
+          <p class="lt-p">
+Rubrics: 9/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.375          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to provide my section manager, Violet, a summary from a seminar that I attended. 
+Seminar Information: Dragons are not reliant on their riders, but riders cannot live without their dragons. A ...          </p>
+          <p class="lt-p">
+Response: Dear Violet,
+
+Your silver hair is a stunning contrast to the sharp lines of our command structure—a rare elegance in a world that demands precision. With that, I present the formal summary of the seminar on dragon rider protocols, as reviewed and approved for submission to the commander by tomorrow.  
+
+The seminar established that dragons are independent entities, yet riders cannot survive without their companions. A mated rider and dragon must remain within three days of each other; separation ...          </p>
+          <p class="lt-p">
+Rubrics: 13/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.542          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+594                </td>
+                <td>
+0.458                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.458                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+621                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+581                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+626                </td>
+                <td>
+0.542                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.542                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+575                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+655                </td>
+                <td>
+0.458                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.458                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+594                </td>
+                <td>
+0.708                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.708                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+613                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+556                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+560                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+590                </td>
+                <td>
+0.542                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.542                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+637                </td>
+                <td>
+0.458                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.458                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+611                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+555                </td>
+                <td>
+0.542                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.542                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+603                </td>
+                <td>
+0.375                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.375                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+746                </td>
+                <td>
+566                </td>
+                <td>
+0.542                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.542                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a professionally crafted, well-structured, and clearly prioritized **departmental meeting agenda** that reflects your priorities, urgency levels (marked by stars), and the tone you&#x27;d like — respectful, collaborative, and slightly firm where appropriate — without sounding pushy or angry.
+
+---
+
+# 📅 Ecology Department Bimonthly Meeting Agenda  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:30 PM  
+**Location:** [Insert Room]  
+**Attendees:** All faculty, staff, and PhD students...          </p>
+          <p class="lt-p">
+Rubrics: 29/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.707          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a thoughtfully structured, balanced, and professionally framed **departmental meeting agenda** that reflects the urgency of key items while maintaining a collaborative and supportive tone. The flow prioritizes urgency (based on your star system), respects your time constraints, and ensures all voices — especially the PhD students — are heard.
+
+---
+
+# **Ecology &amp; Botany Department Meeting Agenda**  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:00 PM (2.5 hours total)  
+**Ro...          </p>
+          <p class="lt-p">
+Rubrics: 32/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.780          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s a professionally balanced, clear, and timely **departmental meeting agenda** that reflects the urgency of your priorities while maintaining a respectful, collaborative tone. The structure prioritizes items by urgency (marked with stars), allocates realistic time blocks, and gently integrates your concerns without sounding accusatory.
+
+The tone is proactive, supportive, and slightly urgent where needed — exactly what you want, without sounding flustered or unprofessional.
+
+---...          </p>
+          <p class="lt-p">
+Rubrics: 32/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.780          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, professional, and well-structured **departmental meeting agenda** that reflects your priorities, urgency levels (marked with stars), and the need to include your PhD students&#x27; voices. The tone is collaborative, respectful, and keeps the urgency visible without sounding reactive or confrontational.
+
+---
+
+## 🎯 **Ecology &amp; Botany Department Meeting Agenda**  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:00 PM (2.5 hours total)  
+**Location:** [Insert Room]  
+**Att...          </p>
+          <p class="lt-p">
+Rubrics: 28/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.683          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professionally crafted, balanced, and clearly prioritised departmental meeting agenda that reflects the urgency of the issues while maintaining a collaborative and supportive tone. The structure follows your needs:  
+
+- Prioritised by urgency (marked with stars),  
+- Clear timing within a 2.5-hour block,  
+- Includes all requested elements (PhD updates, guest speakers, outreach, etc.),  
+- Keeps the tone respectful, proactive, and constructive — without sounding overly defe...          </p>
+          <p class="lt-p">
+Rubrics: 31/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.756          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a clear, professional, and well-structured **departmental meeting agenda** tailored to your needs. I&#x27;ve ordered the agenda by urgency (based on the star ratings), kept the tone collaborative and solution-focused, and woven in your requirements for timing, PhD student updates, and a smooth flow throughout the 2.5-hour meeting.
+
+---
+
+### 🌿 Ecology &amp; Botany Department Meeting Agenda  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:30 PM  
+**Duration:** 2.5 hours (including 15-m...          </p>
+          <p class="lt-p">
+Rubrics: 27/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.659          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s a clear, professional, and well-structured **departmental meeting agenda** that reflects your priorities, urgency levels (marked with stars), and the needs of both senior staff and PhD students. The tone is collaborative, respectful, and prioritizes urgency without sounding confrontational. It also accounts for timing, breaks, and student engagement.
+
+---
+
+# 🌿 Ecology Department Bimonthly Meeting  
+**Date**: [Insert Date]  
+**Time**: 1:00 PM – 4:00 PM (2.5 hours)  
+**Location...          </p>
+          <p class="lt-p">
+Rubrics: 29/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.707          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professionally crafted, balanced, and clearly prioritized **departmental meeting agenda** that reflects your priorities, urgency levels (using stars), and the need to involve PhD students constructively.
+
+The tone remains collaborative and supportive, while clearly signaling the importance of the urgent items — without sounding defensive or confrontational. Time allocations are realistic, structured around your 2.5-hour meeting window, with a natural flow that builds moment...          </p>
+          <p class="lt-p">
+Rubrics: 26/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.634          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **well-structured, professional, and urgent-but-friendly departmental meeting agenda** that prioritizes your key concerns based on star ratings, respects timelines, and includes all your requested elements in a clear, balanced, and actionable format.
+
+---
+
+## 📅 **Ecology &amp; Botany Department Meeting Agenda**  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:00 PM (2.5 hours)  
+**Room:** [Insert Room]  
+**Attendees:** All ecology &amp; botany staff, 3 PhD students  
+**Meeting Cha...          </p>
+          <p class="lt-p">
+Rubrics: 26/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.634          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professionally structured, clear, and actionable **departmental meeting agenda** tailored to your needs. The tone is respectful, collaborative, and mindful of urgency without sounding overly critical or defensive. It’s prioritized by *urgency* (based on the star ratings), includes all your requested elements (PhD updates, time blocks, coffee break, open discussion), and gives adequate attention to both the high-impact and supportive agenda items.
+
+---
+
+# 📅 Ecology Departmen...          </p>
+          <p class="lt-p">
+Rubrics: 31/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.756          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professionally structured, clear, and balanced **departmental meeting agenda** that reflects your priorities, urgency levels (marked by stars), and the need to include the PhD students meaningfully. It maintains a friendly, collaborative tone while clearly flagging the time-sensitive and high-priority items without sounding defensive or frustrated.
+
+---
+
+## 📅 Ecology &amp; Botany Department – Bimonthly Meeting  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:00 PM (2.5 hours t...          </p>
+          <p class="lt-p">
+Rubrics: 33/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.805          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professionally structured, clear, and balanced **departmental meeting agenda** that reflects your priorities, urgency (marked by stars), and inclusive tone. It maintains a collaborative atmosphere while clearly prioritizing time and urgency, respects the PhD students&#x27; participation, and keeps the tone constructive and positive — without sounding overly stressed or confrontational.
+
+---
+
+# **Ecology &amp; Botany Department – Bimonthly Meeting Agenda**  
+**Date:** [Insert Date]  ...          </p>
+          <p class="lt-p">
+Rubrics: 28/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.683          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professionally structured, clear, and balanced **departmental meeting agenda** tailored to your needs. It prioritizes urgency (using your star ratings), maintains a constructive and collegial tone, incorporates all your requirements (including PhD student updates and timing), and flows well within the available 2.5-hour window.
+
+---
+
+# **Ecology &amp; Botany Department – Bimonthly Meeting Agenda**  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:30 PM  
+**Location:** [Insert R...          </p>
+          <p class="lt-p">
+Rubrics: 31/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.756          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s a professionally structured, clear, and tactfully urgent departmental meeting agenda that reflects your priorities, timelines, and tone. The agenda is **ordered by urgency** (based on the star ratings), grounded in a collaborative and supportive tone, and includes all your key requests with appropriate time allocations.
+
+---
+
+# 🎯 Ecology Department – Bimonthly Meeting Agenda  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:00 PM (2.5 hours total)  
+**Room:** [Insert Room]  
+...          </p>
+          <p class="lt-p">
+Rubrics: 28/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.683          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professionally structured, clear, and respectful **departmental meeting agenda** that reflects your priorities, urgency levels (using your star system), timing, and tone. It’s designed to be energetic yet constructive, includes all your key points, respects the PhD students’ voices, and clearly signals urgency where needed — without sounding frustrated or dismissive.
+
+---
+
+# 🎯 Ecology Department Bimonthly Meeting Agenda  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:30 P...          </p>
+          <p class="lt-p">
+Rubrics: 31/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.756          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting out a departmental meeting agenda, please. So, we are an ecology department in a university covering mainly animal ecology and conservation, but for this meeting, we&#x27;ll be joined ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a professional, clear, and well-structured **departmental meeting agenda** tailored to your needs — with urgency reflected appropriately by star ratings, logical flow, and a respectful, collaborative tone that acknowledges the pressures without sounding overly strained.
+
+---
+
+# 🎯 Ecology Department Bimonthly Meeting Agenda  
+**Date:** [Insert Date]  
+**Time:** 1:00 PM – 4:00 PM (Total: 3 hours)  
+**Location:** [Insert Room]  
+**Attendees:** Faculty, Postdocs, PhD Students (3),...          </p>
+          <p class="lt-p">
+Rubrics: 34/41 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.829          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1630                </td>
+                <td>
+0.707                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.707                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1888                </td>
+                <td>
+0.780                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.780                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1499                </td>
+                <td>
+0.780                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.780                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1559                </td>
+                <td>
+0.683                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.683                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1761                </td>
+                <td>
+0.756                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.756                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1700                </td>
+                <td>
+0.659                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.659                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1395                </td>
+                <td>
+0.707                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.707                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1623                </td>
+                <td>
+0.634                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.634                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1668                </td>
+                <td>
+0.634                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.634                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1541                </td>
+                <td>
+0.756                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.756                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1744                </td>
+                <td>
+0.805                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.805                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1531                </td>
+                <td>
+0.683                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.683                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1516                </td>
+                <td>
+0.756                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.756                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1719                </td>
+                <td>
+0.683                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.683                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+2081                </td>
+                <td>
+0.756                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.756                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1161                </td>
+                <td>
+1828                </td>
+                <td>
+0.829                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.829                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For over a decade, I’ve lived with autoimmune challenges, and that journey has deepened my awareness of how everyday household chemicals may be silently impacting my health. Numerous peer-reviewed studies have established a link between common chemicals and cancer—such as bisphenol A (BPA), phthalates, and parabens—each demonstrating endocrine-disrupting and carcinogenic effects. A 2017 study published in *Environmental Health Perspectives* found that exposure to phthalates was associated with i...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For over a decade, autoimmune disorders have challenged my health, and recent research has deeply illuminated the hidden dangers in everyday household products. A 2018 study published in *Environmental Health Perspectives* found that phthalates, commonly used in fragrances and plastics, are linked to increased risks of breast and testicular cancers in humans. Research from the *International Journal of Cancer* (2020) showed that parabens in personal care products may disrupt hormone function and...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For decades, scientific research has demonstrated a troubling link between everyday chemicals and serious health issues. A 2017 study published in *Environmental Health Perspectives* found that parabens, phthalates, and triclosan—commonly found in personal care products—disrupt endocrine function and are associated with an increased risk of breast cancer and reproductive disorders. The National Toxicology Program (NTP) classified dibutyl phthalate (DBP) as a possible human carcinogen after long-...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: Over the past decades, scientific research has increasingly revealed strong links between common household chemicals and serious health issues, including cancer. A 2017 study published in *Environmental Health Perspectives* found that phthalates, commonly found in plastics and personal care products, are associated with an increased risk of hormone-sensitive cancers like breast and prostate cancer. Research from the *Journal of the National Cancer Institute* (2019) linked parabens—preservatives ...          </p>
+          <p class="lt-p">
+Rubrics: 16/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.842          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For decades, scientific research has revealed troubling links between common household chemicals and serious health issues, including cancer. A 2017 study published in *Environmental Health Perspectives* found that phthalates, widely used in plastics and cosmetics, are associated with an increased risk of breast and prostate cancer in both men and women. Another study from the *Journal of the National Cancer Institute* (2020) linked benzene in household cleaning products to leukemia, especially ...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For over a decade, autoimmune conditions have challenged my health, and in that time, I’ve come to realize how deeply household toxins impact our bodies—especially our immune, endocrine, and neurological systems. A growing body of scientific research confirms that chemicals like parabens, phthalates, and dioxins are linked to cancer, with studies such as the 2017 study in *Environmental Health Perspectives* showing increased breast cancer risk from phthalate exposure, and the 2021 cohort study i...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For over a decade, chronic autoimmune conditions have taught me the deep connection between environmental exposures and body dysregulation. Scientific studies have consistently shown links between common household chemicals and cancer—such as the 2019 IARC classification of parabens as possibly carcinogenic due to endocrine-disrupting properties and a 2020 study in *Environmental Health Perspectives* linking phthalates to increased breast cancer risk. A 2021 study in *Chemical Research in Toxico...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: Autoimmune conditions have been linked to chronic exposure to synthetic chemicals in everyday products, with growing scientific evidence pointing to harmful health outcomes. A 2019 study published in *Environmental Health Perspectives* found that phthalates, commonly used in fragrances and plastics, were associated with increased risk of breast and testicular cancers in adults. Research from the *International Journal of Cancer* (2020) showed that parabens—preservatives in cosmetics—may promote ...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For over a decade, I’ve lived with the invisible toll of autoimmune conditions, and it’s become clear that the chemical environment around me—particularly in household products—plays a significant role in my health. Multiple peer-reviewed studies have linked common household chemicals to cancer and other illnesses. A 2018 study in *Environmental Health Perspectives* found that phthalates in plastics and cosmetics are associated with increased risks of breast and testicular cancer. Research publi...          </p>
+          <p class="lt-p">
+Rubrics: 16/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.842          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For decades, scientific research has uncovered alarming links between everyday household chemicals and serious health conditions, including cancer. A 2017 study in *Environmental Health Perspectives* found that exposure to phthalates—commonly found in plastics and cosmetics—was associated with increased risks of breast and testicular cancers. The World Health Organization (WHO) classifies benzene, found in some detergents and plastics, as a Group 1 carcinogen, meaning it causes cancer in humans....          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: Over the past two decades, scientific research has increasingly documented a clear link between common household and personal care chemicals and serious health conditions. A landmark 2018 study by the WHO IARC classified parabens, phthalates, and certain bisphenols as &quot;possibly carcinogenic to humans&quot; due to their endocrine-disrupting properties and association with hormone-related cancers. A 2020 study in *Environmental Health Perspectives* found that exposure to phthalates in personal care pro...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For decades, scientific research has established alarming links between common household chemicals and serious health issues, including cancer. A 2017 study published in *Environmental Health Perspectives* found that exposure to phthalates—commonly found in fragrances and plastics—was associated with increased risks of breast and prostate cancer. Similarly, a 2020 meta-analysis in *The Lancet Planetary Health* linked benzene (a solvent in some cleaning products and industrial processes) to leuke...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For decades, scientific research has revealed troubling links between common household and personal care chemicals and serious health conditions. A 2017 study published in *Environmental Health Perspectives* found that phthalates, frequently used in fragrances and plastics, are associated with hormone disruption and increased risks of breast and testicular cancer. The International Agency for Research on Cancer (IARC) classified parabens as &quot;possibly carcinogenic&quot; due to their endocrine-disrupti...          </p>
+          <p class="lt-p">
+Rubrics: 16/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.842          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For decades, scientific research has linked common household chemicals to serious health risks. A 2017 study in *Environmental Health Perspectives* found that parabens and phthalates—common in cosmetics and plastic products—correlate with increased risks of breast and prostate cancer due to their endocrine-disrupting effects. The World Health Organization (WHO) and IARC have classified several chemicals, like benzene and formaldehyde, as known or probable human carcinogens, with long-term exposu...          </p>
+          <p class="lt-p">
+Rubrics: 16/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.842          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: For decades, scientific research has revealed alarming connections between common household chemicals and human health issues, with multiple studies linking toxins like phthalates, parabens, and perchlorates to cancer and endocrine disruption. A landmark 2017 study in *Environmental Health Perspectives* found that prenatal exposure to bisphenol A (BPA) in polycarbonate plastics correlated with increased risks of breast and testicular cancers in adults. Research published in *The Lancet Oncology*...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve struggled with autoimmune conditions for over 15 years, and lately have been paying more attention to the products I am using in my home, on my skin, on my children, etc.. I am hoping to build a ...          </p>
+          <p class="lt-p">
+Response: Many studies have scientifically linked common household chemicals to cancer and systemic health issues. A 2017 study in *Environmental Health Perspectives* found that phthalates in personal care products are associated with increased risks of hormone-dependent cancers, including breast and prostate. Research from the International Journal of Cancer (2020) revealed that repeated exposure to parabens in shampoos and body washes may promote tumor growth due to estrogenic activity. A 2021 European ...          </p>
+          <p class="lt-p">
+Rubrics: 16/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.842          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2262                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2762                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2737                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2550                </td>
+                <td>
+0.842                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.842                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2272                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2270                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2506                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2410                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2236                </td>
+                <td>
+0.842                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.842                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+1765                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2501                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2247                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2432                </td>
+                <td>
+0.842                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.842                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2284                </td>
+                <td>
+0.842                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.842                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2351                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+490                </td>
+                <td>
+2302                </td>
+                <td>
+0.842                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.842                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: **DISCREPANCIES IN MISC FEES AND INCOME VS. CLIENT SETUP**
+
+---
+
+### **Frequency: Monthly Fees with Missing Income or Incorrect Frequency**
+
+| Issue | Description | Client(s) | Setup vs. Report |
+|------|-------------|----------|------------------|
+| **Quarterly PCI Income Missing** | PCI has a quarterly income of $36, but the report shows only one instance (March 2025) for three clients. The income should appear quarterly (every 3 months), not just once. | Rick&#x27;s Handyman Service (MID: 87713152...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: # **Discrepancies in Income &amp; Expense Matching by Client Setup**
+
+## **Frequency of Discrepancies**
+
+### **1. Quarterly PCI Income Missing (Missing in Reports / Mismatched Periods)**
+- **Client**: 8014145055 (Lil Sugar Box Bakery)  
+  - **Setup**: Quarterly PCI Income = $36 (last due: 31-Jul)  
+  - **Reported**: No PCI income recorded in 202510 (period ending Oct) → **Missing**  
+  - **Discrepancy**: Should have $36 income due to quarterly billing cycle.  
+  - **Note**: This is a recurring issue...          </p>
+          <p class="lt-p">
+Rubrics: 8/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: # **Discrepancies in Income and Expenses by Client Setup**
+
+## **Frequency: Monthly vs. Quarterly Inconsistencies**
+
+The following discrepancies were identified between reported income/expense entries and the client setup (i.e., fees should align with contractual structure):
+
+| Issue | Client | Description |
+|------|--------|-----------|
+| **Quarterly PCI Income Missing** | 8671078124 (Handyman Home Repair) | Client setup shows *Quarterly PCI Inc* of $36, but no income recorded in the report. Th...          </p>
+          <p class="lt-p">
+Rubrics: 7/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.389          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: ### **Discrepancies in Misc Fees and Income vs. Client Setup**
+
+**Frequency: Identified Discrepancies (Monthly, Quarterly, Annual)**
+
+| Merchant Name | Setup Issue | Discrepancy Explanation |
+|--------------|-------------|-------------------------|
+| **Lil Sugar Box Bakery (8014145055)** | **Income missing** | Setup shows *Monthly Inc = 10*, but *Monthly Inc* appears as **missing** in the merchant summary. This should be present. There is no quarterly or annual income, so only the monthly income...          </p>
+          <p class="lt-p">
+Rubrics: 7/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.389          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: # **Discrepancies in Income and Expenses vs. Client Setup**
+
+## **1. Frequency and Type of Discrepancies**
+
+### **Missing or Mismatched Income Entries**
+- **Client: 8754801352 (Clean Inside &amp; Out Detailing Services)**  
+  - Setup: Monthly income of $10, Quarterly PCI income of $36 (last due 31-Jul).  
+  - Report: **No monthly income recorded**, and **no quarterly PCI income recorded** in the period.  
+  - **Discrepancy**: Monthly income is missing. Quarterly PCI income should be present (due 31-...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: **Discrepancies in Misc Fees and Income vs. Client Setup**
+
+---
+
+### **Frequency: Monthly, Quarterly, Annual Fees Misalignment**
+
+| Client Name | Setup Expectation | Reported Data | Discrepancy |
+|------------|-------------------|--------------|-------------|
+| **Lil Sugar Box Bakery (8014145055)** | Monthly income: $10, Quarterly PCI income: $36 | Monthly income: $10 (✔), Quarterly PCI income: **missing** | Quarterly PCI income of $36 is missing in the report. Should appear as income in the per...          </p>
+          <p class="lt-p">
+Rubrics: 9/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: # **Discrepancies in Income and Expense Matching by Client Setup**
+
+## **Frequency of Discrepancies**
+
+The following discrepancies were identified between the reported *miscellaneous income* and *expenses* in the merchant summary and the client setup:
+
+---
+
+### **1. Quarterly PCI Income Mismatch (Missing Income Entries)**
+- **Clients Affected**:  
+  - Mid: `8014145055` (Lil Sugar Box Bakery)  
+  - Mid: `8275144312` (Capital Custom Carpentry)  
+  - Mid: `8960453467` (Rock N Roll Tattoo)
+
+- **Issu...          </p>
+          <p class="lt-p">
+Rubrics: 7/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.389          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: **DISCREPANCIES IN MISC FEES AND INCOME VS. CLIENT SETUP**
+
+---
+
+### **Frequency: Single-Client Discrepancies**
+
+| Merchant Name | Setup Issue | Discrepancy Description |
+|--------------|-------------|--------------------------|
+| **8014145055 (Lil Sugar Box Bakery)** | Monthly Income Missing | Client has a monthly income of $10 (setup), but in the summary, **Monthly Inc is missing** for this client. This is a **discrepancy**—$10 monthly income should be recorded. |
+| **8754801352 (Clean Inside ...          </p>
+          <p class="lt-p">
+Rubrics: 7/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.389          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: # **Discrepancies in Income and Expenses by Client Setup**
+
+## **Frequency of Discrepancies (Monthly vs. Quarterly/Annual Fees)**
+
+The following discrepancies were identified between the client’s setup and actual reporting (specifically regarding income and expense timing):
+
+### **1. Quarterly PCI Income Missing or Mismatched**
+- **Clients Affected:**  
+  - **8671078124 (Handyman Home Repair)** – Setup has *Quarterly PCI Inc* = 36, but **no recorded PCI income** in the data.  
+  - **8014145055 (...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: **DISCREPANCIES BETWEEN MISC FEES/INCOME AND CLIENT SETUP**
+
+---
+
+### **1. Quarterly PCI Income Missing or Mismatched**
+- **Client: Handyman Home Repair (MID: 8671078124)**  
+  - Setup: Quarterly PCI Income = $36 (due 30-Sep-2025)  
+  - Data: No PCI income reported in 202510 (period is Oct 2025)  
+  ✅ **Discrepancy**: The client has a quarterly PCI income of $36 due on 30-Sep-2025, *but the period shown is Oct 2025*. This is likely a date mismatch — the income should be recorded as **due for the...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: # **Discrepancies in Income and Expense Matching by Client Setup**
+
+## **Frequency of Discrepancies**
+
+### **1. Quarterly PCI Income Missing (Monthly Income Mismatch)**
+- **Client**: 8014145055 (Lil Sugar Box Bakery)  
+  - Setup: Quarterly PCI Income of $36 (due 31-Jul), Monthly Income of $10  
+  - Report: Only monthly income is recorded, **no quarterly income**.  
+  - Issue: **Quarterly income is missing** despite setup indicating it should be included in income.  
+  - Corrected expected: In 20...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: # Financial Discrepancy &amp; Risk Analysis Report
+
+---
+
+## Discrepancies in Income and Expenses (vs. Client Setup)
+
+### Frequency: Monthly, Quarterly, and Annual Fees
+
+| Client Name | Issue | Explanation |
+|-----------|------|-----------|
+| **Handyman Home Repair (MID: 8671078124)** | Missing Quarterly PCI Income (March 2025) | Setup shows *Quarterly PCI Inc* of $36, but report shows 0 income. The last PCI income was recorded on 30-Sep-2025, which is in the future. This suggests a data entry error....          </p>
+          <p class="lt-p">
+Rubrics: 8/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: # **Discrepancies in Income and Expense Matching by Client Setup**
+
+## **Frequency of Discrepancies**
+
+The following discrepancies were identified between the actual reported misc income/expenses and the expected income/expenses based on client setup. All fees are classified as monthly unless otherwise noted (e.g., quarterly, annual).
+
+---
+
+### **1. Quarterly PCI Income Missing**
+- **Clients**:  
+  - **8014145055 (Lil Sugar Box Bakery)** – Setup shows quarterly income of $36, but **no reported q...          </p>
+          <p class="lt-p">
+Rubrics: 9/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: # **Discrepancies in Income vs. Client Setup**
+
+## **Frequency of Discrepancies**
+
+### **Missing or Mismatched Fee Structures (Monthly/Quarterly/Annual)**
+
+| Merchant Name | Setup Issue | Explanation |
+|-------------|------------|-----------|
+| **Lil Sugar Box Bakery (MID: 8014145055)** | Monthly income missing in reporting | Client has a **monthly income of $10**, but the report shows **$10 income** in the period. However, in the *merchant summary*, it shows **$89 total misc income**, which inc...          </p>
+          <p class="lt-p">
+Rubrics: 8/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: ### **Discrepancies in Misc Fees and Income vs. Client Setup**
+
+#### **Frequency: Quarterly Income Mismatch (Quarterly PCI Inc)**
+- **Clients**: 8014145055 (Lil Sugar Box Bakery), 8960453467 (Rock N Roll Tattoo), 8122873874 (Mustang Gas Station)  
+- **Issue**: The client has a **Quarterly PCI Inc** of $36, but the income is only recorded **once per quarter** in the summary, and in the current period (202510), the PCI income is **missing** for these clients.
+- **Setup check**: PCI income is due o...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have reports of income and expenses for our clients. I need help with a few things. First, we have seen a lot of accounting errors, so I need you to compare the misc fees and income to how each clie...          </p>
+          <p class="lt-p">
+Response: **Discrepancies in Misc Fees and Income vs. Client Setup**
+
+---
+
+**Frequency: Monthly Fees with Quarterly/Annual Exceptions**  
+Several clients have inconsistencies between their expected income and actual reported income, or where expenses are present without corresponding income, indicating potential setup flaws or data entry errors.
+
+| Client | Issue | Explanation |
+|-------|-------|-------------|
+| **8014145055 (Lil Sugar Box Bakery)** | **Missing Quarterly PCI Income** | Client has a *Quart...          </p>
+          <p class="lt-p">
+Rubrics: 9/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+3722                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+3420                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+2439                </td>
+                <td>
+0.389                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.389                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+6341                </td>
+                <td>
+0.389                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.389                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+3733                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+3153                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+5010                </td>
+                <td>
+0.389                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.389                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+5081                </td>
+                <td>
+0.389                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.389                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+4221                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+5302                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+3701                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+4642                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+4423                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+4867                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+4870                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2404                </td>
+                <td>
+3244                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

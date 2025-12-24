@@ -1,0 +1,4766 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 3</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 3  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-19T23:38:18  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here&#x27;s a **realistic, naturally randomized CSV data sample** based on your detailed requirements. The data represents one weekday (e.g., Monday), covering the full day with all the required behaviors:
+
+---
+
+### ✅ Key Features of This Sample:
+- **Index** starts at 0 and increases sequentially.
+- **Employees**: 4 total (IDs: 64498288, 72185782, 72229080, 5585367)
+- **Accounts**: Each employee only checks their assigned accounts (one per check), not others.
+- **Sign-ins** between **7:00–10:00**, **...          </p>
+          <p class="lt-p">
+Rubrics: 14/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **realistic, naturally randomized sample CSV data** that meets all your specifications.
+
+---
+
+### 📝 **Key Features of the Sample Data**
+- **Index**: Starts at 0, increments sequentially.
+- **ID**: Matches the employee IDs you provided.
+- **Timestamp**: Formatted as `YYMMDD-HH:MM.XX` (e.g., `240405-09:17.42`), representing a single weekday (April 5, 2024).
+- **Page**:
+  - `home`: for sign-in/sign-out
+  - `account`: for reviewing accounts
+  - `video_call`: for video call acti...          </p>
+          <p class="lt-p">
+Rubrics: 14/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here&#x27;s a **realistic, naturally distributed CSV sample** of web activity data for the office accounts management system, following all your specifications.
+
+---
+
+### ✅ Data Features:
+- **Index**: Starts at 0, increases sequentially.
+- **ID**: Employee IDs as provided.
+- **Timestamp**: Formatted as `YYMMDD-HH:MM.XX`, random and natural-sounding (no round times like 11:15.00).
+- **Page**: `home`, `account`, or `video_call`.
+- **Action**: `sign-in`, `sign-out`, `review`, `start`, `join`, `navigate`...          </p>
+          <p class="lt-p">
+Rubrics: 16/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here&#x27;s a **realistic, natural-sounding CSV sample** of web activity data for a workplace with employee account checking, sign-ins/out, and one video call event per day — following your detailed specifications.
+
+---
+
+### ✅ Key Features Included:
+- **Index starts at 0**, increases sequentially.
+- **User IDs** (`id`) match your provided list.
+- **Pages**:
+  - `home` → for sign-in/sign-out
+  - `account` → for reviewing accounts
+  - `video_call` → for meetings
+- **Actions**:
+  - `sign-in`, `sign-out`...          </p>
+          <p class="lt-p">
+Rubrics: 16/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here&#x27;s a **realistic, naturally random sample CSV dataset** that meets all your requirements:
+
+---
+
+### ✅ Key Features Included:
+- 4 employees with their assigned accounts  
+- All actions occur only while signed in  
+- Sign-ins between **7:00–10:00**, sign-outs between **1:00–5:00**  
+- Two employees have a **1-hour lunch break** (randomly between 11:00–1:00)  
+- Each employee checks **each of their accounts once**, randomly spaced  
+- Account reviews are **interleaved** with sign-ins/out and no...          </p>
+          <p class="lt-p">
+Rubrics: 14/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here is a **realistic, natural-looking sample CSV dataset** based on your detailed requirements. The data represents web activities from a single weekday (March 10, 2025), with employee sign-ins, account reviews, video calls, and sign-outs — all strictly aligned with the rules you specified.
+
+---
+
+### ✅ Key Features Implemented:
+- **Index** starts at 0 and increases sequentially.
+- **IDs** match the provided employee IDs.
+- **Pages** are correctly assigned: `home` for sign-in/out, `account` for ...          </p>
+          <p class="lt-p">
+Rubrics: 13/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.542          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here&#x27;s a **realistic, naturally randomized sample CSV dataset** that meets **all your specified constraints** for a single weekday of employee activity on a virtual office account management platform.
+
+---
+
+### ✅ Key Features Implemented:
+
+- **Employees &amp; Accounts** as defined.
+- **Index** starts at 0 and increases sequentially.
+- **Timestamps** are in format `YYMMDD-HH:MM.XX`, naturally randomized (not on perfect minutes).
+- **Sign-in** between 7:00–10:00 AM.
+- **Sign-out** between 1:00–5:00 PM...          </p>
+          <p class="lt-p">
+Rubrics: 13/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.542          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here is a **realistic, naturally randomized sample CSV dataset** based on your detailed specifications.
+
+The data represents one weekday (e.g., Monday), with:
+
+- 4 employees (IDs: 64498288, 72185782, 72229080, 5585367)
+- Each employee signs in between 7:00–10:00 AM and logs out between 1:00–5:00 PM
+- Two employees (randomly selected) take a **1-hour lunch break between 11:00–13:00**, logging out and signing back in later
+- Each employee **reviews each of their assigned accounts exactly once** (n...          </p>
+          <p class="lt-p">
+Rubrics: 12/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here&#x27;s a **realistic, naturally timed CSV sample** of web activity data based on your detailed specifications for a single weekday. The data spans one full weekday (Monday), includes:
+
+- **Sign-ins** from 7:00 AM to 10:00 AM (randomized, natural times)
+- **Sign-outs** between 1:00 PM and 5:00 PM (with two employees having a 1-hour lunch break between 11:00 AM and 1:00 PM)
+- **Account checks** (exactly one per account, per employee, randomized throughout the day, but only during login periods)
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 15/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **realistic, naturally randomized sample CSV data** based on your detailed specifications.
+
+---
+
+### ✅ Key Features Implemented:
+- **Index** from 0 upwards (sequential).
+- **ID**: Employees with assigned account lists.
+- **Timestamp**: Format `YYMMDD-HH:MM.XX` — naturally random, avoids round times (e.g. 11:15.00).
+- **Page**: As defined.
+- **Action**:
+  - Sign-in → `home`, `sign-in`, details = `manual`
+  - Sign-out → `home`, `sign-out`, details = `manual` or `timeout`
+  - ...          </p>
+          <p class="lt-p">
+Rubrics: 18/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here&#x27;s a **realistic, naturally randomized CSV sample** of web activity for an office managing accounts, following all your detailed specifications.
+
+✅ **Features included:**
+- Index from 0
+- Realistic timestamps (YYMMDD-HH:MM.XX), avoiding round times like 11:15.00
+- Only employees check their own accounts (no cross-account checking)
+- Sign-ins between 7–10 AM, sign-outs between 1–5 PM
+- Two employees take a 1-hour lunch break (randomly between 11 AM and 1 PM)
+- At least **2 account checks per ...          </p>
+          <p class="lt-p">
+Rubrics: 18/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Below is a **realistic, naturally randomized CSV-formatted sample dataset** based on your detailed specifications.
+
+---
+
+### ✅ Key Features Implemented:
+- **Employees** with assigned accounts.
+- **Sign-in** between 7:00–10:00 AM, **sign-out** between 1:00–5:00 PM.
+- **Two employees** have a **1-hour lunch break** (between 11:00–1:00), during which they sign out.
+- Each employee **checks each of their own accounts exactly once** (not grouped, spread naturally).
+- Account checks are **interleaved*...          </p>
+          <p class="lt-p">
+Rubrics: 12/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Here&#x27;s a **realistic, naturally timed, and logically structured CSV sample dataset** based on your detailed specifications.
+
+Each row has the fields:
+- `index` (sequential starting from 0)
+- `id` (employee ID)
+- `timestamp` (form: YYMMDD-HH:MM.XX, realistic with no rounding to 15-mins or whole minutes)
+- `page`
+- `action`
+- `details`
+
+---
+
+### ✅ Key Features Implemented:
+
+- **Employees:** 4 employees (64498288, 72185782, 72229080, 5585367)
+- **Accounts:** Each employee has their assigned account...          </p>
+          <p class="lt-p">
+Rubrics: 14/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **realistic, naturally timed, and logically structured CSV sample dataset** that fulfills all your requirements.
+
+---
+
+### ✅ Features Implemented:
+- **Realistic timestamps** between 7:00–17:00 (one weekday), avoiding &quot;round&quot; times (e.g., no 11:15.00), using random seconds and minutes.
+- **Employees** (4 total) with matching **accounts**.
+- Each employee:
+  - Signs in between **7:00–10:00**.
+  - Signs out between **13:00–17:00**.
+  - **Two employees** take a **1-hour lunch ...          </p>
+          <p class="lt-p">
+Rubrics: 15/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **realistic, naturally randomized CSV-formatted sample dataset** that meets all your detailed specifications.
+
+This data represents a **single weekday** (e.g., Monday) of web activity from **four employees** managing their accounts at an office. The dataset includes:
+
+- Realistic timestamps between 7:00 AM and 5:00 PM, avoiding &quot;round&quot; times (like 11:15.00)
+- Sign-in and sign-out times: sign-in between 7–10 AM, sign-out between 1–5 PM
+- Two employees go on lunch breaks (~1 ...          </p>
+          <p class="lt-p">
+Rubrics: 16/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to create realistic sample CSV data. The format will be: index,id,timestamp,page,action,details. &#x27;index&#x27; will be the numbered identifier for each row, starting at 0. For example, the first ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **realistic, naturally distributed, and fully detailed sample CSV** of web activity data for the office account management website, spanning a single weekday (e.g., **Monday, October 23, 2023**).  
+
+The data satisfies all your requirements:
+
+---
+
+### ✅ Key Features Implemented:
+- **Index** starts at 0 and increases by 1 per row.
+- **User IDs** match the provided employees.
+- **Accounts** are only checked by the employee&#x27;s own accounts (no cross-employee checks).
+- **Sign-in...          </p>
+          <p class="lt-p">
+Rubrics: 13/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.542          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+3337                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+8192                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+8115                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+7806                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+4137                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+3137                </td>
+                <td>
+0.542                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.542                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+3027                </td>
+                <td>
+0.542                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.542                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+8192                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+3723                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+3435                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+3078                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+8192                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+3119                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+2817                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+4308                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+958                </td>
+                <td>
+6968                </td>
+                <td>
+0.542                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.542                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully schedule the shifts based on your detailed constraints.
+
+### 📌 **Shifts Overview**
+- **Morning (8–12)**: 2 people, **Mon–Wed**, 3 people **Thu–Fri**
+- **Afternoon (12–4)**: 2 people, **Mon–Wed**, 3 people **Thu–Fri**
+- **Night (4–8)**: 4 people, **every weekday**
+- **Shifts cannot be broken up** → each person works full shifts.
+- **Under 18** → cannot work night shifts or afternoons (only morning if allowed, but note age restrictions).
+- **No one under 18 can work nights or after...          </p>
+          <p class="lt-p">
+Rubrics: 11/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.379          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s break this down systematically to **schedule shifts** that meet **all requirements** while respecting **employee restrictions**, **shift availability**, **hours required**, and **workday limits**.
+
+---
+
+### 📅 **Shift Schedule Overview**
+
+- **Morning (8am–12pm)**: 2 people, **Mon–Wed**; **3 people, Thu–Fri**
+- **Afternoon (12pm–4pm)**: 2 people, **Mon–Wed**; **3 people, Thu–Fri**
+- **Night (4pm–8pm)**: 4 people, **every weekday**
+
+&gt; ⚠️ **Rules:**
+&gt; - Shifts **cannot be broken up** (employee...          </p>
+          <p class="lt-p">
+Rubrics: 17/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.586          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Great — let&#x27;s go step-by-step to **create a realistic and legally compliant shift schedule** for your store based on your constraints.
+
+---
+
+### 🚩 Key Rules Recap:
+
+- **Shifts:**
+  - Morning (8am–12pm)
+  - Afternoon (12pm–4pm)
+  - Night (4pm–8pm)
+
+- **Shift duration:** Cannot be broken up (so full shift or not at all).
+- **Max 2 shifts per day** (unless under 18 — then only one shift possible, or none).
+- **Under 18 employees cannot work night shifts**.
+- **Workday limits:**
+  - Mon–Wed: 2 peopl...          </p>
+          <p class="lt-p">
+Rubrics: 16/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.552          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s walk through this step-by-step to **schedule shifts** for your store based on:
+
+---
+
+### **Shifts**
+- **Morning (8am–12pm)**  
+- **Afternoon (12pm–4pm)**  
+- **Night (4pm–8pm)**  
+
+**Constraints:**
+- Shifts **cannot be broken up** – employees work full shifts.
+- Employees can work **2 shifts per day** at most.
+- **Under 18** cannot work night shifts.
+- **No one under 18** can work **night shifts**.
+- Employees **cannot work specific shifts** due to special considerations.
+
+---
+
+### ...          </p>
+          <p class="lt-p">
+Rubrics: 10/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.345          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s solve this step-by-step to create a **feasible and compliant shift schedule** based on your requirements and constraints.
+
+---
+
+### 🔍 **Shift Requirements Summary**
+
+**Daily Shifts (Weekdays Mon–Fri):**
+
+- **Morning (8–12):** 2 people (Mon–Wed); 3 people (Thu–Fri)
+- **Afternoon (12–4):** 2 people (Mon–Wed); 3 people (Thu–Fri)
+- **Night (4–8):** 4 people (every day)
+
+✅ **Total shifts per day:**
+- Mon–Wed: 2 (morning) + 2 (afternoon) + 4 (night) = 8 employees
+- Thu–Fri: 3 + 3 + 4 = 10 employ...          </p>
+          <p class="lt-p">
+Rubrics: 15/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.517          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s break this down step by step to **create a feasible schedule** for your store shifts, based on all the rules, constraints, and worker availability.
+
+---
+
+## 🔍 **Shift Requirements (by day)**
+
+| Day         | Morning (8am–12pm) | Afternoon (12pm–4pm) | Night (4pm–8pm) |
+|-------------|--------------------|------------------------|------------------|
+| Mon–Wed     | 2 people           | 2 people               | 0 people         |
+| Thu–Fri     | 2 people           | 3 people               | ...          </p>
+          <p class="lt-p">
+Rubrics: 1/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.034          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully schedule shifts for your store while respecting **all constraints** and minimizing conflicts.
+
+---
+
+### 🔍 **Shift Requirements (Weekdays)**
+
+- **Morning (8am–12pm)**: 2 people each from **Mon–Wed**, 2 on **Thu–Fri**
+- **Afternoon (12pm–4pm)**: 2 people each from **Mon–Wed**, 3 on **Thu–Fri**
+- **Night (4pm–8pm)**: 4 people **every weekday**
+
+&gt; ⚠️ **Rules:**
+&gt; - Shifts **cannot be broken up** — employees must work full shifts.
+&gt; - Employees **under 18** (ages &lt;18) **cannot work ni...          </p>
+          <p class="lt-p">
+Rubrics: 12/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.414          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully schedule shifts for your store based on the constraints and requirements.
+
+---
+
+### **Shifts Overview**
+- **Weekdays:** Mon–Fri  
+- **Shifts:**  
+  - **Morning (8am–12pm):** 2 people, **Mon–Wed** (only 2 on Thu–Fri)  
+  - **Afternoon (12pm–4pm):** 2 people, **Mon–Wed** (3 on Thu–Fri)  
+  - **Night (4pm–8pm):** 4 people, **each day**  
+- **Rules:**  
+  - No shift-splitting (work full shift or not)  
+  - Employees **under 18** can&#x27;t work night shifts or (where restricted) certain s...          </p>
+          <p class="lt-p">
+Rubrics: 3/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.103          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully schedule shifts for your store based on all the given constraints. Let&#x27;s go step by step.
+
+---
+
+### 🗓️ **Shifts Overview**
+
+- **Morning (8am–12pm)** – 2 people, **Mon–Wed** (only), **3 people on Thu–Fri**
+- **Afternoon (12pm–4pm)** – 2 people, **Mon–Wed** (only), **3 people on Thu–Fri**
+- **Night (4pm–8pm)** – 4 people, **every weekday**
+
+&gt; 🔍 **Constraints:**
+&gt; - Shifts cannot be broken.
+&gt; - Employees can work **2 shifts per day**, but **under 18 cannot work night shifts or any s...          </p>
+          <p class="lt-p">
+Rubrics: 14/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.483          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully **schedule shifts** for your store based on your requirements and worker constraints.
+
+---
+
+### **Shift Structure (Weekdays only):**
+
+- **Morning (8–12)**: 2 people, Mon–Wed; 3 people, Thu–Fri  
+- **Afternoon (12–4)**: 2 people, Mon–Wed; 3 people, Thu–Fri  
+- **Night (4–8)**: 4 people, every weekday  
+
+---
+
+### **Constraints Recap:**
+
+1. **Shifts cannot be broken** – each person works full shifts only.
+2. **Only 2 shifts per day per employee** (max).
+3. **Under 18 cannot work nig...          </p>
+          <p class="lt-p">
+Rubrics: 10/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.345          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully plan the shift schedule for your store based on the constraints and requirements.
+
+---
+
+### **Shifts Overview**
+- **Morning (8am–12pm)**: 2 staff, **Mon–Wed**, **3 staff, Thu–Fri**
+- **Afternoon (12pm–4pm)**: 2 staff, **Mon–Wed**, **3 staff, Thu–Fri**
+- **Night (4pm–8pm)**: 4 staff **every weekday**
+
+&gt; **Important Rules:**
+&gt; - Shifts **cannot be broken**.
+&gt; - Employees **can work 2 shifts per day** max.
+&gt; - **Under 18 cannot work night shifts**.
+&gt; - **No employee can work more th...          </p>
+          <p class="lt-p">
+Rubrics: 17/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.586          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully plan the shifts based on your detailed requirements and worker constraints.
+
+---
+
+## ✅ **Shifts Overview**
+
+### **Daily Shifts (Weekdays only):**
+- **Morning (8am–12pm):** 2 people, **Mon–Wed** (3 days)  
+  → **Thu–Fri:** 3 people needed
+- **Afternoon (12pm–4pm):** 2 people, **Mon–Wed** (3 days)  
+  → **Thu–Fri:** 3 people needed
+- **Night (4pm–8pm):** 4 people, **every weekday**
+
+### **Key Constraints**
+1. **No shift breaks** – each employee works full shifts only.
+2. **Under 18...          </p>
+          <p class="lt-p">
+Rubrics: 18/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.621          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully schedule shifts for your store based on your detailed constraints. We’ll go step-by-step to assign shifts logically and ensure all rules are followed.
+
+---
+
+### 📅 **Shifts Overview**
+- **Morning (8am–12pm)**: 2 people **Mon–Wed**, 3 people **Thu–Fri**
+- **Afternoon (12pm–4pm)**: 2 people **Mon–Wed**, 3 people **Thu–Fri**
+- **Night (4pm–8pm)**: 4 people **every weekday**
+
+---
+
+### ✅ **Constraints Summary**
+
+1. **No shift breaks** – Employees work full shifts.
+2. **Max 2 shifts per...          </p>
+          <p class="lt-p">
+Rubrics: 17/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.586          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s solve this step by step to **schedule shifts** for your store based on the constraints.
+
+---
+
+### 🔍 **Shift Structure**
+
+- **Morning (8am–12pm)**: 2 people, **Mon–Wed**; 3 people, **Thu–Fri**
+- **Afternoon (12pm–4pm)**: 2 people, **Mon–Wed**; 3 people, **Thu–Fri**
+- **Night (4pm–8pm)**: 4 people, **every weekday**
+
+&gt; 🚫 **Shifts cannot be broken up** → Each person works full shifts only.
+
+&gt; 🚫 **Under 18 cannot work night shifts or certain shifts (as restricted)**
+
+&gt; 🚫 **Employees can work o...          </p>
+          <p class="lt-p">
+Rubrics: 12/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.414          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s create a **feasible and compliant shift schedule** for your store based on your detailed requirements.
+
+---
+
+### 🔍 **Key Constraints and Rules Recap**
+
+#### **Shifts**
+- **Morning (8am–12pm)**
+- **Afternoon (12pm–4pm)**
+- **Night (4pm–8pm)**
+
+#### **Shift Rules**
+1. Shifts **cannot be broken up** — an employee must work full shifts.
+2. Employees **can work 2 shifts per day**, **but not under 18**.
+3. **Employees under 18 cannot work night shifts** or during any shift if restricted.
+...          </p>
+          <p class="lt-p">
+Rubrics: 17/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.586          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need ro scheudle shifts for my store. There is an 8am-12pm morning shift, a 12pm-4pm afternoon shift and a 4pm-8pm night shift on weekdays. Shifts can not be broken up. Employees can work 2 shifts a...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully schedule shifts for your store based on the constraints you&#x27;ve provided.
+
+---
+
+### 🔍 **Constraints Recap**
+
+#### **Shifts**
+- **Morning (8am–12pm)**: 2 people, **Mon–Wed**, **3 people Thu–Fri**
+- **Afternoon (12pm–4pm)**: 2 people, **Mon–Wed**, **3 people Thu–Fri**
+- **Night (4pm–8pm)**: 4 people, **every weekday**
+
+#### **Employee Rules**
+1. **Shifts cannot be broken up.**
+2. **Under 18 cannot work night shifts.**
+3. **Employees can work up to 2 shifts per day.**
+4. **No one und...          </p>
+          <p class="lt-p">
+Rubrics: 18/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.621          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+4283                </td>
+                <td>
+0.379                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.379                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+8192                </td>
+                <td>
+0.586                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.586                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+6911                </td>
+                <td>
+0.552                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.552                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+5391                </td>
+                <td>
+0.345                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.345                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+5540                </td>
+                <td>
+0.517                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.517                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+3940                </td>
+                <td>
+0.034                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.034                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+5637                </td>
+                <td>
+0.414                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.414                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+6767                </td>
+                <td>
+0.103                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.103                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+5393                </td>
+                <td>
+0.483                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.483                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+6475                </td>
+                <td>
+0.345                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.345                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+7073                </td>
+                <td>
+0.586                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.586                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+7989                </td>
+                <td>
+0.621                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.621                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+7339                </td>
+                <td>
+0.586                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.586                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+7134                </td>
+                <td>
+0.414                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.414                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+5724                </td>
+                <td>
+0.586                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.586                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+293                </td>
+                <td>
+8192                </td>
+                <td>
+0.621                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.621                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information presented is based solely on the provided escalation data and does not include external sources or assumptions.  
+
+Event Timeline Summary  
+Support confirmed the intermittent freezing and identified repeated timeout errors tied to the payment module. A temporary system reboot was per...          </p>
+          <p class="lt-p">
+Rubrics: 25/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation related to intermittent freezing of a POS terminal during checkout. The issue occurred between 07:48 and 09:35, spanning the period from initial staff reporting to full system restoration. All information presented is based solely on the provided escalation data and does not include external or unverified sources.
+
+Event Timeline Summary  
+- Support verified the freezing behavior and identified repeated timeout errors in the...          </p>
+          <p class="lt-p">
+Rubrics: 24/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation related to a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information presented is based solely on the provided escalation data and does not include external or speculative details.
+
+Event Timeline Summary  
+Support identified freezing behavior and reviewed system logs, which revealed repeated timeout errors in the payment module. A temporary system r...          </p>
+          <p class="lt-p">
+Rubrics: 25/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information presented is based solely on the provided escalation data and supports internal review and process improvement.  
+
+Event Timeline Summary  
+- Initial reporting of intermittent freezing during checkout was followed by system log collection and analysis revealing repeated timeout error...          </p>
+          <p class="lt-p">
+Rubrics: 25/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window beginning at 07:48 and resolving by 09:35. All information presented is based solely on the provided escalation data and does not include external or supplementary sources.
+
+Event Timeline Summary  
+- Support confirmed the freezing behavior and identified repeated timeout errors linked to the payment module.  
+- A tempo...          </p>
+          <p class="lt-p">
+Rubrics: 26/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.867          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information presented is based solely on the provided escalation data.  
+
+Event Timeline Summary  
+• Support confirmed the freezing behavior and reviewed system logs, identifying repeated timeout errors in the payment module.  
+• A temporary system reboot was performed, followed by the deploymen...          </p>
+          <p class="lt-p">
+Rubrics: 25/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information in this document is based solely on the provided escalation data and does not include external inputs or assumptions.
+
+Event Timeline Summary  
+Support confirmed the freezing behavior and collected system logs indicating repeated timeout errors in the payment module. A temporary syst...          </p>
+          <p class="lt-p">
+Rubrics: 26/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.867          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a clear start-to-end window beginning at 07:48 and concluding at 09:35. All information presented is derived exclusively from the provided escalation data and does not include external assumptions or additional sources.  
+
+Event timeline summary  
+- Support confirmed the freezing issue and began analysis of system logs, identifying repeated timeout ...          </p>
+          <p class="lt-p">
+Rubrics: 26/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.867          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information presented is based solely on the provided escalation data and does not extend beyond the recorded events.  
+
+Event Timeline Summary  
+- Support confirmed the freezing behavior and identified repeated timeout errors in the payment module.  
+- A temporary reboot was applied followed by...          </p>
+          <p class="lt-p">
+Rubrics: 26/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.867          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information presented is based solely on the provided escalation data and does not include external or inferred sources.
+
+Event Timeline Summary  
+Support verified the freezing behavior and identified repeated timeout errors linked to the payment module. A temporary reboot was performed followed...          </p>
+          <p class="lt-p">
+Rubrics: 26/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.867          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics overview  
+This memo summarizes a support ticket escalation related to a malfunctioning point-of-sale terminal. The issue occurred between 07:48 and 09:35, during which staff observed repeated freezing during checkout processes. All information presented is based solely on the provided escalation data and does not include external observations or assumptions.  
+
+Event timeline summary  
+- Support verified the freezing behavior and identified repeated timeout errors in the payment mod...          </p>
+          <p class="lt-p">
+Rubrics: 25/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information presented is based solely on the provided escalation data and does not include external sources or assumptions.  
+
+Event Timeline Summary  
+- Initial support engagement confirmed freezing behavior and collected system logs indicating repeated timeout errors in the payment module.  
+-...          </p>
+          <p class="lt-p">
+Rubrics: 25/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information presented is based solely on the provided escalation data.  
+
+Event timeline summary  
+- Support verified the freezing behavior and identified repeated timeout errors in the payment module.  
+- A system reboot was applied, followed by the deployment of a patch to correct a configurat...          </p>
+          <p class="lt-p">
+Rubrics: 25/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics overview  
+This memo summarizes a support ticket escalation involving a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window beginning at 07:48 and concluding at 09:35. All information presented is based solely on the provided escalation data.  
+
+Event timeline summary  
+Support confirmed the freezing behavior and collected system logs indicating repeated timeout errors in the payment module. A temporary system reboot was performed followed b...          </p>
+          <p class="lt-p">
+Rubrics: 24/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics Overview  
+This memo summarizes a support ticket escalation regarding a malfunctioning point-of-sale terminal. The issue occurred within a defined start-to-end window from 07:48 to 09:35. All information presented is based solely on the provided escalation data and does not include external or unverified inputs.
+
+Event Timeline Summary  
+Support confirmed the freezing behavior and collected system logs showing repeated timeout errors linked to the payment module. A temporary system r...          </p>
+          <p class="lt-p">
+Rubrics: 26/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.867          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to prepare an internal diagnostics summary for a support ticket escalation related to a malfunctioning point-of-sale (POS) terminal. 
+
+Ticket Data (Chronological)
+•	07:48 - Store staff repor...          </p>
+          <p class="lt-p">
+Response: Diagnostics overview  
+This memo summarizes a support ticket escalation related to a malfunctioning point-of-sale terminal. The issue occurred between 07:48 and 09:35, during which staff reported intermittent freezing during checkout. All information in this document is based solely on the provided escalation data.  
+
+Event timeline summary  
+- Support confirmed the freezing behavior and reviewed system logs, identifying repeated timeout errors linked to the payment module.  
+- A temporary syste...          </p>
+          <p class="lt-p">
+Rubrics: 25/30 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+286                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+278                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+299                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+310                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+293                </td>
+                <td>
+0.867                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.867                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+275                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+296                </td>
+                <td>
+0.867                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.867                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+299                </td>
+                <td>
+0.867                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.867                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+264                </td>
+                <td>
+0.867                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.867                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+286                </td>
+                <td>
+0.867                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.867                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+289                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+306                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+268                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+261                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+285                </td>
+                <td>
+0.867                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.867                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+591                </td>
+                <td>
+302                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **ready-to-use, professional template** you can customize and send directly to your customers. It includes **one recommended sign per relevant category** (where applicable), clear reasoning based on business type, location, classiness, regulations, visibility needs, and size suggestions — all while strictly adhering to your guidelines.
+
+---
+
+## **Exterior Sign Recommendations**  
+*For: [Customer Name] – [Business Type]*  
+
+---
+
+### 📍 **Overview**  
+After reviewing your bus...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professional, customer-ready template** tailored to your two customers, with clear sign recommendations based on business type, location, regulatory constraints, desired brand image, and practical functionality. Each recommendation follows your strict criteria: *only one sign per category if applicable*, *no unpermitted signs*, *classiness aligned with business context*, *size suggestions*, and *clear reasoning*.
+
+You can easily copy and adapt this format for future clien...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **professional, customer-ready template** you can use to send to each of your clients. The recommendations are tailored to their business type, location constraints, image strategy, and practical needs—while adhering strictly to your criteria:
+
+---
+
+### 📌 **Exterior Sign Proposal**  
+**For:** [Customer Name]  
+**Business Type:** [e.g., Casual-Dining Restaurant / Manufacturing Facility]  
+**Location Zone:** [e.g., Historic Commercial Zone / Industrial Zone]  
+**Date:** [Ins...          </p>
+          <p class="lt-p">
+Rubrics: 10/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professional, customer-friendly template** you can use to send your sign recommendations. The template includes all the requirements you specified: one sign per relevant category (maximum), clear reasoning, classiness alignment, zone compliance, size suggestions, and practicality based on location and business type.
+
+---
+
+### **Exterior Sign Proposal for [Customer Name]**  
+**Date:** [Insert Date]  
+**Prepared for:** [Customer Name] – [Business Type]  
+**Location:** [Stre...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Here&#x27;s a **professional, customer-ready template** that you can use to send to your clients. The template includes clear, reasoned recommendations for each customer—respecting zoning rules, business type, desired image, area visibility, and classiness level—while staying within your policy of **no more than one sign per category**, only recommending what’s needed and allowed.
+
+Each recommendation includes:
+- A **sign type and size suggestion**
+- A **clear, concise explanation** of *wh...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **professionally formatted template** you can use to send to your customers. The recommendations are tailored based on your criteria: business type, desired image, location regulations, visibility needs, classiness level, and physical constraints (height, size, lighting rules, wall length). Each customer gets exactly **one sign per relevant category** (or none if not needed), with clear reasoning, size suggestions, and a natural tone suitable for client communication.
+
+---...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professionally structured, customer-ready template** that you can use to present your sign recommendations. The template includes:
+
+- Clear, concise reasoning for each recommended sign type  
+- Size suggestions based on needs, zone regulations, and visibility  
+- Justification for *why* only one sign per category was selected  
+- Explicit consideration of classiness, location rules, functionality, and visibility  
+- A note on why other sign types were excluded  
+
+This for...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professional, customer-ready template** you can use to present your sign recommendations. The response is structured by customer, with one recommended sign type per applicable category, fully justified based on business needs, location regulations, classiness, visibility, and zoning constraints. Each recommendation includes:
+
+- A clear sign type (with size)
+- Rationale (including classiness, visibility, zoning, and function)
+- Note on whether multiple signs would be neede...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professional, customer-ready template** that you can use to present your sign recommendations. This template follows all your requirements precisely:
+
+- Only one sign type per category (if applicable)  
+- Clear reasoning for each choice  
+- Classiness level considered in context  
+- Zone regulations respected  
+- Size recommendations based on space and visibility needs  
+- Avoids suggesting signs not allowed in the zone or unnecessary for the business  
+- Structured for e...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professional, customer-ready template** you can use to send your sign recommendations. It’s structured clearly, includes only one sign per category (when applicable), justifies each choice based on business type, location, classiness, zoning rules, and functional needs, and includes suggested sizes with reasoning.
+
+---
+
+## **Sign Proposal for [Customer Name]**  
+*Prepared by [Your Sign Company Name]*  
+
+---
+
+### **Customer Profile**  
+*[Briefly summarize the customer’s bu...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professionally formatted, customer-ready template** that you can use to send to your clients. It includes **one recommended sign per relevant category**, with clear **reasoning**, **size suggestions**, and **consideration of classiness, zoning, visibility, and functionality**—all tailored to each customer&#x27;s unique situation.
+
+Each recommendation is based strictly on your criteria:  
+✔ One sign per category (if applicable)  
+✔ Only if needed and compliant with location rul...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professional, customer-friendly template** you can use to send each client your sign recommendations. The structure includes:
+
+- Clear segmentation by sign category  
+- One recommended sign per category (only if needed)  
+- Size suggestions based on location, visibility, and needs  
+- Detailed reasoning that accounts for business type, classiness, zoning rules, and visibility requirements  
+- Explicit notes on why other types were excluded  
+- Consideration of classiness ...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professional, customer-ready template** that you can directly send to your clients after reviewing their needs and crafting tailored sign recommendations.
+
+Each recommendation includes:
+- A single sign type per category (or no recommendation if not needed),
+- Reasoning based on business type, aesthetics, location regulations, visibility, and classiness,
+- Size suggestions based on visibility and space constraints,
+- An explanation of why the other options in the category ...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **professional, customer-ready template** you can use to send your sign recommendations. The template is structured clearly, includes reasoning, considers classiness, zoning regulations, visibility needs, and size suggestions — all tailored to your two customers based on the criteria you provided.
+
+---
+
+### 🏪 **Sign Recommendation Proposal**  
+*For: [Customer Name / Business Name]*  
+*Location: [City/Zone Details]*  
+*Date: [Insert Date]*  
+
+---
+
+### ✅ Recommended Sign Typ...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **professional, customer-ready template** that you can directly send to your clients. It includes **one sign type per relevant category**, fully justified with reasoning that considers business type, desired image, location constraints, zoning rules, classiness, visibility needs, and size recommendations—**without over-recommending or suggesting off-limits options**.
+
+Each section is structured so you can easily adapt it for future clients by substituting details.
+
+---
+
+🎉 ...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to put together exterior sign proposals for customers at my sign company. At this moment, prices are not an issue, I just need to find the best sign types for each customer based on their needs...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **professional, customer-ready template** that you can adapt and send directly to your clients. The recommendations are tailored to each business based on:
+
+- Business type &amp; desired image  
+- Location zone regulations  
+- Sign availability (height, lighting, wall size limits)  
+- Functionality needs (visibility, wayfinding, brand perception)  
+- Classiness level appropriate to the business  
+- Physical space constraints (wall lengths, zoning rules)
+
+Each section includes:
+...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+1953                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+1588                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+1809                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+1927                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+1488                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+1630                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+2289                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+1434                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+2075                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+2053                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+2066                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+2352                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+2071                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+2353                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+1719                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1146                </td>
+                <td>
+1497                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,4496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 14</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 14  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T11:37:50  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a carefully designed, respectful, and educationally sound **one-week (5-day)** unit plan on **alternative healing modalities** for 9th-grade social studies, aligned with your requirements. The unit emphasizes **cultural sensitivity**, avoids promoting any single religion as superior, highlights **living voices** from today, includes **actionable practices**, and respects the diverse religious background of your students.
+
+---
+
+## 📅 **One-Week Unit Plan: Alternative Healing M...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a thoughtful, inclusive, and age-appropriate **one-week unit plan** (5 school days, with a 10-minute break each day) on **alternative healing modalities** for 9th graders. The unit honors religious diversity, emphasizes **current, living practices**, includes **actionable hands-on activities** (5 modalities), and avoids promoting any single belief system as superior—maintaining a respectful, educational, and secular-scholarly tone consistent with public school standards.
+
+Al...          </p>
+          <p class="lt-p">
+Rubrics: 17/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.739          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a thoughtfully designed, culturally sensitive, and developmentally appropriate **7-day unit plan** (spanning one week of 1.5-hour classes with 10-minute breaks) on **alternative healing modalities**. This unit is designed with your constraints in mind:
+
+- Focus on **8–15 modalities** (we’ve selected **10** with balance in representation)
+- **At least 5** include **hands-on, actionable practices** (e.g., Reiki, breathwork, meditation)
+- Clear **background**, **history**, **pr...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a thoughtful, respectful, and educationally sound day-by-day breakdown for a **one-week unit on alternative healing modalities** tailored for **9th-grade social studies**, with careful attention to:
+
+- Inclusivity and religious sensitivity  
+- Representation of major world religions (Christianity, Islam, Hinduism, Buddhism, Judaism)  
+- A mix of historical/analytical and hands-on, actionable practices  
+- Real, living quotes from contemporary practitioners  
+- Five-sentence ...          </p>
+          <p class="lt-p">
+Rubrics: 17/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.739          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a thoughtful, inclusive, and educationally appropriate **5-day, 1-hour-and-30-minute unit plan** on **alternative healing modalities**, designed for your 9th-grade social studies classroom. The unit respects religious diversity, emphasizes present-day relevance, and includes **background, history, modern application, and actionable practices**, with **five modalities featuring hands-on activities**.
+
+All modalities are tied to key world religions (Christianity, Islam, Hindui...          </p>
+          <p class="lt-p">
+Rubrics: 13/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.565          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a thoughtful, balanced, and classroom-appropriate **one-week unit plan** on alternative healing modalities, designed for your 9th-grade social studies class with a focus on **world religions**, **ethical sensitivity**, **cultural relevance**, and **hands-on engagement**.
+
+This unit spans **5 school days** (fits within your maximum of a week), covers **10 healing modalities** (minimum of 8, maximum of 15 with strong focus), ensures **5 modalities have actionable practices**, ...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a thoughtful, inclusive, and educationally grounded **one-week (5-day) unit plan** on **alternative healing modalities**, designed for 9th-grade social studies with a focus on **world religions**, **cultural sensitivity**, and **hands-on engagement**.  
+
+This unit includes:
+- ✅ 10 modalities (minimum 8, maximum 15)
+- ✅ 5 with **actionable, low-risk, hands-on practices** (suitable for students)
+- ✅ 1 clear connection to **major world religions** (Christianity, Islam, Hinduism, ...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **thoughtfully designed, culturally respectful, and educationally appropriate one-week unit** on **alternative healing modalities**, tailored for your 9th-grade social studies class with a foundation in world religions but mindful of inclusivity, neutrality, and hands-on learning.
+
+---
+
+## 📅 **One-Week Unit Plan: Alternative Healing Modalities (Max 5 School Days)**  
+**Duration**: 5 school days (1.5 hours/day, 10-minute break)  
+**Total Modalities Covered**: 10 (8–15 minim...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a thoughtful, inclusive, and age-appropriate **five-day unit plan** (with optional extensions) for your 9th-grade social studies class on **alternative healing modalities**, designed with sensitivity to diverse religious backgrounds, while still offering **actionable practices**, **historical context**, and **real-world relevance**.
+
+We’ve included **exactly 10 modalities** — **5 major world religions represented**, 5 others from diverse global traditions — with **5 includin...          </p>
+          <p class="lt-p">
+Rubrics: 13/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.565          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a thoughtful, inclusive, and culturally respectful **five-day, one-week unit plan** on alternative healing modalities tailored for **9th-grade social studies**, with a strong emphasis on **world religious connections**, **actionable practices**, and **current, living voices**. This unit is designed to be respectful, evidence-informed, and accessible while honoring the diverse religious backgrounds of your students.
+
+---
+
+### ✅ UNIT OVERVIEW  
+**Duration**: 5 school days (1.5 ...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **thoughtfully designed, inclusive, and educationally sound one-week unit** on alternative healing modalities, structured for a public school environment with a focus on **religious sensitivity, historical context, present-day relevance, and actionable student engagement**.  
+
+---
+
+### 📅 **Week-Long Unit Plan: Alternative Healing Modalities**  
+**Duration:** 5 school days (1.5 hours/day, with 10-minute break)  
+**Target Modalities:** 8–15 total (minimum 8, maximum 15)  
+**...          </p>
+          <p class="lt-p">
+Rubrics: 16/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.696          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a thoughtful, inclusive, and age-appropriate **seven-day unit plan** for your 9th-grade social studies class on **alternative healing modalities**, designed for a public school environment with a sensitive, respectful approach to religion. The plan includes:
+
+✅ 8–15 modalities (with a focus on **5 major world religions** and 5 others that reflect broader global healing traditions)  
+✅ At least **five actionable, hands-on practices** (with clear, safe guidance)  
+✅ A **one-se...          </p>
+          <p class="lt-p">
+Rubrics: 17/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.739          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a carefully curated, respectful, and inclusive **one-week (5-day) unit** on **alternative healing modalities** designed for **9th-grade social studies**, rooted in world religions but accessible to all students regardless of personal beliefs. The unit emphasizes **historical context, present-day relevance, cultural sensitivity, and hands-on, non-religious practice**—with a focus on **physical, emotional, and spiritual well-being** without promoting any specific faith doctrin...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a carefully thought-out, inclusive, and manageable **one-week (5-day) unit plan** on **alternative healing modalities** for your 9th-grade social studies class. The unit respects safety, diversity, and the needs of a multifaith classroom while offering experiential learning through **5 actionable practices** and strong historical context. Each modality includes:
+
+- A **five-sentence overview** (to help you decide relevance and appropriateness)
+- A **real quote from a living ...          </p>
+          <p class="lt-p">
+Rubrics: 17/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.739          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a thoughtful, respectful, and academically sound **one-week (5 school-day) unit plan** on alternative healing modalities, designed specifically for your 9th-grade social studies classroom with a focus on **world religions**, **inclusivity**, **background and history**, **present-day relevance**, and **hands-on, actionable practices**.
+
+This unit is structured to:
+
+- Cover **8–15 modalities** (we selected **10** to fit the time and depth while meeting your criteria).
+- Includ...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I want to teach my 9th graders a unit on alternative healing modalities as part of a larger world religions section of the social studies class I teach. I haven&#x27;t figured out how much time I want to d...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a full, thoughtful, and classroom-ready **five-day unit plan** on **alternative healing modalities**, designed specifically for your **9th-grade social studies class** within a **one-week timeframe** (maximum of 5 school days). The unit is grounded in **respect for religious diversity**, includes **actionable, hands-on practices**, provides **authentic contemporary quotes**, offers **clear five-sentence overviews** for each modality, and includes a **comprehensive vocab bank...          </p>
+          <p class="lt-p">
+Rubrics: 13/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.565          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+5352                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+5705                </td>
+                <td>
+0.739                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.739                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+5340                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+3361                </td>
+                <td>
+0.739                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.739                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+4130                </td>
+                <td>
+0.565                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.565                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+3559                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+5328                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+3687                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+4291                </td>
+                <td>
+0.565                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.565                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+3746                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+4091                </td>
+                <td>
+0.696                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.696                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+4698                </td>
+                <td>
+0.739                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.739                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+4539                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+4628                </td>
+                <td>
+0.739                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.739                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+4857                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+366                </td>
+                <td>
+4244                </td>
+                <td>
+0.565                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.565                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents (Warm, Positive, and Clear)**  
+
+Dear Parents and Guardians,  
+
+I am so proud of all the amazing work your students have done in French this semester! I was especially impressed with their Toussaint (France’s Day of the Dead) projects and their conversation mid-terms. Their effort, creativity, and confidence have grown so much—it’s truly inspiring. I deeply appreciate your support and believe we are building something wonderful together as we move into the final month.  
+
+The ...          </p>
+          <p class="lt-p">
+Rubrics: 17/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.773          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents – Final Month of the Semester in French**
+
+Dear Parents and Guardians,  
+
+I am so proud of the amazing work your child has done in French this semester! I was especially inspired by the Toussaint projects and how well the students shared their thoughts during the conversation mid-terms. I truly appreciate the support you’ve given your child in learning French — it has made a big difference. I hope we can keep this wonderful spirit going all the way through the final month.  
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 19/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.864          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents (Warm &amp; Positive Tone):**
+
+Dear Parents and Guardians,
+
+I am so proud of everything your child has accomplished in French this semester. Their growth in speaking, listening, and using real French has been amazing. I was especially impressed with their Toussaint projects and their conversation mid-term performance. Thank you for supporting their learning at home—your encouragement makes a big difference, and I hope we continue this strong positive momentum in the final month!
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 16/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents (Warm, Positive, and Clear)**
+
+Dear Parents and Guardians,  
+
+I want to say how proud I am of all of you and your students. The work your children have done in French this semester has truly impressed me. I was especially inspired by the Toussaint projects and the conversation mid-term performances. Each student showed great confidence, creativity, and courage in using French — and I truly appreciate your support at home in helping them grow. I hope we can keep this great ener...          </p>
+          <p class="lt-p">
+Rubrics: 18/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents**  
+
+Dear Parents and Guardians,  
+
+I just wanted to say how proud I am of all of you and your students! The work your children have shown in French this semester has been amazing. I was especially impressed with their Toussaint projects and their conversation mid-terms — they showed so much confidence and creativity. Thank you for supporting your child’s learning at home. I truly believe we’re going to keep this positive energy going right through the end of the semester.  
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 18/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents – Final Month of Semester Reminder**
+
+Dear Parents and Guardians,
+
+I want to say how proud I am of all of your children and their growth in French this semester. The way they worked on the Toussaint projects and their conversation mid-terms was truly impressive. I see so much effort, confidence, and passion, and I truly appreciate the support you give them every day. I hope we can keep this positive energy going through the final month.
+
+This is the final month of the semester...          </p>
+          <p class="lt-p">
+Rubrics: 15/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.682          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents – Final Month of the Semester**  
+
+Bonjour,  
+
+I am so proud of all the great work your child has done in French this semester! I was especially impressed by the Toussaint projects and the conversation mid-terms. Your support has made a big difference, and I truly appreciate it. I hope we can keep up this strong momentum through the final month.  
+
+This final month is full of exams, projects, and holiday fun at home. Even though French is an elective, it still counts toward yo...          </p>
+          <p class="lt-p">
+Rubrics: 18/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents – Final Month of Semester Reminder (Formal &amp; Warm)**
+
+Dear Parents and Guardians,  
+
+I am so proud of the great work your students have shown in French this semester! Their energy, creativity, and courage in speaking and writing have been truly inspiring. I was especially impressed with their Toussaint (France&#x27;s Day of the Dead) projects and their conversation mid-terms. Thank you so much for supporting your child’s learning at home — your encouragement makes a big difference....          </p>
+          <p class="lt-p">
+Rubrics: 17/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.773          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents**  
+
+Dear Parents and Guardians,  
+
+I want to say how proud I am of all the great work your students have done in French this semester. I was especially impressed with the Toussaint projects and how well they practiced conversations during mid-term. Their effort, creativity, and passion have really helped our class grow. I am so thankful for your support and hope we keep this positive energy through the final month.  
+
+The final month of the semester is full of exams, projects...          </p>
+          <p class="lt-p">
+Rubrics: 16/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email for Parents**
+
+Dear Parents and Guardians,
+
+I want to start by saying how proud I am of all the work your students have done in French this semester. Their effort has been amazing, especially their Toussaint (France’s Day of the Dead) projects and their conversation mid-term performances. I was truly impressed by how they shared their ideas, spoke confidently, and showed such passion for the language. Thank you so much for your support — it has helped every student grow and feel more con...          </p>
+          <p class="lt-p">
+Rubrics: 16/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents (Warm &amp; Respectful, Simple Language)**  
+
+Dear Parents and Guardians,  
+
+I want to share how proud I am of all of your students this semester! Their progress in French has been amazing. I was especially inspired by their Toussaint projects and their conversation mid-terms. I truly appreciate the ways you support your children’s learning and work at home. I hope we can keep that positive energy going through the final month of school.  
+
+This is the final month of the semester ...          </p>
+          <p class="lt-p">
+Rubrics: 19/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.864          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents – Final Month of the Semester (French Class)**
+
+Hello,  
+
+I want to start by saying how proud I am of all of you and your children! The work your kids have done in French has been amazing. I was especially impressed by their Toussaint projects and their conversation mid-term performances. I truly appreciate your support and encouragement — it makes a big difference in how students grow in their language skills. I hope we can keep this great energy going all the way through the...          </p>
+          <p class="lt-p">
+Rubrics: 15/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.682          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents (Warm &amp; Positive Tone)**
+
+Dear Families,  
+
+I want to share how proud I am of all of you and your children’s hard work in French this semester. Their efforts have truly made a difference — especially the Toussaint projects and the conversation mid-terms. I was deeply impressed by how creative, thoughtful, and brave they were in sharing their ideas. Thank you for supporting your child’s learning every step of the way — I truly appreciate it and hope to keep this great spirit go...          </p>
+          <p class="lt-p">
+Rubrics: 18/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents (Warm, Respectful, Simple Language):**
+
+Dear Parents and Guardians,  
+
+I am so proud of the great work your children have done in French this year! I was especially impressed with their Toussaint projects and their conversation mid-terms. Their creativity, effort, and confidence are amazing. I truly appreciate your support and encouragement—thank you for helping them grow in their learning. I hope we can keep this positive energy going through the final month.  
+
+This final mo...          </p>
+          <p class="lt-p">
+Rubrics: 18/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents – Final Month of the Semester (Formal &amp; Warm)**
+
+Dear Parents and Guardians,  
+
+I am so proud of how hard each student has worked in French this semester! I was especially impressed with the beautiful Toussaint projects and the confidence students showed in their conversation mid-terms. Your support has made a big difference in your child&#x27;s learning journey, and I truly appreciate it. I hope we can keep this great energy going during the final month of school.  
+
+This final mo...          </p>
+          <p class="lt-p">
+Rubrics: 15/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.682          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing an email to remind parents about the final month of the semester in my French classes. 
+
+First, could you open the email with a warm paragraph talking about the great work the st...          </p>
+          <p class="lt-p">
+Response: **Email to Parents – Final Month of the Semester (Formal &amp; Warm)**  
+
+Dear Parents and Families,  
+
+I want to share how proud I am of all of you and your children’s hard work in French this semester. Your students have shown such growth, especially in their **Toussaint (France’s Day of the Dead) Projects** and their **conversation mid-terms**. I was truly impressed by their creativity, confidence, and how well they used French to share their ideas. Thank you so much for your consistent support —...          </p>
+          <p class="lt-p">
+Rubrics: 19/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.864          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+932                </td>
+                <td>
+0.773                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.773                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+909                </td>
+                <td>
+0.864                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.864                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+935                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+1045                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+928                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+1020                </td>
+                <td>
+0.682                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.682                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+915                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+1071                </td>
+                <td>
+0.773                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.773                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+949                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+1006                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+1001                </td>
+                <td>
+0.864                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.864                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+969                </td>
+                <td>
+0.682                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.682                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+1038                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+917                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+938                </td>
+                <td>
+0.682                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.682                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+815                </td>
+                <td>
+1064                </td>
+                <td>
+0.864                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.864                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Lost Puppy**
+
+I found him under the bridge, a dusty patch between crumbling bricks and rusted railings. His fur was matted like dried mud, his eyes wide and wet—like two dark moons blinking in a storm. My name is Clara, and I’d been trying to find him since the morning mist curled around the park. He whimpered, a soft, hollow sound like strings pulled too tight. I held out my hand, and he didn’t run—he just stared, as if recognizing me from a dream.  
+
+The sun rose slow, painting the sky i...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **Title: &quot;The Little Runaway&quot;**
+
+I found the puppy behind the rusted gate, its fur like dusted autumn leaves, trembling under a bruised sky. It had no collar, only a smudge of mud on one ear. I called its name—*Milo*—but it just blinked with hollow eyes, as if time had forgotten to move. The wind howled through the overgrown garden, sharp and hungry, like a whisper that didn’t want to be heard. I thought it must be lost, like a thread forgotten in a seam of old clothes.  
+
+I tried to soothe it w...          </p>
+          <p class="lt-p">
+Rubrics: 14/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Lost Puppy**
+
+I found him under the porch, shaking in the rain, his fur like tangled black velvet. His eyes were big and scared, like two tiny stars in a storm. I’d seen him before—hunched near the woods, losing himself in the thorns and shadows. That night, I promised to find him. I walked the outskirts, through wet mud and writhing weeds, until the wind caught my scarf and I froze. There he was—tucked behind the old wall, gnawing on a rusted iron nail. *Lost*, I thought, not just to me, ...          </p>
+          <p class="lt-p">
+Rubrics: 17/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.810          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Lost Pup**
+
+I found him under the cracked bench by the old bus stop, where the sidewalk split like a frozen river. His fur, once a flicker of golden fluff, was now matted and grey with rain. I called his name—*Baxter*—but the wind only carried my voice like a ghost. His eyes were wide, glassy, like two wells of midnight. I knelt, heart pounding like a caged bird, and felt his cold nose brush my palm. &quot;Don’t go,&quot; I whispered. &quot;Don’t go yet.&quot;
+
+That night, I walked the block again, every step...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Lost Puppy**  
+
+I found Jack in a rain-soaked alley behind the bakery, his small paws soaked to the bone, ears tattered like old paper. He looked like a shadow with fur, tiny and trembling. My heart *thrummed* with dread as I knelt. “You’re lost, aren’t you?” I whispered into the drizzle. He didn’t move—just stared at me with eyes like melted glass.  
+
+I wrapped him in my coat, the wool clinging like a second skin. We walked through the town, each step echoing like footsteps in a hollow ca...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Lost Pup and the Rain-Slicked Street**
+
+I found him under a rusted bench, shivering like a broken leaf in a windless town. His fur, once golden, was now matted with mud and sorrow. I hadn’t seen him since the accident at the corner of Maple and Chestnut. His eyes—two smoldering coals—looked up at me like a question I couldn’t answer. “Don’t run, little one,” I whispered. “We’ll find each other again.”  
+
+The rain that fell that night was relentless—*a drumming downpour*, like hands slammin...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Lost Pup**
+
+I found Leo the morning sun split the sky like a cracked pie, his tiny paws sliding on asphalt, tail gone limp. He was a speck of brown fur, a shadow with no name. I’d lost him during the street fair, where laughter bounced off tin signs and smelled of fried onions. I called his name—*Leo, Leo!*—but the wind caught my voice and carried it away like leaves.  
+
+He stayed hidden behind a rusty fence, where shadows curled like sleeping snakes. I chased him through the market, past ...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Lost Puppy**
+
+I found Pip in the garden one afternoon, his tail twitching like a metronome, his eyes wide as buttons. He’d vanished from the back porch where I left him yesterday. I searched every nook—under the porch, behind the compost heap, even beneath the overgrown roses—until my veins burned with each false hope. His fur, once a golden-brown, now shivered with dust and doubt. I called his name, “Pip! Pip!” Each word cracked like dry twigs in the wind. The sky had turned the same gray...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **My Name is Luna, and I Lost My Way**
+
+I found the puppy on a morning painted with silence, her fur like spun sunlight and her eyes wide as cobblestones. I thought she’d stay. But she left—without a sound, without a sign. I know what it means to wander, like a leaf caught in a storm, drifting from tree to shadow. The wind stole her, and I followed it, though I wasn’t sure I could catch up.
+
+The park had changed. Flowers grew in hushed rows, and the grass whispered secrets I couldn’t understand....          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Lost Puppy**  
+
+I found him in the rain, a speck of fluff tucked beneath the rusted bench near the bakery. His fur—*damp and dusty*—was matted like tangled burlap, and his tail, *a flicker of hope*, waved weakly. I called his name, a whisper lost in the wind, and he didn’t answer. Just stepped into the shadows like a secret-minded ghost.  
+
+The streets grew long and silent after that. Rain poured *in sheets*, turning the pavement to a mirror of blurred faces. I ran, heart *pounding like a ...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Little Dog Who Found Himself**
+
+I found him under the oak, his paws clumsy on the mossy ground. He was small, shivering, like a spark in a storm. His fur, once golden, had turned gray with rain. I picked him up, and he trembled—not from cold, but from fear. He didn’t bark. He just looked at me with eyes like two dark pearls. I called him Scout, even though I didn’t know where he came from.  
+
+At first, I walked him through the garden, watching the dandelions spin like tiny flags in the win...          </p>
+          <p class="lt-p">
+Rubrics: 17/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.810          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Lost Pup**
+
+I found him in the grassy crack behind the old bakery, a trembling ball of fluff with eyes like melted milk. His name was Scout, though I never asked. I crouched, breath catching, as he shivered under the cold sun. *A tiny creature with a tail like a question mark*, I thought. I called his name—*Scout, Scout!*—but he only whimpered, a sound like leaves skittering on stone. I picked him up, his fur sticking to my hand like wet velvet.  
+
+We wandered past the corner store, past t...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Little Runaway Pup**
+
+I found him under the old oak, his fur matted like tangled rope, his eyes bright as broken moons. His name was Scout, though I never asked. He was small, no bigger than a cat’s paw, and his tail thumped like a drum in a storm. I reached for him, and he flinched—just a whisper, like a leaf on wind. I wanted to hold him, but I didn’t know if I could. His breath came in short, *sweet-scorched* puffs, like burnt toast on a cold morning.
+
+Scout didn’t run. He walked. Slow,...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **The Little Pup Who Walked into the Rain**
+
+I found him near the rusted fence at the edge of the park, his fur matted like wet wool, tail tucked between his paws. He was small, no bigger than a raindrop, and his eyes—bright as shattered glass—watched me with a mix of fear and hope. His name was Scout, though I didn’t know how I’d ever found it. That night, under a pale moon, I took him home. The house smelled like dust and old books, and the silence made me feel like a stranger in my own skin.
+...          </p>
+          <p class="lt-p">
+Rubrics: 17/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.810          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **Classic Story Structure**
+
+1. *Exposition* – The narrator introduces themselves and the setting.  
+2. *Rising Action* – A problem or conflict begins to develop.  
+3. *Climax* – The turning point where tension peaks.  
+4. *Falling Action* – The consequences of the climax unfold.  
+5. *Resolution* – The conflict is resolved, and the story ends.  
+
+**Literary Devices Used**
+
+| Device          | Example from Story                                                                 | Explanation of Dev...          </p>
+          <p class="lt-p">
+Rubrics: 14/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help writing a short story with evaluations for my English homework (homework instructions attached at the end). Do not format the uses of literary device differently within the story to highli...          </p>
+          <p class="lt-p">
+Response: **Title: &quot;The Lost Pup&quot;**
+
+I found Max at dawn, tangled in the garden’s tangled thorns, his fur matted like old rope, his eyes wide as coins in a storm. I thought my heart would break—how could such a small creature feel so heavy? Max had not been my dog, not exactly. He&#x27;d been a stray, a shadow with a soft bark and a habit of disappearing. But when he followed me, when he curled at my feet like a relic from a forgotten tale, I knew he belonged.  
+
+The morning sun dripped through the trees, gold...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+934                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+1064                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+989                </td>
+                <td>
+0.810                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.810                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+907                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+993                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+927                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+960                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+902                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+1028                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+1129                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+968                </td>
+                <td>
+0.810                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.810                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+1045                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+1005                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+940                </td>
+                <td>
+0.810                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.810                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+858                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+249                </td>
+                <td>
+1036                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely — this is such a fun and practical goal, and I love that you’re creating a system that’s **fun, easy to use, and family-friendly**! The key is to keep it simple, playful, and inclusive so that **kids can instantly identify their &quot;number zone&quot;** without needing to read long labels.
+
+We’ll do this in a few clear steps:
+
+---
+
+### 🎯 GOAL  
+Create a **10-genre system** (numbered 1 to 10) with **fun, clever, and playful names** that:  
+✔️ Make sense of the books  
+✔️ Are easy for kids to un...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is such a fun and practical idea — an *organized, easy-to-use, and kid-friendly* book system that’s fun to talk about, full of personality, and actually works in real life. You&#x27;re not trying to be a librarian — you&#x27;re creating a **family adventure in book discovery**. So let’s build something that’s smart, joyful, and *super easy* for everyone — including your kids.
+
+---
+
+## 🌟 The Fun &amp; Friendly Book Number System:  
+### &quot;The 10 Genres, Numbered for Fun!&quot;  
+*(Plus a little magic...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is such a thoughtful and fun idea — giving your book collection a playful, accessible, and family-friendly system that everyone (especially the kids) can quickly grasp and enjoy. You’ve already done a great job identifying the core genres, and now we’ll refine and **reimagine them into 10 fun, memorable, and kid-approved titles** — something that’s easy to remember, visually engaging, and clearly labeled with a number.
+
+Since **your kids will know which numbers are theirs** (the...          </p>
+          <p class="lt-p">
+Rubrics: 9/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is such a lovely and thoughtful idea — a fun, *inclusive*, and **kid-friendly** book organization system that doesn’t require complexity, reading labels, or stiff library rules. You’re already off to a great start by choosing fun names and creating a clear, numbered system (1–10) that’s easy to use, even for kids.
+
+Let’s simplify, delight, and organize your genres into **10 fun, vivid, and meaningful titles** that are:
+
+- Easy for kids to remember and recognize  
+- Fun enough to...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is a *fantastic* idea — combining fun, kid-friendly labels with easy-to-use numbers so everyone in the house (kids, husband, you) can quickly find a book without confusion. Since you don’t want something like Dewey Decimal (which can feel overwhelming), and you want **fun, memorable titles** with **just 10 genres** that are easy to remember and use — while still covering your collection meaningfully — I’ve crafted a system that’s **playful, inclusive, and practical**.
+
+---
+
+## 🌟...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! I love this idea — a fun, kid-friendly, and super easy-to-use book organization system that works *for everyone*, especially the kids. Since you’re not looking for something overly technical (like Dewey Decimal), and you want **10 fun, memorable genre titles** with clear, intuitive placement (so kids can instantly know where to put books), I’ve crafted a system that:
+
+- Pulls from your real books  
+- Groups them into **10 creative, fun, and meaningful genre labels**  
+- Makes **numbe...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! You’ve got such a thoughtful and fun vision for your book organization system — and I love that you&#x27;re prioritizing **fun, kid-friendly labels** while keeping it **simple, scalable, and accessible** for everyone in the family.
+
+You mentioned you don’t want Dewey decimals (which is totally valid!), and you want **10 clear, fun, memorable genres** with **fun titles** that will make your friends laugh. You also want:
+
+- A system where books can be quickly placed by number (no reading la...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is such a fun and practical idea — and you&#x27;re already ahead of the game by thinking about **fun, memorable titles** and **simple numbering** so that everyone — especially your kids — can instantly recognize where books belong.
+
+Let’s create a **10-genre system** that:
+- Matches your actual books
+- Is **fun, colorful, and playful** (with titles your friends will laugh at)
+- Is **clear, quick, and intuitive** (no confusing labels or Dewey decimals)
+- Celebrates *all* of you — kids...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely — this is such a fun and smart idea! You&#x27;re already thinking clearly about making it **easy, engaging, and family-friendly**, and that’s so important for *everybody* to feel included, especially the kids.
+
+We’ll take your list of books, your genres, and your vision of **fun, colorful, numbered categories** — and create a system that’s:
+
+✅ Simple to use (no Dewey decimals!)  
+✅ Clear and intuitive  
+✅ Numbered 1–10 (so kids instantly know where things go)  
+✅ Fun, creative, and full of...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! You&#x27;re absolutely right — a system that’s fun, simple, and *inclusive* is the kind of thing families thrive on. You don&#x27;t need complexity or library jargon. You want **fun labels** that will make your kids laugh, **clear rules** for placing books, and a structure that’s easy for *everyone* to use — including the kids who can just go “Ah! Number 3! That’s for me!”
+
+Let’s design a joyful, meaningful, and totally practical system based on your books and your vision.
+
+---
+
+### 📚 **The 10...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is such a fun and smart idea — an *easy*, *playful*, and *inclusive* book organization system that works for *everyone*, especially kids. You&#x27;re right: complex systems like Dewey Decimal are overwhelming, and we don’t need a library for a home bookshelf.
+
+You want:
+- 10 fun, **clear**, **kid-friendly genre titles**  
+- Each labeled with a **number 1–10** (so we can just drop a book in the right spot)  
+- The **higher numbers** (8–10) are **for kids** (and easy to recognize)  
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is such a fun and practical idea — and I *love* that you want it to be playful, easy, and inclusive for everyone in the house — especially the kids. You don’t need any intimidating library rules or complex categories. Instead, you want **10 fun, quirky, and instantly recognizable labels** that are simple to remember, visually engaging, and *perfectly matched* to the books you already have.
+
+Your goal:
+- Only **10 genres** (numbered 1–10)
+- **Fun, fun, fun titles** (so your frien...          </p>
+          <p class="lt-p">
+Rubrics: 9/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is such a fun and thoughtful idea — bringing books into a home with **fun, kid-friendly labels** and a simple numbering system makes reading accessible, joyful, and even game-like for everyone. You&#x27;ve already done the hard work by identifying your books and a list of possible genres. Now, we’ll simplify everything into a **clear, memorable, and playful 10-genre system**, with **fun titles**, logical placement, and a clear hierarchy that makes it easy for kids (especially) to fin...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! You&#x27;ve got a fantastic foundation here — you&#x27;re thinking about fun, accessible, family-centered organization that *works* for everyone, especially the kids. Since you want **10 cool, fun genre titles** (with clear, playful names that kids will love and adults can enjoy too), **easy-to-remember numbers**, and **real-world book placement based on your collection**, let’s create something joyful, practical, and inclusive.
+
+---
+
+## 🌟 10 Fun &amp; Family-Friendly Genre Titles (Numbered 1–10)
+...          </p>
+          <p class="lt-p">
+Rubrics: 12/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is such a fun and practical idea — and you&#x27;re absolutely right that a **fun, easy-to-use, kid-friendly system** will work *far* better than a Dewey decimal system, especially when you have young people involved. You want **10 playful, memorable genre labels** (with numbers 1–10), **clear placement**, and **a playful tone** that kids will love — so they feel included and excited, not overwhelmed.
+
+---
+
+## ✅ Your New Fun &amp; Functional Book Organization System:  
+### **&quot;The 10 Kingd...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My home book collection is getting a little out of hand, and I can&#x27;t actually manage to find anything anymore, so I need some help creating an organization system. I am not a librarian, so I don&#x27;t wan...          </p>
+          <p class="lt-p">
+Response: Absolutely — this is such a fun, thoughtful, and *practical* goal! You want something that’s easy for everyone (kids, husband, and you) to use, has **fun, playful titles**, is **simple and numbered**, and still **organizes the books meaningfully** — all while keeping it accessible and joyful.
+
+Let’s build a system that:
+
+✅ Uses only **10 clear, fun, and age-appropriate genre labels**  
+✅ Assigns each book to a genre based on *what it’s actually about* (not just surface categories)  
+✅ Gives each...          </p>
+          <p class="lt-p">
+Rubrics: 9/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2813                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2752                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2944                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2884                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2949                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2528                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2262                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+3027                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2016                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+3196                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2655                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2835                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2995                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+3031                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2995                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+814                </td>
+                <td>
+2538                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

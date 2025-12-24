@@ -1,0 +1,4633 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 4</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 4  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-19T23:42:56  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Bliss,Rena,ok,ok,ok,ok,ok
+Bower,Raekwon,1/05/23 - 1/04/23,Iss. 5/15/21 - Exp. 5/15/26,2/7/22 - 12/7/27,2/6/23 - 2/6/28,10/14/23 - 12/18/39
+Charles,Donnell G,1.5.12 - 1.4.22,5.5.23 - 5.5.28,1/8/23 - 1/8/28,12.26.22 - 12.26.27,ok
+Cameron,Shaniya,1/5/22 - 1/4/32,8/11/22 - 8/11/27,10/8/23 - 10/8/28,12/7/29 - 12/7/44,4/4/23 - 5/18/29
+Choate,George,ok,8/5/17 - 8/5/22,10/8/23 - 10/8/28,12/26/22 - 12/26/27,11/14/20 - 5/19/30
+Damico,Sincere,ok,ok,ok,ok,...          </p>
+          <p class="lt-p">
+Rubrics: 0/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,document_date,ship
+Almeida,Exp,MIG
+Baker,ok,BIL
+Bliss,ok,QUQ
+Bower,1/05/23-1/04/23,YOK
+Banks,ok,SON
+Bartolomeo,ok,WAD
+Brown,ok,SAM
+Campbell,ok,ORD
+Charles,12.26.22-12.26.27,WAS
+Choi,ok,AVI
+Damico,ok,AVI
+Davies,ok,BIL
+Dee,ok,QUQ
+Derick,ok,SAM
+Dobson,ok,ORD
+Donnell,12.26.22-12.26.27,WAS
+Eaton,ok,AVI
+Fong,6/15/32-6/16/22,ORD
+Foote,ok,SON
+Garnett,ok,YOK
+Gilliland,5.5.22-5.5.27,BIL
+Gilman,Exp,MIG
+Huff,ok,WAD
+Huff,ok,WAD
+Huff,ok,WAD
+Joe,ok,AVI
+Keeley,ok,ORD
+Keeley,ok,ORD
+Keeley,ok,ORD...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: &quot;ok&quot; for non-expired records with no issues and just show expired expiration dates and blanks for everything else in each document field.
+
+We are to:
+- Correct spelling errors and match names to the provided list.
+- Identify expired or missing or error-prone (likely typo) document dates.
+- Output a comma-separated value (CSV) table with:
+  - Only **last names** in each row.
+  - Each row should have: last name, ship name (as code or * if not provided)
+- Separate list for **captains** (only captai...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Almeida,MIG,1/4/32,10/5/26,11/18/28,ok,5/28/29
+Baron,MAG,ok,ok,ok,ok,ok
+Bliss,QUQ,11/5/22 - 11/4/32,5/5/23 - 5/15/2024,2/17/22 - 2/17/27,10/7/25 - 10/9/30,ok
+Bower,YOK,1/05/23 - 1/04/23,5/15/21 - Exp. 5/15/26,2/7/22 - 12/7/27,2/6/23 - 2/6/28,10/14/23 - 12/18/39
+Charles,WAS,1.5.12 - 1.4.22,5.5.23 - 5.5.28,1/8/23 - 1/8/28,12.26.22 - 12.26.27,ok
+Damico,MIG,ok,Exp,ok,ok,ok
+Davies,ok,ok,ok,ok,ok,ok
+Derick,Tovar,SAM,30.2.20 - 30.2.25,10/18/23 - 10/18...          </p>
+          <p class="lt-p">
+Rubrics: 0/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Almeida,MIG,1/4/32,10/5/26,11/18/28,,&quot;&quot;
+Banks,SON,1/5/22 - 1/4/27,12/7/20 - 12/27/25,11/8/23 - 11/8/28,9/17/2024 - 9/17/2029,11/4/21 - 11/4/29
+Baron,,&quot;4/32&quot;,,&quot;&quot;,&quot;&quot;,&quot;&quot;
+Bliss,QUQ,11/5/22 - 11/4/32,5/5/23 - 5/15/,2/17/22 - 2/17/27,10/7/25 - 10/9/30
+Brown,SAM,1/5/13 - 1/4/23,5/5/25 - 5/5/20,1/7/17 - 1/7/22,12/16/24 - 12/16/29,4/14/29 - 1/11/22
+Camara,,&quot;1/5/22 - 1/4/32&quot;,8/11/22 - 8/11/27,10/8/23 - 10/8/28,12/7/29 - 12/7/44,4/4/23 - 5/18/29
+Charles,W...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Baron,ok,ok,ok,ok,ok,ok
+Bliss,QUQ,11/5/22 - 11/4/32,5/5/23 - 5/15/,2/17/22 - 2/17/27,10/7/25 - 10/9/30,ok
+Bower,YOK,1/05/23 - 1/04/23,Iss. 5/15/21 - Exp. 5/15/26,2/7/22 - 12/7/27,2/6/23 - 2/6/28,ok
+Brown,SAM,1/5/13 - 1/4/23,ok,ok,ok,ok
+Cameron,YOK,1/5/22 - 1/4/32,8/11/22 - 8/11/27,10/8/23 - 10/8/28,12/7/29 - 12/7/44,4/4/23 - 5/18/29
+Choate,SON,11/5/17 - 11/4/27,8/5/17 - 8/5/22,10/8/23 - 10/8/28,12/26/22 - 12/26/27,11/14/20 - 5/19/30
+Damico,MIG,...          </p>
+          <p class="lt-p">
+Rubrics: 0/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,twic,mmc,med_cert,dl
+Baron,ok,ok,ok,ok,ok,ok
+Bliss,ok,ok,ok,ok,ok,ok
+Bower,ok,expired,ok,5/15/21-5/15/26,2/6/23-2/6/28,ok
+Choate,ok,ok,ok,ok,ok,ok
+Cornell,ok,10/15/32-10/14/22,1/8/20-1/8/25,ok,ok
+Damico,ok,ok,ok,expired,ok,ok
+Davies,ok,ok,ok,ok,ok,ok
+Derick,ok,31.5.22-30.5.32,10/18/23-10/18/28,30.2.20-30.2.25,2/7/25-2/7/30,ok
+Fong,ok,6/15/32-6/16/22,ok,15/6/21-15/6/26,17/7/29,ok
+Foote,ok,ok,ok,11/15/18-11/15/23,ok,4/4/23-5/18/29
+Garnett,ok,8/5/22-8/4/32,10/17/24-10...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Almeida,MIG,1/4/32,10/5/26,11/18/28,,&quot;&quot;
+Baron,ok,ok,ok,ok,ok,ok
+Bliss,Rena,11/5/22 - 11/4/32,5/5/23 - 5/15/,2/17/22 - 2/17/27,10/7/25 - 10/9/30,ok
+Bower,YOK,1/05/23 - 1/04/23,5/15/21 - Exp. 5/15/26,2/7/22 - 12/7/27,2/6/23 - 2/6/28,10/14/23 - 12/18/39
+Brown,SAM,1/5/13 - 1/4/23,5/5/25 - 5/5/20,1/7/17 - 1/7/22,12/16/24 - 12/16/29,4/14/29 - 1/11/22
+Charles,WAS,1.5.12 - 1.4.22,5.5.23 - 5.5.28,1/8/23 - 1/8/28,12.26.22 - 12.26.27,ok
+Cameron,YOK,1/5/22...          </p>
+          <p class="lt-p">
+Rubrics: 0/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,passport,mmc,twic,med_cert,dl,ship
+Almeida,Expired,10/5/26,11/18/28,Exp,5/28/29,
+Baron,Raymundo Barrron,Exp,12/7/27,Exp,Exp,
+Bliss,Rena,11/5/22,2/17/27,10/7/25,Exp,QUQ
+Bower,Raekwon,1/05/23,2/7/22,2/6/23,10/14/23,YOK
+Brown,Frank,1/5/13,2/7/22,5/5/25,4/14/20,SAM
+Banks,Will,1/15/22,12/7/27,12/7/27,4/4/29,BIL
+Cameron,Shaniya,1/5/22,10/8/23,12/7/29,4/4/23,YOK
+Charles,Donnell G,1.5.12,1.8.23,12.26.22,4/11/23,WAS
+Choate,George,11/5/17,10/8/23,12/26/22,11/14/20,SON
+Damico,Sincere,Exp,E...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Baron,ok,ok,ok,ok,ok,ok
+Bliss,QUQ,11/5/22 - 11/4/32,5/5/23 - 5/15/23,2/17/22 - 2/17/27,10/7/25 - 10/9/30,ok
+Bower,YOK,1/05/23 - 1/04/23,5/15/21 - Exp. 5/15/26,2/7/22 - 12/7/27,2/6/23 - 2/6/28,10/14/23 - 12/18/39
+Brown,SAM,1/5/13 - 1/4/23,5/5/25 - 5/5/20,1/7/17 - 1/7/22,12/16/24 - 12/16/29,4/14/29 - 1/11/22
+Choate,SON,11/5/17 - 11/4/27,8/5/17 - 8/5/22,10/8/23 - 10/8/28,12/26/22 - 12/26/27,11/14/20 - 5/19/30
+Damico,MIG,ok,ok,ok,ok,ok
+DeLeon,ok,ok...          </p>
+          <p class="lt-p">
+Rubrics: 0/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Baron,ok,ok,ok,ok,ok,ok
+Bliss,QUQ,11/5/22 - 11/4/32,5/5/23 - 5/15/23,2/17/22 - 2/17/27,10/7/25 - 10/9/30,ok
+Bowers,ok,1/05/23 - 1/04/23,5/15/21 - Exp. 5/15/26,2/7/22 - 12/7/27,2/6/23 - 2/6/28,10/14/23 - 12/18/39
+Brown,SAM,1/5/13 - 1/4/23,5/5/25 - 5/5/20,1/7/17 - 1/7/22,12/16/24 - 12/16/29,4/14/29 - 1/11/22
+Chu,ok,ok,ok,ok,ok,ok
+Choate,SON,11/5/17 - 11/4/27,8/5/17 - 8/5/22,10/8/23 - 10/8/28,12/26/22 - 12/26/27,11/14/20 - 5/19/30
+Damico,MIG,ok,Ex...          </p>
+          <p class="lt-p">
+Rubrics: 0/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,passport,mmc,twic,med_cert,dl,ship
+Almeida,expired,expired,expired,expired,&quot;&quot;,MIG
+Banks,ok,ok,ok,ok,&quot;&quot;,SON
+Bliss,ok,ok,ok,ok,&quot;&quot;,QUQ
+Boyer,ok,ok,ok,ok,&quot;&quot;,MAG
+Brown,ok,ok,ok,ok,&quot;&quot;,SAM
+Charles,ok,ok,ok,ok,&quot;&quot;,WAS
+Cameron,expired,expired,expired,expired,&quot;&quot;,YOK
+Choi,ok,ok,ok,ok,&quot;&quot;,ORD
+Damico,ok,ok,ok,ok,&quot;&quot;,AVI
+Derick,ok,ok,ok,ok,&quot;&quot;,SAM
+Dowd,ok,ok,ok,ok,&quot;&quot;,WAD
+Fong,expired,expired,expired,expired,&quot;&quot;,ORD
+Foote,ok,ok,ok,ok,&quot;&quot;,MAG
+Garnett,ok,ok,ok,ok,&quot;&quot;,YOK
+Gilliland,ok,ok,ok,ok,&quot;&quot;,BIL
+Ho...          </p>
+          <p class="lt-p">
+Rubrics: 3/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,document_passport,document_mmc,document_twic,document_med_cert,document_dl,ship
+Shook,ok,ok,ok,ok,ok,SAM*
+Raines,ok,ok,ok,ok,ok,MAG*
+Lutz,ok,ok,ok,ok,ok,BIL*
+Bliss,ok,ok,ok,ok,ok,QUQ*
+Banks,ok,ok,ok,ok,ok,SON*
+Pham,ok,ok,ok,ok,ok,ORD*
+Garnett,ok,ok,ok,ok,ok,YOK*
+Cameron,ok,ok,ok,ok,ok,YOK*
+Stoddard,ok,ok,ok,ok,ok,QUQ*
+Gilman,expired,expired,expired,expired,ok,MIG*
+Almeida,ok,ok,ok,ok,ok,MAG*
+Damico,expired,ok,ok,ok,ok,AVI*
+Bower,expired,ok,ok,ok,ok,YOK*
+Fong,ok,ok,ok,expired,ok,...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Almeida,MIG,1/4/32,10/5/26,11/18/28,ok,5/28/29
+Banks,SON,1/5/22 - 1/4/32,12/7/20 - 12/27/25,11/8/23 - 11/8/28,9/17/2024 - 9/17/2029,11/4/21 - 11/4/29
+Baron,ok,ok,ok,ok,ok,ok
+Bliss,QUQ,11/5/22 - 11/4/32,5/5/23 - 5/15/,2/17/22 - 2/17/27,10/7/25 - 10/9/30
+Blog,ok,ok,ok,ok,ok,ok
+Brown,SAM,1/5/13 - 1/4/23,5/5/25 - 5/5/20,1/7/17 - 1/7/22,12/16/24 - 12/16/29,4/14/29 - 1/11/22
+Charles,WAS,1/5/12 - 1/4/22,5/5/23 - 5/5/28,1/8/23 - 1/8/28,12/26/22 - 12/26...          </p>
+          <p class="lt-p">
+Rubrics: 0/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Almeida,MIG,1/4/32,10/5/26,11/18/28,,,5/28/29
+Banks,SON,1/5/22 - 1/4/32,12/7/20 - 12/27/25,11/8/23 - 11/8/28,9/17/2024 - 9/17/2029,11/4/21 - 11/4/29
+Bliss,Rena,11/5/22 - 11/4/32,5/5/23 - 5/15/,2/17/22 - 2/17/27,10/7/25 - 10/9/30,
+Bower,QUE,1/05/23 - 1/04/23,5/15/21 - Exp. 5/15/26,2/7/22 - 12/7/27,2/6/23 - 2/6/28,10/14/23 - 12/18/39
+Charles,SAM,1.5.12 - 1.4.22,5.5.23 - 5.5.28,1/8/23 - 1/8/28,12.26.22 - 12.26.27,
+Concord,Justyn,1/5/22 - 1/4/27,5/...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Using the following information, produce a list of employees with expired or missing or errors (probably typos) in the document dates.  Sort by last name, but do a separate list for captains.  Also pu...          </p>
+          <p class="lt-p">
+Response: ```csv
+last_name,ship,passport,mmc,twic,med_cert,dl
+Baron,ok,ok,ok,ok,ok,ok
+Bliss,QUQ,11/5/22 - 11/4/32,5/5/23 - 5/15/,2/17/22 - 2/17/27,10/7/25 - 10/9/30,ok
+Bower,YOK,1/05/23 - 1/04/23,5/15/21 - Exp. 5/15/26,2/7/22 - 12/7/27,2/6/23 - 2/6/28,ok
+Choate,SON,11/5/17 - 11/4/27,8/5/17 - 8/5/22,10/8/23 - 10/8/28,12/26/22 - 12/26/27,11/14/20 - 5/19/30
+Damico,MIG,ok,ok,ok,ok,ok
+DeLoughrey,ok,ok,ok,ok,ok,ok
+Devlin,ok,ok,ok,ok,ok,ok
+Dovar,ok,ok,ok,ok,ok,ok
+Fong,ok,ok,ok,ok,ok,ok
+Foote,ok,ok,ok,ok,ok,ok
+Ga...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+4140                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+8192                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+7079                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+1727                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+2134                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+1333                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+1403                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+2434                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+1093                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+8192                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+2169                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+696                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+633                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+1936                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+1815                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4487                </td>
+                <td>
+1345                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: 1. **Which book of the Iliad contains the interaction between Diomedes and Glaukos?**  
+A) Book 1  
+B) Book 4  
+C) Book 9  
+D) Book 18  
+E) Book 22  
+
+2. **According to Glaukos, what is the nature of human generations in relation to the passage’s metaphor of leaves?**  
+A) Generations are eternal and unchanging, like ancient trees.  
+B) Generations grow and die in cycles, like leaves falling and budding again.  
+C) Generations are fixed by divine will and cannot be altered.  
+D) Generations decl...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: 1. **Which book of the Iliad contains the interaction between Glaukos and Diomedes?**  
+A) Book 8  
+B) Book 9  
+C) Book 10  
+D) Book 11  
+E) Book 12  
+
+2. **What is the central purpose of Glaukos’ extended genealogy in his speech to Diomedes?**  
+A) To brag about his lineage and prove his superiority in battle  
+B) To establish a shared ancestral history and validate their friendship  
+C) To explain how Bellerophontes was cursed by the gods for his integrity  
+D) To show that all heroes are ulti...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: 1. **Which book of the Iliad contains the interaction between Glaukos and Diomedes?**  
+A) Book 5  
+B) Book 6  
+C) Book 15  
+D) Book 10  
+E) Book 8  
+
+2. **What does Diomedes fear more than fighting any mortal, and why?**  
+A) He fears the Amazons because they are fierce warriors.  
+B) He fears the power of the gods because of the fate of Lykourgos, who died after challenging them.  
+C) He fears the wrath of Aphrodite, who has a strong interest in battle.  
+D) He fears the consequences of being ...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: Certainly! Below are **10 exam questions** based on the Lattimore translation of the Glaukos–Diomedes interaction from the *Iliad*. These questions are carefully crafted to reflect both **recall** and **interpretation**, assume students have read and discussed the passage in class, and are designed to test their understanding through a mix of difficulty and focus. The questions follow your requested structure: **7 multiple-choice, 2 short answer, 1 short essay with 3 options**.
+
+---
+
+1. **Which ...          </p>
+          <p class="lt-p">
+Rubrics: 8/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a carefully crafted set of 10 exam questions based on the Glaukos and Diomedes passage from the *Iliad* (Lattimore translation). These questions are designed to assess both **recall** and **interpretation**, with a balanced mix of difficulty levels and thematic depth. They follow your instructions precisely:
+
+- 7 multiple-choice questions (alternating between basic knowledge and interpretive depth)  
+- 2 short-answer questions (interrogative, requiring 1–3 sentence responses,...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a carefully designed exam section based on the provided passage from *The Iliad* (Lattimore translation), including **10 questions** as requested:  
+
+- **7 Multiple-Choice Questions** (alternating between basic recall and interpretive depth)  
+- **2 Short Answer Questions** (interrogative, complex, and requiring synthesis)  
+- **3 Short Essay Question Options** (diverse in focus, ranging from mythological themes to human relationships with the divine)  
+
+All questions are gro...          </p>
+          <p class="lt-p">
+Rubrics: 10/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a well-structured and balanced set of 10 exam questions based on the Glaukos and Diomedes passage from the *Iliad* (Lattimore translation), designed for students who have read and discussed the passage in class and have access to the text during the exam.
+
+The questions follow your specifications:
+- 7 multiple-choice questions (with 5 plausible options each)
+- 2 short answer questions (interrogative, complex, no &quot;what/who&quot;)
+- 3 short essay question options (diverse in focus a...          </p>
+          <p class="lt-p">
+Rubrics: 7/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.389          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a carefully crafted exam section consisting of **10 questions** based on the Glaukos and Diomedes passage from the *Iliad*, as requested. The questions are structured to reflect both **recall** and **interpretation**, vary in difficulty, and align with classroom discussion expectations. Students are assumed to have read the passage and reviewed it prior to the exam.
+
+---
+
+1. **Which book of the Iliad contains the interaction between Glaukos and Diomedes?**  
+(1) Book 1  
+(2) ...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: Certainly! Below are **10 carefully crafted exam questions** based on the Glaukos and Diomedes passage from the *Iliad* (Lattimore translation), designed to test both **recall** and **interpretation**. The questions follow your specifications:
+
+- 7 multiple-choice questions (mix of basic recall and deeper interpretation)
+- 2 short answer questions (interrogative, not starting with &quot;what&quot; or &quot;who&quot;, concise, 1–3 sentences)
+- 3 essay question options (diverse in focus: mythology, mortals/gods, hero...          </p>
+          <p class="lt-p">
+Rubrics: 9/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: Certainly! Here is a well-structured exam section tailored to your needs, with 10 carefully crafted questions that reflect both recall and interpretation. The questions alternate in difficulty, build on prior class discussion, and are designed to test students&#x27; engagement with the text while allowing them to demonstrate critical thinking. All options are rooted in the Homeric world and avoid modern or non-Mythological references.
+
+---
+
+1. **Which book of the Iliad contains the interaction betwee...          </p>
+          <p class="lt-p">
+Rubrics: 8/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: Certainly! Below are **10 carefully crafted exam questions** based on the Glaukos and Diomedes passage from the *Iliad* (Lattimore translation), designed for students who have read and discussed the text in class. The questions follow your specifications:  
+- 7 multiple-choice (with plausible distractors)  
+- 2 short answer (using interrogatives, not &quot;what&quot; or &quot;who&quot;)  
+- 3 essay question options (varying in focus)  
+
+The questions alternate between **recall** and **interpretation**, range in dif...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: 1. **Which book of the Iliad contains the exchange between Glaukos and Diomedes?**  
+A) Book 1  
+B) Book 2  
+C) Book 3  
+D) Book 9  
+E) Book 15  
+
+2. **What does Diomedes claim about the gods&#x27; response to Lykourgos’ attempt to confront them?**  
+A) The gods punished him by turning him into a boar  
+B) The gods were indifferent and let him die of old age  
+C) The gods were angered and struck him blind, resulting in his brief life  
+D) The gods protected him by sending a divine shield  
+E) The god...          </p>
+          <p class="lt-p">
+Rubrics: 7/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.389          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: Certainly! Below are 10 carefully designed exam questions based on the Glaukos and Diomedes passage from the *Iliad* (Lattimore translation), aligned with your specifications. The questions vary in difficulty, blend recall and interpretation, and are structured to reflect classroom discussion and student familiarity with the text.
+
+---
+
+1. **Which book of the *Iliad* contains the interaction between Glaukos and Diomedes?**  
+A) Book 1  
+B) Book 2  
+C) Book 4  
+D) Book 5  
+E) Book 18  
+
+2. **What...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: 1. **Which book of the Iliad contains the interaction between Glaukos and Diomedes?**  
+A) Book 1  
+B) Book 3  
+C) Book 9  
+D) Book 12  
+E) Book 14  
+
+2. **What does Diomedes imply about the danger of fighting gods, drawing on the story of Lykourgos?**  
+A) He believes that even a mortal like Lykourgos could succeed in battle against the gods.  
+B) He fears that gods will retaliate with divine punishment, as seen in Lykourgos’ blindness and death.  
+C) He claims that only heroes like Bellerophon...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: 1. **Which book of the Iliad contains the exchange between Glaukos and Diomedes?**  
+A) Book 4  
+B) Book 5  
+C) Book 12  
+D) Book 15  
+E) Book 20  
+
+2. **What is the primary purpose of Glaukos&#x27; genealogical story when speaking to Diomedes?**  
+A) To assert his divine ancestry and prove his superiority in battle  
+B) To explain the origins of the Lykian people and their cultural traditions  
+C) To establish a sense of shared ancestry and mutual respect between the two warriors  
+D) To justify the...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hello, I am writing an exam that will test students&#x27; recall and understanding of key passages of the Iliad. For this section of the exam, we will be focusing on the interaction between Glaukos and Dio...          </p>
+          <p class="lt-p">
+Response: 1. **Which of the following best identifies the main purpose of the exchange between Diomedes and Glaukos in the passage?**  
+A) To establish a formal alliance between the Achaean and Lykian armies for a joint campaign against Troy  
+B) To confirm Glaukos’s lineage and validate shared ancestry with Diomedes through a reciprocal act of hospitality  
+C) To demonstrate how divine favor determines the success of warriors in battle  
+D) To honor the memory of past wars and leaders by reenacting their...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1170                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1341                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1442                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+2167                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+2012                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+2153                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1789                </td>
+                <td>
+0.389                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.389                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1560                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1927                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1300                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1332                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+968                </td>
+                <td>
+0.389                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.389                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1338                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1120                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1068                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2159                </td>
+                <td>
+1408                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**very great literary voice, even the most powerful, emerges in a network—not in isolation. The stories we tell today are not born in vacuum, but from conversations across time, place, and culture. For Black, Indigenous, and people of color (BIPOC) writers, the journey to literary visibility has often been shaped by a complex, sometimes painful, interweaving of global influences—shared not through intent to dominate, but through necessity, curiosity, and survival.
+
+When one considers the lite...          </p>
+          <p class="lt-p">
+Rubrics: 12/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.480          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**
+
+In the quiet hum of modern literary conversation, one might assume that today’s BIPOC writers are standing on isolated ground—forged solely in their own communities, speaking in unbroken, original voices. But the truth is more woven, more layered. The literary currents shaping today’s most compelling stories have long carried the echoes of writers from across the globe—some white, some colonial, some utterly alien to the lived experience of Black, Indigenous, and People of Color (BIPOC) c...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**very great literary movement—no matter how far back it stretches—carries a quiet pulse that can be felt long after its time has passed. It’s not a story about one group &quot;paving the way&quot; for another. It’s not a hierarchy of origin. Instead, it’s a subtle, sometimes unremarked-upon collaboration: the way artists from different backgrounds listen, absorb, and reimagine—without erasure, without oversimplification—the voices that surround them.  
+
+Today’s BIPOC writers are not just building upon...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**very great literary voice, no matter how rooted in a single culture, draws energy from the vast landscape of human experience. This is true not only for BIPOC writers today but for the literary traditions that came before them—whether in Paris, Russia, or New York. It’s a truth that resists tidy narratives of origin or “firstness.” The idea that one group of writers created a genre and then passed it on to others—especially through a lens of hierarchy or superiority—is not just inaccurate; ...          </p>
+          <p class="lt-p">
+Rubrics: 14/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.560          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**
+
+Ernest Hemingway, often celebrated for his lean prose and stark realism, did not write in isolation. Though born in the United States and rooted in a Eurocentric literary tradition, his influence on modern BIPOC writers stretches across continents and generations—not through erasure, but through the enduring resonance of his thematic preoccupations: isolation, the aftermath of violence, the tension between authenticity and performance. These themes, woven into the fabric of early 20th-cen...          </p>
+          <p class="lt-p">
+Rubrics: 16/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.640          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**
+
+In the quiet hum of a well-turned page, literature has always been a conversation—not a monologue. It’s a dialogue between generations, continents, and cultural worlds that, when held with care and respect, can bloom into something new and deeply authentic. For contemporary BIPOC writers, the literary journey is not a solitary one. It’s shaped by a long history of cross-pollination—where voices from different traditions have not just crossed paths, but grown together, like roots in shared...          </p>
+          <p class="lt-p">
+Rubrics: 13/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.520          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**
+
+Ernest Hemingway, known for his stark, minimalist prose and focus on male experience, was not a representative of any one cultural tradition—though his work emerged from a global context shaped by the tumult of war and migration. In the 1920s, during the rise of the ExPat literary movement in Paris, artists from across Europe and the Americas gathered in the city’s cafés, drawing on shared experiences of displacement and cultural hybridity. Many of these writers, including Hemingway, foun...          </p>
+          <p class="lt-p">
+Rubrics: 12/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.480          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**very great literary voice has roots that stretch beyond the borders of one culture, one country, or one generation. In the rich mosaic of modern literature, especially among BIPOC writers, inspiration is not a one-way street — it is a dialogue, woven across centuries, continents, and voices. This is not a story of superiority, nor of who came first or whose work &quot;paved the way.&quot; It is a quiet, ongoing exchange — one in which writers of all backgrounds borrow, adapt, and transform, not to er...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**
+
+In the quiet hum of literary evolution, few things are more enduring than the idea that stories feed on each other—across borders, generations, and skin tones. Today’s BIPOC writers don’t emerge in vacuum; they carry echoes of earlier voices—some no longer in our living rooms, others still visible in the cadence of a well-written sentence or the structure of a deeply intuitive narrative. This is not a tale of white supremacy or cultural dominance. Nor is it a white savior narrative. It is...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**
+
+In the quiet hum of modern literature, voices from all corners of the globe—those shaped by migration, silence, resilience, and resistance—have coalesced into something bold and new. Today’s BIPOC writers do not stand in isolation. Their work is woven from threads pulled from centuries of global literary exchange, where the movements of the past didn’t simply inform the present—they gave space to new expressions of identity, language, and truth.  
+
+This isn’t a story of white authors “pav...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**
+
+When we think of literary influence, it’s easy to focus on lineage—on who came before, who shaped tradition. But in truth, the most powerful connections in literature don’t follow a straight path from past to present. They weave across borders, across identities, across time—sometimes through silence, sometimes through struggle. Modern BIPOC writers don’t inherit a literary tradition in isolation. They build upon a mosaic of voices that have, at various points in history, been both availa...          </p>
+          <p class="lt-p">
+Rubrics: 13/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.520          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**very great literary voice, even one born into a world where representation was rare, begins somewhere—often in the hush between silence and sound, in the margins of a published page. For BIPOC writers today, that beginning is rarely one of isolation. Instead, it is a quiet, persistent collaboration—one that stretches across continents, decades, and cultural boundaries. It is not about one group &quot;paving the way&quot; for another. It is about how voices have flowed, shaped, and reimagined each oth...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**
+
+Ernest Hemingway’s spare, understated prose—crafted in the shadow of war and the expanse of postwar Europe—may seem distant from the lyrical complexity of Toni Morrison’s *Beloved* (1987), but their dialogues lived on in the quiet spaces between words. What emerged from that crosscurrent of influence was not a hierarchy of who came first or who was more “authentic,” but a shared language of reckoning: one shaped by loss, silence, and the weight of history. In the 1920s, Paris became a cru...          </p>
+          <p class="lt-p">
+Rubrics: 10/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**
+
+In the quiet hum of modern literary creation, it’s easy to assume that inspiration flows only from one direction—downward, from the established to the emerging. But truth be told, the literary landscape we inhabit today is built on a rich, overlapping network of voices. No single movement or tradition stands alone. Instead, what we see as the evolution of modern BIPOC narrative—its rhythms, its silences, its emotional depth—is forged through centuries of crosscurrents. The work of white w...          </p>
+          <p class="lt-p">
+Rubrics: 13/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.520          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**very literary movement, no matter how far-flung or foreign, begins with a spark—sometimes a single conversation, a moment of silence, a poem read aloud in a crowded room. For BIPOC writers today, that spark has often come not from echoes of their own heritage, but from the works of writers across language, race, and geography who existed before them, whose stories were too often buried in silence or ignored in mainstream literary canons. This doesn’t mean that those earlier voices were “pav...          </p>
+          <p class="lt-p">
+Rubrics: 15/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am hoping to put together a blog post for an upcoming Substack feature. It should feature a comparison of several literary movements and how they’ve influenced the modern BIPOC writer. The tone of t...          </p>
+          <p class="lt-p">
+Response: **E**very great literary movement begins not in isolation, but in exchange—a quiet hum of dialogue between voices that, at first glance, seem worlds apart. When we talk about the influence of past literary traditions on contemporary BIPOC writers, it&#x27;s crucial to avoid the trap of claiming that white writers &quot;paved the way&quot; or that their contributions were somehow foundational in a hierarchy of authorship. Instead, let’s explore how cross-cultural encounters—shaped by geography, migration, displ...          </p>
+          <p class="lt-p">
+Rubrics: 17/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.680          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1449                </td>
+                <td>
+0.480                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.480                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1872                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+2176                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1691                </td>
+                <td>
+0.560                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.560                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+2006                </td>
+                <td>
+0.640                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.640                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1967                </td>
+                <td>
+0.520                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.520                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1871                </td>
+                <td>
+0.480                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.480                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1978                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1962                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1767                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1737                </td>
+                <td>
+0.520                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.520                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1670                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1479                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1419                </td>
+                <td>
+0.520                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.520                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1757                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+692                </td>
+                <td>
+1832                </td>
+                <td>
+0.680                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.680                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **fully completed, correctly formatted, and alphabetised bibliography** according to the course standards you specified.
+
+---
+
+**Bibliography**
+
+Allison, A. (2022) - Disney and Pixar&#x27;s Top 5 Most Innovative Animation Technologies, Explained [article]  
+Anderson, C.Z. (2020) - The Flawed Beauty of Treasure Planet: An Animated Disney Masterpiece (Video Essay) [Video]  
+Bellatoni, P. (2005) - If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling. 1st...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **complete, correctly formatted, and alphabetised bibliography** based on your in-text citations and the specified course standards. All formatting rules have been strictly applied as requested:
+
+- Entries are listed alphabetically by surname (or username in quotation marks if no surname is given).  
+- Titles are in italics.  
+- Web links with &quot;youtube&quot; are followed by [Video].  
+- Podcasts are marked with [Podcast].  
+- Sources with no web link include [book].  
+- Other...          </p>
+          <p class="lt-p">
+Rubrics: 16/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.842          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **fully completed, correctly formatted, and alphabetically ordered bibliography** according to your stated course standards.
+
+### ✅ Formatting Rules Applied:
+- All entries follow: **Surname, Initials. (date) - *Title* [source type]**  
+- Titles are in *italics*  
+- If the web link includes &quot;youtube&quot;: add `[Video]`  
+- Podcasts: add `[Podcast]`  
+- No date included in the source if not provided → use `(n.d.)`  
+- If in-text citation uses a username (e.g., ‘JUSTICE’, ‘BREA...          </p>
+          <p class="lt-p">
+Rubrics: 13/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.684          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **completed, correctly formatted, and alphabetized bibliography** according to the specified university course standards.
+
+Each entry follows the required format:
+
+&gt; **Surname, Initials. (date) - *Title* [type of source]**  
+&gt; (With all formatting rules applied as per your instructions.)
+
+---
+
+Bellatoni, P. (n.d.) - *If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling* [book]  
+Berkeley: University of California Press  
+
+Dudley, S. (2020) - *The...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your fully completed, correctly formatted, and alphabetically ordered bibliography according to the course standards you specified.
+
+---
+
+**Bibliography**
+
+Allison, A. (2022) - Disney and Pixar&#x27;s Top 5 Most Innovative Animation Technologies, Explained [article]  
+Bellatoni, P. (2005) - If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling. 1st edition. Los Angeles: Routledge  
+Coleman, R. (2020) - Treasure Planet - A Hidden Sci-Fi Gem [video]  
+Dudley,...          </p>
+          <p class="lt-p">
+Rubrics: 9/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.474          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **fully completed, correctly formatted, and alphabetically ordered bibliography** according to your specified university course standards.
+
+---
+
+**Bibliography**
+
+Allison, A. (2022) - Disney and Pixar&#x27;s Top 5 Most Innovative Animation Technologies, Explained [article]  
+Bellatoni, P. (n.d.) - If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling. 1st edition. Los Angeles: Routledge  
+Coleman, R. (n.d.) - Treasure Planet - A Hidden Sci-Fi Gem [vide...          </p>
+          <p class="lt-p">
+Rubrics: 12/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.632          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **fully completed, properly formatted, and alphabetized bibliography** according to your specified university standards.
+
+---
+
+**Bibliography**
+
+Allison, A. (2022) - Disney and Pixar&#x27;s Top 5 Most Innovative Animation Technologies, Explained [article]  
+Bellatoni, P. (2005) - If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling. 1st edition. Los Angeles: Routledge  
+Coleman, R. (2020) - Treasure Planet - A Hidden Sci-Fi Gem [video]  
+Dudley, S. (2...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **fully completed, alphabetically organised bibliography** that adheres strictly to your specified formatting requirements:
+
+---
+
+Bellatoni, P. (n.d.) - *If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling* [book]. Los Angeles: Routledge  
+Coleman, R. (n.d.) - *Treasure Planet - A Hidden Sci-Fi Gem* [video].  
+Dudley, S. (2020) - *The Making of Treasure Planet | Animation Magic* [Video]  
+Etherington-Wright, C. (2011) - *Understanding film theor...          </p>
+          <p class="lt-p">
+Rubrics: 10/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.526          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **fully completed, correctly formatted, and alphabetically ordered bibliography** based on the in-text citations and your provided requirements.
+
+---
+
+**Bibliography**
+
+Allison, A. (2022) - Disney and Pixar&#x27;s Top 5 Most Innovative Animation Technologies, Explained [article]  
+Bellatoni, P. (2005) - If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling. 1st edition. Los Angeles: Routledge  
+Coleman, R. (2020) - Treasure Planet - A Hidden Sci-Fi Gem...          </p>
+          <p class="lt-p">
+Rubrics: 12/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.632          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **completed, correctly formatted, and alphabetically ordered bibliography** according to your course requirements.
+
+---
+
+**Bibliography**
+
+Allison, A. (2022) - Disney and Pixar&#x27;s Top 5 Most Innovative Animation Technologies, Explained [article]  
+Anderson, C.Z. (2020) - The Flawed Beauty of Treasure Planet: An Animated Disney Masterpiece (Video Essay) [video]  
+Bellatoni, P. (2005) - If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling. 1st editi...          </p>
+          <p class="lt-p">
+Rubrics: 14/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.737          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **completed, properly formatted, and alphabetised bibliography** according to the university course standards you provided.
+
+All sources have been:
+
+- Organised alphabetically by surname (or username in quotation marks if no surname is provided),
+- Formatted with the required structure: **Surname, Initials. (date) - *Title* [type]**  
+- Titles in *italics*,
+- Correctly labelled with [Video], [Podcast], [book], or [article] as required,
+- &quot;and&quot; used instead of &quot;&amp;&quot;,
+- Web ...          </p>
+          <p class="lt-p">
+Rubrics: 11/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.579          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **completed, properly formatted, and alphabetically organized bibliography** in accordance with the course standards you&#x27;ve specified.
+
+---
+
+**Bibliography**
+
+Allison, A. (2022) - Disney and Pixar&#x27;s Top 5 Most Innovative Animation Technologies, Explained [article]  
+Bellatoni, P. (n.d.) - If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling. 1st edition. Los Angeles: Routledge  
+Coleman, R. (n.d.) - Treasure Planet - A Hidden Sci-Fi Gem [video]  ...          </p>
+          <p class="lt-p">
+Rubrics: 10/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.526          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is the **completed, correctly formatted bibliography** for your university essay, fully aligned with your specified formatting rules and course standards.
+
+---
+
+**Bibliography**
+
+Allison, A. (2022) - Disney and Pixar&#x27;s Top 5 Most Innovative Animation Technologies, Explained [article]  
+Bellatoni, P. (2005) - If it’s purple someone’s gonna die: The Power of Color in Visual Storytelling. 1st edition. Los Angeles: Routledge  
+Clements, R &amp; Musker, J. (2021) - Treasure Planet (2002)...          </p>
+          <p class="lt-p">
+Rubrics: 10/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.526          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **completed and properly formatted bibliography**, fully compliant with the course requirements:
+
+- Aligned in **alphabetical order**  
+- Each entry follows the format: **Surname, Initials. (date) - *Title* [type]**  
+- Titles in *italics*  
+- Web links with &quot;youtube&quot; → [Video]  
+- Podcasts → [Podcast]  
+- Sources with no URL → [book]  
+- All &quot;and&quot; replaced with &quot;and&quot;  
+- No access dates included  
+- No date if not provided → (n.d.)  
+- Username citations (e.g., ‘BREADSW...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is the **completed and properly formatted bibliography** according to your course standards. All in-text citations have been matched to the correct source entries, with accurate formatting, alphabetical order, and adherence to all specified rules:
+
+---
+
+Anderson, C.Z. (2020) - The Flawed Beauty of Treasure Planet: An Animated Disney Masterpiece (Video Essay) [Video]
+
+Allison, A. (2022) - Disney and Pixar&#x27;s Top 5 Most Innovative Animation Technologies, Explained [Article]
+
+Bellat...          </p>
+          <p class="lt-p">
+Rubrics: 15/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.789          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need you to help me finish the bibliography for my university essay so that it meets the course standards. Using the in-text citations, can you please complete the  information in the bibliography a...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is your **completed and properly formatted bibliography** in accordance with your course standards. All in-text citations have been matched to the sources, and each entry is presented in the required format:
+
+&gt; **Surname, Initials. (date) - *Title* [type of source]**  
+&gt;  
+&gt; - Titles are in italics  
+&gt; - YouTube links end with [Video]  
+&gt; - Podcasts end with [Podcast]  
+&gt; - Sources without a URL (e.g., books) include [book]  
+&gt; - Other sources (e.g., articles) include [article] ...          </p>
+          <p class="lt-p">
+Rubrics: 10/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.526          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+689                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+666                </td>
+                <td>
+0.842                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.842                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+763                </td>
+                <td>
+0.684                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.684                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+806                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+658                </td>
+                <td>
+0.474                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.474                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+724                </td>
+                <td>
+0.632                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.632                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+693                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+655                </td>
+                <td>
+0.526                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.526                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+693                </td>
+                <td>
+0.632                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.632                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+714                </td>
+                <td>
+0.737                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.737                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+1169                </td>
+                <td>
+0.579                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.579                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+659                </td>
+                <td>
+0.526                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.526                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+968                </td>
+                <td>
+0.526                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.526                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+682                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+717                </td>
+                <td>
+0.789                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.789                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3805                </td>
+                <td>
+950                </td>
+                <td>
+0.526                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.526                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

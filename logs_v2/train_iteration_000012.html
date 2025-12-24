@@ -1,0 +1,4675 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 12</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 12  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T01:25:08  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **polished, persuasive, and well-organized proposal** you can present to your school board. It clearly outlines the program’s structure, integrates your vision, and—most importantly—ends with a strong, evidence-based **section on benefits** that will resonate with skeptical decision-makers.
+
+---
+
+# **Proposal for a School-Based Pokémon After-School Program**
+
+**Presented to the School Board**  
+*By [Your Name], [Your Grade/Subject], and the Student Leadership Team*  
+*Date: ...          </p>
+          <p class="lt-p">
+Rubrics: 20/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.741          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, persuasive, and well-structured proposal** you can present to your school board. It’s organized to clearly communicate the program’s structure, logistics, and — most importantly — the **educational and developmental benefits** of the Pokémon After-School Program.
+
+---
+
+# **Proposed After-School Pokémon Program**  
+*Presented to the [School Name] School Board*  
+Prepared by: [Your Name], [Your Position]  
+Date: April 5, 2025
+
+---
+
+### **Introduction: A Fun,...          </p>
+          <p class="lt-p">
+Rubrics: 24/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.889          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a strong, well-structured **proposal to present to the school board** about launching the **Pokémon Afterschool Program**, designed to address skepticism while clearly articulating the educational and social benefits—especially at the end, as you asked.
+
+The proposal flows logically:  
+→ Introduction and program structure  
+→ How the program works (team formation, gameplay, schedule)  
+→ Why it matters *to students* (with a strong, compelling benefits section at the end)  
+→ R...          </p>
+          <p class="lt-p">
+Rubrics: 19/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.704          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **complete, professional, and persuasive proposal** you can present to the school board. It’s structured to build trust, clarify expectations, and–as requested–put the **benefits of the program at the end**, so board members can reflect on them after reviewing the logistics.
+
+---
+
+# **Proposal for a Collaborative After-School Pokémon Program**  
+*Submitted by: [Your Name], [Grade Level/Department]*  
+*Date: [Insert Date]*  
+
+---
+
+## **Executive Summary**
+
+This proposal outli...          </p>
+          <p class="lt-p">
+Rubrics: 21/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a polished, professional, and persuasive **proposal for a Pokémon Afterschool Program** that you can present directly to your school board. It&#x27;s structured to first explain the program in an accessible, engaging way, and then — as requested — **ends with a strong, evidence-based benefits section** so the board members can reflect on the educational value before making their final decision.
+
+---
+
+# **Proposal: Launch of a Pokémon Afterschool Program**
+
+## **Submitted by:** [Y...          </p>
+          <p class="lt-p">
+Rubrics: 22/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.815          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a **clear, professional, and persuasive proposal** you can present to the school board that explains your *Pokémon Afterschool Program* in a way that addresses concerns, highlights educational value, and ends with a strong, evidence-based **benefits section**—exactly as you requested.
+
+---
+
+# **Proposal for a Pokémon Afterschool Program**  
+*Presented to the School Board*  
+*Date: [Insert Date]*  
+*Submitted by: [Your Name], [Your Grade/Position]*
+
+---
+
+## **Executive Summary*...          </p>
+          <p class="lt-p">
+Rubrics: 17/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.630          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **professional, compelling, and board-friendly proposal** for your Pokémon After-School Program. The structure is designed to build trust and understanding — starting with a clear vision, practical logistics, and ending with a strong, evidence-based **section on the educational and developmental benefits** that will resonate with skeptical board members.
+
+---
+
+# **Proposal for a Pokémon After-School Program at [School Name]**
+
+## **Submitted by:** [Your Name], [Grade Level/R...          </p>
+          <p class="lt-p">
+Rubrics: 19/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.704          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a polished, professional, and persuasive **school board proposal** for your **Pokemon Afterschool Program**, structured with a clear narrative flow that emphasizes *student development*, *program integrity*, and *community engagement*.  
+
+You’ve already laid out a strong foundation — I’ve refined it for clarity, alignment with educational values, and emotional appeal. Most importantly, the **benefits section comes last** as requested, so board members can focus on what truly m...          </p>
+          <p class="lt-p">
+Rubrics: 19/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.704          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **polished, professional, and persuasive proposal** you can present to the school board. It clearly outlines the structure, logistics, and — most importantly — the **educational and developmental benefits** of your Pokémon Afterschool Program. The benefits section is placed at the end, as requested, so board members walk away convinced of the program&#x27;s value.
+
+---
+
+# **Proposal for a Pokémon Afterschool Program**  
+*Presented to the School Board*  
+*Prepared by: [Your Name...          </p>
+          <p class="lt-p">
+Rubrics: 22/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.815          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **comprehensive, persuasive, and well-structured proposal** you can present to the school board for your **Pokémon After-School Program**. The document follows a clear, logical flow: first explaining the program in a simple, accessible way (with school-friendly language), then diving into the **real educational and social benefits**—which you requested to be placed at the end so they stand out for the board members to consider *after* the initial presentation.
+
+The plan incl...          </p>
+          <p class="lt-p">
+Rubrics: 20/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.741          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **thoughtfully structured, persuasive, and research-backed proposal** you can present to the school board for your **Pokémon Afterschool Program**. It&#x27;s designed to first establish the program’s structure and logistics, then place the *clear, tangible benefits* at the end — exactly as requested — so that board members can reflect on the value before making their decision.
+
+---
+
+# **Proposal: Launch of the Student Pokémon Afterschool Program**
+
+### **To:** The School Board  
+...          </p>
+          <p class="lt-p">
+Rubrics: 20/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.741          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **polished, thoughtful, and persuasive proposal** you can present to the school board. It clearly explains the structure of the program, builds trust through its educational and developmental benefits, and ends with a strong, evidence-based *benefits section*—as you requested—so board members focus on value before making a decision.
+
+---
+
+# **Proposal: After-School Pokémon Afterschool Program**
+
+## **Presented to:**  
+The [School Name] School Board  
+**Date:** [Insert Date] ...          </p>
+          <p class="lt-p">
+Rubrics: 19/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.704          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **professional, persuasive, and well-structured proposal** you can present to the school board. It clearly outlines your vision for the Pokémon Afterschool Program, includes a logical teaming structure based on student skill levels, and places **the benefits section at the end**—as you requested—to leave board members with a strong, focused takeaway.
+
+---
+
+# **Proposal: Launch of the Pokémon Afterschool Program**
+
+**Submitted by:** [Your Name], [Your Grade Level/Subject Ar...          </p>
+          <p class="lt-p">
+Rubrics: 18/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **clear, professional, and persuasive proposal** you can present directly to the school board. It begins with a strong introduction and structure, builds momentum with a well-organized vision for the program, and ends with a **powerful benefits section**—as requested—so the board members will focus on the value *after* reading the logistics.
+
+The proposal includes:
+- A clear structure of the program
+- A detailed teaming strategy (with skill balance and team sizes)
+- A sugg...          </p>
+          <p class="lt-p">
+Rubrics: 21/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is a thoughtful and well-structured proposal — your vision already has strong pedagogical and community-building foundations. Below is a **professional, persuasive, and comprehensive presentation plan** you can present directly to the school board.
+
+It follows a logical flow: introduction, structure of the program, daily activities, teaming strategy (with the requested roster breakdown), and ends with a **strong, detailed benefits section** — as you requested — presented last so...          </p>
+          <p class="lt-p">
+Rubrics: 19/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.704          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m a teacher and my school wants to start a Pokemon afterschool program where the kids can learn the game, battle each other, and hang out. I need help writing out a plan to present to the school boa...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **polished, professional, and persuasive proposal** you can present to the school board — structured clearly with an emphasis on **educational benefits**, balanced team design, and student engagement. The **benefits section is placed at the end** as requested, so board members can focus on those key points after reviewing the program details.
+
+---
+
+# Proposal: After School Pokemon Learning &amp; Team Engagement Program
+
+**Submitted to:** School Board  
+**Prepared by:** [Your Nam...          </p>
+          <p class="lt-p">
+Rubrics: 19/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.704          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2515                </td>
+                <td>
+0.741                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.741                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2302                </td>
+                <td>
+0.889                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.889                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2590                </td>
+                <td>
+0.704                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.704                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2901                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+6017                </td>
+                <td>
+0.815                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.815                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2573                </td>
+                <td>
+0.630                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.630                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+4089                </td>
+                <td>
+0.704                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.704                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2407                </td>
+                <td>
+0.704                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.704                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2510                </td>
+                <td>
+0.815                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.815                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2852                </td>
+                <td>
+0.741                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.741                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2318                </td>
+                <td>
+0.741                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.741                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2409                </td>
+                <td>
+0.704                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.704                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+6034                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2353                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+4861                </td>
+                <td>
+0.704                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.704                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+720                </td>
+                <td>
+2398                </td>
+                <td>
+0.704                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.704                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the thoughtful, detailed outline. Your introduction is strong and sets a vivid, historically grounded tone. Below is **detailed feedback**, followed by **a concise summary of Yurchak and Bakhtin**, then a completed **&quot;Ritual and Speech&quot; section** (600 words or less) with all your requested elements, and finally, **a suggestion for the next section** that directly supports your conclusion.
+
+---
+
+### 🔍 Feedback on Your Introduction
+
+**What Works Well:**
+- Strong narrativ...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — your introduction is strong and compelling. Here’s detailed feedback, followed by the requested theoretical summaries, the structured &quot;Ritual and Speech&quot; section (within 600 words), and suggestions for the next section.
+
+---
+
+### ✅ **Feedback on Your Introduction**  
+**What Works Well:**  
+- Strong narrative immediacy: the vivid scene of the Bulldozer Exhibition grounds the reader in historical reality.  
+- Clear cause-effect structure: suppression → global attention → state-sanctio...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful setup. Below is **constructive feedback on your introduction**, followed by a **concise, theory-grounded summary of Yurchak and Bakhtin**, and then a **fully developed, focused first section** titled *&quot;Ritual and Speech&quot;*, structured as you requested (with a small intro/conclusion), staying under 600 words, and incorporating your key examples and theoretical references. I’ve also included a suggestion for a **natural second section** to foll...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for such a detailed and thoughtful query. Let&#x27;s begin with **feedback on your introduction**, followed by the **concise summaries of Yurchak and Bakhtin**, then the **fully developed “Ritual and Speech” section** (as requested), including your key examples and suggestions for performance groups. Finally, I’ll suggest a **natural follow-up section** that builds on your conclusion.
+
+---
+
+### 🔍 **Feedback on Your Introduction**
+
+**What Works Well:**
+- Strong opening with vivi...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for such a detailed and thoughtful query. Let’s begin with **feedback on your introduction**, followed by a concise summary of **Yurchak and Bakhtin**, then a fully developed, focused, and theoretically grounded **first section titled &quot;Ritual and Speech&quot;** that fits your requirements. Finally, I’ll offer a suggestion for a **second section** that directly supports your conclusion.
+
+---
+
+### 🔍 Feedback on Your Introduction
+
+**What Works:**
+- Strong opening with vivid, concr...          </p>
+          <p class="lt-p">
+Rubrics: 18/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the thoughtful and detailed setup. Your introduction is already strong, and I’ll provide specific, constructive feedback before moving forward with your first section.
+
+---
+
+### ✅ **Feedback on Your Introduction (under 600 words)**
+
+**What works well:**
+- You establish clear historical context with precise dates, locations, and key names (Oskar Rabin, Alexander Glezer, the bulldozers), which grounds the reader in the event.
+- The narrative arc — from planned exhibition...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for such a clear, thoughtful, and well-structured query. Let’s begin with **your introduction feedback**, then move on to the concise **theory summaries**, and finally craft your **&quot;Ritual and Speech&quot; section** as requested, followed by a subtle suggestion for a second section that supports your argument.
+
+---
+
+### 📝 Feedback on Your Introduction (300 words)
+
+**What Works Well:**
+
+- Strong historical hook: The vivid imagery of the Bulldozer Exhibition immediately grabs att...          </p>
+          <p class="lt-p">
+Rubrics: 18/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for such a thoughtful and well-structured query. Let’s begin with **feedback on your introduction**, then provide the **concise summaries of Yurchak and Bakhtin** (as requested), followed by a **strong, focused, and theoretically grounded first section titled “Ritual and Speech”**, meeting your word count and structural requirements. I’ll also suggest a **natural continuation for a second section** at the end.
+
+---
+
+### 🔍 **Feedback on Your Introduction**  
+**What works:**...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — great work so far on your introduction. Here&#x27;s some **constructive, specific feedback**, followed by the **theory summary**, the **first section &quot;Ritual and Speech&quot;** as requested, and suggestions for the next section.
+
+---
+
+### 🔍 Feedback on Your Introduction (Strengths &amp; Suggestions)
+
+**What Works Well:**
+- Strong narrative opening with vivid, concrete detail (the bulldozers, water cannons, arrests) immediately grounds the reader in the historical moment.
+- You effectively establi...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — great questions, and your introduction is already strong. Here&#x27;s **detailed feedback**, followed by the **summary of Yurchak and Bakhtin**, then your full **&quot;Ritual and Speech&quot; section** (structured as requested), and finally a **natural suggestion for a second section** to support your argument.
+
+---
+
+### ✅ Feedback on Your Introduction
+
+**What Works Well:**
+- Strong narrative tension: you immediately grab attention with the vivid image of the Bulldozer Exhibition and the violent s...          </p>
+          <p class="lt-p">
+Rubrics: 18/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for such a detailed and thoughtful inquiry. Let’s start with **feedback on your introduction**, followed by a concise summary of **Yurchak and Bakhtin**, and then your requested **&quot;Ritual and Speech&quot; section** with a strong theoretical foundation, clear structure, and integration of your key examples. I’ll also offer a suggestion for a **second section** that builds on your concluding claim.
+
+---
+
+### ✅ Feedback on Your Introduction
+
+**What Works Well:**
+- Strong narrative...          </p>
+          <p class="lt-p">
+Rubrics: 18/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — great work on your introduction, and your direction is both insightful and timely. Below, I’ll first give **detailed feedback on your introduction**, then provide a concise and scholarly summary of **Bakhtin and Yurchak** (as requested), followed by a strong, focused, and theoretically grounded **first section titled &quot;Ritual and Speech&quot;** (structured as two paragraphs with a brief intro and conclusion, under 600 words). I’ll then suggest a **natural follow-up section** to build on y...          </p>
+          <p class="lt-p">
+Rubrics: 18/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed, thoughtful outline. Your introduction is already strong, and below I’ll provide **detailed feedback**, followed by a concise and focused **summary of Bakhtin and Yurchak’s key ideas**, and then a fully developed **first section titled &quot;Ritual and Speech&quot;** with the structure, references, and logical flow you requested.
+
+---
+
+### ✅ Feedback on Your Introduction (Brief &amp; Constructive)
+
+**What Works Well:**
+- Strong narrative voice and vivid imagery (e.g., b...          </p>
+          <p class="lt-p">
+Rubrics: 17/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.810          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful outline. Your introduction is strong, well-structured, and handles both the historical facts and their broader significance with clarity. Below is constructive feedback, followed by the requested summaries of Yurchak and Bakhtin, and then your full “Ritual and Speech” section as requested — with a focus on performative shifts, state suppression, and the role of ritual in authoritarian contexts, incorporating your key examples and theoretical...          </p>
+          <p class="lt-p">
+Rubrics: 20/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.952          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — great questions, and your introduction is already strong. Let me provide detailed feedback, then deliver exactly what you’re asking for: a polished, theory-grounded, and focused first section on **&quot;Ritual and Speech&quot;**, followed by concise summaries of Bakhtin and Yurchak, plus a suggestion for a second section.
+
+---
+
+### 📝 **Feedback on Your Introduction**
+
+**What Works Well:**
+- Strong narrative arc: you clearly set the scene, establish the historical significance, and show how su...          </p>
+          <p class="lt-p">
+Rubrics: 19/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.905          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please can you help me write the first section of my extended essay for uni. I’ve already written the introduction and have the key points for the first section. The introduction is below:
+
+On Septe...          </p>
+          <p class="lt-p">
+Response: Absolutely — great questions, and your introduction is already strong. Here&#x27;s detailed feedback on your introduction, followed by a concise and powerful summary of Bakhtin and Yurchak, and finally, a fully structured, theory-grounded, and historically rich first section titled **&quot;Ritual and Speech&quot;**, meeting all your requirements.
+
+---
+
+### ✅ **Feedback on Your Introduction**
+
+**What Works Well:**
+- The narrative flow is clear, engaging, and grounded in specific historical detail — this creates...          </p>
+          <p class="lt-p">
+Rubrics: 18/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1247                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1407                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1170                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1339                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1585                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1474                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1535                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1383                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1240                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1399                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1351                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1402                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1265                </td>
+                <td>
+0.810                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.810                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1504                </td>
+                <td>
+0.952                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.952                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1463                </td>
+                <td>
+0.905                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.905                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+769                </td>
+                <td>
+1373                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries. The countries included in this report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+Inflow: 1.83 × 10⁴ cubic meters. Year: 2016.  
+Inflow: 1.83 × 10⁴ cubic meters. Year: 2017.  
+Inflow: 1.48 × 10⁴ cubic meters. Year: 2015.  
+Inflow: 2.90 × 10¹ cubic meters. Year: 1990.  
+Inflow: 2.50 × 10¹ cubic meters. Year: 1995.  
+Inflow: 2.40 × 10¹ cubic ...          </p>
+          <p class="lt-p">
+Rubrics: 16/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.696          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries. The countries included in this report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+  Inflow: 3.21 × 10⁴ cubic meters. Year: 2016.  
+  Inflow: 3.08 × 10⁴ cubic meters. Year: 2017.  
+  Inflow: 1.48 × 10⁴ cubic meters. Year: 2015.  
+  Inflow: 2.90 × 10¹ cubic meters. Year: 1990.  
+  Inflow: 2.50 × 10¹ cubic meters. Year: 1995.  
+  Inflow: 2.40 ...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries. The countries included in the report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+Inflow: 2.48×10⁴ cubic meters. Year: 2016.  
+Inflow: 2.42×10⁴ cubic meters. Year: 2017.  
+Inflow: 1.48×10⁴ cubic meters. Year: 2015.  
+Inflow: 2.90×10¹ cubic meters. Year: 1990.  
+Inflow: 2.50×10¹ cubic meters. Year: 1995.  
+Inflow: 2.40×10¹ cubic meters. Year:...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries, including Albania, Andorra, Bahrain, and Latvia. Each entry reflects the volume of water received by these countries, measured in million cubic meters, across different years.
+
+**Inflow of surface and groundwaters**  
+  Inflow: 2.13 × 10⁴ cubic meters. Year: 2016.  
+  Inflow: 2.12 × 10⁴ cubic meters. Year: 2017.  
+  Inflow: 1.48 × 10⁴ cubic meters. Year: 2015.  
+  Inflow: 2.90 × 1...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries, including Albania, Andorra, Bahrain, and Latvia. Inflow values are presented for specific years and are based on reported volumes in million cubic meters.
+
+**Inflow of surface and groundwaters**  
+Inflow: 3.41 × 10⁴ cubic meters. Year: 2016.  
+Inflow: 3.22 × 10⁴ cubic meters. Year: 2017.  
+Inflow: 3.00 × 10⁴ cubic meters. Year: 2015.  
+Inflow: 2.90 × 10¹ cubic meters. Year: 1995. ...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data presents the inflow of surface and groundwaters from neighbouring countries, recorded across various years. The countries included in this report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+Inflow: 3.14 × 10⁴ cubic meters. Year: 2016.  
+Inflow: 3.12 × 10⁴ cubic meters. Year: 2017.  
+Inflow: 2.96 × 10⁴ cubic meters. Year: 2015.  
+Inflow: 2.90 × 10⁴ cubic meters. Year: 1995.  
+Inflow: 2.80 × 10⁴ cubic meters. Year: 1990...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries. The countries included in the report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+Inflow: 1.49×10⁴ cubic meters. Year: 2016.  
+	Inflow: 1.83×10⁴ cubic meters. Year: 2017.  
+	Inflow: 1.48×10⁴ cubic meters. Year: 2015.  
+	Inflow: 2.90×10¹ cubic meters. Year: 1990.  
+	Inflow: 2.50×10¹ cubic meters. Year: 1995.  
+	Inflow: 2.40×10¹ cubic meters. ...          </p>
+          <p class="lt-p">
+Rubrics: 15/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.652          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries. The countries included in this report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+Inflow: 3.42×10⁴ cubic meters. Year: 2016.  
+Inflow: 3.40×10⁴ cubic meters. Year: 2017.  
+Inflow: 3.41×10⁴ cubic meters. Year: 2015.  
+Inflow: 2.90×10¹ cubic meters. Year: 1995.  
+Inflow: 2.90×10¹ cubic meters. Year: 1990.  
+Inflow: 2.40×10¹ cubic meters. Year...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries. The countries included in this report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+Inflow: 4.57×10⁴ cubic meters. Year: 2016.  
+Inflow: 4.50×10⁴ cubic meters. Year: 2017.  
+Inflow: 4.50×10⁴ cubic meters. Year: 2015.  
+Inflow: 2.90×10¹ cubic meters. Year: 1990.  
+Inflow: 2.50×10¹ cubic meters. Year: 1995.  
+Inflow: 2.40×10¹ cubic meters. Year...          </p>
+          <p class="lt-p">
+Rubrics: 12/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.522          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries, including Albania, Andorra, Bahrain, and Latvia. It reflects annual inflows measured in million cubic meters, with values recorded across various years. The data is compiled to highlight trends in water inflow among these four countries. Only valid, non-zero inflow values are included in the final report.
+
+**Inflow of surface and groundwaters**  
+  Inflow: 6.92×10³ cubic meters. Y...          </p>
+          <p class="lt-p">
+Rubrics: 17/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.739          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries. The countries included in this report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+Inflow: 3.42 × 10⁴ cubic meters. Year: 2016.  
+Inflow: 3.40 × 10⁴ cubic meters. Year: 2017.  
+Inflow: 3.01 × 10⁴ cubic meters. Year: 2015.  
+Inflow: 2.90 × 10¹ cubic meters. Year: 1995.  
+Inflow: 2.90 × 10¹ cubic meters. Year: 1990.  
+Inflow: 2.40 × 10¹ cubic ...          </p>
+          <p class="lt-p">
+Rubrics: 15/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.652          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries. The countries included in this report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+Inflow: 2.48×10⁴ cubic meters. Year: 2016.  
+Inflow: 2.42×10⁴ cubic meters. Year: 2017.  
+Inflow: 1.48×10⁴ cubic meters. Year: 2015.  
+Inflow: 2.90×10¹ cubic meters. Year: 1990.  
+Inflow: 2.50×10¹ cubic meters. Year: 1995.  
+Inflow: 2.40×10¹ cubic meters. Year...          </p>
+          <p class="lt-p">
+Rubrics: 16/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.696          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data reflects the inflow of surface and groundwaters from neighbouring countries. The countries included in this report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+  Inflow: 3.81×10⁴ cubic meters. Year: 2016.  
+  Inflow: 3.80×10⁴ cubic meters. Year: 2017.  
+  Inflow: 1.48×10⁴ cubic meters. Year: 2015.  
+  Inflow: 2.90×10¹ cubic meters. Year: 1990.  
+  Inflow: 2.50×10¹ cubic meters. Year: 1995.  
+  Inflow: 2.40×10¹ cubic me...          </p>
+          <p class="lt-p">
+Rubrics: 16/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.696          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data presents the inflow of surface and groundwaters from neighbouring countries, including Albania, Andorra, Bahrain, and Latvia. These inflows are recorded annually and reflect the volume received from adjacent regions. The values represent total inflow in million cubic meters, and the analysis is based on the available historical records. The report focuses only on these four countries and their respective inflow figures over time.
+
+**Inflow of surface and gro...          </p>
+          <p class="lt-p">
+Rubrics: 12/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.522          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data represents the inflow of surface and groundwaters from neighbouring countries, including Albania, Andorra, Bahrain, and Latvia. These inflows are recorded by year and reflect the volume of water entering each country from adjacent regions. The values are presented in cubic meters and reflect annual variations over time. The report focuses solely on the listed countries and does not include additional geographical context.
+
+**Inflow of surface and groundwater...          </p>
+          <p class="lt-p">
+Rubrics: 14/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.609          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help making this raw data into a brief report. It must have an introduction, list, conclusion, and a separate &quot;Notes&quot; section.
+Firstly, count the number of entries. The list can only be eight ...          </p>
+          <p class="lt-p">
+Response: **Introduction**  
+The following data presents the inflow of surface and groundwaters from neighbouring countries, measured in million cubic meters. The countries included in this report are Albania, Andorra, Bahrain, and Latvia.
+
+**Inflow of surface and groundwaters**  
+  Inflow: 1.83 × 10⁴ cubic meters. Year: 2016.  
+  Inflow: 1.83 × 10⁴ cubic meters. Year: 2017.  
+  Inflow: 1.48 × 10⁴ cubic meters. Year: 2015.  
+  Inflow: 2.90 × 10¹ cubic meters. Year: 1990.  
+  Inflow: 2.50 × 10¹ cubic meter...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+588                </td>
+                <td>
+0.696                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.696                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+599                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+541                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+587                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+614                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+594                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+564                </td>
+                <td>
+0.652                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.652                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+1999                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+529                </td>
+                <td>
+0.522                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.522                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+590                </td>
+                <td>
+0.739                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.739                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+690                </td>
+                <td>
+0.652                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.652                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+604                </td>
+                <td>
+0.696                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.696                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+441                </td>
+                <td>
+0.696                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.696                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+571                </td>
+                <td>
+0.522                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.522                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+742                </td>
+                <td>
+0.609                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.609                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+495                </td>
+                <td>
+563                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Absolutely, Tom — I understand your situation completely. You&#x27;re in a tough spot with HPAI leading to a significant loss of birds, and you need to **urgently organize and prioritize** your remaining inventory to fulfill holiday orders with minimal disruption, while making sense of weight classes, ensuring customer requirements are met, and understanding your losses.
+
+Let’s take a **systematic, practical, and compassionate approach** — grounded in your clear priorities and constraints.
+
+---
+
+## ✅...          </p>
+          <p class="lt-p">
+Rubrics: 5/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.263          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed request, Tom — this is a complex but important situation, and I appreciate your clear breakdown. Let’s walk through this step-by-step with precision, transparency, and care — exactly as you’ve outlined.
+
+---
+
+## 🔍 Step 1: Understand the Context
+
+You started with **500 birds** total.  
+A significant portion was culled due to **HPAI** (Highly Pathogenic Avian Influenza).  
+You want to **consolidate orders** based on **priority**, fulfill requests as closely as possible, ...          </p>
+          <p class="lt-p">
+Rubrics: 7/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.368          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and thoughtful breakdown, Tom. I understand your situation — a significant loss due to HPAI, a tight deadline before the holidays, and the need to be organized, fair, and transparent about what’s possible.
+
+Let’s go step by step to consolidate your orders with clarity, accuracy, and respect to your priorities. I’ll:
+
+✅ Calculate the total number of birds in each weight class (light hens, hens, light toms, toms)  
+✅ Assign each bird to a weight range (based on class)  
+...          </p>
+          <p class="lt-p">
+Rubrics: 4/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.211          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Absolutely, Tom — thank you for the detailed and thoughtful breakdown. Let’s go step by step to consolidate your turkey farm orders after the HPAI outbreak, organize what remains, and maintain fairness, priority, and practicality — especially since you’re short on inventory and need to fulfill orders in a way that’s realistic and sustainable.
+
+---
+
+## ✅ **Summary &amp; Assumptions**
+
+- **Original flock**: You started with **500 birds**.
+- You suspect **a significant portion was culled** due to HPAI....          </p>
+          <p class="lt-p">
+Rubrics: 5/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.263          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and thoughtful breakdown, Tom. I understand your situation clearly — a significant loss due to HPAI, and the need to **consolidate orders effectively** while managing priorities, weight classes, and substitutions. Let’s take it step by step with care, precision, and transparency.
+
+---
+
+## ✅ Step 1: Clarify the Problem &amp; Structure
+
+You started with **500 turkeys** (you said “I’m not sure how many they culled” — we’ll verify that below).
+
+We have:
+- A list of weights (in...          </p>
+          <p class="lt-p">
+Rubrics: 6/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.316          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thanks, Tom — this is a complex but manageable situation given the scale and details. Let’s walk through this methodically, **organizing your inventory, grouping turkeys by weight, identifying losses, fulfilling orders by priority, and preserving your reserve for future use**.
+
+You’ve already done much of the heavy lifting by listing the weights. Now we’ll take all of it and bring structure to it.
+
+---
+
+## 🔍 Step 1: Clarify What We Know
+
+### Key Facts from Your Statement:
+- You started with **50...          </p>
+          <p class="lt-p">
+Rubrics: 8/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.421          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Absolutely, Tom. I appreciate you being so thorough — this is a complex but very real situation, and I&#x27;m glad you&#x27;re taking steps to organize it. Let’s walk through this systematically, step by step, in a way that makes sense for your farm&#x27;s priorities, inventory, and constraints.
+
+---
+
+## ✅ **Summary of Your Situation**
+
+- **Original inventory**: 500 birds total
+- **Culling due to HPAI** – a significant portion lost
+- You need to **prioritize and fulfill orders**, especially for **A-priority** ...          </p>
+          <p class="lt-p">
+Rubrics: 8/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.421          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and thoughtful breakdown, Tom. I understand the urgency and complexity of this situation — a significant loss due to HPAI, combined with strong customer orders, limited inventory, and the need to organize efficiently under pressure.
+
+Let’s walk through this **step by step** to give you a **clear, actionable, and accurate** plan. I’ll:
+
+1. Confirm how many birds were culled  
+2. Cluster the weights into standardized **weight classes** (with boundaries)  
+3. Assign birds...          </p>
+          <p class="lt-p">
+Rubrics: 6/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.316          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thanks for the detailed breakdown, Tom — this is a comprehensive and very practical scenario. Let&#x27;s go step-by-step to organize your situation with clarity, precision, and care.
+
+---
+
+## 🐔 Overview: Your Situation
+
+### Initial Bird Count
+- You started with **500 birds** (as stated).
+- A significant portion was culled due to **HPAI (Highly Pathogenic Avian Influenza)**.
+- You need to **consolidate orders** and **distribute surviving turkeys** by weight and priority.
+
+### Key Constraints &amp; Rules
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 10/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.526          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Absolutely, Tom — I&#x27;m here to help you **organize, prioritize, and distribute** your turkey inventory *after* the HPAI loss. Let&#x27;s go step by step with clarity, precision, and your specific constraints.
+
+---
+
+## ✅ Step 1: Understand the Situation
+
+You started with **500 birds** (total), and due to HPAI, **a significant portion were culled**.
+
+You&#x27;re looking to:
+- Distribute remaining birds based on **priority (A &gt; B &gt; C)**.
+- **Meet exact orders** where possible, with substitutions allowed where...          </p>
+          <p class="lt-p">
+Rubrics: 2/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.105          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed breakdown, Tom — this is a complex but very solvable situation. Let&#x27;s walk through it step-by-step with clarity, accuracy, and your stated priorities.
+
+---
+
+## 🔍 **Step 1: Understand the Problem**
+
+You started with **500 birds** (a total of lights, hens, and toms) and a large portion of your flock was culled due to HPAI.  
+You need to:
+
+1. **Reconstruct the original weight distribution** by weight class.
+2. **Determine how many birds were lost in each weight class**.
+3...          </p>
+          <p class="lt-p">
+Rubrics: 4/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.211          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thank you, Tom — I appreciate the detailed and thorough breakdown. This is a complex but manageable situation given the limited number of birds and the structure you&#x27;ve provided.
+
+Let’s go step by step to **consolidate your turkey farm orders after HPAI slaughter**, accurately **distribute birds by weight class**, **identify losses by class**, and **prioritize fulfillment** based on your rules.
+
+---
+
+## 🔍 Step 1: Clarify the Situation
+
+- You started with **500 birds** (from your records, we’ll c...          </p>
+          <p class="lt-p">
+Rubrics: 9/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.474          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thanks for the detailed breakdown, Tom — I understand the situation clearly now. Let’s walk through this step-by-step so you can see exactly what’s being done, why, and how to manage your remaining inventory efficiently.
+
+---
+
+## 🚩 Overview of the Situation
+
+- You started with **500 turkeys** (we assume this total is accurate: 500 birds).
+- A portion of your flock was culled due to **HPAI** — we need to determine how many were lost.
+- The order fulfillment must be prioritized: **A &gt; B &gt; C**
+- So...          </p>
+          <p class="lt-p">
+Rubrics: 8/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.421          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Absolutely, Tom — thank you for the detailed and thoughtful breakdown. I appreciate how clearly you&#x27;ve laid out your priorities, constraints, and goals. Let’s walk through this step by step with precision, clarity, and care — because you&#x27;re doing something hard under pressure: keeping your customers happy after a devastating loss from HPAI, with only 500 birds to work with.
+
+---
+
+## 🐔 **Objective Recap (Tom)**
+
+- You started with **500 birds** — now need to determine **how many were culled** (i....          </p>
+          <p class="lt-p">
+Rubrics: 8/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.421          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Absolutely, Tom — thanks for the detailed and thoughtful breakdown. This is a high-stakes situation — you&#x27;ve lost a significant portion of your inventory due to HPAI, and with holidays approaching, getting this organized is crucial. Let’s walk through this **step by step** and **clearly**, with the precision, clarity, and structure you need.
+
+We’ll:
+1. Determine the total number of birds originally (before culling)
+2. Categorize each bird by **type**, **weight**, and **group**
+3. Identify where ...          </p>
+          <p class="lt-p">
+Rubrics: 6/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.316          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help consolidating orders for my turkey farm, a flock of my birds contracted HPAI so they had to be culled. It was a considerable portion of my inventory and I am swamped trying to figure out t...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and thoughtful breakdown, Tom. This is a complex but very important situation — you’ve already done a great job organizing the data. Let’s walk through this step-by-step to get you organized, provide **clear numbers**, and **meet your priority goals** while also answering your key questions.
+
+---
+
+## 🚩 Summary of Goals &amp; Constraints
+
+You started with **500 birds**, and **a portion were culled due to HPAI**.  
+We need to:
+
+1. **Determine how many birds were culled** (i....          </p>
+          <p class="lt-p">
+Rubrics: 7/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.368          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+5091                </td>
+                <td>
+0.263                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.263                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.368                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.368                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.211                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.211                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+7188                </td>
+                <td>
+0.263                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.263                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+2389                </td>
+                <td>
+0.316                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.316                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.421                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.421                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.421                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.421                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.316                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.316                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.526                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.526                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+7357                </td>
+                <td>
+0.105                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.105                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+2614                </td>
+                <td>
+0.211                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.211                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.474                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.474                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.421                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.421                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.421                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.421                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.316                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.316                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2610                </td>
+                <td>
+8192                </td>
+                <td>
+0.368                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.368                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,4652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 6</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 6  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T00:50:44  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates the original schedule with only the necessary changes — respecting the constraints (PM interviews on Mon/Tue and Wed must be in-person, max 3 interviews per day, buffer time for in-person, and room A-2 due to roadwork) — while clearly explaining the reason for the changes and updating the key details:
+
+---
+
+**Subject:** Updated Interview Schedule – Due to Emergency Roadwork &amp; In-Person Requirements  
+
+Hi Charles,  
+
+Following up o...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates your original message with only the necessary changes — repositioning candidates based on the city’s emergency roadwork, adjusting for in-person requirements, buffer times, and the 3-interview-per-day cap — while clearly explaining the changes and citing the move to Room A-2:
+
+---
+
+**Subject:** Updated Interview Schedule – Adjustments Due to City Roadwork &amp; Logistics  
+
+Hi Charles,  
+
+Just a quick update to the interview schedule ...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates the original schedule with only the necessary changes, explains the reason for the adjustments, and notes the move to Room A-2 due to emergency roadwork:
+
+---
+
+**Subject:** Updated Interview Schedule – Adjustments Due to Emergency Roadwork  
+
+Hi Charles,  
+
+Just a quick note to update you on the interview schedule. Due to emergency roadwork in the area—specifically, ongoing construction affecting Wi-Fi connectivity and closure of ...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a polished, professional follow-up email that updates only the necessary changes based on your constraints—while clearly explaining the impact of the city’s emergency roadwork, the new room, and the adjustments made *without* a full rescheduling:
+
+---
+
+**Subject:** Updated Interview Schedule – Due to Emergency Roadwork &amp; In-Person Requirements  
+
+Hi Charles,  
+
+Following up on our original interview schedule, I wanted to share an updated version due to urgent city-wide emergency roa...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a professionally written, concise follow-up email that updates the original schedule with only the necessary changes based on your constraints — while clearly explaining the reasons and noting the move to Room A-2:
+
+---
+
+**Subject:** Updated Interview Schedule – Adjustments Due to Emergency Roadwork &amp; Logistics  
+
+Hi Charles,  
+
+Just wanted to follow up with an updated interview schedule due to unforeseen emergency roadwork in the area. This work will disrupt Wi-Fi connectivity and ...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates the original schedule with only the necessary changes — honoring the city&#x27;s emergency roadwork, applying your constraints (in-person only on certain days, buffer times, max 3 interviews per day), and explaining the shift to Room A-2:
+
+---
+
+**Subject:** Updated Interview Schedule – Adjusted for Emergency Roadwork &amp; Location Change  
+
+Hi Charles,  
+
+Just a quick update to the interview schedule due to emergency roadwork in the city....          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates the original schedule with only the necessary changes — factoring in the city&#x27;s emergency roadwork, the new in-person-only requirements, buffer times, and the max of 3 interviews per day — while clearly explaining the reasons and noting the move to Room A-2:
+
+---
+
+**Subject:** Updated Interview Schedule – Reflecting Emergency Roadwork and In-Person Adjustments  
+
+Hi Charles,  
+
+Just a quick update to your original interview schedu...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates the original schedule with only the necessary changes — moving candidates to different days based on the city’s emergency roadwork, the in-person requirements, and the buffer/time constraints — while clearly explaining the reason for the change and noting the room update:
+
+---
+
+**Subject:** Updated Interview Schedule – Adjusted Due to City Emergency Roadwork  
+
+Hi Charles,  
+
+Following up on our original interview schedule, we’ve ...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates your original message with only the necessary changes — respecting the new city roadwork constraints, enforcing in-person requirements for certain days, adding buffer time, and adjusting only as needed to stay within the max of 3 interviews per day. The email also explains the reason for the change and acknowledges the room shift to A-2:
+
+---
+
+**Subject:** Updated Interview Schedule – Due to Emergency Roadwork &amp; In-Person Requirem...          </p>
+          <p class="lt-p">
+Rubrics: 9/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.562          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Certainly! Here&#x27;s a concise, professional follow-up email that updates the original schedule with only the necessary changes based on your new constraints — while clearly explaining the reason for the changes and noting the shift to Room A-2:
+
+---
+
+**Subject:** Updated Interview Schedule – Emergency Roadwork Impact &amp; Room Change  
+
+Hi Charles,  
+
+Just wanted to update you on the interview schedule due to unexpected emergency roadwork in the area. This work will disrupt Wi-Fi and close off the ma...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates your original message with only the necessary changes due to the emergency roadwork, while clearly explaining the reasons and reflecting the new room and schedule constraints:
+
+---
+
+**Subject:** Updated Interview Schedule – Adjustments Due to Emergency Roadwork  
+
+Hi Charles,  
+
+Just a quick follow-up to update you on the interview schedule. Due to emergency city roadwork that will disrupt Wi-Fi and close off the main entrance, we...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates the schedule with only the necessary changes—accounting for the emergency roadwork, layout changes, and your constraints—while clearly explaining the reasons and noting the move to Room A-2:
+
+---
+
+**Subject:** Updated Interview Schedule – Response to City Roadwork &amp; In-Person Requirements  
+
+Hi Charles,  
+
+Just a quick follow-up to adjust the interview schedule due to unexpected emergency roadwork in the city. This work will disru...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates only the necessary parts of your original schedule based on the city’s emergency roadwork and the new in-person-only constraints. It explains the changes clearly, justifies the adjustments, and includes the room change:
+
+---
+
+**Subject:** Updated Interview Schedule – Adjustments Due to Emergency Roadwork &amp; Logistics  
+
+Hi Charles,  
+
+I’m following up with an updated interview schedule due to unexpected emergency roadwork in the ci...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a concise, professional follow-up email that updates your original message with only the necessary changes — reassigning candidates to different days while respecting the constraints (in-person-only on Monday/Tuesday/Wednesday, buffer time, max 3 interviews per day, and room A-2 due to emergency roadwork). It explains the reason for the change clearly without redoing the entire schedule.
+
+---
+
+**Subject:** Updated Interview Schedule – Due to Emergency Roadwork &amp; In-Person Requiremen...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a professionally polished and concise follow-up email that updates the original schedule based on the emergency roadwork, incorporates your constraints, and clearly explains the changes — without redoing the entire plan:
+
+---
+
+**Subject:** Updated Interview Schedule – Reflections Due to City Roadwork  
+
+Hi Charles,  
+
+Just a quick update to the original interview schedule due to emergency roadwork being conducted in the city. This work will impact WiFi availability and close off the...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sent the below email earlier today but just found out that the city&#x27;s doing a bunch of emergency roadwork that&#x27;ll disrupt wifi and close off the main entrance. That means that the original schedule ...          </p>
+          <p class="lt-p">
+Response: Sure! Here&#x27;s a professional, concise, and polite follow-up email that updates only the necessary changes based on the emergency roadwork, the in-person requirements, and your constraints—without redoing the entire schedule. It explains the reason for the changes and includes the move to Room A-2:
+
+---
+
+**Subject:** Updated Interview Schedule – Adjustments Due to Emergency Roadwork  
+
+Hi Charles,  
+
+I’m following up on the interview schedule with an update due to recent emergency roadwork in the ...          </p>
+          <p class="lt-p">
+Rubrics: 10/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+6607                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+697                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+613                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+855                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+818                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+728                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+775                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+746                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+882                </td>
+                <td>
+0.562                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.562                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+816                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+619                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+638                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+841                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+771                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+618                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+481                </td>
+                <td>
+812                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: **Sales Team Report: Synthesis of Diethyl Ether – Performance Analysis &amp; Commercial Implications**  
+*Prepared by: [Your Name], Senior Chemist | Date: [Insert Date]*  
+
+---
+
+### **Introduction**  
+This report summarizes key performance data from 20 recent synthesis runs of diethyl ether using sodium ethoxide and bromoethane. The goal is to provide a clear, actionable overview of reaction efficiency, cost, and quality—information designed specifically for non-technical stakeholders such as sales ...          </p>
+          <p class="lt-p">
+Rubrics: 18/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.462          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, concise, and scientifically sound report** tailored specifically for your **sales team**, written in accessible language while maintaining scientific accuracy. It includes all your requested calculations, flags, analysis, and context — all presented in a structured, professional format that fits within an 8-minute presentation.
+
+---
+
+# **Synthesis of Diethyl Ether: Process Summary &amp; Commercial Viability Report**  
+*Prepared for Sales Team | Date: April 5, 2025*
+
+--...          </p>
+          <p class="lt-p">
+Rubrics: 14/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.359          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, concise, and scientifically sound report** tailored specifically for your **sales team**, with all requested calculations completed, data analyzed, and presented in a way they can understand — while maintaining a professional scientific tone.
+
+---
+
+# **Report: Synthesis of Diethyl Ether – Performance &amp; Economics Summary**  
+**Prepared for: Sales Team**  
+**Prepared by: [Your Name], Chemist**  
+**Date: April 5, 2025**
+
+---
+
+## **Introduction**
+
+This report summarize...          </p>
+          <p class="lt-p">
+Rubrics: 14/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.359          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: **Synthesis Reaction Performance Summary Report: Diethyl Ether Production from Sodium Ethoxide and Bromoethane**  
+*Prepared for Sales Team – Scientific Tone, Simplified for Business Context*
+
+---
+
+### **Introduction**  
+This report summarizes the performance of our recent synthesis runs for diethyl ether via the reaction of sodium ethoxide (NaOEt) with bromoethane (BrEt). The goal is to provide a clear, actionable overview of yield, cost efficiency, quality consistency, and financial impact—hig...          </p>
+          <p class="lt-p">
+Rubrics: 11/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.282          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, scientifically sound, and sales-friendly report** that your sales team can easily understand — presented in a professional yet accessible format. All calculations are verified, data is carefully filtered, and only valid runs are used in final analysis. The report adheres strictly to your requirements, including significant figures, cost analysis, yield evaluation, flagged data with root cause, and break-even pricing.
+
+---
+
+# **Synthesis of Diethyl Ether: Performanc...          </p>
+          <p class="lt-p">
+Rubrics: 11/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.282          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: **Report: Synthesis of Diethyl Ether – Performance Summary for Sales Team**  
+*Prepared by: Chemistry Team | Date: April 5, 2025*  
+*For internal use by Sales – Simplified and context-driven insights*
+
+---
+
+### **Introduction**
+
+This report summarizes data from recent laboratory runs aimed at synthesizing **diethyl ether** via the Williamson ether synthesis from sodium ethoxide (NaOEt) and bromoethane (BrEt). While this reaction is a standard method in organic chemistry, our goal here is not to ...          </p>
+          <p class="lt-p">
+Rubrics: 9/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.231          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, professional, and sales-ready report** written in a **scientific tone** but tailored specifically for the **sales team** — emphasizing value, cost efficiency, performance, and reliability without using overly technical jargon.
+
+---
+
+# **Synthesis of Diethyl Ether: Performance Report for Sales Team**
+
+### **Introduction**  
+This report evaluates the consistency and economic performance of our recent synthesis runs for diethyl ether via the reaction of sodium ethoxid...          </p>
+          <p class="lt-p">
+Rubrics: 8/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.205          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a clear, professional, and **sales-ready** report written specifically for your **sales team**, summarizing your synthesis data in an accessible, scientifically grounded, and business-focused way — all within the strict 8-minute presentation limit.  
+
+The language avoids excessive jargon but preserves scientific accuracy. Key metrics are highlighted, flagged values are explained, and business implications (like break-even pricing and financial losses) are emphasized for sales...          </p>
+          <p class="lt-p">
+Rubrics: 14/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.359          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly! Here&#x27;s a **clear, science-based, sales-ready report** that your sales team can easily understand — concise, accurate, and focused on actionable insights. It includes all your requested calculations, flags issues, identifies losses, and presents the data in a way that emphasizes **profitability, reliability, and key performance indicators** — exactly what a sales team needs to confidently communicate value to customers.
+
+---
+
+# **Synthesis of Diethyl Ether: Performance Summary Report**...          </p>
+          <p class="lt-p">
+Rubrics: 9/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.231          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, concise, and scientifically grounded report** tailored specifically for your **sales team**, using only the information you provided — all within the constraints of **8 minutes of presentation time**. The tone is professional, accessible, and avoids excessive jargon while still maintaining scientific rigor.
+
+---
+
+# **Synthesis Performance Report: Diethyl Ether from Sodium Ethoxide and Bromoethane**  
+*Prepared for Sales Team — For Internal Use Only*
+
+---
+
+## **Intr...          </p>
+          <p class="lt-p">
+Rubrics: 10/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.256          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: **Report: Synthesis of Diethyl Ether – Performance Summary for Sales Team**  
+*Prepared by: [Your Name], Chemist – Organic Synthesis*  
+*Date: [Insert Date]*  
+*Intended Audience: Sales Team*
+
+---
+
+### **Introduction**
+
+This report summarizes the recent synthesis of diethyl ether via the nucleophilic substitution reaction between sodium ethoxide (NaOEt) and bromoethane (BrEt). As part of our internal R&amp;D efforts, we conducted 20 reaction runs to evaluate yield, purity, and cost efficiency. This ...          </p>
+          <p class="lt-p">
+Rubrics: 10/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.256          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: **Synthesis Reaction Performance Report: Diethyl Ether from Sodium Ethoxide and Bromoethane**  
+*Prepared for Sales Team – For Internal Use Only*  
+
+---
+
+### **Introduction**  
+This report summarizes the recent laboratory performance of a key synthesis reaction used to produce **diethyl ether** from sodium ethoxide and bromoethane. The goal is to evaluate the **efficiency, consistency, and economic viability** of the process — all critical information for discussing value, scalability, and relia...          </p>
+          <p class="lt-p">
+Rubrics: 10/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.256          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: **Synthesis Reaction Performance Report: Diethyl Ether Production**  
+*Prepared for Sales Team – Simplified for Clarity and Business Relevance*  
+
+---
+
+### **Introduction**  
+This report summarizes the performance of recent laboratory runs synthesizing **diethyl ether** via a nucleophilic substitution reaction between **sodium ethoxide (NaOEt)** and **bromoethane (BrEt)**. The goal is to provide actionable, transparent data that reflects **efficiency, cost, and reliability** — key factors for ou...          </p>
+          <p class="lt-p">
+Rubrics: 15/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.385          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, concise, and scientifically accurate report** tailored specifically for your **sales team**, based strictly on your data and requirements. The report avoids overly technical jargon, maintains a professional yet accessible tone, includes all requested calculations with precision, and highlights key financial and performance insights — all within a structure you can deliver in **8 minutes**.
+
+---
+
+# **Report: Synthesis of Diethyl Ether — Performance &amp; Economics Overv...          </p>
+          <p class="lt-p">
+Rubrics: 14/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.359          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, concise, and scientifically grounded report** tailored specifically for your **sales team**. The language is accessible—avoiding jargon while maintaining scientific accuracy—and follows your requested structure and data processing steps.
+
+---
+
+# **Synthesis of Diethyl Ether: Performance Summary Report**  
+*For Internal Sales and Commercial Considerations*
+
+---
+
+## **Introduction**
+
+This report summarizes data from 20 bench-scale reactions designed to synthesize **d...          </p>
+          <p class="lt-p">
+Rubrics: 13/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a report about my recent synthesis reaction for our sales team that they can easily understand. I am a chemist at a pharmaceutical company and I have a lot of data from our recent...          </p>
+          <p class="lt-p">
+Response: Certainly. Below is a **clear, professional, and sales-team-friendly report** based on your synthesis data. It includes all requested calculations and analysis — formatted for **understanding without requiring chemical expertise** — while maintaining scientific rigor.
+
+---
+
+# **Synthesis Report: Diethyl Ether from Sodium Ethoxide and Bromoethane**  
+*For Internal Sales Team Use – Simplified &amp; Actionable Summary*  
+
+---
+
+## **Introduction**
+
+This report summarizes the results of 20 recent synthes...          </p>
+          <p class="lt-p">
+Rubrics: 10/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.256          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+3885                </td>
+                <td>
+0.462                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.462                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+4488                </td>
+                <td>
+0.359                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.359                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+5460                </td>
+                <td>
+0.359                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.359                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+6504                </td>
+                <td>
+0.282                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.282                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+3932                </td>
+                <td>
+0.282                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.282                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+5158                </td>
+                <td>
+0.231                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.231                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+4882                </td>
+                <td>
+0.205                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.205                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+6114                </td>
+                <td>
+0.359                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.359                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+3781                </td>
+                <td>
+0.231                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.231                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+3256                </td>
+                <td>
+0.256                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.256                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+5098                </td>
+                <td>
+0.256                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.256                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+4505                </td>
+                <td>
+0.256                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.256                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+3808                </td>
+                <td>
+0.385                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.385                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+4418                </td>
+                <td>
+0.359                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.359                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+3812                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1553                </td>
+                <td>
+6794                </td>
+                <td>
+0.256                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.256                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **simple, practical, and low-cook effort meal plan** tailored to your 3rd-grade overnight camp situation — designed to **minimize cooking**, reduce stress, and keep everyone feeling included and not singled out.
+
+We’ll structure it using **only 3 main meal options** (as requested), so you don’t need to cook more than 3 dishes total.  
+Each meal will be **flavorful, kid-friendly, non-spicy, and free from strong or foreign flavors** (like spicy, soy, or complex sauces).  
+We&#x27;l...          </p>
+          <p class="lt-p">
+Rubrics: 16/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.552          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! I totally get how much time and effort this can take — and you&#x27;re right that minimizing cooking while still being respectful and inclusive is key. Since you&#x27;re limited to **only 3 meal options total** (to reduce prep work), and since kids don&#x27;t like spicy, strong, or foreign flavors, we’ll go for **simple, familiar, comforting foods** with the same foundation across meals.
+
+We’ll design **3 core meal options** (one plain, one to accommodate gluten-free (GF), one to accommodate dairy-...          </p>
+          <p class="lt-p">
+Rubrics: 20/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.690          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **simple, practical, and easy-to-read meal plan** for your overnight camp that meets all your requirements:
+
+---
+
+### ✅ Key Design Choices:
+- **Only 3 main meal options** (minimizing cooking workload)
+- **Same base recipe structure** for normal and restricted meals (so kids don’t feel singled out)
+- **Diet-friendly swaps** only where needed — no fancy or expensive ingredients
+- **No spicy, foreign, or strong flavors** (safe for picky 3rd graders)
+- **All meals made with only...          </p>
+          <p class="lt-p">
+Rubrics: 21/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.724          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Thanks for the detailed request — this is super thoughtful and important work. Since your goal is to **minimize cooking, reduce prep work, keep meals simple and familiar, avoid strong or spicy flavors, respect dietary needs, and ensure no one feels singled out**, I’ve designed a **3-meal, 3-option meal plan** that:
+
+✅ Uses the **same base recipes** for the main dish across all meals (only swaps are made for restrictions)  
+✅ Keeps meals **culturally familiar, kid-friendly, and mild**...          </p>
+          <p class="lt-p">
+Rubrics: 15/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.517          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a smart, simple, and **low-effort meal plan** tailored to your needs — designed to **minimize cooking**, use **fewer than 3 meal options total**, keep things **diet-friendly but inclusive**, avoid strong or spicy flavors, and ensure kids don’t feel singled out.
+
+We’ve kept the meals **simple, familiar, and child-friendly** — with swaps that are clearly marked in brackets. Since you have only a **kettle, microwave, and fridge**, we’re using pre-made or store-bought ingredients ...          </p>
+          <p class="lt-p">
+Rubrics: 19/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.655          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! I get it — you’re juggling a lot, and your goal is clear: **simple, low-cooking effort, flexible meals that meet dietary needs without singling anyone out, and practical for easy prep and serving**.
+
+Since your camp has **limited cooking facilities** (only kettle, microwave, fridge), and you want to **minimize cooking time and effort**, we’ll focus on **fewer than 3 main meal options** (which I’ll keep at **3**) that can be **easily prepped**, **reheated**, and **switched with simple...          </p>
+          <p class="lt-p">
+Rubrics: 19/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.655          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **simple, easy-to-read, practical meal plan** designed specifically for your 3rd-grade overnight camp. The goal is to:
+
+- Keep **only 3 main meal options** total (minimizing cooking effort)
+- Make **restrictions as similar as possible** to the regular meal, so kids don’t feel singled out
+- Use **safe, affordable, non-spicy, familiar foods** (no foreign or strong flavors)
+- Maximize shared meals (in the hall) while still meeting all needs
+- Make it **simple for you to prep an...          </p>
+          <p class="lt-p">
+Rubrics: 25/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.862          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **simple, practical, and easy-to-read meal plan** for your 3rd-grade overnight camp that:
+
+✅ Keeps **only 3 main meal options** (minimizing cooking effort)  
+✅ Uses **similar or identical main dishes** with simple swaps for restrictions  
+✅ Reduces the need for extra prep or cooking  
+✅ Works within your budget and kitchen constraints (only kettle, microwave, fridge)  
+✅ Avoids strong flavors, spicy foods, or foreign cuisines (kids are picky!)  
+✅ Includes **clear labeling**...          </p>
+          <p class="lt-p">
+Rubrics: 16/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.552          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **simple, easy-to-read, and practical meal plan** tailored to your situation — with **only 3 main meal options** (to minimize cooking effort), **diet-friendly swaps** so kids don’t feel singled out, and **clear labeling** for restriction-specific meals so you know exactly how much to prepare.
+
+🔹 Key design goals achieved:
+- Only **3 meal options total** (same base, just swaps for restrictions)
+- Meals are **simple, kid-friendly**, no spicy or foreign flavors
+- All meals are ...          </p>
+          <p class="lt-p">
+Rubrics: 18/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.621          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a **simple, practical, and low-cooking-effort meal plan** tailored to your 3rd grade overnight camp with minimal prep, budget-friendly ingredients, and **only 3 distinct meal options** — designed to reduce your workload while respecting dietary needs.
+
+Key principles used:
+- **All meals share a similar base** (same main dish, same texture, same flavor profile) so kids don’t feel singled out.
+- **Restrictions are met with simple swaps** (e.g., GF flour, no beef, no eggs, DF-fri...          </p>
+          <p class="lt-p">
+Rubrics: 18/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.621          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a simple, practical, **easy-to-read meal plan** tailored to your needs — designed to **minimize cooking effort**, **be affordable**, **respect dietary restrictions**, and **keep meals familiar and comfortable** for kids (especially since they&#x27;re picky about strong or foreign flavors).  
+
+Key features of this plan:
+
+✅ **Only 3 meal options total** (no more than 3)  
+✅ Main meals and restriction versions use **similar bases** with **simple swaps** so kids don’t feel singled out ...          </p>
+          <p class="lt-p">
+Rubrics: 21/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.724          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **simple, practical, and flexible meal plan** that minimizes cooking effort, respects dietary needs, keeps flavors mild and familiar (no spicy or foreign foods), and reduces the need to make *many* different meals — which is exactly what you&#x27;re looking for.
+
+---
+
+### ✅ Key Principles Used:
+- **Only 3 meal options total** (same as main dish, with simple, safe swaps for restrictions)
+- **Dish names are consistent** across meals so kids don’t feel singled out
+- **Dietary ...          </p>
+          <p class="lt-p">
+Rubrics: 22/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.759          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **simple, easy-to-read, and practical meal plan** tailored to your 3rd-grade overnight camp with minimal cooking, low cost, and **only 3 meal options total** (to reduce prep work).  
+
+✅ **Only 3 meal types** (main + 2 restriction versions)  
+✅ Main dishes are **similar** so kids don’t feel singled out  
+✅ All meals avoid spicy, foreign, or strong flavors (safe for picky kids)  
+✅ Uses **only microwave, kettle, and fridge** (no ovens or stoves)  
+✅ Includes **diet-friendly sw...          </p>
+          <p class="lt-p">
+Rubrics: 20/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.690          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! I totally get the challenge — managing dietary needs without adding extra work, while keeping meals simple, flavorful, and inclusive for all. Since you&#x27;re limited to **only 3 meal options total** (to minimize cooking effort), and you have **no cooking facilities beyond a kettle, microwave, and fridge**, we need to focus on **flexibility, simplicity, and easy swaps**.
+
+Here&#x27;s the smart plan:
+
+---
+
+### ✅ Key Principles Used:
+- **Only 3 meals total** (breakfast, lunch, dinner), with one...          </p>
+          <p class="lt-p">
+Rubrics: 17/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.586          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **simple, practical, and low-effort meal plan** tailored to your needs — designed with minimal cooking, easy prep, diet-friendly swaps, and no fancy or spicy flavors. The meals are structured to be **easily prepared in advance** using only a kettle, microwave, and fridge, and are **cost-effective**.
+
+We&#x27;re keeping **only 3 meal options total** (1 for the general group, and 2 for restrictions), with **similar main dishes** so kids don’t feel singled out. Restrictions are hand...          </p>
+          <p class="lt-p">
+Rubrics: 14/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.483          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help creating a meal plan for my class. I am supervising an overnight camp for my 3rd grade class and a lot of the kids have dietary requirements, some of the adults supervising do too. I need ...          </p>
+          <p class="lt-p">
+Response: Absolutely! I completely understand the challenge — balancing dietary needs, minimizing cooking work, keeping meals simple, and ensuring kids don&#x27;t feel singled out. Since you&#x27;re limited to **only 3 meal options total** (across breakfast, lunch, dinner), and you only have a kettle, microwave, and fridge, this means **all meals must be easy to prep**, **require minimal cooking**, and **be made in bulk** so you can share ingredients or replicate dishes with quick swaps.
+
+---
+
+### ✅ Key Strategies ...          </p>
+          <p class="lt-p">
+Rubrics: 16/29 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.552          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2275                </td>
+                <td>
+0.552                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.552                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2325                </td>
+                <td>
+0.690                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.690                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+1375                </td>
+                <td>
+0.724                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.724                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+1927                </td>
+                <td>
+0.517                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.517                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+1836                </td>
+                <td>
+0.655                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.655                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2366                </td>
+                <td>
+0.655                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.655                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2763                </td>
+                <td>
+0.862                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.862                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+1669                </td>
+                <td>
+0.552                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.552                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2019                </td>
+                <td>
+0.621                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.621                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+1669                </td>
+                <td>
+0.621                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.621                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+1849                </td>
+                <td>
+0.724                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.724                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2146                </td>
+                <td>
+0.759                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.759                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+1837                </td>
+                <td>
+0.690                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.690                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2186                </td>
+                <td>
+0.586                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.586                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+1794                </td>
+                <td>
+0.483                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.483                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+590                </td>
+                <td>
+2233                </td>
+                <td>
+0.552                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.552                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through the task step-by-step and create **accurate, clean, and properly formatted final invoices for October** for the **Investigation** and **Mucho** channels.
+
+---
+
+## 🔍 **Rules Recap &amp; Filtering Process**
+
+We must apply the following rules **strictly**:
+
+1. **Exclude scripts submitted in November** — only include scripts **submitted in October**.
+2. **For TV Shows**:
+   - Length **21–24 minutes**: $75.00 (fixed)
+   - Length **42–48 minutes**: $150.00 (fixed)
+   - Outsi...          </p>
+          <p class="lt-p">
+Rubrics: 7/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.269          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to create accurate, clean, and properly formatted **final invoices for October** for the **Investigation** and **Mucho** channels based on your detailed instructions.
+
+---
+
+### ✅ Key Rules Recap:
+1. **Only include scripts submitted in October** (not submitted in November or later).
+2. **Exclude scripts finished in October but submitted in November** (even if finished in October).
+3. **For TV Shows**:
+   - **Fixed rates**:  
+     - 21–24 minutes → $75.00  
+     -...          </p>
+          <p class="lt-p">
+Rubrics: 6/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.231          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to create **accurate, clean, and properly formatted final invoices for October** for the **Investigation** and **Mucho** channels — following **all your specific rules**.
+
+---
+
+### 📌 Rules Clarified &amp; Applied:
+
+1. **Only include scripts *finished* in October**  
+   → Exclude any script where **Finished date is after October 31** or **Submitted in November** → **even if finished in October**.  
+   → So: include only entries where **Finished ≤ 31-Oct** AND **Submi...          </p>
+          <p class="lt-p">
+Rubrics: 6/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.231          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s go step-by-step to create **accurate, clean, and properly formatted final invoices** for **October** for the **Investigation** and **Mucho** channels.
+
+---
+
+### ✅ **Key Rules Applied**
+1. **Only include scripts submitted in October** (not submitted in November, even if finished in October).
+2. **Remove any script where &quot;Submitted&quot; is in November** — even if &quot;Finished&quot; is in October.
+3. **For TV Shows:**
+   - **Fixed rates:** 21–24 minutes → $75.00; 42–48 minutes → $150.00
+   - *...          </p>
+          <p class="lt-p">
+Rubrics: 5/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.192          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to generate **clean, accurate final invoices for October** for the **Investigation** and **Mucho** channels, based on your detailed instructions.
+
+---
+
+## ✅ Key Rules Applied:
+1. **Only include scripts submitted in October** (i.e., `Submitted ≤ 31-Oct`).  
+   → Scripts finished in October but submitted in November are **excluded**.
+
+2. **Show titles must be cleaned**:
+   - Remove episode numbers after a dash (e.g., `Gold Run - Day of Mourning` → `Gold Run`)
+   -...          </p>
+          <p class="lt-p">
+Rubrics: 7/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.269          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to create accurate and clean **final invoices for October** for the **Investigation** and **Mucho** channels, following your detailed instructions.
+
+---
+
+### ✅ RULES APPLIED:
+
+1. **Only include scripts submitted in October** — *exclude any submitted in November*, even if finished in October.
+2. **For TV Shows**:
+   - If length is **21–24 minutes**: fixed rate → $75.00
+   - If length is **42–48 minutes**: fixed rate → $150.00
+   - Else: variable rate → $3.30 per ...          </p>
+          <p class="lt-p">
+Rubrics: 5/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.192          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s process the data carefully according to your requirements and generate clean, accurate **final invoices for October** for the **Investigation** and **Mucho** channels.
+
+---
+
+## ✅ Invoicing Rules Recap (Confirmed):
+
+1. **Only include scripts submitted in October** — *exclude any submitted in November (even if finished in October)*.
+2. **For TV Shows**:
+   - Fixtures:  
+     - 21–24 minutes → $75.00  
+     - 42–48 minutes → $150.00  
+   - Variable (outside ranges) → $3.30 per min...          </p>
+          <p class="lt-p">
+Rubrics: 8/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.308          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s carefully go through your data and build the **final invoices for October** for the **Investigation** and **Mucho** channels, following all your detailed rules.
+
+---
+
+### ✅ Key Rules Recap:
+1. **Only include scripts submitted in October** (not submitted in November).
+2. **Exclude scripts finished in October but submitted in November**.
+3. **Movies**:
+   - $5.70 per minute.
+4. **TV Shows**:
+   - Fixed rates:
+     - 21–24 minutes: $75.00
+     - 42–48 minutes: $150.00
+   - Variabl...          </p>
+          <p class="lt-p">
+Rubrics: 4/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.154          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to build the **final invoices for October** for the **Investigation** and **Mucho** channels, based on your detailed instructions.
+
+---
+
+### ✅ Key Rules Recap:
+1. **Only include scripts submitted in October** (i.e., submitted date ≤ 31-Oct).
+2. **Exclude scripts finished in October but submitted in November**.
+3. **Movie cost**: $5.70 per minute.
+4. **TV Show costs**:
+   - Fixed: 
+     - 21–24 minutes → $75.00  
+     - 42–48 minutes → $150.00  
+   - Variable: An...          </p>
+          <p class="lt-p">
+Rubrics: 6/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.231          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to create **accurate, clean, and properly formatted October invoices** for the **Investigation** and **Mucho** channels based on your detailed instructions.
+
+---
+
+### ✅ Key Rules Applied:
+1. **Only include scripts submitted in October** (not submitted in November or later).
+2. **Exclude scripts finished in October but submitted in November**.
+3. **For TV Shows**:
+   - Fixed rates:  
+     - 21–24 minutes → $75.00  
+     - 42–48 minutes → $150.00  
+   - Variable r...          </p>
+          <p class="lt-p">
+Rubrics: 5/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.192          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s carefully go through your data and generate **two clean, final invoices for October** — one for **Investigation** channel shows and one for **Mucho** channel shows — following **all your specific instructions**.
+
+---
+
+## ✅ INVOICE RULES RECAP (Applied)
+
+1. **Exclude scripts submitted in November** — only include those **submitted in October**.
+2. **Only include scripts finished in October (or earlier in October)** — if finished in October, even if submitted later, but **do not ...          </p>
+          <p class="lt-p">
+Rubrics: 5/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.192          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to create accurate, clean, and properly formatted **final invoices for October** for the **Investigation** and **Mucho** channels.
+
+---
+
+### ✅ **Rules Recap &amp; Filtering Logic**:
+1. **Only include scripts submitted in October** (not submitted in November).
+2. **Exclude any script that was finished in October but submitted in November**.
+3. **For TV Shows**:
+   - Fixed rate:  
+     - 21–24 minutes → $75.00  
+     - 42–48 minutes → $150.00  
+   - Variable rate:  
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 7/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.269          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s process the data step-by-step to create the **final invoices for October** for the **Investigation** and **Mucho** channels — following your detailed instructions.
+
+---
+
+### ✅ Key Rules Recap:
+
+1. **Only include scripts submitted in October** (not submitted in November).
+2. **Exclude scripts finished in October but submitted in November**.
+3. **Show titles**:
+   - Remove episode numbers (e.g., &quot;S1&quot;, &quot;S7&quot;), season numbers, or episode titles (e.g., &quot;- The First Day&quot;).
+   - Exampl...          </p>
+          <p class="lt-p">
+Rubrics: 6/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.231          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to create **clean, accurate, and properly formatted final invoices for October** for the **Investigation** and **Mucho** channels.
+
+---
+
+### 🔍 Key Rules Applied:
+
+1. **Only include scripts submitted in October**  
+   → Ignore any that were **submitted in November** or later, even if finished in October.
+
+2. **Show titles:**
+   - Remove episode numbers (e.g., `S1`, `S3`, `S7`, etc.)
+   - Remove dash + episode title (e.g., `Gold Run - Day of Mourning` → `Gold Run`...          </p>
+          <p class="lt-p">
+Rubrics: 7/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.269          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to build accurate, clean, and properly formatted **final invoices for October** for the **Investigation** and **Mucho** channels, following **all your detailed rules**.
+
+---
+
+## ✅ Criteria Recap (to ensure accuracy):
+
+1. **Only include scripts submitted in October**  
+   → Exclude any entry where **Submitted date is in November**, even if finished in October.
+
+2. **Show title formatting**:
+   - Remove episode numbers (e.g., S1, S7)  
+   - Remove episode titles a...          </p>
+          <p class="lt-p">
+Rubrics: 7/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.269          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for October for the Investigation and Mucho channels? My team writes scripts for closed captioning, and the monthly invoices include the scripts that w...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s walk through this step-by-step to produce accurate and properly formatted **October invoices** for the **Investigation** and **Mucho** channels — only including scripts **finished in October** and **submitted in October**, and not including any that were submitted in November (even if finished in October).
+
+---
+
+### ✅ Key Rules Applied:
+
+1. **Only include scripts where:**
+   - **Finished date is in October** (between 01-Oct and 31-Oct)
+   - **Submitted date is in October** (betw...          </p>
+          <p class="lt-p">
+Rubrics: 6/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.231          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+4786                </td>
+                <td>
+0.269                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.269                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+4048                </td>
+                <td>
+0.231                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.231                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+3976                </td>
+                <td>
+0.231                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.231                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+2051                </td>
+                <td>
+0.192                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.192                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+8192                </td>
+                <td>
+0.269                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.269                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+3886                </td>
+                <td>
+0.192                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.192                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+2687                </td>
+                <td>
+0.308                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.308                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+4684                </td>
+                <td>
+0.154                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.154                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+3529                </td>
+                <td>
+0.231                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.231                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+2584                </td>
+                <td>
+0.192                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.192                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+4402                </td>
+                <td>
+0.192                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.192                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+5267                </td>
+                <td>
+0.269                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.269                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+5137                </td>
+                <td>
+0.231                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.231                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+4047                </td>
+                <td>
+0.269                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.269                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+3889                </td>
+                <td>
+0.269                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.269                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1300                </td>
+                <td>
+5531                </td>
+                <td>
+0.231                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.231                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

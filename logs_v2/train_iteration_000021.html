@@ -1,0 +1,4823 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 21</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 21  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T13:07:59  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** World History  
+**Grade Level:** 7th Grade  
+**Topic:** The Great Pyramid of Giza  
+**Date:** [Insert Date]  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials**  
+- Projector and screen or smartboard  
+- Interactive whiteboard or student notebook (paper)  
+- Printed handouts with key facts about the Great Pyramid of Giza  
+- Access to a reliable historical video (e.g., a 3–4 minute documentary clip on the construction of the Great Pyramid)  
+- Whiteboard and markers  
+- Student work...          </p>
+          <p class="lt-p">
+Rubrics: 26/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** 7th Grade Social Studies / World History  
+**Grade Level:** 7  
+**Topic:** The Great Pyramid of Giza  
+**Date:** [Insert Date]  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Projector and screen or smartboard  
+- Whiteboard and markers  
+- Printed handouts (one per student): “Pyramid Facts Sheet” and “Timeline Chart”  
+- Student notebooks  
+- Access to internet or pre-downloaded images (optional)  
+- Chart paper  
+- Colored pencils or markers  
+
+**Learning Objectives:**  ...          </p>
+          <p class="lt-p">
+Rubrics: 29/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.906          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** 7th Grade History  
+**Grade Level:** 7  
+**Topic:** The Great Pyramid of Giza  
+**Date:** [Insert Date]  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Projector and laptop  
+- Whiteboard and markers  
+- Student worksheets (with key facts and fill-in-the-blanks)  
+- Timer or clock for pacing  
+- Access to educational videos or images of the Great Pyramid (reliable sources)  
+
+**Learning Objectives:**  
+1. Identify who constructed the Great Pyramid of Giza and why.  
+2. Det...          </p>
+          <p class="lt-p">
+Rubrics: 30/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** World History  
+**Grade Level:** 7th Grade  
+**Topic:** The Great Pyramid of Giza  
+**Date:** [Insert Date]  
+**Time:** 10:00 AM – 11:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector or smartboard (optional)  
+- Student notebooks  
+- Handout with key facts about the Great Pyramid (printable, one per student)  
+- Access to internet or digital device (optional for video viewing)  
+- Chart paper and sticky notes (for collaborative discussion)  
+
+**Learning Objectiv...          </p>
+          <p class="lt-p">
+Rubrics: 28/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** 7th Grade History  
+**Grade Level:** 7  
+**Topic:** The Great Pyramid of Giza  
+**Date:** April 26, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector or smartboard (optional)  
+- Printed handouts with key facts about the Great Pyramid  
+- Student notebooks  
+- Access to reliable historical sources (optional digital access during lesson)  
+
+**Learning Objectives:**  
+1. Identify who constructed the Great Pyramid of Giza.  
+2. Determin...          </p>
+          <p class="lt-p">
+Rubrics: 26/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject**: World History  
+**Grade Level**: 7th Grade  
+**Topic**: The Great Pyramid of Giza  
+**Date**: [Insert Date]  
+**Time**: 9:00 AM – 10:00 AM  
+
+---
+
+**Materials**:  
+- Projector or smartboard  
+- Computer or tablet with internet access  
+- Whiteboard and markers  
+- Handouts on the Great Pyramid of Giza (detailed infographic with key facts)  
+- Student notebooks  
+- Access to historical images (photos, diagrams, maps of Giza)  
+- Student worksheets with guided questions  
+
+---
+
+**Lear...          </p>
+          <p class="lt-p">
+Rubrics: 27/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.844          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** World History  
+**Grade Level:** 7th Grade  
+**Topic:** The Great Pyramid of Giza  
+**Date:** October 10, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector or smartboard with images of the Great Pyramid  
+- Handouts with key facts (who built it, when, size, significance)  
+- Student notebooks  
+- Access to internet or printed articles (optional)  
+- Mini whiteboards or index cards for group responses  
+
+---
+
+**Learning Objectives:** ...          </p>
+          <p class="lt-p">
+Rubrics: 28/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** 7th Grade World History  
+**Grade Level:** 7  
+**Topic:** The Great Pyramid of Giza  
+**Date:** April 27, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+### **Materials**  
+- Projector and screen or smartboard  
+- Computer with internet access (for visuals)  
+- Whiteboard and markers  
+- Student activity sheets (handouts with key facts and questions)  
+- Printed images of the Great Pyramid, Giza Plateau, and ancient Egyptian workers  
+- Chart paper and sticky notes  
+- Copies of maps o...          </p>
+          <p class="lt-p">
+Rubrics: 27/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.844          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** World History  
+**Grade Level:** 7th Grade  
+**Topic:** The Great Pyramid of Giza  
+**Date:** April 5, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector and screen (or printed handouts)  
+- Chart paper and sticky notes  
+- Student worksheets (with diagrams and fill-in-the-blank questions)  
+- Access to internet or printed images of the Great Pyramid  
+
+**Learning Objectives:**  
+1. Identify who constructed the Great Pyramid of Giza. ...          </p>
+          <p class="lt-p">
+Rubrics: 25/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.781          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** History  
+**Grade Level:** 7th Grade  
+**Topic:** The Great Pyramid of Giza  
+**Date:** October 10, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector and screen (for visuals of the Great Pyramid)  
+- Student handouts (with key facts about the pyramid)  
+- Printed images of the Great Pyramid, ancient Egyptian pharaohs, and construction workers  
+- Measuring tape or rulers (for size comparisons)  
+- Chart paper and sticky notes  
+- Cla...          </p>
+          <p class="lt-p">
+Rubrics: 25/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.781          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** 7th Grade World History  
+**Grade Level:** 7  
+**Topic:** The Great Pyramid of Giza  
+**Date:** October 10, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+### **Materials**
+- Projector and screen  
+- Whiteboard and markers  
+- Student worksheets (with key facts about the Great Pyramid)  
+- Printed images of the Great Pyramid, ancient Egypt (e.g., pharaohs, tools, construction)  
+- Access to internet or digital slides (optional for background visuals)
+
+---
+
+### **Learning Objectives**
+1...          </p>
+          <p class="lt-p">
+Rubrics: 29/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.906          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** 7th Grade History  
+**Grade Level:** 7  
+**Topic:** The Great Pyramid of Giza  
+**Date:** October 10, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector and screen (optional)  
+- Printed handouts (key facts about the Great Pyramid)  
+- Student notebooks  
+- Access to internet or digital device (for visual aids, if available)  
+- Stopwatch or timer (for pacing)  
+
+**Learning Objectives:**  
+1. Students will identify who constructed the...          </p>
+          <p class="lt-p">
+Rubrics: 30/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** 7th Grade Social Studies / World History  
+**Grade Level:** 7  
+**Topic:** The Great Pyramid of Giza  
+**Date:** October 25, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector or smartboard (optional)  
+- Student notebooks  
+- Handout with key facts about the Great Pyramid (printable)  
+- Access to digital images of the pyramid (optional)  
+- Chart paper and sticky notes  
+
+---
+
+**Learning Objectives:**  
+1. Students will identify who...          </p>
+          <p class="lt-p">
+Rubrics: 25/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.781          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** Social Studies / World History  
+**Grade Level:** 7th Grade  
+**Topic:** The Great Pyramid of Giza  
+**Date:** Tuesday, April 23, 2025  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector and screen (or printed handouts)  
+- Student notebooks/desktop worksheets  
+- Maps of ancient Egypt (simple schematic)  
+- Printed reading passages on the Great Pyramid  
+- Chart paper and glue sticks (for visual group collaboration)  
+
+---
+
+**Learning Obje...          </p>
+          <p class="lt-p">
+Rubrics: 27/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.844          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** 7th Grade World History  
+**Grade Level:** 7  
+**Topic:** The Great Pyramid of Giza  
+**Date:** October 10, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector and computer (for visuals of the Great Pyramid)  
+- Printed handouts: “Pyramid Facts Sheet” and “Timeline of Ancient Egypt”  
+- Student notebooks  
+- Chart paper and sticky notes  
+- Access to internet (for quick facts if needed)  
+
+**Learning Objectives:**  
+1. Students will id...          </p>
+          <p class="lt-p">
+Rubrics: 30/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.938          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need help drafting a lesson plan for my class. I teach 7th grade history, and I need the lesson to be on the Great Pyramid of Giza. It needs to be for a one-hour class. I need the lesson plan to inc...          </p>
+          <p class="lt-p">
+Response: **Subject:** 7th Grade History  
+**Grade Level:** 7  
+**Topic:** The Great Pyramid of Giza  
+**Date:** April 27, 2024  
+**Time:** 9:00 AM – 10:00 AM  
+
+---
+
+**Materials:**  
+- Whiteboard and markers  
+- Projector and screen (optional)  
+- Student handouts with key facts about the Great Pyramid  
+- Access to a digital or printed image of the Great Pyramid  
+- Chart paper and sticky notes  
+- Timer or phone with timer app  
+
+---
+
+**Learning Objectives:**  
+1. Identify who built the Great Pyramid o...          </p>
+          <p class="lt-p">
+Rubrics: 27/32 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.844          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2771                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+3988                </td>
+                <td>
+0.906                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.906                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2561                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2627                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2670                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2957                </td>
+                <td>
+0.844                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.844                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2530                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2845                </td>
+                <td>
+0.844                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.844                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2209                </td>
+                <td>
+0.781                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.781                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2912                </td>
+                <td>
+0.781                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.781                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2422                </td>
+                <td>
+0.906                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.906                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2586                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2727                </td>
+                <td>
+0.781                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.781                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2482                </td>
+                <td>
+0.844                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.844                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2791                </td>
+                <td>
+0.938                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.938                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+375                </td>
+                <td>
+2847                </td>
+                <td>
+0.844                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.844                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: [INSERT EVENT NAME HERE]  
+November 29, 2025  
+
+**Oak Suite** (4 tables – most gaming showcases)  
+
+| Time | Activity | Table |  
+|------|--------|------|  
+| 10:00 – 10:30 | Welcome &amp; event orientation (drop-in info, rules, game list) | – |  
+| 10:30 – 11:00 | *Set-up transition* | – |  
+| 11:00 – 11:30 | **Warhammer 40k** (Permanent) | Table 4 |  
+| 11:30 – 12:00 | **Dungeons &amp; Dragons** (Permanent) | Table 3 |  
+| 12:00 – 12:30 | *Pack up 40k, set up MERP* | – |  
+| 12:30 – 13:00 | **Middle-e...          </p>
+          <p class="lt-p">
+Rubrics: 15/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.577          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables – 4 games running in rotation)  
+*Hosts the majority of showcases due to room capacity and game diversity*
+
+| Time | Activity | Table | Notes |
+|------|---------|------|-------|
+| 10:00 – 10:30 | **Setup &amp; Welcome** | – | All staff and volunteers arrive. Sign-in sheet distributed. Decor and seating ready. |
+| 10:30 – 10:45 | **Welcome &amp; Event Overview** | – | Brief introduction to the event, rules for drop-ins, and ...          </p>
+          <p class="lt-p">
+Rubrics: 15/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.577          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: [INSERT EVENT NAME HERE]  
+November 29, 2025  
+
+**Oak Suite** (4 tables – most gaming showcases)  
+*Available for 4+ concurrent demos and rotations; includes the two most popular games (40k and D&amp;D) on highest-numbered tables.*  
+
+| Time | Activity | Table | Notes |
+|------|---------|-------|-------|
+| 10:00 – 10:30 | Setup and welcome briefing | – | All staff and volunteers assemble. Welcome cards and game brochures distributed. |
+| 10:30 – 11:00 | **Dungeons &amp; Dragons (D&amp;D)** (Demo) | Table 4 ...          </p>
+          <p class="lt-p">
+Rubrics: 11/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.423          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables)  
+*Hosts the most diverse range of gaming showcases, with four tables available for dynamic scheduling and game rotation.*
+
+| Time | Activity | Table | Notes |
+|------|---------|-------|-------|
+| 10:00 – 10:30 | **Set-up and welcome drinks** | — | Staff and game owners arrive; tables prepared; guests can sign in and browse. |
+| 10:30 – 11:00 | **Dungeons &amp; Dragons (D&amp;D)** | Table 4 | Permanent game – full table av...          </p>
+          <p class="lt-p">
+Rubrics: 16/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables – most gaming showcases)  
+*Hosts the majority of game demos with rotating gameplay slots, including the two most popular games (D&amp;D and 40k) on permanent tables.*
+
+- **10:30 AM – 11:00 AM**  
+  Table 4: **Dungeons &amp; Dragons (D&amp;D)** – Permanent session (dedicated table, open for drop-ins and play)  
+- **11:00 AM – 11:30 AM**  
+  *Pack up D&amp;D, set up next game*  
+- **11:30 AM – 12:00 PM**  
+  Table 3: **Warhammer 40k...          </p>
+          <p class="lt-p">
+Rubrics: 16/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables — four game showcases, including permanent games)  
+
+- **11:00 AM – 11:30 AM** – Setup and final check-in  
+- **11:30 AM – 12:00 PM** – *Dungeons &amp; Dragons (D&amp;D)* – Table 4 (Permanent)  
+- **12:00 PM – 12:30 PM** – *Warhammer 40k (40k)* – Table 4 (Permanent)  
+- **12:30 PM – 1:00 PM** – *Middle-earth Roleplaying (MERP)* – Table 1  
+- **1:00 PM – 1:30 PM** – *Call of Cthulhu* – Table 2  
+- **1:30 PM – 2:00 PM** – *Th...          </p>
+          <p class="lt-p">
+Rubrics: 18/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables – highest game showcase density)  
+*Note: Oak Suite holds 4 tables and features the most popular and diverse gaming showcases, with D&amp;D and 40k running continuously as permanent tables.*
+
+| Time          | Activity |
+|---------------|---------|
+| 10:00–10:30   | Setup and initial arrival (welcome signage, tables prepared) |
+| 10:30–11:00   | **Dungeons &amp; Dragons (D&amp;D) – Table 4** (Permanent) |
+| 11:00–11:30   | **Wa...          </p>
+          <p class="lt-p">
+Rubrics: 16/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables – *highest capacity, includes 40k and D&amp;D as permanent games*)  
+
+| Time          | Activity | Table |  
+|---------------|--------|-------|  
+| 10:00–10:30   | Setup &amp; Welcome (room preparation) | – |  
+| 10:30–11:00   | **Dungeons &amp; Dragons (D&amp;D)** – Open demo with game master | Table 4 |  
+| 11:00–11:30   | **Warhammer 40k (40k)** – Rules overview &amp; faction showcase | Table 4 |  
+| 11:30–11:45   | *Pack up 40k &amp; D...          </p>
+          <p class="lt-p">
+Rubrics: 14/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.538          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: [INSERT EVENT NAME HERE]  
+November 29, 2025  
+
+**Oak Suite** (4 tables – highest concentration of gaming showcases)  
+
+| Time | Activity | Table |  
+|------|---------|-------|  
+| 10:00 – 10:30 | Setup &amp; Welcome (Group kickoff &amp; signage) | – |  
+| 10:30 – 11:00 | **Dungeons &amp; Dragons (D&amp;D)** – Full Table Demo | Table 4 |  
+| 11:00 – 11:30 | **Warhammer 40k (40k)** – Full Table Demo | Table 3 |  
+| 11:30 – 12:00 | *Pack up 40k; set up MERP* | – |  
+| 12:00 – 12:30 | **Middle-earth Roleplaying (M...          </p>
+          <p class="lt-p">
+Rubrics: 15/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.577          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: [INSERT EVENT NAME HERE]  
+November 29, 2025  
+
+**Oak Suite** (4 tables – highest capacity, features 40k and D&amp;D as permanent games)  
+
+1. 10:00 – 10:30 AM: **Warhammer 40k (Table 4 – Permanent)**  
+   – Full game demo with rules walkthrough, key factions, and tactical scenarios.  
+   – Tables reserved for ongoing gameplay with rotating participants.  
+
+2. 10:30 – 11:00 AM: *Setup and pack-up between games*  
+   – Transition to next game session.  
+
+3. 11:00 – 11:30 AM: **Dungeons &amp; Dragons (Tab...          </p>
+          <p class="lt-p">
+Rubrics: 16/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables – host 4 game showcases, with 40k and D&amp;D on highest-numbered tables)  
+
+*Table 4 – Warhammer 40k (40k)*  
+**11:00 AM – 12:00 PM**  
+Demo and gameplay with 40k – focused on sci-fi lore, character builds, and key lore-heavy scenarios.  
+
+*Table 3 – Dungeons &amp; Dragons (D&amp;D)*  
+**12:00 PM – 1:00 PM**  
+Demo and gameplay with D&amp;D 5e – beginner-friendly scenarios, classic fantasy world elements.  
+
+*Table 2 – Call of Cth...          </p>
+          <p class="lt-p">
+Rubrics: 16/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables – highest capacity)  
+*Hosts the most gaming showcases with dedicated rotation time and full access to rotating demos.*
+
+| Time | Activity |
+|------|---------|
+| 10:00 – 10:30 | Setup &amp; welcome (including signage and refreshments) |
+| 10:30 – 11:00 | **Dungeons &amp; Dragons (D&amp;D)** – Permanent table (#4) – Full gameplay demo (1 hour) |
+| 11:00 – 11:30 | *Pack up D&amp;D, set up next game* |
+| 11:30 – 12:00 | **Warhammer 40...          </p>
+          <p class="lt-p">
+Rubrics: 16/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: [INSERT EVENT NAME HERE]  
+November 29, 2025
+
+**Oak Suite** (4 tables – includes 40k and D&amp;D as permanent games)  
+*Note: Oak Suite has more gaming showcases due to greater room capacity.*
+
+| Time | Activity | Table Number |
+|------|--------|-------------|
+| 10:00 – 10:30 | Welcome &amp; Intro (drop-in signing, game info) | — |
+| 10:30 – 11:00 | *Setup &amp; pack-up transition* | — |
+| 11:00 – 11:30 | **Warhammer 40k** (Permanent) | Table 4 |
+| 11:30 – 12:00 | *Pack up 40k, set up next game* | — |
+| 12:...          </p>
+          <p class="lt-p">
+Rubrics: 13/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables)  
+*Hosts the most gaming showcases with dedicated time per game, featuring both popular and niche titles.*
+
+1. **Warhammer 40k (40k)** – Table 4 (Permanent)  
+   *10:30 AM – 12:30 PM*  
+   (Full D&amp;D-like rules, large armies, and immersive combat demos)  
+
+2. **Dungeons &amp; Dragons (D&amp;D)** – Table 4 (Permanent)  
+   *12:45 PM – 2:45 PM*  
+   (Full D&amp;D 5e session; roll-based storytelling, character creation, and campai...          </p>
+          <p class="lt-p">
+Rubrics: 13/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables — most gaming showcases)  
+
+*Table 1* – **Warhammer 40k** (D&amp;D 5e)  
+*Table 2* – **Middle-earth Roleplaying (MERP)**  
+*Table 3* – **Call of Cthulhu**  
+*Table 4* – **Age of Sigmar**  
+
+**Times (start to finish):**  
+10:00 – 10:30 – *Set up &amp; prep*  
+10:30 – 11:00 – **Warhammer 40k** (full table, continuous)  
+11:00 – 11:30 – *Pack up 40k, set up MERP*  
+11:30 – 12:00 – **Middle-earth Roleplaying (MERP)**  
+12:00 – ...          </p>
+          <p class="lt-p">
+Rubrics: 16/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Help me set up an itinerary for a gaming club launch event at my local community centre. It will be an event showcasing old-style dice roleplaying games and tabletop wargaming. I&#x27;m launching it throug...          </p>
+          <p class="lt-p">
+Response: **[INSERT EVENT NAME HERE]**  
+November 29, 2025  
+
+---
+
+**Oak Suite** (4 tables — most gaming showcases)  
+
+*Table 1:* Warhammer 40k (Permanent) — 10:00 AM – 11:00 AM  
+*Table 2:* Dungeons &amp; Dragons (Permanent) — 11:00 AM – 12:00 PM  
+*Table 3:* Middle-earth Roleplaying (MERP) — 12:15 PM – 1:15 PM  
+*Table 4:* Call of Cthulhu — 1:30 PM – 2:30 PM  
+
+*Set-up / Pack-up Transition (between MERP and Call of Cthulhu)*  
+*During transition: 2:30 PM – 2:45 PM — pack up Call of Cthulhu, set up The Dark ...          </p>
+          <p class="lt-p">
+Rubrics: 12/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.462          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1548                </td>
+                <td>
+0.577                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.577                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1777                </td>
+                <td>
+0.577                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.577                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1225                </td>
+                <td>
+0.423                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.423                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1481                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1151                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1059                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1301                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1569                </td>
+                <td>
+0.538                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.538                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1803                </td>
+                <td>
+0.577                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.577                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1148                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+982                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1913                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+947                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+983                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+1118                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+587                </td>
+                <td>
+713                </td>
+                <td>
+0.462                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.462                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, broadly defined as the aversion, fear, or rejection of homosexuality, has often been co-opted by state authorities not only as a moral or cultural stance but as a strategic instrument of political control. This phenomenon—what scholars label *state homophobia*—involves the deliberate use of homophobic legislation, rhetoric, and policy to consolidate power, project nat...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, as a socially and politically constructed response to homosexual identities, has functioned not merely as moral condemnation but as a tool of statecraft in modern history. This essay examines how state authorities have strategically exploited homophobia to consolidate power, manage crises, and reconstruct national identity. Drawing on historical case studies from Nazi...          </p>
+          <p class="lt-p">
+Rubrics: 17/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.810          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, as a socially constructed and politically instrumentalised form of ideological exclusion, has long functioned as a tool through which state authorities consolidate power, manage crisis, and project national identity. This essay explores how modern state authorities have selectively and strategically exploited homophobia to legitimise repression of LGBT communities, us...          </p>
+          <p class="lt-p">
+Rubrics: 14/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, as a structured societal reaction against homosexuality, has often been deployed not merely as a moral or cultural expression but as a strategic instrument of political power. State-level homophobia—defined as the institutionalisation and enforcement of homophobic policies under official governance—functions as a tool to legitimise authority, displace political anxiet...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, broadly defined as the fear, hatred, or prejudice against homosexuality, has been systematically leveraged by modern state authorities as a political instrument. This form of state homophobia operates not merely as a reflection of societal attitudes but as a deliberate, strategic response to consolidate power, manage crises, and define national identities. Drawing on ...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, when deployed by state institutions, functions not merely as a social prejudice but as a strategic instrument of political control. This phenomenon—referred to as *state homophobia*—involves the institutionalisation of anti-LGBT sentiment to serve broader governance objectives, such as consolidating power, reinforcing national identity, or diverting public attention f...          </p>
+          <p class="lt-p">
+Rubrics: 14/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, particularly when institutionalised and mobilised by state power, serves as a mechanism through which political authorities reassert control, consolidate legitimacy, and redirect public discontent. While homophobia may appear to stem from moral or cultural preconceptions, historical evidence demonstrates that it is frequently deployed as a strategic tool of governance...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, understood as the systemic opposition to homosexuality rooted in cultural, religious, and political discourse, has been strategically deployed by modern state authorities as a tool for consolidating power, managing social crises, and reinforcing national identities. This essay examines how state-sanctioned homophobia functions not merely as a moral or ideological stan...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, as a system of social, political, and ideological exclusion, has served as a tool not only for marginalising LGBT individuals but also for reinforcing state authority through the construction of cultural moral boundaries. In this context, *state homophobia* refers to the deliberate use of anti-homosexual policies and rhetoric by sovereign bodies to legitimise power, r...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, as a system of societal and state-sanctioned prejudice, has been strategically deployed by modern authoritarian regimes not merely as a reflection of cultural norms but as a tool of political manipulation. State homophobia—defined as deliberate governmental policies or rhetoric that criminalize, stigmatize, or marginalize lesbian, gay, bisexual, and transgender (LGBT)...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, as a socially and politically constructed form of prejudice, has long functioned as both a cultural trope and a strategic instrument in statecraft. In historical and contemporary contexts, state authorities have not only tolerated but actively exploited homophobia to consolidate power, manage political crises, and project national identity. This essay investigates how...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, as a socially and politically constructed response to non-normative sexual identities, has historically functioned not merely as a cultural bias but as a strategic instrument wielded by modern state authorities to consolidate power, reinforce national identity, and divert public attention from systemic failures. State homophobia refers specifically to the deliberate i...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, broadly defined as the fear, prejudice, and hostility toward individuals or groups perceived as non-heteronormative, has frequently been weaponised by modern state authorities as a means of political control and social cohesion. This essay examines the strategic deployment of homophobia by state powers in Germany, Russia, and Africa, arguing that it serves as both a t...          </p>
+          <p class="lt-p">
+Rubrics: 17/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.810          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, when institutionalised and weaponised by state authorities, functions as a tool of political control, social engineering, and crisis management. This essay explores how modern state regimes—particularly in Germany, Russia, and Africa—have strategically exploited homophobia to consolidate power, justify repression, and divert public attention from deeper governance fai...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, when deployed by state institutions, transcends mere social prejudice to become a strategic instrument of political control. This essay examines how modern state authorities have systematically exploited homophobia to target LGBT communities, employing it as a tool for regime consolidation, national identity formation, and distraction from systemic failures. Central t...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have an essay due in a few days for my history undergrad &#x27;history of homosexuality&#x27; module. I need it to be 2000 words total (it can be slightly less than this like 1800 but not crazy less, and not ...          </p>
+          <p class="lt-p">
+Response: **Why have modern state authorities exploited homophobia and targeted LGBT communities for special discrimination?**
+
+Homophobia, as a socially constructed and politically utilised form of prejudice, has long been deployed by state actors to consolidate power, reinforce dominant cultural narratives, and legitimise political decisions. This essay contends that modern state authorities have systematically exploited homophobia as a mechanism of social and political control, using it to purge intern...          </p>
+          <p class="lt-p">
+Rubrics: 16/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.762          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+3086                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2525                </td>
+                <td>
+0.810                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.810                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2264                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2733                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2940                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2911                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2369                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2575                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2641                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2794                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+3122                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2602                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2574                </td>
+                <td>
+0.810                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.810                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2790                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2738                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3327                </td>
+                <td>
+2825                </td>
+                <td>
+0.762                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.762                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this **step by step**, following your detailed process and rules.
+
+We’ll complete this in **three clear parts** as requested:
+
+---
+
+## ✅ PART 1: Initial Allocation Using Eligibility and Preference Order (Ignoring Capacity)
+
+We will:
+- For each student and each block, check their **preferences** in order.
+- Only consider an elective if the student meets the **prerequisite average**.
+- Assign the first eligible elective in their preference list.
+- If no elective is e...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step by step, following your detailed rules and process in **three clear parts** as requested.
+
+---
+
+## 📚 **Part 1: Initial Allocation Using Only Eligibility and Preference Order (Ignoring Capacity)**
+
+We begin by checking **prerequisite eligibility** for each student in each block. Students will be assigned their *first eligible* preference in each block (by ranked order), moving down to the next if the first fails the prerequisite. If no preference is eligi...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this **step-by-step** in the three requested parts as per your detailed instructions.
+
+---
+
+## ✅ **PART 1: Initial Allocation Using Only Eligibility and Preference Order (Ignoring Capacity)**
+
+We begin by:
+- Checking **each student&#x27;s average** against **prerequisite thresholds** for each block.
+- For each block, the student selects the **first eligible elective** from their preference list.
+- If the first choice is **ineligible**, move to the next preference until...          </p>
+          <p class="lt-p">
+Rubrics: 10/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.476          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s go through your full elective assignment process step by step, as requested, in **three clear parts**:
+
+---
+
+## ✅ PART 1: INITIAL ALLOCATION USING ELIGIBILITY AND PREFERENCE ORDER (IGNORE CAPACITY)
+
+We begin by assigning students to their **first eligible elective** in each block based on:
+- Their **average score**
+- The **minimum prerequisite average** for each subject
+- Their **ranked preferences** (in order)
+
+We only assign if the student **meets the prerequisite**. If not,...          </p>
+          <p class="lt-p">
+Rubrics: 7/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through your **elective allocation process step by step**, in the three requested parts:
+
+---
+
+## ✅ **PART 1: Initial Allocation Using Eligibility and Preference Order (Ignoring Capacity)**
+
+We will:
+- For each student, go through their preferences **in order** (1st → 2nd → 3rd...) and **only assign an elective if the student meets the prerequisite average**.
+- If they meet the prerequisite for a preference, assign them to that elective, **even if the block is oversubscri...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step-by-step, clearly and systematically. We’ll follow your instructions exactly, including:
+
+1. **Initial allocation** based on preferences and eligibility (ignoring capacity).
+2. A detailed **analysis of capacity problems and unassigned students** due to prerequisites.
+3. A **final balanced allocation** resolving all capacity limits and prerequisite rules, using the priority order: **Block B &gt; Block C &gt; Block A &gt; Block D**, and minimizing preference drops.
+...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through this step-by-step and **thoroughly** follow your detailed procedures to arrive at a **correct, fair, and logically consistent allocation** for your Year 10 students across the four elective blocks.
+
+---
+
+## ✅ **PART 1: INITIAL ALLOCATION USING ELIGIBILITY AND PREFERENCE ORDER (IGNORE CAPACITY)**
+
+We begin by assigning each student to their **first eligible preference** in each block (based on their average and prerequisite thresholds).  
+If they don’t meet the prereq...          </p>
+          <p class="lt-p">
+Rubrics: 14/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through the **full allocation process** for your Year 10 students across the four elective blocks, step by step, following **your detailed rules** precisely.
+
+---
+
+## ✅ **Part 1: Initial Allocation Based on Eligibility &amp; Preference (Ignoring Capacity)**
+
+We will first assign each student to an elective in each block **based on their preferences**, **only considering electives they meet the prerequisite for**, in order of preference (first eligible choice, then second, etc.)....          </p>
+          <p class="lt-p">
+Rubrics: 12/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through your detailed **elective allocation process for Year 10 students**, step by step, as requested.
+
+---
+
+## 📚 Overview of the Process
+
+We are allocating **14 students** across **4 blocks (A, B, C, D)**, each with **3 elective options** and **prerequisite thresholds**.
+
+### ✅ Rules Recap:
+1. Each student must take **one elective per block**.
+2. No student can be in two electives in the same block.
+3. **Prerequisites must be met**: a student cannot be assigned an elective...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s go through this **step-by-step** as requested, with **three clear parts**:
+
+---
+
+## ✅ **Part 1: Initial Allocation Using Eligibility and Preference Order (Ignoring Capacity)**
+
+We begin by assigning each student to their **first eligible elective** in each block, based on:
+- Their **preference list**
+- The **prerequisite minimum average** for each subject
+- The student only considers electives they meet the threshold for
+
+We ignore capacity at this stage. We assign **one electi...          </p>
+          <p class="lt-p">
+Rubrics: 12/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is a detailed and careful allocation problem involving **eligibility, preferences, capacity constraints, and priority resolution**. We’ll go through your request in the three required parts:
+
+---
+
+## ✅ **PART 1: INITIAL ALLOCATION USING ELIGIBILITY AND PREFERENCE ORDER (IGNORE CAPACITY)**
+
+We will:
+- For each student, go through their **preferences per block**, in order.
+- Only consider **electives they meet the prerequisite average for**.
+- Assign the **first eligible elective*...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through this **step-by-step** as requested in three clear parts:
+
+---
+
+## ✅ **Part 1: Initial Allocation Using Eligibility and Preference Order (Ignoring Capacity)**
+
+We will first assign each student to their **first eligible elective** in each block based on:
+- Their **average score**
+- The **prerequisite threshold** for each elective
+- Preference order (first choice they meet the threshold for)
+
+&gt; ❗ Ignore capacity at this stage — only consider eligibility and preference....          </p>
+          <p class="lt-p">
+Rubrics: 9/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this **step-by-step** to ensure every requirement is met with precision — including prerequisites, preference rankings, capacity limits, and chain reactions.
+
+We have **16 students**, and **four elective blocks**, each with **a maximum of 6 students**.
+
+---
+
+## 🔹 Step 1: Initial Allocation (Based on Eligibility and Preference Order)
+
+We start by assigning each student to their **first eligible** elective in each block (based on prerequisite requirements), using the...          </p>
+          <p class="lt-p">
+Rubrics: 11/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.524          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through the **full allocation process** carefully and systematically, in the three requested parts:
+
+---
+
+## ✅ **Part 1: Initial Allocation Using Eligibility and Preference Order (Ignoring Capacity)**
+
+We begin by checking **prerequisites** for each elective. A student can only be assigned to an elective if their **previous-year average meets or exceeds** the required minimum.  
+We process preferences **in order** (first choice to last), assigning the **first eligible opti...          </p>
+          <p class="lt-p">
+Rubrics: 10/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.476          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through this step-by-step, as per your detailed instructions. We’ll follow **three clear parts**:
+
+---
+
+## ✅ **Part 1: Initial Allocation Using Eligibility and Preference Order (Capacity Ignored)**
+
+We begin by assigning each student to an elective in each block based on:
+- Their **preferences**, in order.
+- Only electives they **meet the prerequisite average** (minimum average requirement).
+- Students are assigned to the **first eligible elective** in their preference list ...          </p>
+          <p class="lt-p">
+Rubrics: 12/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help assigning our Year 10 students to their elective subjects for next term. We run four elective blocks - Block A, Block B, Block C, and Block D - and each block happens at a fixed time ...          </p>
+          <p class="lt-p">
+Response: Absolutely! We&#x27;ll go through the complete allocation process step-by-step as requested, in **three clear parts**:
+
+---
+
+## ✅ **PART 1: Initial Allocation Using Eligibility and Preference Order (Ignoring Capacity)**
+
+We start by assigning each student to their **first eligible elective in each block**, based on:
+
+- **Prerequisite thresholds** (minimum average required)
+- **Preference list** (in order)
+- **No assignment if student fails all prerequisites in a block**
+- We **ignore capacity** in th...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8135                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8155                </td>
+                <td>
+0.476                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.476                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+6998                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+7917                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.524                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.524                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.476                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.476                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1833                </td>
+                <td>
+8192                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

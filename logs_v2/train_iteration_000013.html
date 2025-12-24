@@ -1,0 +1,4598 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 13</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 13  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T01:30:11  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated continued progress in his emotional regulation and academic functioning, despite facing significant emotional challenges tied to his one-year anniversary in residence and the recent departure of a potential adoptive family. While (Name) expressed deep distress regarding his future placement, he has maintained a stable trajectory in core treatment areas. Notably, there has been a marked reduction in aggressive behaviors toward both staff and peers, w...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has continued to demonstrate consistent progress in key areas of treatment despite facing significant emotional challenges related to his one-year anniversary in the residential program and the recent loss of a potential adoptive family. While (Name) has shown resilience and academic strength, ongoing difficulties with self-regulation, peer socialization, and sleep hygiene remain central to his current treatment focus. Notably, there has been a marked reduction in a...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated continued progress in his overall treatment trajectory despite significant emotional challenges related to his one-year anniversary in the residential setting and the recent loss of a potential adoptive family match. While (Name) has maintained a strong academic performance and remains engaged in structured school environments, his emotional regulation, peer interactions, and sleep consistency remain key areas of focus. Notably, there has been a mar...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has made consistent progress in emotional regulation and behavioral functioning despite experiencing significant emotional turbulence related to his one-year anniversary in the treatment center and the recent loss of a potential adoptive family. While his emotional resilience has strengthened, core challenges in self-soothing, peer engagement, and sleep hygiene remain central to his treatment. (Name) continues to demonstrate strong academic abilities and a consisten...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated consistent progress in his overall treatment trajectory despite facing significant emotional challenges tied to the one-year anniversary of his residential placement and the recent termination of potential adoptive family consideration. While the loss of this potential placement has elicited profound grief and uncertainty, (Name) has remained resilient and engaged in therapeutic modalities. His academic performance continues to reflect strong potent...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has continued to demonstrate progress in emotional regulation and academic functioning despite significant emotional challenges related to his one-year anniversary at the facility and the recent disengagement of a potential adoptive family. This transition has prompted heightened emotional intensity, particularly around autonomy, peer interaction, and future planning. While (Name) remains vigilant in school, where he excels academically, his challenges in self-regul...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated consistent progress in his overall treatment trajectory despite experiencing significant emotional turbulence around his one-year anniversary in the residential setting. The loss of a potential adoptive family after months of engagement and visits has intensified his emotional sensitivity and self-doubt regarding his future, which has impacted his ability to regulate emotions in group settings. However, (Name) remains academically engaged, motivated...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated consistent progress in his behavioral and emotional regulation despite significant developmental and emotional challenges related to his one-year anniversary at the facility. Marked improvements have been observed in several key areas, including a near-complete reduction in aggression toward staff and peers, and significant reductions in verbal and symbolic aggression. (Name) continues to show strong academic engagement and intellectual advancement,...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has continued to demonstrate meaningful progress in his overall treatment trajectory, despite experiencing significant emotional turmoil surrounding his one-year anniversary at the facility and the loss of a potential adoptive family match. While the rejection of the family placement has triggered distress and prolonged periods of emotional dysregulation, (Name) has consistently shown resilience in maintaining academic performance, emotional stability during structu...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has shown consistent progress in his overall emotional regulation and academic functioning despite facing significant emotional challenges related to his one-year anniversary in the residential treatment center. The recent loss of potential adoptive family interest was a profound emotional event for (Name), who had developed a strong attachment to the family and viewed their involvement as a vital step toward long-term stability. While this transition has introduced...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated continued progress in his overall treatment trajectory despite significant emotional and transitional challenges. Marking one year in residence, (Name) has experienced heightened emotional responses related to his future placement, particularly following the withdrawal of a prospective adoptive family after months of engagement. Though this development has been distressing, (Name) has maintained stability in core functional areas, including academic...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated continued progress in his overall treatment trajectory despite experiencing heightened emotional vulnerability during his one-year milestone at the facility. This anniversary prompted significant emotional responses related to his future placement, particularly following the withdrawal of a previously engaged potential adoptive family. Though this loss was distressing for (Name), he has remained engaged in treatment, showing resilience and academic ...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated consistent progress in his emotional regulation and academic functioning despite ongoing challenges related to peer interaction and self-soothing. The one-year anniversary of his residency has amplified his emotional sensitivity around long-term placement, particularly following the withdrawal of a previously engaged adoptive family. While this has resulted in heightened anxiety and temporary disruptions in emotional stability, (Name) remains commit...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated consistent progress in core therapeutic areas despite significant emotional and developmental challenges related to his transition planning and social interactions. (Name) successfully celebrated one year in residence, a milestone that triggered intense emotions around future placement and identity. While a potential adoptive family was previously engaged, their decision to withdraw created substantial distress for (Name), who had formed a meaningfu...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has demonstrated consistent emotional and behavioral improvement despite the emotional challenges associated with his one-year anniversary in the residential treatment center. His recent loss of a potential adoptive family, after months of visits and bonding, has led to heightened anxiety and feelings of uncertainty about his future, which has temporarily impacted his emotional regulation. However, (Name) has shown resilience in treatment engagement, maintaining aca...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Write me a treatment plan review for a child living in a residential treatment center. Do not include any meta text in the response. Do not use anything besides the placeholder (Name) when referring t...          </p>
+          <p class="lt-p">
+Response: Over the past 60 days, (Name) has continued to demonstrate consistent progress in his overall treatment trajectory despite significant emotional turbulence related to his one-year anniversary in the residential setting and the recent loss of a potential adoptive family. While this transition has heightened his anxiety and feelings of uncertainty about his future, (Name) has maintained resilience and engagement in academic, therapeutic, and structured activities. His emotional regulation has impr...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+866                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+887                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+884                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+820                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+866                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+901                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+887                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+875                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+927                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+917                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+1001                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+950                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+955                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+917                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+923                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+869                </td>
+                <td>
+803                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful request. This is a well-structured policy, and we’re going to create a **practical, fair, and compliant staff rota** that aligns with your goals of:
+
+✅ Ensuring **every lesson has at least one TA**  
+✅ Providing **20% rest time** for all staff (grouped as much as possible)  
+✅ Giving **full-time staff a full day off per week or two half-days**, with **no rest on Mondays**, and **no rest on Fridays**  
+✅ Using staff in designated preference o...          </p>
+          <p class="lt-p">
+Rubrics: 11/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.550          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful request. Let&#x27;s build a realistic, fair, and fully compliant **staff rota** based on your policy goals, staff availability, class structure, and prioritisation rules.
+
+---
+
+## 🎯 GOALS &amp; CONSTRAINTS (RECAP)
+
+1. **All staff must receive 20% of their working hours as rest periods**, grouped together (not scattered).
+2. **Full-time staff must get either a full day off or two half-days**, grouped at the start or end of the week (no middle-period b...          </p>
+          <p class="lt-p">
+Rubrics: 14/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.700          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful request. This is a complex but very important policy to implement, and your goal — to improve **work-life balance** while maintaining **full teaching coverage** — is both realistic and fair.
+
+Let&#x27;s build a **practical, sustainable, and fair staff rota** based on your specifications. We’ll go step-by-step to ensure:
+
+✅ Every class has **at least one TA per lesson**  
+✅ All staff receive **20% of their hours as rest periods**, grouped together...          </p>
+          <p class="lt-p">
+Rubrics: 12/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **practical, fair, and workable staff rota** that fulfils **your school&#x27;s new work-life balance policy**, while ensuring **all teaching requirements are met**, **all staff get their 20% rest time** (grouped together), and **back-up staffing is included**.
+
+---
+
+## 📌 Key Policy Requirements Recap
+
+1. **All staff (teachers, TAs, cover, pastoral) must receive 20% of their hours as rest periods.**
+2. **Rest periods must be grouped together** (e.g., at **start or end of day ...          </p>
+          <p class="lt-p">
+Rubrics: 13/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.650          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for providing such a detailed and thoughtful policy framework. Below is a **comprehensive, realistic, and compliant staff rota** that meets all your specified criteria, while prioritizing work-life balance, teaching coverage, and fairness.
+
+---
+
+## ✅ **Policy Summary: Staff Rest &amp; Coverage Rota (School Name: [Your School Name])**
+
+### 🎯 **Key Objectives Met**
+- All staff get **20% of their hours as rest periods** (grouped together where possible).
+- Full-time staff receive...          </p>
+          <p class="lt-p">
+Rubrics: 12/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — I can help you create a **comprehensive, practical, and policy-compliant staff rota** that meets all your requirements. Let&#x27;s walk through this step by step to ensure we respect both **work-life balance** and **operational continuity**, while maintaining fairness and flexibility.
+
+---
+
+## ✅ ⭐ KEY OBJECTIVES FROM YOUR REQUEST
+
+1. **20% rest time for all staff** (grouped as a full day or 2 half-days, if full day not possible).
+2. **Mondays – No rest periods** (training at end of day)....          </p>
+          <p class="lt-p">
+Rubrics: 4/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — this is a complex and thoughtful staff rota requirement, and we’ll build a **realistic, policy-compliant, and work-life balance-focused rota** that meets **all** your stated requirements.
+
+---
+
+## ✅ **OVERVIEW OF YOUR REQUIREMENTS**
+
+### Objective:
+Ensure **all staff** receive **20% of their hours as rest periods**, **grouped together** (full day off if possible), **never on Monday or Friday** (with special exception for Friday), and **only where feasible**.
+
+### Key Rules:
+1. **No ...          </p>
+          <p class="lt-p">
+Rubrics: 16/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for such a detailed and thoughtful request. I&#x27;ll create a **realistic, fair, and fully compliant staff rota** that addresses all of your policy requirements with clarity, structure, and practicality.
+
+---
+
+## 🎯 **School Staff Rota – Work-Life Balance Policy Implementation**
+
+### 📌 **Policy Overview**
+- All staff receive **20% of their contracted hours** as rest periods.
+- **Rest periods must be grouped together** at the *start or end* of the day (not mid-day or fragmented)...          </p>
+          <p class="lt-p">
+Rubrics: 12/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful request. This is a complex but very important personnel planning challenge, focusing on **work-life balance**, **fair distribution of rest**, and **operational feasibility** across a school’s teaching and pastoral structure.
+
+Let’s work through this step-by-step to create a **feasible, fair, and practical staff rota** that meets all your criteria.
+
+---
+
+## 🎯 GOALS SUMMARY
+
+1. **All staff must receive 20% of their hours as &quot;rest periods&quot;** — ...          </p>
+          <p class="lt-p">
+Rubrics: 9/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.450          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful query. Based on your comprehensive requirements, here&#x27;s a **practical, workable, and fair staff rota** designed to meet **all key policy goals**:
+
+---
+
+## ✅ **Key Objectives Achieved**
+- All staff receive **20% of their hours as rest periods**, grouped together at start/end of day.
+- **Full-time staff** get either:
+  - A **full day off per week**, or  
+  - Two **half-days off** (if full day not possible), both **grouped**.
+- **Part-time staf...          </p>
+          <p class="lt-p">
+Rubrics: 16/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for providing such a detailed and thoughtful request. This is a well-structured, equitable policy aiming to improve work-life balance, and I’m going to help you design a **feasible, fair, and compliant staff rota** that meets all the criteria you’ve specified.
+
+---
+
+## 🎯 **Policy Summary &amp; Key Objectives**
+
+| Requirement | How We Will Meet It |
+|----------|---------------------|
+| **20% rest time** for **all staff** | Grouped together (full day or 2 half-days), only at sta...          </p>
+          <p class="lt-p">
+Rubrics: 16/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.800          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for such a detailed and thoughtful request. This is a well-structured problem that requires balancing **workload equity**, **student safety**, **rest periods**, and **practical staffing constraints**.
+
+We&#x27;ll now develop a **feasible, inclusive, and balanced rota** that meets **all your policy and operational requirements**.
+
+---
+
+## 🎯 **Key Requirements Recap &amp; Constraints**
+
+| Requirement | Details |
+|----------|--------|
+| ✅ **20% rest time** | All staff (teachers, TAs, ...          </p>
+          <p class="lt-p">
+Rubrics: 14/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.700          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful requirements. Based on your comprehensive policy and operational constraints, I’ll create a **feasible, equitable, and practical staff rota** that:
+
+✅ Ensures **every class has at least one TA per lesson**  
+✅ Provides **20% rest time** for **all staff** (grouped together, at start/end of day where possible)  
+✅ Respects **key constraints**:  
+- No rest on **Mondays** (training)  
+- No rest on **Fridays** (to avoid unfair weekend gaps)  
+- U...          </p>
+          <p class="lt-p">
+Rubrics: 9/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.450          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful parameters. This is a well-structured and fair approach to improving staff well-being through rest periods, and your requirements provide a solid foundation for a practical, balanced, and equitable rota.
+
+Let&#x27;s step through the solution carefully, respecting:
+
+✅ **All classes have 1 TA per lesson**  
+✅ **All staff get 20% of their hours as rest periods**  
+✅ **Rest periods are grouped (full day or two half-days)**  
+✅ **Mondays have no rest ...          </p>
+          <p class="lt-p">
+Rubrics: 8/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for providing such a clear and detailed specification. This is a thoughtful and well-structured policy to improve staff well-being, and I&#x27;ll help you develop a realistic, fair, and compliant **staff rota** that meets **all your requirements**.
+
+---
+
+## ✅ Objective Summary
+We are creating a **company-wide rest period policy** (20% of work hours, grouped together), with:
+- **Full-time staff**: One full day off per week, or two half-days (if full day not possible).
+- **Part-t...          </p>
+          <p class="lt-p">
+Rubrics: 9/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.450          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me create a staff rota please? We are bringing in a new, company-wide, policy at our school, which is designed to improve work-life balance for staff, and I need to work out how to implem...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for such a detailed and thoughtful request. Below is a **comprehensive, realistic, and equitable staff rota** tailored to your school&#x27;s needs, fully aligned with your policy objectives for **work-life balance**, **safe rest periods**, and **class coverage**.
+
+---
+
+## 📝 **WORK-LIFE BALANCE ROATA POLICY IMPLEMENTATION PLAN**
+
+### ✅ Key Principles &amp; Constraints Recap:
+1. **All staff (teachers, TAs, cover, pastoral)** must receive **20% of their scheduled hours** as **rest per...          </p>
+          <p class="lt-p">
+Rubrics: 10/20 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+6425                </td>
+                <td>
+0.550                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.550                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+5450                </td>
+                <td>
+0.700                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.700                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+6259                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+7686                </td>
+                <td>
+0.650                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.650                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+6286                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+6201                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+6641                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+4336                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+7664                </td>
+                <td>
+0.450                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.450                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+6355                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+4928                </td>
+                <td>
+0.800                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.800                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+5678                </td>
+                <td>
+0.700                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.700                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+6553                </td>
+                <td>
+0.450                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.450                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+8192                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+7812                </td>
+                <td>
+0.450                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.450                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+614                </td>
+                <td>
+6484                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s everything you asked for, thoughtfully crafted and aligned with your brand voice, values, and seasonal flow:
+
+---
+
+**📧 EMAIL DRAFT COPY (for your newsletter)**  
+
+Hello beautiful souls,  
+
+This month, I’ve been reminded again how deeply our bodies hold the wisdom of who we truly are — not just what we think, but how we feel, move, and breathe in the world. As a women’s coach in embodiment and empowerment, I believe true strength lives not in chasing perfection, but in learnin...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely, beautiful soul — thank you for sharing such a clear and heartfelt vision. Here&#x27;s everything tailored to your brand, tone, and needs:
+
+---
+
+**📧 EMAIL DRAFT COPY**  
+*Starting with your signature warmth:*  
+
+Hello beautiful souls,  
+
+Have you ever felt like your body is holding space for something deeper — like a quiet wisdom, a buried strength, or a long-lost rhythm of being? I’m here to help women *reawaken* that embodied truth — not with busywork or external fixes, but by tuning int...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Of course! Here’s your fully crafted content, broken down exactly as requested — including warm, authentic copy for email, a concise Pinterest version, an Instagram caption, 4 brand-specific hashtags (without &quot;self-care&quot;), and a thoughtful follow-up question to help you schedule it.
+
+---
+
+**📧 EMAIL COPY (with two CTAs):**  
+Hello beautiful souls,  
+
+Are you tired of showing up *for* your body — without really *listening* to it? True embodiment isn’t about eating perfectly or achieving a certain ...          </p>
+          <p class="lt-p">
+Rubrics: 9/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.562          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Of course! Here&#x27;s your complete, beautifully crafted content—tailored to your authentic voice, brand values, and structure—plus the video speech scenario and the actionable follow-up question to help you remember to schedule everything.
+
+---
+
+### 📧 EMAIL DRAFT COPY (Full Version)  
+**Subject:** You&#x27;re already more whole than you think.  
+
+Hello beautiful souls,  
+
+There’s a quiet power in simply *being*—in how your body remembers what your mind forgets. As an embodiment coach, I work with women ...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s everything you’ve asked for, thoughtfully crafted with your brand voice, tone, and vision in mind.
+
+---
+
+### 📧 **Email Draft Copy (for Women’s Embodiment Coach)**
+
+Hello beautiful souls,  
+
+Have you ever felt like your body is holding on to old stories—tensions, emotions, or beliefs that no longer serve you? That quiet ache in your chest when you try to move freely, or the way your breath falters mid-sentence? In the space between breath and belief, there’s a powerful shift ha...          </p>
+          <p class="lt-p">
+Rubrics: 8/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely, beautiful soul — thank you for sharing such a clear, intentional vision. Here’s your fully tailored content, with both email copy and platform-specific short versions, all grounded in your tone, values, and brand identity.  
+
+---
+
+### 📧 **Email Copy (with two CTAs)**  
+*Hello beautiful souls,*  
+
+This month, I’m inviting you to stop scrolling and start *feeling* — to truly settle into your body, your breath, and the quiet power that lives within you. When you embody what you already ...          </p>
+          <p class="lt-p">
+Rubrics: 7/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.438          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Of course! Here’s everything you requested — thoughtfully crafted, seasonally aligned, and perfectly structured for your brand voice.
+
+---
+
+### 📧 **Email Draft (Full Copy)**  
+*Starts with &quot;Hello beautiful souls&quot; and ends only with &quot;In ceremony&quot; when in retreat season (April &amp; September).*
+
+Hello beautiful souls,  
+
+There’s a quiet power in showing up *as you are* — in your breath, in your body, in the way you hold your truth. As an embodiment coach, I’ve learned that real empowerment doesn’t co...          </p>
+          <p class="lt-p">
+Rubrics: 8/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely, sweetheart — here’s your complete package, thoughtfully crafted with your brand voice, needs, and flow in mind.
+
+---
+
+**📧 EMAIL DRAFT COPY**  
+*Opening with your signature tone*  
+
+Hello beautiful souls,  
+
+Right now, your body is holding more wisdom than you’ve given it credit for. It’s been quietly teaching you how to move through life with presence, confidence, and grounded power — not just through feelings, but through *feeling* the truth in your bones.  
+
+✨ This is where embodim...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Of course! Here’s everything you’ve asked for — crafted with care, warmth, and in alignment with your brand voice and vision.
+
+---
+
+**✨ Email Draft (Full Copy)**  
+*Begin with “hello beautiful souls” and end only with “In ceremony” if referencing retreat season (April/September).*
+
+Hello beautiful souls,  
+
+Have you ever felt like your body knows more than your mind ever could — like it’s quietly holding space for strength you’ve only just begun to recognize? As an embodiment coach, I guide wome...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s everything you requested — clear, warm, aligned with your brand voice, and crafted with intention for your audience.  
+
+---
+
+### 📧 **Email Draft Copy**  
+*Hello beautiful souls,*  
+
+Did you know your body holds the quiet power to shift your confidence, your presence, and your very sense of authority — right from the inside out? As a women’s coach who guides women into true embodiment, I’ve seen how simply getting in tune with the physical, emotional, and spiritual layers of ou...          </p>
+          <p class="lt-p">
+Rubrics: 10/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s everything tailored to your voice, brand, and needs, with intention, warmth, and clarity.
+
+---
+
+**📧 Email Draft Copy (for your audience)**  
+
+Hello beautiful souls,  
+
+Have you ever felt like your body is holding on to old stories — voices that don&#x27;t belong to you, tensions that never quite settled? That’s where embodiment comes in. It’s not about fixing what’s broken; it’s about *remembering* what’s always been true — your strength, your rhythm, your sovereignty.  
+
+I invite...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely, beautiful soul — thank you for trusting me with this. Here’s everything you asked for, thoughtfully crafted with your voice, values, and seasonal rhythm in mind.
+
+---
+
+**📧 Email Draft Copy**  
+*Starts with “hello beautiful souls” and ends with “In ceremony” (only in April/September)*  
+
+Hello beautiful souls,  
+
+Have you felt your body holding the weight of what you didn’t say, what you were too afraid to feel — and now, simply *remembering* how to trust it again? As an embodiment co...          </p>
+          <p class="lt-p">
+Rubrics: 10/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Of course! Here’s everything you asked for, beautifully crafted and aligned with your voice, brand, and intent.
+
+---
+
+**📧 Email Draft Copy (Full):**  
+Hello beautiful souls,  
+
+Have you ever felt like your body is holding space for something deeper — a wisdom you haven’t been able to access in words? As an embodiment coach, I work with women who are ready to listen to their bodies, reclaim their power, and step into the sacred rhythm of being truly seen.  
+
+When we stop trying to &quot;fix&quot; ourselves...          </p>
+          <p class="lt-p">
+Rubrics: 10/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely—here’s your fully crafted content, tailored to your voice, values, and rhythm.  
+
+---
+
+### ✉️ **Email Draft Copy**  
+Hello beautiful souls,  
+
+When you stop running from your body and start listening to it—when you feel your breath deepening, your shoulders loosening, and your heart remembering how to expand—you’re not just practicing embodiment. You’re reawakening.  
+
+This is where empowerment begins: not in doing more, but in being fully present with what you already hold. I work wi...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Absolutely, beautiful soul — thank you for this clear and heartfelt request. Here’s your full package, crafted with intention, warmth, and your brand voice in mind.  
+
+---
+
+### 📧 **Email Draft Copy**  
+*Starts with “Hello beautiful souls” and ends only with “In ceremony” if referencing retreat season (April/Sept). Otherwise, ends with the final CTA.*  
+
+---
+
+Hello beautiful souls,  
+
+Have you felt your body speaking to you in quiet, deep ways — like a whispered invitation to show up authenticall...          </p>
+          <p class="lt-p">
+Rubrics: 10/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: hey there, can you help me with a marketing post for my small business? It&#x27;s going to be via email. I want two CTA&#x27;s technically, one at the very end (with nothing after) and one somewhere in the firs...          </p>
+          <p class="lt-p">
+Response: Of course! Here&#x27;s everything you requested — thoughtfully crafted, brand-aligned, and perfectly structured for your needs.
+
+---
+
+### 📨 **Email Draft Copy**  
+*Starts with &quot;Hello beautiful souls&quot; – ends with &quot;In ceremony&quot; (only in April/September)*
+
+Hello beautiful souls,  
+
+Have you ever felt your body holding space for something deeper — a quiet strength, a forgotten power, a truth that moves through you without speaking? As an embodiment coach, my work is rooted in helping women feel reconnect...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+615                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+743                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+482                </td>
+                <td>
+0.562                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.562                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+748                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+599                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+475                </td>
+                <td>
+0.438                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.438                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+773                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+678                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+598                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+719                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+617                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+797                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+682                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+605                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+727                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+329                </td>
+                <td>
+749                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P**  
+In 88 BCE, which political movement led to Sulla&#x27;s first coup and marked the beginning of the transitional period that would later see the reassertion of military authority over the Roman Republic?  
+A) The Populares campaign for agrarian reform  
+B) The rise of the Marian faction in the Senate  
+C) The conspiracy of the *Sullan faction* to overthrow the consulship  
+
+**2. M**  
+Which battle in 88 BCE marked the decisive moment in Sulla’s initial campaign against the popular faction, ...          </p>
+          <p class="lt-p">
+Rubrics: 8/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.381          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** What was the primary outcome of the Social War (91–88 BCE) that significantly altered the political landscape of the late Roman Republic?  
+A) The full citizenship rights were granted to all Italian allies  
+B) Italy was formally agreed to be under Roman law through a peace treaty  
+C) The Roman Senate abolished the role of the consuls to prevent future conflicts  
+
+**2. E** During Sulla’s first coup in 88 BCE, which economic policy did he implement to restore public trust in the state ...          </p>
+          <p class="lt-p">
+Rubrics: 9/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** During the period of the Third Republic of the Nobiles (139–88 BCE), which of the following best describes the political structure that characterized Roman governance?  
+A) Expansion of popular assemblies with direct voting on laws  
+B) Power concentrated in the hands of the patrician *nobiles*, especially through the Senate  
+C) Direct election of consuls by the people, with no senatorial oversight  
+
+**2. M** In 88 BCE, what battle marked the beginning of Sulla’s first coup and effect...          </p>
+          <p class="lt-p">
+Rubrics: 4/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.190          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: 1. **P** During the period of the Third Republic of the Nobiles (139–88 BCE), what was the primary power structure that maintained Roman political stability?  
+A) The expansion of the Senate’s authority over the people  
+B) The dominance of wealthy patrician families through political alliances  
+C) The active involvement of the Roman plebeians in military commands  
+
+2. **M** What battle marked the beginning of Sulla’s first coup against the republican government in 88 BCE?  
+A) Battle of Thaps...          </p>
+          <p class="lt-p">
+Rubrics: 5/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.238          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** During the social war (91–88 BCE), which of the following best describes the impact of the conflict on Roman citizenship?  
+A) It led to the expansion of citizenship to all populations in the provinces  
+B) It resulted in the abolition of Roman citizenship for all non-Roman allies  
+C) It confirmed the right of Roman citizens to hold office in provincial cities  
+
+**2. E** In the transitional period after the fall of the Republic&#x27;s beginnings (139–88 BCE), what key economic change occur...          </p>
+          <p class="lt-p">
+Rubrics: 6/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.286          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: 1. **P** During the period 139–88 BCE, what was the primary feature of the political system known as the Third Republic of the Nobiles?  
+A) The restoration of the Roman Senate as the sole governing body  
+B) Expansion of the power of the plebeian tribunes to veto key legislation  
+C) Increasing influence of the equestrian class in military and financial appointments  
+
+2. **E** In what year did Sulla&#x27;s first military intervention begin, leading to a major shift in power dynamics in Rome?  
+A) 8...          </p>
+          <p class="lt-p">
+Rubrics: 9/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** During the period of the Third Republic of the Nobiles (139–88 BCE), which political group held the majority of power in the Roman state and largely controlled the Senate?  
+A) The equites (equestrian order)  
+B) The *nobiles* (aristocratic families)  
+C) The plebeian tribunes  
+
+**2. E** What major economic reform did the *nobiles* introduce during the late 2nd century BCE to stabilize the currency and reduce credit inflation?  
+A) Reintroducing the denarius with a silver standard  
+B)...          </p>
+          <p class="lt-p">
+Rubrics: 2/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.095          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: 1. **P** During the late Roman Republic, which political faction dominated the Roman state from 139 to 88 BCE, forming the so-called *Third Republic of the Nobiles*?  
+A) The Socii (allied states)  
+B) The Optimates  
+C) The Populares  
+
+2. **M** In 88 BCE, what major event marked the beginning of the transitional period that would eventually lead to Sulla’s dictatorship?  
+A) The Battle of the Aventine  
+B) Sulla’s first military coup in the Forum  
+C) The Battle of the Colline Gate  
+
+3. **E**...          </p>
+          <p class="lt-p">
+Rubrics: 7/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** During the Third Republic of the nobiles (139–88 BCE), which political institution was most significantly weakened by the growing influence of the *populares* faction?  
+A) The Senate  
+B) The populus in the comitia centuriata  
+C) The praetorships  
+
+**2. E** Which of the following best describes the economic consequence of Sulla&#x27;s confiscations during his first coup in 88 BCE?  
+A) A surge in coinage leading to hyperinflation  
+B) A significant redistribution of wealthy land to plebei...          </p>
+          <p class="lt-p">
+Rubrics: 8/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.381          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** During which military campaign did the Roman Republic experience a major crisis in its eastern provinces, leading to the rise of pro-Sullan factions in the Senate, and culminating in a pivotal battle in 88 BCE?  
+A. Battle of Pharsalus  
+B. Battle of the Lapis  
+C. Battle of the Tiber  
+
+**2. M** What was the name of the decisive battle in which Sulla defeated the forces of the returning nationalist faction led by Mithradates and his allies in 88 BCE, effectively securing his initial mi...          </p>
+          <p class="lt-p">
+Rubrics: 6/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.286          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: 1. **P** During the Third Republic of the nobiles (139–88 BCE), which of the following best describes the role of the *cursus honorum*?  
+A) It was abolished to prevent aspiring senators from rising too quickly  
+B) It was strictly limited to patricians, ensuring only the wealthiest families held power  
+C) It was restructured to allow equestrians to attain the consulship  
+
+2. **E** In what year did Sulla&#x27;s first coup occur, marking the beginning of the transitional period (88–81 BCE)?  
+A) 88 ...          </p>
+          <p class="lt-p">
+Rubrics: 8/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.381          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** What was the primary political conflict that led to Sulla’s first coup in 88 BCE?  
+A) A dispute over grain distribution in Rome  
+B) The clash between the *nobiles* and the *populares* over senatorial power  
+C) A financial crisis caused by the loss of agricultural revenues  
+
+**2. M** During which battle did Sulla decisively defeat the forces of the Roman Senate’s allies in 83 BCE?  
+A) Battle of the Caudine Forks  
+B) Battle of the Forum  
+C) Battle of the Appian Way  
+D) Battle of T...          </p>
+          <p class="lt-p">
+Rubrics: 7/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: 1. **P** What was the primary reason for the outbreak of the Social War (91–88 BCE)?  
+A) A dispute over land ownership in the Latin cities  
+B) The Roman Senate’s refusal to grant citizenship to the Italian allies  
+C) A failed economic policy that caused widespread famine  
+
+2. **M** Which battle marked the decisive end of Sulla’s first coup and the beginning of his rise to power in 88 BCE?  
+A) Thermopylae  
+B) Ab urbe condita  
+C) the Battle of the Colline Gate  
+
+3. **E** During Sulla&#x27;s dic...          </p>
+          <p class="lt-p">
+Rubrics: 7/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** During the social war (91–88 BCE), which of the following best describes the primary cause of Roman unrest among the Italian allies?  
+A. Demand for Roman citizenship rights  
+B. Economic decline of Rome’s trade networks  
+C. Opposition to the Senate’s refusal to allow grain subsidies  
+
+**2. M** What battle marked the decisive Roman victory over the Aequi and Volsci in 390 BCE, ending major opposition in central Italy?  
+A. Battle of the Allia  
+B. Battle of Gergovia  
+C. Battle of Lak...          </p>
+          <p class="lt-p">
+Rubrics: 8/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.381          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** What was the primary cause of the Social War (91–88 BCE), which led to significant changes in Roman citizenship?  
+A) A revolt of Roman senators against the expansion of power to the Roman plebs  
+B) A conflict between the Senate and the Roman equites over land distribution  
+C) A rebellion by Italian allies who demanded full Roman citizenship  
+
+**2. M** Which battle marked the decisive end of Sulla’s first coup and established his control over Rome in 88 BCE?  
+A) Battle of Pharos  
+B...          </p>
+          <p class="lt-p">
+Rubrics: 10/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.476          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m preparing a quiz for my class about the late Roman Republic crisis. The questions should only be based on events within the following timeline:
+
+139–88 Third republic of the nobiles
+88–81	Trans...          </p>
+          <p class="lt-p">
+Response: **1. P** What was the primary cause of the Social War (91–88 BCE), which ultimately led to the enfranchisement of Roman allies?  
+A) A demand for citizenship rights by Italian allies  
+B) Agricultural land disputes in central Italy  
+C) Religious opposition to Roman religious practices  
+
+**2. E** Which of the following best describes the economic policy implemented by Sulla after his return to Rome in 82 BCE?  
+A) Redistribution of land to former slaves  
+B) A revival of credit-based lending fr...          </p>
+          <p class="lt-p">
+Rubrics: 4/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.190          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+856                </td>
+                <td>
+0.381                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.381                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+886                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+1365                </td>
+                <td>
+0.190                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.190                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+863                </td>
+                <td>
+0.238                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.238                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+1087                </td>
+                <td>
+0.286                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.286                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+923                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+1223                </td>
+                <td>
+0.095                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.095                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+748                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+1133                </td>
+                <td>
+0.381                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.381                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+956                </td>
+                <td>
+0.286                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.286                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+1034                </td>
+                <td>
+0.381                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.381                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+820                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+1297                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+1016                </td>
+                <td>
+0.381                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.381                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+868                </td>
+                <td>
+0.476                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.476                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+412                </td>
+                <td>
+846                </td>
+                <td>
+0.190                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.190                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

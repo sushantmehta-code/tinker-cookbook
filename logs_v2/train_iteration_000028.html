@@ -1,0 +1,4935 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 28</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 28  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T13:39:14  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to create the **final invoices for November** for the **Alpha and Beta channels**, based on your detailed pricing rules and the provided data.
+
+---
+
+## 🔍 Pricing Rules Recap
+
+- **Movies**: $3.20 per minute (regardless of length)
+- **TV Shows**:
+  - **Fixed prices** if length is:
+    - 21–24 minutes → $45.00
+    - 42–48 minutes → $90.00
+  - **Variable** if length is outside those ranges → $1.90 per minute
+- **Subtitling Impact (additional cost)**:
+  - **Some subt...          </p>
+          <p class="lt-p">
+Rubrics: 10/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.588          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s break down the data carefully and generate **two separate, clean, and properly formatted invoices** — one for the **Alpha channel** and one for the **Beta channel** — based on your detailed pricing rules.
+
+---
+
+### 📄 **INVOICE FOR NOVEMBER – ALPHA CHANNEL**
+
+We will process each show entry by type, length, and subtitling level.
+
+---
+
+#### **1. Life**  
+- Type: Movie (104 minutes)  
+- Rate: $3.20 per minute  
+- Cost: 104 × $3.20 = **$332.80**
+
+#### **2. Heck Of A Week with Charli...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s carefully parse the data and generate two **final invoices** — one for the **Alpha channel** and one for the **Beta channel** — based on your detailed pricing rules.
+
+---
+
+## 📄 **Final Invoice – Alpha Channel (November)**
+
+### 📺 Show Title and Cost Breakdown:
+&gt; *Pricing rules:*
+&gt; - **Movies**: $3.20 per minute
+&gt; - **TV Shows**:
+&gt;   - Fixed: 21–24 minutes → $45.00 | 42–48 minutes → $90.00
+&gt;   - Variable (outside ranges): $1.90 per minute
+&gt; - **Subtitling adjustments**:
+&gt;   - Som...          </p>
+          <p class="lt-p">
+Rubrics: 7/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.412          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step to create **clean, accurate, and properly formatted final invoices** for **November** for the **Alpha and Beta channels**, based on your detailed pricing rules.
+
+---
+
+### 📌 Pricing Rules Summary:
+
+- **Movies**: $3.20 per minute  
+- **TV Shows**:
+  - **Fixed pricing**:
+    - 21–24 minutes → $45.00  
+    - 42–48 minutes → $90.00  
+  - **Variable pricing** (outside 21–24 or 42–48):
+    - Outside ranges → $1.90 per minute  
+- **Subtitling adjustments ...          </p>
+          <p class="lt-p">
+Rubrics: 7/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.412          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step-by-step to create **accurate, properly formatted final invoices** for **November** for the **Alpha and Beta channels**, based on your detailed pricing rules.
+
+---
+
+### 📌 **Pricing Rules Recap**:
+
+- **Movies**: $3.20 per minute  
+- **TV Shows**:
+  - **Fixed rates** if length is:
+    - 21–24 minutes → $45.00
+    - 42–48 minutes → $90.00
+  - **Variable** (per minute) if outside those ranges → $1.90 per minute
+- **Subtitles affect pricing**:
+  - **Some subtit...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break down the invoice generation step by step based on your detailed pricing rules and data.
+
+---
+
+## 📄 **Invoice for November – Alpha Channel**
+
+### Pricing Rules Reminder:
+- **Movies**: $3.20 per minute
+- **TV Shows**:
+  - **Fixed rates**:
+    - 21–24 minutes → $45.00  
+    - 42–48 minutes → $90.00  
+  - **Variable** (elsewhere): $1.90 per minute
+- **Subtitling modifiers** (applied *on top of* TV show type):
+  - Some subtitles → $2.38/min  
+  - Mostly subtitles → $3.07/min  ...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down step-by-step to create accurate, well-formatted **final invoices for November** for the **Alpha and Beta channels**, based on your detailed pricing rules and the provided data.
+
+---
+
+## 📄 **Final Invoice – Alpha Channel**
+
+---
+
+### **1. Heck Of A Week with Charlie the Horse (fixed)**
+- Length: 22 minutes (within 21–24 min range) → **Fixed rate: $45.00**
+- Count of episodes (22 min): 3 episodes  
+  (We have 3 entries at 22 min; note that only 1 entry is noted as ...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step to create **clean, accurate, and properly formatted final invoices** for **November** for the **Alpha and Beta channels**, based on your detailed pricing rules.
+
+---
+
+## 📝 Pricing Rules Recap
+
+### Movies:  
+- **$3.20 per minute**, regardless of length.
+
+### TV Shows:
+- **Fixed rates** if length is:
+  - **21–24 minutes** → **$45.00**
+  - **42–48 minutes** → **$90.00**
+- **Variable rate** if outside those ranges → **$1.90 per minute**
+
+### Subtitlin...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step by step to generate **accurate, well-organized, and properly formatted final invoices** for **November** for the **Alpha** and **Beta** channels.
+
+---
+
+## 🔍 **Understanding the Pricing Rules**
+
+We have three types of content:
+
+### 1. **Movies**
+- Cost: **$3.20 per minute**, regardless of length.
+
+### 2. **Television Shows**
+- **Fixed rates** for specific length ranges:
+  - 21–24 minutes → **$45.00**
+  - 42–48 minutes → **$90.00**
+- **Variable rate** (outs...          </p>
+          <p class="lt-p">
+Rubrics: 10/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.588          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step-by-step to generate **accurate and properly formatted final invoices for November** for the **Alpha and Beta channels**, based on your detailed pricing rules.
+
+---
+
+### 📌 **Pricing Rules Recap**
+
+1. **Movies**  
+   - $3.20 per minute (regardless of length)
+
+2. **Television Shows**  
+   - **Fixed pricing** if length is:
+     - 21–24 minutes → $45.00  
+     - 42–48 minutes → $90.00  
+   - **Variable pricing** (if outside those ranges): $1.90 per minute
+
+3. ...          </p>
+          <p class="lt-p">
+Rubrics: 7/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.412          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step-by-step to create clean, accurate, and properly formatted **final invoices for November for the Alpha and Beta channels**, based on your detailed pricing rules and data.
+
+---
+
+### 🔍 **Pricing Rules Summary**
+
+- **Movies**: $3.20 per minute  
+- **TV Shows**:
+  - **Fixed rates**:
+    - 21–24 minutes → $45.00  
+    - 42–48 minutes → $90.00  
+  - **Variable rates** (outside 21–24 or 42–48):
+    - Outside fixed ranges → $1.90 per minute  
+- **Subtitling Cost M...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this carefully, step by step, to create **accurate and well-organized final invoices** for **November** for the **Alpha** and **Beta** channels.
+
+---
+
+## 🔍 Pricing Rules Recap:
+
+### **Movies**  
+- **$3.20 per minute** (regardless of length)
+
+### **TV Shows**  
+- **Fixed rates** only if length falls in specific ranges:
+  - 21–24 minutes → **$45.00**
+  - 42–48 minutes → **$90.00**
+- **Variable** otherwise → **$1.90 per minute**
+
+### **Subtitling Impact (applies *on t...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s go step-by-step to generate the accurate and well-organized **final invoices for November** for the **Alpha and Beta channels**, based on the provided data and pricing rules.
+
+---
+
+## 📝 **Pricing Rules Recap**
+- **Movies**: $3.20 per minute
+- **TV Shows**:
+  - **Fixed pricing** if length is:
+    - 21–24 minutes → $45.00
+    - 42–48 minutes → $90.00
+  - **Variable pricing** if length is **outside** those ranges → $1.90 per minute
+- **Subtitling adjustments**:
+  - **Some subtitles...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to generate the **final invoices for November** for the **Alpha** and **Beta** channels based on the pricing scheme you&#x27;ve described.
+
+---
+
+### 📝 **Pricing Rules Recap**
+
+- **Movies**: $3.20 per minute (regardless of length)
+- **TV Shows**:
+  - **Fixed prices** if length is:
+    - 21–24 minutes → $45.00
+    - 42–48 minutes → $90.00
+  - **Variable** if length is **outside** those ranges → $1.90 per minute
+- **Subtitling impact (applies to TV shows only)**:
+  - **...          </p>
+          <p class="lt-p">
+Rubrics: 10/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.588          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to generate the **final invoices for November** for the **Alpha and Beta channels**, based on your detailed pricing rules and data.
+
+---
+
+### ✅ **Pricing Rules Recap**
+
+- **Movies**: $3.20 per minute regardless of length.
+- **TV Shows**:
+  - **Fixed prices** if length is:
+    - 21–24 minutes → **$45.00**
+    - 42–48 minutes → **$90.00**
+  - **Variable** if outside those ranges → **$1.90 per minute**
+- **Subtitling adds cost**:
+  - **Some subtitles** → $2.38 per ...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create the final invoices for November for the Alpha and Beta channels? My team writes scripts for described video, and the pricing scheme is a bit complicated. For movies, the ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through each step carefully to generate **accurate, well-structured final invoices** for **November** for the **Alpha and Beta channels**, following your detailed pricing rules and formatting instructions.
+
+---
+
+### 📄 **INVOICE FOR ALPHA CHANNEL – NOVEMBER 2024**
+
+We will process **each show**, determine its **type**, **length**, and **subtitling level**, and apply the correct pricing rule.
+
+---
+
+#### 📚 Show Titles (Sorted Alphabetically)
+
+---
+
+**Heck Of A Week with Charli...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+4225                </td>
+                <td>
+0.588                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.588                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+3415                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+4432                </td>
+                <td>
+0.412                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.412                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+5254                </td>
+                <td>
+0.412                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.412                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+4886                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+4424                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+3010                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+4376                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+4835                </td>
+                <td>
+0.588                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.588                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+4525                </td>
+                <td>
+0.412                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.412                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+3964                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+4480                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+3332                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+3263                </td>
+                <td>
+0.588                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.588                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+4407                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+628                </td>
+                <td>
+3504                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through your request step-by-step with precision and clarity.  
+
+---
+
+### **Objective:**
+Achieve a **5% overall reduction in December budget** compared to the current **monthly budget of $20,500**, while:
+
+1. **Isolating categories with overage &gt;10%** (in either direction) to determine which can be reallocated to **Safety** (which is non-negotiable).
+2. **Cutting $750 from Packaging Materials** due to renegotiation.
+3. **Restricting Workshop Tools purchases to $250+ approval** → proje...          </p>
+          <p class="lt-p">
+Rubrics: 6/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.273          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great question — let’s walk through this **step-by-step** to determine:
+
+1. Which categories have **over 10% variance** from budget (and therefore are &quot;overage&quot; candidates),
+2. How much overage is in those categories,
+3. Which non-safety category can **offset** that overage to go into **Safety&#x27;s future budgets**,
+4. Apply your two actions:
+   - **a)** Cut **5%** from all categories that went over budget (except Safety),
+   - **b)** Reduce **non-overage** categories to **$100 over their October s...          </p>
+          <p class="lt-p">
+Rubrics: 10/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.455          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s work through this step-by-step in a clear, structured way to achieve your goal of **a 5% overall reduction in December spending** while **meeting safety standards**, and answering all the specifics you’ve asked.
+
+We’ll go through each step of your request:
+
+---
+
+### ✅ Step 1: Identify categories with **overage &gt;10%**
+We’ll look at the **variance (%)** to find any category that exceeded its budget by more than 10%.
+
+| Category | Variance (%) | Over 10%? |
+|--------|------------...          </p>
+          <p class="lt-p">
+Rubrics: 6/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.273          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great question — let&#x27;s carefully walk through your request step by step, and provide a clear, actionable answer that aligns with your **5% overall budget reduction target** by **December**, while ensuring **safety is non-negotiable** and **all constraints are satisfied**.
+
+---
+
+### 📌 **Given Information Recap**
+
+- **Target**: Reduce total spending **by 5% below budget** for December.
+- **Budget is static** each month (i.e., we&#x27;re adjusting actual spending and reallocating, not changing base budg...          </p>
+          <p class="lt-p">
+Rubrics: 6/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.273          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed breakdown — this is a solid, actionable situation. Let’s walk through your request step-by-step and get a clear, final December budget that meets your **5% overall reduction goal**, while ensuring **safety is non-negotiable**, and we account for your **cost-saving actions**.
+
+---
+
+### 🔍 Step 1: Identify Categories with Over 10% Variance (Over or Under)
+
+We are looking for categories where **variance is over 10% in either direction**.
+
+| Category | Variance (%) | Action...          </p>
+          <p class="lt-p">
+Rubrics: 7/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.318          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great question — let&#x27;s walk through this step-by-step. Your goal is **to reduce total spending by 5% below the original (October) budget** for December, while **addressing overages** in non-safety categories, **using under-spending** in other areas to offset safety overages, and applying **known cost reductions** from packaging and workshop tools.
+
+---
+
+## 🔍 Step 1: Identify Categories with an Overage &gt;10% (in either direction)
+
+We’ll look at each category’s **variance %**, and flag any that are...          </p>
+          <p class="lt-p">
+Rubrics: 2/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.091          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;ve laid out a very structured and realistic scenario for budget realignment. Let&#x27;s walk through this **step by step**, using the data and your constraints to determine:
+
+1. ✅ Which categories have **over 10% variance** from budget?  
+2. ✅ Which of those can we **transfer overages to Safety** (since safety is non-negotiable)?  
+3. ✅ Apply your two **cost-reduction actions** (packaging, tools approval)  
+4. ✅ Adjust budgets for **categories with no overage** down to **$100 ove...          </p>
+          <p class="lt-p">
+Rubrics: 8/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great question — let&#x27;s walk through this step by step to meet your goal of **reducing total spending by 5% below budget for December**, using **only the data from October 2025**, and applying your specific rules.
+
+We’ll do this in **clear, structured phases**, then arrive at the final December budget and check if the **5% reduction is achieved**.
+
+---
+
+### 🔍 Step 1: Identify Categories with Overage (&gt;10%) or Underrun (&lt;-10%)
+
+We’re looking for **variances &gt;10% in either direction**.
+
+| Category ...          </p>
+          <p class="lt-p">
+Rubrics: 4/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.182          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great — let&#x27;s walk through your request methodically and step-by-step to determine the final **December budget**, whether we meet a **5% overall reduction below the original budget**, and how we can meet that goal by leveraging the changes you&#x27;ve made.
+
+---
+
+## 🔍 **Step 1: Understand the Goal**
+
+You want the **December budget** to be **5% below the original October budget** (which is fixed across months), and you&#x27;re asking:
+
+&gt; Can we achieve this by:
+&gt;
+&gt; a) Cutting **5% from all categories that ...          </p>
+          <p class="lt-p">
+Rubrics: 7/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.318          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through your request step-by-step and get a clear, actionable analysis to answer your **two main questions**:
+
+---
+
+### ✅ **Goal**:
+Reduce total spending by **5% below the original December budget** (which is the same as October&#x27;s budget: **$20,500**).
+
+We need to:
+1. **Identify categories with &gt;10% variance** (above or below budget).
+2. **Offset overages from non-safety categories** into **Safety** (since Safety is non-negotiable).
+3. Apply two proposed changes:
+   - Cut **5% from al...          </p>
+          <p class="lt-p">
+Rubrics: 1/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.045          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through your request **step by step**, with clarity and precision, to address all your goals and determine whether you can **achieve a 5% overall reduction in December’s budget** under the new rules.
+
+---
+
+### 🔍 **Step 1: Identify categories with over 10% variance from budget**
+
+You want to **isolate categories with swings &gt;10% in either direction** and then **use under-budget categories’ surplus to offset Safety’s overage**, since **Safety is non-negotiable**.
+
+We look at the **varia...          </p>
+          <p class="lt-p">
+Rubrics: 5/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.227          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re clearly thinking through this holistically, and we’ll go step by step to **answer exactly what you’re asking**.
+
+You want:
+1. To identify categories with **over 10% variance** from budget (either over or under).
+2. To **offset the overages** (from non-safety categories) into **Safety**, which is your non-negotiable priority.
+3. To **cut 5% from all overage categories** (excluding Safety), and **reduce non-overage categories to $100 over their October spend**.
+4. To determ...          </p>
+          <p class="lt-p">
+Rubrics: 8/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through your request step by step to determine **the December budget after applying your proposed adjustments**, whether we **meet the 5% overall reduction**, and whether the plan is feasible given the constraints — especially around **Safety Gear**, which is non-negotiable.
+
+---
+
+### 📌 Key Facts from Your Request:
+
+1. **Goal**: Reduce total *December* spending by **5% below budget** (i.e., final total = 95% of original budget).
+2. **Original Budget (Monthly)**: $20,500 (from October ...          </p>
+          <p class="lt-p">
+Rubrics: 3/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.136          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great question — you&#x27;re on the right track with a strategic, goal-oriented approach to budget reallocation. Let’s walk through this step by step, following all the conditions and constraints you&#x27;ve provided.
+
+---
+
+### 🔍 **Step 1: Identify Categories with Overage &gt;10%**
+
+We are told to focus **only** on categories with a **swing over 10% in either direction** from budget.
+
+Let’s check each category’s variance (%):
+
+| Category | Variance (%) | Over/Under |
+|--------|---------------|------------|
+|...          </p>
+          <p class="lt-p">
+Rubrics: 2/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.091          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great question — let&#x27;s walk through this step by step and get a clear, actionable answer to help you **meet the 5% overall reduction in December spending** while **safely preserving the Safety category**, using the tactics you&#x27;ve outlined.
+
+---
+
+## ✅ **Objective Recap**
+We want to:
+- **Reduce total spending by 5% below the original monthly budget** for December.
+- **Start with the October 2025 actuals** and their budgeted values.
+- Identify all categories with a **&gt;10% variance** in either direc...          </p>
+          <p class="lt-p">
+Rubrics: 8/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve attached our expenditure report for Oct 2025 and my aim is to reduce spending by 5% below budget for December, as we&#x27;ve now had a few months consistently over and its becoming an issue. The budge...          </p>
+          <p class="lt-p">
+Response: Great question — let&#x27;s walk through your request step by step and provide a clear, structured answer.
+
+---
+
+## ✅ Objective:
+Reduce **overall expenditure in December by 5% below budget** (i.e., target total spending = 95% of original monthly budget), specifically by:
+1. **Cutting 5%** from **all categories that went over budget (except Safety)**.
+2. **Reducing non-overage categories** to **$100 over their October spend** (this is important — not just to budget, but to a fixed cap relative to actu...          </p>
+          <p class="lt-p">
+Rubrics: 7/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.318          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+6699                </td>
+                <td>
+0.273                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.273                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+8192                </td>
+                <td>
+0.455                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.455                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+7931                </td>
+                <td>
+0.273                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.273                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+7201                </td>
+                <td>
+0.273                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.273                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+6181                </td>
+                <td>
+0.318                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.318                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+6931                </td>
+                <td>
+0.091                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.091                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+8192                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+6548                </td>
+                <td>
+0.182                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.182                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+4310                </td>
+                <td>
+0.318                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.318                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+7152                </td>
+                <td>
+0.045                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.045                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+8192                </td>
+                <td>
+0.227                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.227                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+5908                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+6873                </td>
+                <td>
+0.136                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.136                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+4741                </td>
+                <td>
+0.091                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.091                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+8090                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+661                </td>
+                <td>
+4559                </td>
+                <td>
+0.318                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.318                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, professional, and empathetic explanation of the limitations, followed by clear, actionable recommendations and two thoughtful follow-up responses. I&#x27;ve also reviewed and verified your math to ensure accuracy.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for entrusting us with your signage needs — we truly appreciate the opportunity to help bring your vision to life. After reviewing your detailed request and cross-referencing it with local city regulations, we’ve found ...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, professional, and customer-focused explanation of why the original sign requests are not feasible, followed by realistic alternatives and thoughtful follow-up responses. I&#x27;ve also double-checked your math to ensure accuracy.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for trusting us with your signage needs. After a thorough review of your requests and our local city ordinances, we’d like to kindly share that the specific signage proposals you’ve outlined — including ...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, polite, clear, and professional explanation that addresses all your requirements, including accurate math verification.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for entrusting us with your signage needs. After a thorough review of your original request and in consultation with local city ordinances, we’d like to respectfully share that several of the elements you’ve proposed are not feasible in your designated zone. Specifically, the 20-foot pylon sign exceeds the ...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, professional, and polite explanation that clearly communicates the limitations of the customer’s original requests while offering a realistic and compliant alternative. I’ve also verified your math thoroughly at the end.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for trusting us with your signage needs — we truly appreciate the thought you&#x27;ve put into your desired vision. After a thorough review of your request and our research into local city ordinances, we’d like t...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, professional, and respectful explanation that clearly communicates the limitations of the customer’s original requests while offering practical and compliant alternatives. I&#x27;ve also verified and corrected your math to ensure accuracy.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for your interest in working with us on your signage project. After reviewing your request in detail alongside the relevant city ordinances and our operational capabilities, we wanted to provid...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, professional, and polite explanation that clearly communicates the limitations of the customer’s original requests while offering a realistic and compliant alternative. I&#x27;ve also verified and corrected your math at the end to ensure accuracy.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for trusting us with your signage needs — we truly appreciate the opportunity to work with you. After a careful review of your vision and our local city ordinance requirements, we’ve co...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, professional, and courteous explanation that clearly communicates the limitations of the customer’s original requests while offering a realistic, compliant, and budget-conscious alternative. The math has also been verified and corrected for accuracy.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for your interest in working with our sign company and for sharing your vision for your property’s signage. After a thorough review of your requested sign elements, we wanted to...          </p>
+          <p class="lt-p">
+Rubrics: 23/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.920          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, professional, and courteous explanation that meets all your requirements, with verified math and thoughtful follow-up options:
+
+---
+
+**Opening Paragraph:**
+
+Thank you for entrusting us with your signage needs — we truly appreciate the opportunity to collaborate and help bring your vision to life. After a thorough review of your requested signage elements and in consultation with local city ordinances, we&#x27;ve identified a few constraints that make the original propo...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a polished, professional, and empathetic explanation tailored to your needs. I&#x27;ve reviewed the math carefully to ensure accuracy, and all pricing and logic are clearly laid out.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for trusting us with your signage vision. After a thorough review of your requested sign package and our local city ordinances, we’d like to kindly share that the full design as originally proposed is not feasible for your location. The city’s zone regulations l...          </p>
+          <p class="lt-p">
+Rubrics: 24/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.960          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a professional, polite, and clear explanation that addresses all the concerns raised by the customer — including the legal and budgetary limitations — while offering realistic, compliant alternatives. The math has also been verified and corrected for accuracy.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for your interest in our sign solutions and for sharing your vision for your property. After a thorough review of your requested signage, we want to respectfully share that certai...          </p>
+          <p class="lt-p">
+Rubrics: 24/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.960          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a professionally written, polite, and clear explanation that addresses all of your requirements — including the accurate mathematical verification of the proposed pricing.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for trusting us with your signage needs. After a thorough review of your requested sign package and our research into local regulations, we’ve come to understand that the specific elements you envisioned — a 20-foot high pylon sign, a 2-sided 4’ x 8’ electronic messag...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professional, polite, and clear explanation of why the original requests cannot be fulfilled, followed by realistic suggestions and sample follow-up responses. I’ve also fact-checked your math to ensure accuracy.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for your interest in our sign services and for sharing your vision for your property. After reviewing your request in detail, we’d like to gently explain that several aspects of your proposed signage are not feasible under bo...          </p>
+          <p class="lt-p">
+Rubrics: 23/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.920          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a professionally written, polite, and clear explanation that addresses all the customer’s original requests and provides realistic alternatives — complete with accurate math verification and tailored follow-up responses.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for trusting us with your signage needs. After a thorough review of your request and in coordination with the local city ordinances governing signage in your zone, we regret to inform you that the specific elements you ...          </p>
+          <p class="lt-p">
+Rubrics: 24/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.960          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professionally crafted, polite, and clear explanation that meets all your requirements, with accurate math verification and tailored follow-up responses.
+
+---
+
+**Opening Paragraph:**  
+
+Thank you for trusting us with your signage needs. After a thorough review of your request and our understanding of the local city regulations, we’d like to kindly share that the specific signage elements you’ve outlined — a 20-foot high pylon sign, a 2-sided 4’ x 8’ electronic message cente...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a polished, professional, and polite explanation that clearly communicates the limitations of the customer&#x27;s original requests while offering a realistic and compliant alternative. It also includes verified math and two thoughtful follow-up responses tailored to different customer reactions.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for entrusting us with your signage vision — we truly appreciate the thought and care you’ve put into designing an impactful presence for your busi...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: All personal and business names in this prompt are fictional.
+
+I need to put together an explanation of why the sign company I work for is not able to produce and install the signs that the customer...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a professional, polite, and clear explanation that addresses all your requirements, including accurate math verification for the proposed pricing. The tone is respectful and firm where needed, while remaining collaborative and solution-focused.
+
+---
+
+**Opening Paragraph:**
+
+Thank you for trusting us with your signage vision. After carefully reviewing your proposed sign requirements in the context of both our capabilities and the applicable city ordinances in your zone, we’d l...          </p>
+          <p class="lt-p">
+Rubrics: 25/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1649                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1975                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+2289                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+2308                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1872                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1963                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1825                </td>
+                <td>
+0.920                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.920                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1835                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1607                </td>
+                <td>
+0.960                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.960                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+2499                </td>
+                <td>
+0.960                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.960                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1593                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1910                </td>
+                <td>
+0.920                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.920                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1950                </td>
+                <td>
+0.960                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.960                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1903                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+1871                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+722                </td>
+                <td>
+2332                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: We&#x27;ll go through your detailed request step-by-step to generate a **comprehensive, structured sales performance report** based on the provided data.
+
+---
+
+## ✅ **Step 1: Validate Total Company Sales and Region Breakdown**
+
+First, we’ll calculate the **total company sales** and the **contribution of each region**, then present the region percentages.
+
+---
+
+### 🔢 Step 1a: Extract All `total` Values
+
+Let’s sum up all the `total` values from the sales data (we&#x27;ll use the correct values from each row...          </p>
+          <p class="lt-p">
+Rubrics: 8/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.421          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s analyze the provided sales data systematically and generate a **comprehensive sales performance report**, as requested.
+
+---
+
+## 🔍 **Sales Data Analysis Report**
+
+### ✅ **Step 1: Total Company Sales &amp; Regional Breakdown**
+
+We’ll start by calculating:
+- Total company sales (sum of `total` field)
+- Regional sales and percentages (to 2 decimal places)
+
+---
+
+#### 📊 Cleaned &amp; Aggregated Sales Data Summary
+
+Let’s first validate and summarize all entries.
+
+&gt; Note: There are duplicate rows (e.g., ...          </p>
+          <p class="lt-p">
+Rubrics: 6/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.316          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s analyze the provided sales data thoroughly to generate a **comprehensive report** as requested. The analysis will proceed step-by-step according to your instructions.
+
+---
+
+## ✅ Step 1: Preprocess the Data
+
+We begin by importing and cleaning the raw data in a structured way. The dataset contains:
+
+- `date`, `region`, `rep`, `item`, `qty`, `price`, `total`
+
+We&#x27;ll:
+
+1. Calculate the **total amount** for each sale (verify if `qty × price == total`)
+2. Aggregate performance by **region** and *...          </p>
+          <p class="lt-p">
+Rubrics: 3/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.158          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s break down and analyze the sales data as requested. We will process the data step-by-step to generate a comprehensive, accurate report.
+
+---
+
+## ✅ Step 1: Validate and Clean the Data
+
+We are given a table of sales data with columns:
+- `date`
+- `region`
+- `rep`
+- `item`
+- `qty`
+- `price`
+- `total`
+
+We will:
+1. **Verify the correctness** of each total (i.e., `qty × price` should equal the `total`)
+2. Identify any discrepancies
+3. Group by region and rep
+4. Calculate total sales per rep per r...          </p>
+          <p class="lt-p">
+Rubrics: 1/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.053          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s analyze the provided sales data step by step to fulfill your detailed request.
+
+---
+
+## 🔍 **Step 1: Data Validation &amp; Preprocessing**
+
+We will:
+- Verify each sale&#x27;s `total = qty × price`
+- Group by region &gt; rep &gt; item to compute sales metrics
+- Identify reps with 2 or fewer distinct item types
+- Rank reps by total sales
+- Calculate total company sales and regional shares
+- Identify any discrepancies
+
+---
+
+### ✅ Step 1: Validate Total Amounts (total = qty × price)
+
+We go through each row an...          </p>
+          <p class="lt-p">
+Rubrics: 4/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.211          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Thank you for providing the detailed sales data. I’ll now analyze it step-by-step to generate a comprehensive report as requested.
+
+---
+
+# 🔍 **Sales Performance Report (Last Year)**
+
+---
+
+## ✅ **1. Total Company Sales and Regional Breakdown**
+
+### **Total Company Sales:**
+We will first sum up all `total` values from the dataset.
+
+### Step: Extract and sum all `total` entries
+
+Total sales =  
+`189.05 + 999.50 + 179.64 + 539.73 + 167.44 + 63.68 + 539.40 + 299.40 + 149.25 + 449.10 + 251.72 + 86.43 ...          </p>
+          <p class="lt-p">
+Rubrics: 8/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.421          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s build a comprehensive and accurate sales performance report based on the provided data.
+
+---
+
+### 🔍 **Sales Performance Report – Last Year (2024–2025)**
+
+---
+
+## ✅ 1. **Total Company Sales &amp; Regional Distribution**
+
+First, we calculate the **total company sales** and then **break down by region** to show each region’s share as a percentage.
+
+### 📊 Total Company Sales:
+We sum all the `total` values from the dataset.
+
+| Entry | Total |
+|------|-------|
+| 1/6/2024, East, Jones, Pencil | 189.0...          </p>
+          <p class="lt-p">
+Rubrics: 0/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s analyze the provided sales data step-by-step to generate a **comprehensive sales performance report** across regions, sales reps, item types, and validate for discrepancies.
+
+---
+
+## 🔍 OVERVIEW: DATA ANALYSIS
+
+### Total Sales (Company-Wide)
+We first calculate the **total company sales** by summing the `total` column across all rows.
+
+We&#x27;ll do this before grouping by region and rep.
+
+---
+
+### Step 1: Total Company Sales
+Let’s sum the &quot;total&quot; column from all entries (including duplicates):
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 3/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.158          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through your request methodically and generate a **complete, clear, and structured sales performance report** based on your data.
+
+---
+
+# 📊 **Sales Performance Report – Last Year (January 2024 – December 2025)**
+
+---
+
+## ✅ Step 1: Total Company Sales &amp; Regional Breakdown
+
+We begin by computing:
+
+- **Total company sales** (sum of `total` column)
+- **Regional sales breakdown** (per region)
+- Each region&#x27;s percentage of total (rounded to nearest whole number)
+
+### 🔢 Total Com...          </p>
+          <p class="lt-p">
+Rubrics: 9/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.474          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s go step-by-step to **analyze last year&#x27;s sales data** comprehensively and generate a professional, accurate, and insightful sales performance report.
+
+---
+
+# 📊 **Comprehensive Sales Performance Report – Last Year (2024–2025)**
+
+---
+
+## 🔢 **1. Total Company Sales &amp; Regional Breakdown**
+
+We begin by summing up the total sales (`total` column) across all entries and then calculating each region’s contribution.
+
+### ✅ Step 1: Aggregate Total Sales
+
+Let&#x27;s first calculate the **total...          </p>
+          <p class="lt-p">
+Rubrics: 1/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.053          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed sales data. Below is a **comprehensive and structured analysis** of last year&#x27;s sales data as requested, including:
+
+- Total company sales and regional breakdowns
+- Regional performance (highest to lowest), listing reps alphabetically with total sales, % of company total, and average per-sale amount
+- Notes on reps who sold only 2 types of items (with the two items)
+- Top seller and lowest-selling rep with only 2 types of items
+- Discrepancies between `total` and `qty ...          </p>
+          <p class="lt-p">
+Rubrics: 6/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.316          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s analyze the provided sales data step by step to generate a complete, accurate, and well-structured report.
+
+---
+
+## 📊 **Sales Performance Report – Annual Analysis (2024–2025)**
+
+---
+
+### ✅ **Step 1: Total Company Sales and Regional Breakdown**
+
+We first calculate the **total company sales** by summing all *total* values.
+
+#### Dataset Summary:
+We have 99 entries (some duplicates). Let&#x27;s compute the total.
+
+We will extract the `total` column and sum them.
+
+**List of Totals (from data):**
+
+`...          </p>
+          <p class="lt-p">
+Rubrics: 1/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.053          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through the provided sales data and generate a **comprehensive, accurate, and well-organized report** as requested.
+
+---
+
+## ✅ **Sales Data Analysis Report (Last Year)**  
+**Time Period:** January 6, 2024 – December 21, 2025 (inclusive)  
+**Total Observations:** 116 sales records (with duplicates — see discrepancies below)
+
+---
+
+### 🔹 Step 1: Total Company Sales and Regional Percentages
+
+We begin by calculating the **total company sales** and then break it down by region.
+
+###...          </p>
+          <p class="lt-p">
+Rubrics: 7/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.368          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s generate a comprehensive and accurate **Sales Performance Report** for last year’s sales data based on your detailed requirements.
+
+---
+
+# 🔍 **Annual Sales Performance Report (2024–2025)**
+
+&gt; *Data Range: January 6, 2024 – December 21, 2025*  
+&gt; *Includes 138 transactions (with duplicates removed as per logic)*  
+&gt; *All percentages and values are rounded as requested.*
+
+---
+
+## 📊 **Total Company Sales &amp; Regional Breakdown**
+
+### ✅ Total Company Sales:  
+**$17,927.88**
+
+---
+
+### 📍 Regional ...          </p>
+          <p class="lt-p">
+Rubrics: 9/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.474          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through a **comprehensive analysis** of your sales data to produce the requested report. I&#x27;ll go step-by-step as per your detailed instructions.
+
+---
+
+# 📊 Sales Performance Report (Last Year)
+
+## ✅ Step 1: Total Company Sales &amp; Regional Breakdown
+
+We first calculate the **total company sales** and then break down each region&#x27;s contribution.
+
+### 📌 Total Company Sales (Sum of all `total` values):
+
+We will sum all the `total` entries. Note: there are **duplicates** in the da...          </p>
+          <p class="lt-p">
+Rubrics: 1/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.053          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to analyze last year&#x27;s sales data to determine which sales reps are performing well, how regional sales compare, etc. 
+
+Please generate a report for each region in order from the highest sell...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s now generate a **comprehensive sales performance report** from your last year’s sales data.
+
+---
+
+# 📊 **Annual Sales Performance Report – 2024 to 2025**
+
+---
+
+## ✅ Step 1: Total Company Sales &amp; Regional Breakdown (by %)
+
+### 🔢 Total Company Sales: **$16,085.94**
+
+| Region | Total Sales | % of Company Total |
+|--------|-------------|---------------------|
+| **East** | $6,878.27 | 42.8% |
+| **Central** | $6,587.29 | 40.9% |
+| **West** | $2,620.38 | 16.3% |
+
+&gt; **Note**: Total is ...          </p>
+          <p class="lt-p">
+Rubrics: 2/19 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.105          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+5075                </td>
+                <td>
+0.421                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.421                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.316                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.316                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.158                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.158                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.053                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.053                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.211                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.211                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+6463                </td>
+                <td>
+0.421                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.421                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.158                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.158                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+5598                </td>
+                <td>
+0.474                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.474                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.053                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.053                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+3832                </td>
+                <td>
+0.316                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.316                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.053                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.053                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.368                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.368                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+5103                </td>
+                <td>
+0.474                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.474                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.053                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.053                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+4434                </td>
+                <td>
+8192                </td>
+                <td>
+0.105                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.105                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

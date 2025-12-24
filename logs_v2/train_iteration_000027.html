@@ -1,0 +1,4783 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 27</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 27  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T13:34:50  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have become a central part of modern life, shaping how people engage with leisure, social interaction, and even cognitive development.  
+- While often criticized for promoting addiction or violence, video games also offer significant opportunities for emotional growth, problem-solving, and social connection.  
+- The impact of video games on individuals is complex—structuring these influences requires a thoughtful examination of both the risks and the benefits they presen...          </p>
+          <p class="lt-p">
+Rubrics: 12/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have evolved from simple entertainment to a complex cultural phenomenon that deeply influences how people think, feel, and interact with the world.  
+- While some view video games as a harmful distraction, others argue they offer powerful tools for cognitive development, emotional expression, and social connection.  
+- The impact of video games on individuals is increasingly significant—shaping everything from mental health to creativity—requiring careful examination of ...          </p>
+          <p class="lt-p">
+Rubrics: 14/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have evolved from simple entertainment tools into complex digital environments that shape behavior, emotions, and social interactions.  
+- While often perceived as a distraction or source of escapism, video games are increasingly recognized as a significant influence on mental health, cognitive development, and interpersonal relationships.  
+- The growing presence of video games in daily life demands a thoughtful examination of whether they enhance or undermine human wel...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have become a central part of modern life, shaping how people interact, learn, and perceive the world.  
+- While often criticized for promoting escapism or aggression, video games can also serve as powerful tools for cognitive development, emotional growth, and social connection.  
+- The impact of video games on individuals is far from simple—whether positive or negative, their influence reflects deeper psychological and societal patterns.
+
+2: Paragraph 1  
+**Positive Im...          </p>
+          <p class="lt-p">
+Rubrics: 14/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have become a significant part of modern life, shaping how people interact, learn, and perceive the world.  
+- Once viewed as a pastime for children, video games are now influencing cognitive development, emotional well-being, and social behavior across all age groups.  
+- While some argue that video games promote mental health and skill development, others claim they contribute to addiction, aggression, and social isolation.  
+
+2: Paragraph 1  
+**Positive Impact: Video ...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have evolved from simple entertainment tools into complex digital experiences that shape how people think, feel, and interact with the world.  
+- As technology advances, the influence of video games on mental health, social behavior, and cognitive development grows stronger, raising important questions about their overall impact on individuals.  
+- While some view video games as a source of stress and distraction, others see them as powerful tools for building skills, fo...          </p>
+          <p class="lt-p">
+Rubrics: 15/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Introduction  
+- Video games have evolved from simple entertainment tools into complex digital experiences that shape how people think, feel, and interact with the world.  
+- What was once seen as a pastime for idle hours is now widely recognized as a powerful influence on mental health, social behavior, and cognitive development.  
+- As society becomes more interconnected through technology, understanding the impact of video games—whether positive or negative—is essential for shaping healthi...          </p>
+          <p class="lt-p">
+Rubrics: 11/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.524          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have become a central part of modern culture, shaping how people interact, learn, and even think about themselves and the world around them.  
+- While some view video games as a harmless form of entertainment, others argue they have deep psychological effects that can either enrich or harm individual well-being.  
+- The impact of video games on people’s lives is significant—ranging from improved cognitive skills to potential risks in social and emotional development.
+
+2:...          </p>
+          <p class="lt-p">
+Rubrics: 12/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have become a dominant form of entertainment, shaping how people interact with technology and each other in the modern world.  
+- Once viewed as passive leisure activities, video games are now being studied for their significant psychological effects on players of all ages.  
+- While some argue that video games lead to addiction, isolation, or aggression, others see them as tools for cognitive development, emotional regulation, and social connection.  
+
+2: Paragraph 1  
+...          </p>
+          <p class="lt-p">
+Rubrics: 14/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have evolved from simple entertainment to complex digital experiences that shape how people think, feel, and interact with the world.  
+- In an age where screen time is dominant, it’s critical to understand whether video games serve as a positive force for development or a contributor to social and psychological challenges.  
+- While often criticized for promoting addiction or aggression, video games also offer significant opportunities for cognitive growth, emotional ex...          </p>
+          <p class="lt-p">
+Rubrics: 11/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.524          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have evolved from simple entertainment to a powerful force shaping how people think, feel, and interact with the world.  
+- While some view video games as a distraction or a threat to mental health, others recognize them as tools for creativity, emotional growth, and cognitive development.  
+- In an age where digital engagement dominates daily life, understanding the true impact of video games on human psychology is essential to forming balanced and informed perspectives...          </p>
+          <p class="lt-p">
+Rubrics: 11/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.524          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have become a dominant part of modern culture, influencing how people spend their time, interact socially, and develop cognitive skills.  
+- While once viewed as a simple form of entertainment, video games are now being studied for their profound psychological effects on individuals across different age groups.  
+- The rise of immersive digital experiences has sparked debates about whether video games primarily serve as a source of positive development or contribute to n...          </p>
+          <p class="lt-p">
+Rubrics: 12/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have become a central part of modern life, shaping how people interact, learn, and express themselves.  
+- While once seen as a distraction, video games are now being studied for their significant psychological and social effects on individuals.  
+- The influence of video games on human behavior—whether positive or negative—has sparked intense debate among psychologists, educators, and parents alike.
+
+2: Paragraph 1  
+**Positive impact: Video games enhance cognitive skil...          </p>
+          <p class="lt-p">
+Rubrics: 12/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have evolved from simple entertainment tools into complex cultural and psychological phenomena that influence behavior, emotion, and social interaction.  
+- While often viewed through the lens of distraction or unhealthy consumption, video games can also serve as powerful tools for cognitive development, emotional regulation, and personal growth.  
+- In today’s digital age, understanding the impact of video games on individuals is essential to evaluating their role in sh...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have become a central part of modern life, shaping how people socialize, learn, and cope with emotions.  
+- While often criticized for promoting aggression or addiction, video games can also serve as powerful tools for emotional development and cognitive growth.  
+- From enhancing problem-solving skills to offering safe spaces for emotional expression, the impact of video games on individuals is both profound and complex.
+
+2: Paragraph 1  
+**Positive Impact: Video games ...          </p>
+          <p class="lt-p">
+Rubrics: 12/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi I am trying to write an essay for my psychology course and I decided to make my topic for the essay about video games. Basically I want to discuss how video games either negatively or positively im...          </p>
+          <p class="lt-p">
+Response: 1: Intro  
+- Video games have evolved from simple entertainment to a significant part of modern cultural and psychological experiences, shaping how people interact, think, and feel.  
+- As technology advances, so does our understanding of how video games affect mental health, social behavior, and cognitive development—raising important questions about their overall impact.  
+- While some critics view video games as a source of escapism and distraction, others see them as powerful tools for learn...          </p>
+          <p class="lt-p">
+Rubrics: 13/21 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.619          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+503                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+528                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+529                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+513                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+539                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+579                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+555                </td>
+                <td>
+0.524                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.524                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+494                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+510                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+464                </td>
+                <td>
+0.524                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.524                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+516                </td>
+                <td>
+0.524                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.524                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+575                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+460                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+489                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+503                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+568                </td>
+                <td>
+538                </td>
+                <td>
+0.619                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.619                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm-2pm (2 hours)  
+- Gemma Moses: 1pm-3pm (2 hours)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am-12pm (2 hours)  
+- Maya Mccormick: 11am-1pm (2 hours)  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm-2pm (2 hours)  
+- Courtney Cruise: 2pm-4pm (2 hours)  
+
+(All realtors work within their availability, minimum price thresholds, and time limits. Each open house has at least one realtor present during showing hou...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm-2pm  
+- Gemma Moses: 1pm-3pm  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am-12pm  
+- Maya Mccormick: 11am-1pm  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm-2pm  
+- Courtney Cruise: 2pm-4pm  
+
+(Note: Chris Cremini is not assigned due to unavailability during the required hours; all realtors are scheduled within their availability and constraints. Sam, Frodo, and Courtney are scheduled on 2 open houses, wit...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm–2pm (12:00–2:00)  
+- Maya Mccormick: 1:30pm–3:30pm (1:30–3:30)  
+- Courtney Cruise: 12pm–2pm (12:00–2:00)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am–12pm (10:00–12:00)  
+- Chris Cremini: 11am–1pm (11:00–13:00)  
+- Frodo Freedom: 10am–12pm (10:00–12:00)  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm–2pm (12:00–2:00)  
+- Gemma Moses: 1pm–3pm (13:00–15:00)  
+- David Double: 2pm–4pm (14:00–16:00)  
+
+Note: ...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm-2pm (meets minimum $500K, available Mon-Fri 8:15am-5:45pm)  
+- Maya Mccormick: 1pm-3pm (meets minimum $700K, available Mon-Fri 9am-7pm)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am-12pm (meets minimum $600K, available Mon-Fri 7am-6pm)  
+- Chris Cremini: 11am-1pm (meets minimum $650K, available Mon-Fri 1:30pm-6:30pm – *overlap issue: only available 1:30pm+; cannot show 11am-1pm*) → **Invalid**  
+→ Replace Chris with **Gem...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm–2pm (works within availability, $500K min, 2 hours)  
+- Gemma Moses: 1pm–3pm (within availability, $750K min, 2 hours)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am–12pm (within availability, $600K min, 2 hours)  
+- Maya Mccormick: 11am–1pm (within availability, $700K min, 2 hours)  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm–2pm (within availability, $825K min, 2 hours)  
+- Courtney Cruise: 2pm–4pm (wi...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane: Sam Gam  
+888 Cymbal Street: David Double  
+222 Siren Court: Frodo Freedom...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm–2pm (2-hour showing, 30 min overlap with next)  
+- Gemma Moses: 1pm–3pm (2-hour showing, 30 min overlap with previous)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am–12pm (2-hour showing, 30 min overlap with next)  
+- Chris Cremini: 11am–1pm (2-hour showing, 30 min overlap with previous)  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm–2pm (2-hour showing, 30 min overlap with next)  
+- Maya McCormick: 2pm–4p...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm:  
+- Sam Gam  
+- Gemma Moses  
+
+888 Cymbal Street, $675K, M-F 10am-2pm:  
+- David Double  
+- Maya Mccormick  
+
+222 Siren Court, $850K, Sat 12pm-6pm:  
+- Frodo Freedom  
+- Courtney Cruise...          </p>
+          <p class="lt-p">
+Rubrics: 5/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm–2pm (2 hours)  
+- Gemma Moses: 1pm–3pm (2 hours)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am–12pm (2 hours)  
+- Maya McCormick: 11am–1pm (2 hours)  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm–2pm (2 hours)  
+- Courtney Cruise: 2pm–4pm (2 hours)  
+
+**Notes:**  
+- All realtors are scheduled within their availability and minimum price thresholds.  
+- No realtor exceeds 2 hours per open house or 4 hours p...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm–2pm (2 hours)  
+- Gemma Moses: 2pm–4pm (2 hours)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am–12pm (2 hours)  
+- Maya Mccormick: 12pm–2pm (2 hours)  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm–2pm (2 hours)  
+- Courtney Cruise: 2pm–4pm (2 hours)  
+
+All realtors work within 4 hours per day, no more than 2 hours per open house, with 30-minute overlap between shifts, and all open houses have a realtor pre...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm–2pm (within availability, $500k threshold met)  
+- Gemma Moses: 1pm–3pm (within availability, $750K threshold met)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am–12pm (within availability, $600K threshold met)  
+- Maya Mccormick: 10am–12pm (within availability, $700K threshold met)  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm–2pm (within availability, $825K threshold met)  
+- Courtney Cruise: 12pm–2pm (w...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm–2pm (2 hours), transition to 2pm–3pm (30 min overlap)  
+- Maya Mccormick: 2pm–4pm (2 hours)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am–12pm (2 hours), transition to 12pm–1pm (30 min overlap)  
+- Chris Cremini: 12pm–2pm (2 hours)  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm–2pm (2 hours), transition to 2pm–4pm (30 min overlap)  
+- Gemma Moses: 4pm–6pm (2 hours)  
+
+Each realtor is scheduled within thei...          </p>
+          <p class="lt-p">
+Rubrics: 9/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm:  
+- Sam Gam  
+- Gemma Moses  
+
+888 Cymbal Street, $675K, M-F 10am-2pm:  
+- Maya Mccormick  
+- David Double  
+
+222 Siren Court, $850K, Sat 12pm-6pm:  
+- Frodo Freedom  
+- Courtney Cruise...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm:  
+- Sam Gam  
+- Maya Mccormick  
+
+888 Cymbal Street, $675K, M-F 10am-2pm:  
+- David Double  
+- Gemma Moses  
+
+222 Siren Court, $850K, Sat 12pm-6pm:  
+- Frodo Freedom  
+- Courtney Cruise  
+
+(Each realtor appears at one open house per day with scheduled hours within availability and minimum price requirements. Transitions include 30-minute overlaps. No agent exceeds 2 hours per showing or 4 hours per day. All open houses have at least one realtor during showi...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm:  
+- Sam Gam  
+- Gemma Moses  
+
+888 Cymbal Street, $675K, M-F 10am-2pm:  
+- David Double  
+- Maya Mccormick  
+
+222 Siren Court, $850K, Sat 12pm-6pm:  
+- Frodo Freedom  
+- Courtney Cruise...          </p>
+          <p class="lt-p">
+Rubrics: 5/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a broker at a real estate office help me to schedule my realtors for open houses.
+
+Here are the realtors, their availability and the minimum house price they are willing to show:
+Sam Gam: Mon-...          </p>
+          <p class="lt-p">
+Response: 555 Tremble Lane, $700K, M-F 12pm-4pm  
+- Sam Gam: 12pm–2pm (12pm–2pm, 2pm–4pm with 30min overlap) → 12pm–2pm (overlaps with 12pm–2pm)  
+- Gemma Moses: 12pm–2pm (12pm–2pm)  
+
+888 Cymbal Street, $675K, M-F 10am-2pm  
+- David Double: 10am–12pm (10am–12pm), then 12pm–2pm (12pm–2pm, with 30min overlap) → 10am–12pm  
+- Chris Cremini: 11am–1pm (11am–1pm)  
+
+222 Siren Court, $850K, Sat 12pm-6pm  
+- Frodo Freedom: 12pm–2pm (12pm–2pm), then 2pm–4pm (2pm–4pm, 30min overlap) → 12pm–2pm  
+- Maya McCormick: ...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+209                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+223                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+350                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+1058                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+482                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+32                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+296                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+101                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+262                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+235                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+284                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+269                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+101                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+160                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+101                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+451                </td>
+                <td>
+442                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s build a **precise, detailed labor cost breakdown** for your shoot on Friday, with all stipulations factored in:  
+- Hourly rates based on 12-hour day rate (divided by 14)  
+- OT at 2x hourly rate after 12 hours  
+- Meal penalties (1 hour of hourly rate) for breaks missed after 6 hours  
+- Different arrival times based on roles and talent needs  
+- Talent off-clock 15 minutes after scene ends  
+- Option to compare lunch break cost difference (PA lunch break vs. full PA break 12...          </p>
+          <p class="lt-p">
+Rubrics: 4/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.235          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s walk through this **detailed labor cost breakdown** for your Friday shoot, with all stipulations factored in accurately.
+
+---
+
+## 🎯 **Goals &amp; Rules Recap**
+
+We are calculating:
+- **Labor cost breakdown** by role
+- **Hourly rates**, with the formula:
+  - **12-hour day rate = (8 hours @ regular rate) + (4 hours @ 1.5x)**
+  - So, **hourly rate = day rate / 14** (since 8 + 4×1.5 = 14 hours)
+- **OT (Overtime)**: Any time **after 12 hours** is paid at **2x the hourly rate**
+- **Meal...          </p>
+          <p class="lt-p">
+Rubrics: 4/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.235          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to create a **detailed and accurate labor cost breakdown** for your Friday shoot, incorporating **all your stipulations**, including:
+
+- Breakdown of **hourly rates** (based on 12-hour day rate, split 8 hours at normal rate, 4 hours at 1.5x, and OT at 2x)
+- **Meal penalties** (1 hour of pay at normal rate per day — only one per person)
+- **Work timing** based on your **schedule and arrival rules**
+- **Potential cost difference** from **breaking PAs during lunch*...          </p>
+          <p class="lt-p">
+Rubrics: 6/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.353          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **detailed labor cost breakdown** for your Friday shoot, incorporating all your stipulations precisely.
+
+---
+
+## 📝 **Key Assumptions &amp; Rules Recap**
+
+### **Hourly Rate Calculation**
+- A **12-hour day rate** is divided by **14** to get the *hourly rate*:
+  - 8 hours @ normal rate  
+  - 4 hours @ 1.5× normal rate  
+  - 13 hours = 8 + 4 + 1 (1 hour OT at 2× rate) if worked after 12 hours  
+- **OT (Over Time)**:
+  - Any work **after 12 hours** is paid at **2× hourly rate**
+...          </p>
+          <p class="lt-p">
+Rubrics: 4/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.235          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Great. Let’s go step-by-step to generate a **comprehensive and accurate labor cost breakdown** for your Friday shoot, including:
+
+- Full labor cost by role
+- Hourly rate calculation (with OT, meal penalties, and day rates)
+- Work times per crew member (including breaks and extras)
+- A detailed **difference analysis** between **lunch break for PAs (standard vs. 12:45–1:30p)**  
+- Talent work times listed clearly
+
+---
+
+## ✅ Key Assumptions &amp; Rules Recap
+
+### 1. **Hourly Rate Calculation**
+- 12-hou...          </p>
+          <p class="lt-p">
+Rubrics: 5/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.294          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through this labor cost breakdown **step by step**, factoring in all your detailed stipulations.
+
+---
+
+## ✅ **Key Assumptions &amp; Rules Summary**
+
+### Hourly Rate Calculation
+- 12-hour day rate = base rate / 14 hours
+  - 8 hours at normal rate
+  - 4 hours at 1.5x rate (after 8 hours)
+  - 4 hours beyond 12 hours is OT @ 2× hourly rate (only if over 12 hours)
+
+✅ *We will compute:*
+- Standard hourly rate = 12-hour day rate / 14
+- OT (after 12 hours) = 2 × hourly rate
+- Meal penalty = 1 hou...          </p>
+          <p class="lt-p">
+Rubrics: 2/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.118          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through your **labor cost breakdown** carefully and systematically — including all stipulations such as:
+
+- 12-hour day rate split (8 hours at normal rate, 4 hours at 1.5×, OT at 2×)
+- Meal penalties (1 per day, only if work &gt;6 hours without a break)
+- Shift start/end times based on your schedule and arrival rules
+- Off-duty times (after scenes end)
+- Lunch break alternatives (what happens if **all PAs** break from **12:45–1:30pm** instead of the standard lunch break)
+- Fi...          </p>
+          <p class="lt-p">
+Rubrics: 7/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.412          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down methodically and provide you with:
+
+1. A **detailed labor cost breakdown**, including:
+   - Hourly rates (calculated from 12-hour day rates)
+   - Time worked per crew member (including meal penalties and OT)
+   - Labor cost per person
+   - Total labor cost (final)
+
+2. A **comparison** of the two lunch break scenarios:
+   - **Standard**: Lunch from 1:30p–2:00p (all crew)
+   - **Alternative**: PAs break from **12:45p–1:30p** (only PAs), with everyone else lunching...          </p>
+          <p class="lt-p">
+Rubrics: 5/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.294          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Great question — this is a detailed and very practical labor budgeting scenario! Let&#x27;s break it down methodically, accounting for:
+
+- Hourly rates (based on 12-hour day rate)
+- OT (time after 12 hours)
+- Meal penalties (one per worker per day)
+- Exact start/end times for all crew and talent
+- Break scenarios (original lunch vs. PA lunch break)
+- Final labor cost totals
+
+---
+
+## ✅ Preliminary Setup &amp; Assumptions
+
+### Hourly Rate Calculation:
+- 12-hour day rate = $X
+- Standard workday = **8 hours ...          </p>
+          <p class="lt-p">
+Rubrics: 4/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.235          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a comprehensive **labor cost breakdown** for your shoot on Friday, factoring in all your stipulations and arriving at an accurate budget, including both scenarios (standard break vs. PA break extension), with detailed work times for talent.
+
+---
+
+## 📋 **SHOOT SCHEDULE SUMMARY**
+
+### 🕒 Key Times
+- **Production Call:** 6:45 AM → All **Production &amp; Support** start at this time (except Producer and LM)
+- **General Crew Call:** 7:30 AM → Director &amp; all **other crew** arrive at thi...          </p>
+          <p class="lt-p">
+Rubrics: 5/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.294          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s break this down **step by step** to create a comprehensive and accurate **labor cost budget** for your Friday shoot, including:
+
+- **Hourly rates** based on 12-hour day rates (with OT and meal penalties)
+- **Work start/end times** for everyone based on your schedule and rules
+- **Individual work hours** for crew and talent
+- **Meal penalty application**
+- **OT (overtime) calculations**
+- **Lunch break scenario comparison**
+- **Final labor cost breakdown**
+
+---
+
+## 🔍 Key Assump...          </p>
+          <p class="lt-p">
+Rubrics: 4/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.235          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s break this down carefully with precision, incorporating **all your stipulations**, **time tracking**, **hourly calculations**, **meal penalties**, **OT**, and **alternative lunch scenarios**.
+
+---
+
+## ✅ GOALS OF THIS BREAKDOWN
+
+1. Provide a **detailed labor cost breakdown** by role.
+2. Account for:
+   - 12-hour day rate → hourly rate = day rate / 14 (based on 8h @ normal, 4h @ 1.5x)
+   - OT (after 12 hours): paid at 2x hourly rate
+   - Meal penalty: 1 per day, after 6 hours of...          </p>
+          <p class="lt-p">
+Rubrics: 6/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.353          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break down your **labor cost budget** for the Friday shoot with all the detailed stipulations you&#x27;ve provided.
+
+---
+
+## 🎯 GOALS OF THIS BUDGET:
+1. Calculate **accurate labor hours** for each crew member based on:
+   - Start/end times
+   - Meal penalties (1 hour of rate after 6 hours of work, max one per day)
+   - OT (after 12 hours, paid at 2x hourly rate)
+   - 12-hour day rate → hourly rate = day rate / 14
+2. Include **all labor components** (normal hours, OT, meal penalty)
+3....          </p>
+          <p class="lt-p">
+Rubrics: 5/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.294          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely — let’s walk through this **comprehensive labor cost breakdown** step-by-step, with full attention to:
+
+- **Hourly rates**, **OT rules**, and **meal penalties**
+- **Arrival times** based on your detailed schedule and stipulations
+- **Work hours** (including off-clock time)
+- **Break timing** (lunch vs. PA lunch alternative)
+- **Talent work times**
+- **Final labor cost summary**
+
+---
+
+## 🔍 Key Rules Recap
+
+### 1. **Hourly Rate Calculation**
+- 12-hour day rate = (8 standard hours @ full...          </p>
+          <p class="lt-p">
+Rubrics: 5/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.294          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s walk through this step by step to create a **detailed, accurate labor cost breakdown**, factoring in:
+
+- Daily rates
+- 12-hour day rate → hourly rate (based on 8 hours at normal rate + 4 hours at 1.5x, so total 14 hours per day)
+- OT (after 12 hours) = 2x hourly rate
+- Meal penalties = 1 hour of rate for each time a worker cannot take a break **after 6 hours of work** (only 1 per day, even if multiple 6-hour segments)
+- Time tracking based on arrival, departure, and work sched...          </p>
+          <p class="lt-p">
+Rubrics: 4/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.235          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create an estimated labor budget for a shoot on Friday with a lot of stipulations. Note that the hourly rate for a 12 hour day rate is calculated by dividing the day rate by 14. This is beca...          </p>
+          <p class="lt-p">
+Response: Absolutely! This is a detailed and nuanced labor budget calculation. I’ll walk you through each component step-by-step to produce an accurate, itemized **labor cost breakdown**, including:
+
+1. **Labor cost per crew member** (using the correct hourly rate, OT, meal penalties, and time-on-set rules)
+2. **Talent work times**
+3. **Breakdown of total labor cost**
+4. **Alternative scenario**: Lunch break for all PAs from **12:45 PM – 1:30 PM** (instead of 1:30 PM – 2:00 PM)
+5. **Final cost difference*...          </p>
+          <p class="lt-p">
+Rubrics: 7/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.412          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+6812                </td>
+                <td>
+0.235                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.235                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+7429                </td>
+                <td>
+0.235                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.235                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+8192                </td>
+                <td>
+0.353                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.353                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+7071                </td>
+                <td>
+0.235                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.235                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+8192                </td>
+                <td>
+0.294                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.294                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+8192                </td>
+                <td>
+0.118                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.118                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+8192                </td>
+                <td>
+0.412                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.412                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+6631                </td>
+                <td>
+0.294                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.294                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+7580                </td>
+                <td>
+0.235                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.235                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+7125                </td>
+                <td>
+0.294                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.294                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+7172                </td>
+                <td>
+0.235                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.235                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+8192                </td>
+                <td>
+0.353                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.353                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+7314                </td>
+                <td>
+0.294                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.294                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+7406                </td>
+                <td>
+0.294                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.294                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+7890                </td>
+                <td>
+0.235                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.235                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1190                </td>
+                <td>
+7911                </td>
+                <td>
+0.412                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.412                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£30,120/year]
+
+[Part-Time], [20 hours/week]
+
+[35 days of paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Deli Assistant to join our team in Parsons Green, SW London. The role involves working 16 to 24 hours per week, with shifts beginning at 6am and ending at 7pm daily. Candidates will be responsible for serving customers, preparing sandwiches, mixing ingredients for muffins and frangipane ...          </p>
+          <p class="lt-p">
+Rubrics: 25/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.758          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00]/hour), ~[£28,080]/year]
+
+[Part-time], [20 hours/week]
+
+[35 days paid holiday]
+
+[The Fig and Artichoke is seeking a dedicated Deli Assistant to join our team in Parsons Green, SW London. The role involves working in a fast-paced, customer-focused environment where personal interaction and service quality are essential. Candidates will work a daily shift from 6:00 am to 7:00 pm, with a weekly commitment of 16 to 24 hou...          </p>
+          <p class="lt-p">
+Rubrics: 20/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.606          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Part-Time Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00]/hour), ~[£20,760]/year]
+
+[PT], [20 hours/week]
+
+[35 days paid holiday leave]
+
+[The Fig and Artichoke is seeking a committed Part-Time Deli Assistant to join our team in Parsons Green, SW London. Candidates will work within a fast-paced environment, starting at 6:00 am and finishing at 7:00 pm daily, with a weekly commitment of 20 hours. The initial hourly rate is £13.00, with a successful completion of the ...          </p>
+          <p class="lt-p">
+Rubrics: 22/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00]/hour), ~[£31,250]/year]
+
+[PT], [20 hours/week]
+
+[35 days of paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Deli Assistant to join our team in Parsons Green, SW London. The position is part-time and requires a reliable individual to contribute to daily operations in a fast-paced, customer-focused environment. The initial hourly rate is £13.00, with a successful completion of the three-month probati...          </p>
+          <p class="lt-p">
+Rubrics: 21/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Part-Time Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£28,120/year]
+
+[Part-Time], [20 hours/week]
+
+[35 days of paid holiday leave]
+
+[The Fig and Artichoke is seeking a reliable and personable Part-Time Deli Assistant to join our team in Parsons Green, SW London. Candidates will work in a fast-paced environment where interpersonal skills and attention to detail are essential. The role starts at £13.00 per hour, with an increase to £13.25 per hour upon s...          </p>
+          <p class="lt-p">
+Rubrics: 20/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.606          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Part-Time Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£29,520/year]
+
+[Part-Time], [20 hours/week]
+
+[35 days paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Part-Time Deli Assistant to join our team in Parsons Green, SW London. The role is suitable for individuals with a genuine interest in customer interaction, coffee preparation, and food production. Candidates will be engaged in a range of kitchen and deli tasks, including preparin...          </p>
+          <p class="lt-p">
+Rubrics: 21/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Part-Time Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£27,120/year]
+
+[Part-Time], [20 hours/week]
+
+[35 days of paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Part-Time Deli Assistant to join our team in Parsons Green, SW London. Candidates will work in a fast-paced, customer-focused environment where attention to detail, reliability, and genuine interpersonal skills are essential. All part-time staff are hired at an initial hourly r...          </p>
+          <p class="lt-p">
+Rubrics: 23/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.697          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Part-Time Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£28,520/year]
+
+[PT], [20 hours/week]
+
+[35 days paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Part-Time Deli Assistant to join our team in Parsons Green, SW London. The role offers an initial hourly rate of £13.00, with a successful completion of the three-month probation period leading to an increased rate of £13.25 per hour. Candidates will work a flexible schedule of 16 to 24 ...          </p>
+          <p class="lt-p">
+Rubrics: 22/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£31,920/year]
+
+[Part-time], [20 hours/week]
+
+[35 days paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Deli Assistant to join our team in Parsons Green, SW London. Candidates will work within a part-time schedule of 16 to 24 hours per week, with shifts beginning at 6:00 am and ending at 7:00 pm daily. The initial hourly rate is £13.00, with an increase to £13.25 upon successful completion of...          </p>
+          <p class="lt-p">
+Rubrics: 25/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.758          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00]/hour), ~[£31,700]/year]
+
+[PT], [20 hours/week]
+
+[35 days paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Deli Assistant to join our dynamic team in Parsons Green, SW London. This part-time role offers a competitive hourly rate of £13.00 upon hire, with a successful completion of the three-month probation period resulting in an increase to £13.25 per hour. The estimated annual earnings, based on the...          </p>
+          <p class="lt-p">
+Rubrics: 23/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.697          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Part-Time Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00]/hour), ~[£31,200]/year]
+
+[PT], [20 hours/week]
+
+[35 days of paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Part-Time Deli Assistant to join our team in Parsons Green, SW London. The role involves a variety of responsibilities including serving customers, preparing sandwiches, creating morning pastry mixes for muffins and frangipane for almond croissants, and maintaining store cleanliness...          </p>
+          <p class="lt-p">
+Rubrics: 19/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.576          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Part-Time Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£28,080/year]
+
+[Part-Time], [20 hours/week]
+
+[35 days of paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Part-Time Deli Assistant to join our team in Parsons Green, SW London. The position offers a starting hourly rate of £13.00, with a successful completion of a three-month probation period resulting in a raise to £13.25 per hour. Candidates will work a flexible schedule of 16 to...          </p>
+          <p class="lt-p">
+Rubrics: 21/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Part-Time Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£31,800/year]
+
+[Part-Time], [20 hours/week]
+
+[35 days of paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated and personable Part-Time Deli Assistant to join our team in Parsons Green, SW London. Candidates will work a shift schedule starting at 6am and ending at 7pm, daily, with a weekly commitment of 20 hours. The initial hourly rate upon hire is £13.00, with a successful completion ...          </p>
+          <p class="lt-p">
+Rubrics: 23/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.697          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Deli Assistant]  
+
+[The Fig and Artichoke], [Parsons Green, SW London]  
+
+[£13.00/hour], ~[£30,120/year]  
+
+[Part-time], [20 hours/week]  
+
+[35 days paid holiday]  
+
+The Fig and Artichoke is seeking a skilled and personable Deli Assistant to join our team in Parsons Green, SW London. This part-time position offers an hourly rate of £13.00 upon hiring, with the opportunity to increase to £13.25 upon successful completion of a three-month probation period. The role is designed for individuals who...          </p>
+          <p class="lt-p">
+Rubrics: 26/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.788          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£31,800/year]
+
+[Part-Time], [20 hours/week]
+
+[35 days of paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Deli Assistant to join our team in Parsons Green, SW London. The role is part-time, with expected working hours of 20 hours per week, commencing at 6:00 am and concluding at 7:00 pm daily. Initial hourly pay is £13.00, with a successful completion of the three-month probation period resu...          </p>
+          <p class="lt-p">
+Rubrics: 24/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi, I need to prepare a document which explains the vacancy of the part-time job our deli is offering. The website we&#x27;re using to advertise has specific sections that should be filled out. The square ...          </p>
+          <p class="lt-p">
+Response: [Part-Time Deli Assistant]
+
+[The Fig and Artichoke], [Parsons Green, SW London]
+
+[£13.00/hour], ~[£32,000/year]
+
+[PT], [20 hours/week]
+
+[35 days paid holiday leave]
+
+[The Fig and Artichoke is seeking a dedicated Part-Time Deli Assistant to join our team in Parsons Green, SW London. The role offers an hourly rate of £13.00 upon hire, with a successful completion of the three-month probation period resulting in a rate increase to £13.25 per hour. Candidates selected for the position will work a sc...          </p>
+          <p class="lt-p">
+Rubrics: 24/33 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+557                </td>
+                <td>
+0.758                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.758                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+813                </td>
+                <td>
+0.606                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.606                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+767                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+544                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+553                </td>
+                <td>
+0.606                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.606                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+607                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+695                </td>
+                <td>
+0.697                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.697                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+550                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+664                </td>
+                <td>
+0.758                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.758                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+692                </td>
+                <td>
+0.697                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.697                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+528                </td>
+                <td>
+0.576                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.576                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+744                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+523                </td>
+                <td>
+0.697                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.697                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+574                </td>
+                <td>
+0.788                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.788                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+581                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+823                </td>
+                <td>
+754                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

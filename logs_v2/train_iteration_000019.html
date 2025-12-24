@@ -1,0 +1,4612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 19</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 19  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T12:11:39  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, professional yet simple** engineering report section written in a **third-person narrative**, using plain English and avoiding overly technical language. It meets all your requirements:
+
+- Includes an **introduction** explaining why this section is important  
+- Details the **current Gantt chart progress** and work done  
+- Explains **changes from the previous schedule** with a clear table and explanations  
+- Offers **more than 3 justifications and recommendations...          </p>
+          <p class="lt-p">
+Rubrics: 7/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.412          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a clear, professional, yet simple and accessible engineering-style report section for your **Project Management** portion of Phase 2. The tone is straightforward and realistic—perfect for university student teams—without overly complex language or jargon. It fully addresses your request:  
+
+- Includes the **introduction**,  
+- Explains the **current Gantt chart**,  
+- Details **changes from the previous schedule**,  
+- Provides **3+ justifications and recommendations** for sc...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a clear, professional yet accessible **Project Management Section** for your Phase 2 report — written in a simple, engineering-friendly tone, using third-person narrative. It addresses all your requirements: explains the updated Gantt chart, justifies changes, includes a comparison table, adds practical buffer recommendations, creates a checklist for future success, and ends with a strong, self-contained conclusion that answers the original question without needing to read th...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a clear, professional, yet simple and accessible **Project Management Section** for your Phase 2 report — written in a third-person narrative with an engineering professional tone but using everyday language. It directly answers your request, includes **all the specified elements**, and provides **practical, student-friendly justifications and recommendations** for schedule buffers, a cohesive checklist, and a strong concluding abstract-style summary.
+
+---
+
+### **Project Mana...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Here&#x27;s a clear, professional yet simple and natural-sounding **Project Management Section** for your draft report. It follows all your instructions: includes a logical flow, explains changes in the schedule without sounding negative, justifies updates in an engineering-appropriate way, adds realistic buffer recommendations (specifically tailored for university student teams), includes a comparison table, a checklist for future use, and ends with a strong, clear conclusion that answers...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a clear, professional yet accessible **Project Management Section** for your draft report, written in a simple and natural engineering tone (not overly formal or technical), using third-person narrative. It includes all the elements you requested — an introduction, explanation of current progress, changes to the schedule, justifications, buffer recommendations, a checklist, and a strong concluding abstract that answers the original question directly.
+
+---
+
+### Project Managem...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a clear, professional yet accessible engineering-style report section for **Phase 2 of the project**, written in a simple English tone (not overly technical), with a third-person narrative. It directly addresses your request — including all required parts: introduction, current progress, changes to the schedule, justification for changes, buffer recommendations, future implementation strategy, and a strong concluding abstract.
+
+---
+
+### Project Management – Schedule Progress ...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, professional, yet simple English** engineering-style project management section for your draft report — written in a third-person narrative, using straightforward language, and fully addressing your request.
+
+---
+
+### **Project Management – Schedule Progress and Adjustments**
+
+#### **Introduction**  
+This section explains how the project schedule has evolved since the initial plan. It shows what has been completed, what changes were made, and why. Since the project...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a clear, professional, yet accessible engineering-style section written in a natural third-person tone — simple English, no jargon, and focused on clarity. It directly answers your original request: **skillfully integrates an updated Gantt chart, explains timeline changes (even when there are no deviations), justifies changes with engineering-sensible reasoning, includes a table comparing old vs. new dates, offers real-world buffer recommendations for students, creates a team...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Here&#x27;s a clear, professional, yet accessible engineering report section written in a simple and natural tone — perfect for a university-level project with students and clients. It answers your original question **skillfully and realistically**, even though there are no actual timeline deviations. Instead, it frames the changes as **logical, necessary updates** to improve clarity, team workflow, and client engagement — which makes sense for a student team.
+
+---
+
+## Project Management –...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a clear, professional, yet simple and accessible engineering report section written in a third-person narrative with a natural, conversational tone — suitable for a team of university students. It directly addresses your requirements: includes an introduction, explains the current Gantt chart and progress, details changes from the previous schedule, justifies the updates, provides **more than 3 buffer recommendations**, creates a **checklist for the team**, and ends with a st...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, professional yet simple English** project management section written in a **third-person narrative**, suitable for a report draft targeting university students and clients. It directly answers your request with:
+
+- A smooth introduction  
+- A clear explanation of the current Gantt chart and progress  
+- A breakdown of changes from the previous schedule (with justifications)  
+- 4 practical and relevant **justifications and recommendations** for schedule buffers  
+-...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, professional yet simple** engineering-style report section for your client submission, written in a straightforward tone (avoiding complex jargon), using third-person narrative, and fully addressing your request. It includes:
+
+- An introduction explaining why this section is important  
+- A clear explanation of the current Gantt chart and progress  
+- A detailed breakdown of changes from the previous schedule (with a comparison table)  
+- Justifications and 5 reali...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a **clear, professional yet accessible engineering-style report section** for your client’s project, written in a **simple, natural English** tone — suitable for university students and stakeholders. It includes all your requested elements: introduction, explanation of current progress, schedule changes, justifications, buffer recommendations, a checklist, and a strong concluding abstract that answers your original question.
+
+---
+
+## Project Management – Scheduling and Timeli...          </p>
+          <p class="lt-p">
+Rubrics: 6/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.353          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Below is a clear, professional, yet simple and accessible **engineering project management section** written in a third-person narrative, using plain English. It directly answers your request — explaining the updated schedule, justifying the changes, providing meaningful buffer recommendations, and ending with a strong, self-contained conclusion that readers can understand without reading the full section.
+
+---
+
+## Project Management – Schedule Progress and Updates
+
+### Introduction  ...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you help me with report writing for Phase 2 of the project for our client? I am writing a project management section, where I am talking about current progress in terms of scheduling based on our ...          </p>
+          <p class="lt-p">
+Response: Certainly! Here&#x27;s a clear, professional yet simple engineering-style report section tailored to your needs. It follows your structure, uses plain English without jargon, stays in third-person, and includes all the requested elements — including a table of changes, justifications for schedule buffers, a checklist for future implementation, and a strong concluding abstract that answers the original question directly.
+
+---
+
+## Project Management – Schedule Progress and Updates (Phase 2)
+
+### Introd...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1748                </td>
+                <td>
+0.412                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.412                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1568                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1742                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1712                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1873                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1693                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1900                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1433                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1722                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1762                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1676                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1756                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1720                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1693                </td>
+                <td>
+0.353                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.353                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1458                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1870                </td>
+                <td>
+1614                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+We hope you&#x27;re well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for a Captain/IGL role with our organisation.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a newly formed, multi-game esports organisation built on a foundation of talent, trust, and long-term vision. We’ve recently secured a significant funding partnership with Amazon, giving us the stability and resources to invest heavily in playe...          </p>
+          <p class="lt-p">
+Rubrics: 18/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+Hope you&#x27;re well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for the role of Captain or IGL.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game organisation emerging with a bold vision to reshape the competitive landscape of e-sports. We’ve secured a significant funding partnership with Amazon, giving us the resources and stability to build a sustainable, long-term squad — and we’re l...          </p>
+          <p class="lt-p">
+Rubrics: 20/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+I hope you&#x27;re well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for a leadership role — specifically as a Captain or IGL. We&#x27;re excited to connect with experienced leaders who can shape the next generation of top-tier esports talent.  
+&lt;/greeting&gt;  
+
+&lt;body1&gt;  
+Team Invictus is a new, multi-game organisation built on passion, strategy, and long-term vision — backed by a strong funding partnership...          </p>
+          <p class="lt-p">
+Rubrics: 21/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+I hope you&#x27;re doing well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for the role of Captain/IGL.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, dynamic multi-game organisation built on vision, talent, and long-term growth. We’ve recently secured a major funding partnership with Amazon — granting us a strong financial foundation to invest in elite players and deliver top-tier resources, trai...          </p>
+          <p class="lt-p">
+Rubrics: 23/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.958          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+I hope you&#x27;re well! Benjamin Glaser is reaching out to you from Team Invictus regarding a potential tryout for the role of captain/IGL.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game esports organisation with a bold vision to elevate the next generation of competitive players into the highest tiers of play. We&#x27;ve just secured a significant funding partnership with Amazon, giving us the resources to invest in long-term devel...          </p>
+          <p class="lt-p">
+Rubrics: 17/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.708          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+We hope you&#x27;re well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for the role of Captain or IGL.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a newly formed, multi-game organisation built on the foundation of elite talent, structured leadership, and long-term vision. We’ve recently secured a groundbreaking funding partnership with Amazon, which allows us to provide stable, competitive resources an...          </p>
+          <p class="lt-p">
+Rubrics: 22/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.917          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+Hope you&#x27;re well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for a Captain/IGL role.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game organisation built on speed, innovation, and a deep commitment to player development. We’ve just secured a major funding partnership with Amazon — which means we’re not just operating on a budget, but with real resources to invest in long-term growth....          </p>
+          <p class="lt-p">
+Rubrics: 19/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.792          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+Hope you&#x27;re well! Benjamin Glaser is reaching out to you from Team Invictus regarding a potential tryout for the role of Captain or IGL.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game esports organisation on a mission to reshape the highest levels of competitive play—backed by a significant funding partnership with Amazon, which gives us the stability and resources to build a long-term, high-performance team. We’re assembli...          </p>
+          <p class="lt-p">
+Rubrics: 20/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+We hope you&#x27;re well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for the role of Captain or IGL.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game esports organisation built on a foundation of talent, vision, and long-term investment. With a powerful funding partnership from Amazon, we&#x27;re able to offer stable, sustainable pathways for experienced leaders like yourself to take on roles...          </p>
+          <p class="lt-p">
+Rubrics: 18/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+I hope you&#x27;re well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for the role of Captain/IGL.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game esports organisation with a bold vision—to elevate the next generation of competitive players into the highest levels of the scene. We’ve just secured a transformative funding partnership with Amazon, giving us the financial stability and resou...          </p>
+          <p class="lt-p">
+Rubrics: 19/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.792          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+I hope you&#x27;re well! Benjamin Glaser is reaching out to you from Team Invictus regarding a potential tryout for a Captain/IGL role.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game esports organisation built on a foundation of vision, investment, and player development. With a strong funding partnership from Amazon, we&#x27;re able to offer not just competitive opportunities—but long-term stability, structured growth, and the resou...          </p>
+          <p class="lt-p">
+Rubrics: 20/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+We hope you&#x27;re doing well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for a captain/IGL role with us.  
+&lt;/greeting&gt;  
+
+&lt;body1&gt;  
+Team Invictus is a new, multi-game esports organisation built on talent, discipline, and long-term vision — and we’re just beginning to build a roster that can compete at the very top. We’ve recently secured a significant funding partnership with Amazon, which allows ...          </p>
+          <p class="lt-p">
+Rubrics: 20/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+Hope you&#x27;re well! Benjamin Glaser is reaching out from Team Invictus regarding a potential tryout for the role of Captain/IGL.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game esports organisation built on raw talent, strong leadership, and long-term vision — and we&#x27;re now backed by a significant funding partnership with Amazon. We’ve recently signed a talented group of young players who are eager to grow into elite performer...          </p>
+          <p class="lt-p">
+Rubrics: 19/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.792          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+I hope you&#x27;re well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for a Captain/IGL role with our organisation.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game esports organisation built on talent, innovation, and long-term vision — backed by a strong funding partnership with Amazon. We’ve assembled a core group of young, high-potential players who are ready to be shaped into elite co...          </p>
+          <p class="lt-p">
+Rubrics: 20/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+We hope you&#x27;re doing well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for a captain/IGL role with our new multi-game esports organisation.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a fast-growing, new multi-game organisation setting out to redefine what&#x27;s possible in competitive gaming — built on a foundation of raw talent, strong leadership, and long-term vision. We’ve recently secured a majo...          </p>
+          <p class="lt-p">
+Rubrics: 18/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am an eSports team manager. We are Team Invictus, a new multi-game organisation who have just received a funding partnership with Amazon. We have a lineup of young players, known for their talent, w...          </p>
+          <p class="lt-p">
+Response: &lt;email&gt;  
+&lt;greeting&gt;  
+Greetings Alan &#x27;Trickz-&#x27; Garner,  
+
+Hope you&#x27;re well! Benjamin Glaser from Team Invictus is reaching out to you regarding a potential tryout for a leadership role — specifically, as a Captain or IGL.  
+&lt;/greeting&gt;  
+&lt;body1&gt;  
+Team Invictus is a new, multi-game esports organisation powered by a strong strategic partnership with Amazon, giving us the resources to build a sustainable, long-term legacy in competitive gaming. We’re assembling a high-calibre team of young, talen...          </p>
+          <p class="lt-p">
+Rubrics: 20/24 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2605                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2530                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2661                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2634                </td>
+                <td>
+0.958                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.958                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2837                </td>
+                <td>
+0.708                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.708                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2890                </td>
+                <td>
+0.917                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.917                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+3131                </td>
+                <td>
+0.792                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.792                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2650                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2836                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2775                </td>
+                <td>
+0.792                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.792                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2732                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2812                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2647                </td>
+                <td>
+0.792                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.792                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2586                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2639                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+835                </td>
+                <td>
+2374                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **fully tailored ethnographic fieldwork schedule** for your 6-month study on Japanese rockabilly, incorporating all of your constraints:
+
+---
+
+### 📅 Fieldwork Schedule: Japanese Rockabilly Ethnography  
+**Arrival:** December 4  
+**Departure:** May 25  
+**Work Days (Part-time job):** 1st, 5th, 10th, 15th, 20th, 25th of each month  
+❌ **Cannot attend events on work days unless they start at 6pm or later**  
+❌ **No events or interviews on Valentine’s Day (02/14)**  
+❌ **No i...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a thoughtfully curated **6-month ethnographic fieldwork schedule** for your study on **Japanese rockabilly**, tailored to your constraints:
+
+---
+
+### 📅 **Overall Fieldwork Overview**
+- **Arrival:** December 4  
+- **Departure:** May 25  
+- **Work Days (Part-time job):** 1st, 5th, 10th, 15th, 20th, 25th of each month (unless event starts at or after 6:00 PM)  
+- **Excluded Date:** February 14 (Valentine’s Day) – no events or interviews  
+- **Region Limitation:** Only events in *...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **fully detailed, realistic, and ethically structured ethnography schedule** for your 6-month fieldwork on Japanese rockabilly culture. This schedule:
+
+✅ Ensures you attend **at least 3 events per month**  
+✅ Includes **1 scheduled interview per month** (within 10am–5pm, not overlapping with work or events)  
+✅ Respects your **work days** (1st, 5th, 10th, 15th, 20th, 25th — only accessible on days starting at 6pm or later)  
+✅ Excludes **Valentine’s Day (02/14)** due to pe...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your **fully customized ethnographic fieldwork schedule** for the next 6 months, covering all events, scheduled interviews, and respecting your constraints:
+
+- ✅ Arrive: **December 4**  
+- ✅ Depart: **May 25**  
+- ✅ Work days: **1st, 5th, 10th, 15th, 20th, 25th** of each month (only attend events **starting at or after 6:00 PM**)  
+- ✅ Cannot attend events on **Valentine’s Day (February 14)**  
+- ✅ Cannot attend **events or interviews on the same day**  
+- ✅ Attend **3 event...          </p>
+          <p class="lt-p">
+Rubrics: 10/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, tailored ethnographic schedule** for your 6-month study on Japanese rockabilly. This schedule:
+
+✅ Includes all your **events** (filtered to only those in the **Kanto region** and accessible given your work constraints)  
+✅ Respects your **work days** (1st, 5th, 10th, 15th, 20th, 25th — unless events start at or after 6pm)  
+✅ Excludes **Valentine’s Day (02/14)** due to personal plans  
+✅ Ensures **3 events per month** (minimum)  
+✅ Schedules **1 interview ...          </p>
+          <p class="lt-p">
+Rubrics: 9/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your **fully customized ethnographic fieldwork schedule** for your study of Japanese rockabilly, covering **December through May**. This schedule adheres to all your constraints and goals:
+
+---
+
+### 📅 Fieldwork Schedule: Japanese Rockabilly Ethnography  
+**Arrival:** December 4  
+**Departure:** May 25  
+**Work Days (restrictions):** 1st, 5th, 10th, 15th, 20th, 25th of each month (no events or interviews scheduled on these days unless starting at 6pm or later)  
+**Travel Limi...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a comprehensive, realistic, and well-organized **6-month ethnography schedule** for your study of Japanese rockabilly — tailored to your constraints:
+
+---
+
+## 📅 **Ethnography Fieldwork Schedule: Japanese Rockabilly (Arrival: Dec 4 – Departure: May 25)**
+
+### ✅ Key Constraints Incorporated:
+- **Attend ≥3 events per month**  
+- **Conduct 1 interview per month** (1-hour block, 10am–5pm)  
+- **No overlapping of interviews and events on the same day**  
+- **No events on workdays (1...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your **fully optimized, realistic, and detailed ethnographic fieldwork schedule** for your 6-month study of Japanese rockabilly culture. This schedule incorporates:
+
+- ✅ Arrival and departure dates  
+- ✅ All events (with geographic filtering to **Kanto region** only)  
+- ✅ **3 events per month** (minimum)  
+- ✅ **1 interview per month** (scheduled in 1-hour blocks from 10am–5pm, not overlapping with work, events, or personal plans)  
+- ✅ Exclusion of work days (1st, 5th, 10t...          </p>
+          <p class="lt-p">
+Rubrics: 8/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **comprehensive, realistic, and ethically sound ethnographic fieldwork schedule** tailored to your needs, constraints, and goals.
+
+---
+
+### 📅 Ethnographic Fieldwork Schedule: Japanese Rockabilly (December – May)
+
+** Arrival: December 4**  
+** Departure: May 25**  
+** Work Days (Part-time job):** 1st, 5th, 10th, 15th, 20th, 25th of each month  
+** Constraints:**
+- Can only attend events in **Kanto region** (Tokyo, Kanagawa, Shizuoka, Gifu, Akita — *Akita is outside Kanto*, so...          </p>
+          <p class="lt-p">
+Rubrics: 10/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your fully tailored **6-month ethnographic fieldwork schedule** for Japanese rockabilly, incorporating all your constraints:
+
+---
+
+### 📅 Fieldwork Schedule: Japanese Rockabilly Ethnography (Arrival: Dec 4 – Departure: May 25)
+
+&gt; **Key Constraints Applied:**
+&gt; - Attend **3 events minimum per month**  
+&gt; - Conduct **1 interview per month** (1-hour block, 10am–5pm)  
+&gt; - No interview or event scheduled on the same day  
+&gt; - Only attend events in **Kanto region** (Tokyo, Kanagaw...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, well-organized ethnographic schedule** tailored to your needs for your 6-month fieldwork on Japanese rockabilly culture.
+
+---
+
+### 📅 **Fieldwork Schedule: Japanese Rockabilly Ethnography**  
+**Arrival:** December 4  
+**Departure:** May 25  
+**Work Days:** 1st, 5th, 10th, 15th, 20th, 25th (of each month) — *only attend if event starts at or after 6:00 PM*  
+**Valentine’s Day (February 14) — unavailable**  
+**Location Constraint:** Only events in the **Kanto...          </p>
+          <p class="lt-p">
+Rubrics: 10/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **fully detailed, realistic, and organized ethnography fieldwork schedule** covering all events and interviews you need to attend — with proper constraints applied:
+
+---
+
+## 🌸 Fieldwork Schedule: Japanese Rockabilly Ethnography  
+**Arrival:** December 4  
+**Departure:** May 25  
+**Work Days (Kanto Region):** 1st, 5th, 10th, 15th, 20th, 25th of each month  
+**Constraints:**  
+- Can only attend events in **Kanto region** (Tokyo, Kanagawa, Shizuoka, Gifu – note: Gifu is outs...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **detailed, realistic, and fully customized ethnography fieldwork schedule** for your six-month research journey into Japanese rockabilly culture.
+
+This schedule:
+
+✅ Includes **all events** listed (including the monthly &quot;Strangers of Yoyogi Park&quot;)  
+✅ Ensures **3 events per month** (minimum)  
+✅ Adds **1 scheduled interview per month** (in 1-hour blocks between 10am–5pm)  
+✅ Respects your **workdays** (1st, 5th, 10th, 15th, 20th, 25th of each month — only if event starts a...          </p>
+          <p class="lt-p">
+Rubrics: 12/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **comprehensive, carefully crafted ethnographic fieldwork schedule** for your 6-month study on Japanese rockabilly, designed to meet all your constraints:
+
+---
+
+## 📅 Fieldwork Schedule: Japanese Rockabilly Ethnography  
+**Arrival:** December 4  
+**Departure:** May 25  
+**Work Days (Kanto Region):** 1st, 5th, 10th, 15th, 20th, 25th of each month  
+**Attendance Rule:** Minimum of **3 events per month**  
+**Interviews:** 1 per month, scheduled in **1-hour blocks (10am–5pm)**, n...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a detailed, realistic, and fully customized **ethnographic fieldwork schedule** for your 6-month study on Japanese rockabilly — incorporating all your constraints:
+
+---
+
+### 📅 **Arrival &amp; Departure**  
+- **Arrival:** December 4  
+- **Departure:** May 25  
+- **Work Days (Kanto region):** 1st, 5th, 10th, 15th, 20th, 25th of each month  
+  → **Cannot attend events before 6:00 PM on these days** (unless overlapping with work hours)  
+- **Valentine’s Day:** February 14 → **No event...          </p>
+          <p class="lt-p">
+Rubrics: 11/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.611          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;m writing an ethnography about Japanese rockabilly and will spend the next 6 months attending events and undergoing interviews. Below is going to be a list of all the events for the next 6 months an...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, detailed, and realistic ethnographic fieldwork schedule** tailored to your needs — including all events (with notes on feasibility), your work days, personal constraints (Valentine’s Day, travel, regional access), interview scheduling, and the rule that **no event and interview occur on the same day**, and **no two events per day**.
+
+---
+
+## 📅 Field Research Schedule: Japanese Rockabilly Ethnography  
+**Arrival:** December 4  
+**Departure:** May 25  
+**Con...          </p>
+          <p class="lt-p">
+Rubrics: 14/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.778          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+4950                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+4584                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+3617                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+3740                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+3962                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+4436                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+4892                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+4747                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+4898                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+5767                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+3435                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+6272                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+3817                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+3412                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+5135                </td>
+                <td>
+0.611                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.611                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1931                </td>
+                <td>
+6841                </td>
+                <td>
+0.778                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.778                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Business Snapshot Report**  
+*Date: Saturday*  
+*Purpose: Analyze current pricing performance and evaluate a proposed policy change limiting group size to 5 per range*
+
+---
+
+### **Daily Revenue by Party Size and Hour (12-Hour Format)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|------...          </p>
+          <p class="lt-p">
+Rubrics: 15/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Revenue Snapshot Report – June 2024**
+
+---
+
+### **Party Size &amp; Hourly Revenue Summary (Saturday)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|---...          </p>
+          <p class="lt-p">
+Rubrics: 11/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.407          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Revenue Snapshot Report**  
+*Date: Saturday, [Insert Date]*  
+*Purpose: Analyze current revenue by hour and party size to evaluate potential policy changes and identify profitability trends*
+
+---
+
+### **Daily Revenue by Party Size and Hour (12-Hour Clock Format)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-----...          </p>
+          <p class="lt-p">
+Rubrics: 14/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.519          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Business Snapshot Report – June 2024**
+
+---
+
+### **Party Size and Hourly Spending Breakdown (Saturday)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-----------...          </p>
+          <p class="lt-p">
+Rubrics: 10/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.370          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Revenue Snapshot Report – June 1, 2024**
+
+---
+
+### **Daily Range Usage &amp; Revenue Breakdown by Hour (Saturday)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|----...          </p>
+          <p class="lt-p">
+Rubrics: 13/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.481          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Daily Operations Snapshot Report**  
+*Date: Saturday*  
+*Reporting Period: 09:00 – 22:00*  
+
+---
+
+### **Party Size and Hourly Spending Table**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-...          </p>
+          <p class="lt-p">
+Rubrics: 13/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.481          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Daily Performance Report – June 1, 2024**
+
+---
+
+### **Party Size &amp; Hourly Spending Summary (Total per Hour)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|------...          </p>
+          <p class="lt-p">
+Rubrics: 13/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.481          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Revenue Snapshot Report**  
+*Date: Saturday, [Insert Date]*  
+*Prepared for: Management Review &amp; Policy Evaluation*  
+
+---
+
+### **Daily Revenue by Party Size and Hour (12-Hour Format)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|...          </p>
+          <p class="lt-p">
+Rubrics: 13/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.481          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Daily Business Snapshot – Saturday Summary Report**  
+*Prepared for Management Review – Effective April 5, 2025*
+
+---
+
+### **Daily Revenue by Hour and Party Size**
+
+*Note: Party size and rental revenue are calculated by range. Rental rates are based on time of day: $20/hour (9:00–12:00), $40/hour (12:00–5:00), $50/hour (after 5:00). All values are in USD. Total per hour = sum of range rental + food/drink spending. The least profitable hour is highlighted in bold.*
+
+| Party Size | 09:00...          </p>
+          <p class="lt-p">
+Rubrics: 12/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Business Snapshot Report – June 2024**
+
+---
+
+### **Daily Customer Spending Breakdown by Hour**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------...          </p>
+          <p class="lt-p">
+Rubrics: 16/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.593          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Operational Snapshot Report – June 2024**
+
+---
+
+### **Daily Rental &amp; Concessions Summary (Saturday)**
+
+The following table details the party size and total spending (range rental + food/drink) for each hour of operation. Party sizes and rental rates are based on the current time-of-day pricing model:  
+- **9:00–12:00**: $20/hour  
+- **12:00–5:00**: $40/hour  
+- **After 5:00**: $50/hour  
+
+*Note: Rental costs are per party per hour regardless of party size. All rental totals ar...          </p>
+          <p class="lt-p">
+Rubrics: 15/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.556          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Business Snapshot Report – June 2024**
+
+---
+
+### **Hourly Party-Sized Spending Summary (by Party Size and Hour)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|--...          </p>
+          <p class="lt-p">
+Rubrics: 13/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.481          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Revenue Snapshot Report – June 2024**  
+*Prepared for Business Review: Analyzing Hourly Revenue by Party Size and Evaluating a Potential Policy Change*
+
+---
+
+### **Hourly Revenue Summary by Party Size (12-Hour Clock)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|---------...          </p>
+          <p class="lt-p">
+Rubrics: 16/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.593          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Daily Business Snapshot: Saturday Revenue Analysis (June 22, 2024)**
+
+---
+
+### **Party-Specific Rental &amp; Concession Spending by Hour**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|----...          </p>
+          <p class="lt-p">
+Rubrics: 13/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.481          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Saturday Business Snapshot Report – June 2024**
+
+---
+
+### **Daily Rental and Concessions Revenue by Hour (Party Size &amp; Total Spending)**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|--...          </p>
+          <p class="lt-p">
+Rubrics: 12/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.444          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a MaxGolf driving range. We&#x27;ve been thinking about making some changes to our pricing models, and the first step in changing course is to get a snapshot of how our business currently works. ...          </p>
+          <p class="lt-p">
+Response: **MaxGolf Daily Business Snapshot – Saturday Report**  
+*Prepared for Strategic Pricing Review &amp; Policy Evaluation*
+
+---
+
+### **Rental &amp; Concessions Spending by Hour &amp; Party Size**
+
+| Party Size | 09:00–10:00 | 10:00–11:00 | 11:00–12:00 | 12:00–13:00 | 13:00–14:00 | 14:00–15:00 | 15:00–16:00 | 16:00–17:00 | 17:00–18:00 | 18:00–19:00 | 19:00–20:00 | 20:00–21:00 | 21:00–22:00 |
+|-----------|-------------|-------------|-------------|-------------|-------------|-------------|-------------|----------...          </p>
+          <p class="lt-p">
+Rubrics: 9/27 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+4559                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+1990                </td>
+                <td>
+0.407                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.407                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+7259                </td>
+                <td>
+0.519                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.519                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+3931                </td>
+                <td>
+0.370                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.370                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+5548                </td>
+                <td>
+0.481                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.481                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+3940                </td>
+                <td>
+0.481                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.481                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+4239                </td>
+                <td>
+0.481                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.481                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+7638                </td>
+                <td>
+0.481                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.481                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+3020                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+6145                </td>
+                <td>
+0.593                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.593                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+3627                </td>
+                <td>
+0.556                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.556                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+2448                </td>
+                <td>
+0.481                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.481                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+4998                </td>
+                <td>
+0.593                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.593                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+4000                </td>
+                <td>
+0.481                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.481                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+2592                </td>
+                <td>
+0.444                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.444                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2098                </td>
+                <td>
+7628                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

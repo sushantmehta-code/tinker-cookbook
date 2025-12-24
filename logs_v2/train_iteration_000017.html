@@ -1,0 +1,4804 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 17</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 17  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T12:01:08  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a clean, organized chart for your **first online sale (November 26, 2025)** — with clear rules and categories. We&#x27;ll follow your guidelines exactly, including **excluding Christmas ribbons from this sale** (they go on sale January 15, 2026), applying the correct discounts, and highlighting the Christmas items separately.
+
+---
+
+### ✅ Rules Summary (for First Sale – Nov 26, 2025)
+
+| Rule | Application |
+|------|-------------|
+| **Old stock (&gt;1 year)** | 50% off |
+| **Stock ...          </p>
+          <p class="lt-p">
+Rubrics: 0/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down step by step so you get a clear, organized, and actionable sales plan for **November 26, 2025 (First Sale)** — with **no Christmas ribbons on sale yet**, and only specific logic applied.
+
+---
+
+### ✅ **Key Rules for the First Sale (November 26, 2025):**
+
+1. **All items in stock for over 1 year (stocked &gt;12 months)** → 50% off  
+2. **Items in stock for over 6 months (but ≤1 year)** → 30% off  
+3. **Valentine&#x27;s Day ribbon** → **10% off** (exception, not 30% or 50%)...          </p>
+          <p class="lt-p">
+Rubrics: 4/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.222          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down step by step to create a clear, organized chart for your **first sale (November 26, 2025)**, with the following rules:
+
+---
+
+### ✅ **Goal:**
+- **First Sale:** November 26, 2025  
+  - Sell **old stock** (over 1 year) → **50% off**  
+  - Sell items **on sale for 6 months** → **30% off**  
+  - **Valentine’s Day ribbons** → **10% off** (exception)  
+  - Items with **&gt;25 units** and not in other categories → **5% off**  
+  - **Christmas ribbons NOT on sale yet** — wi...          </p>
+          <p class="lt-p">
+Rubrics: 0/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **clear, organized, and actionable chart** for your **first sale (November 26, 2025)**, following your exact rules — with **no Christmas ribbons on sale yet**, and only specific items discounted based on age, quantity, or category.
+
+---
+
+## ✅ Sales Strategy Recap (First Sale: November 26, 2025)
+
+| Rule | Discount |
+|------|----------|
+| Items in stock **&gt;1 year** | 50% off |
+| Items in stock **6 months or more** (but &lt;1 year) | 30% off |
+| **Valentine&#x27;s Day ribbon** | 1...          </p>
+          <p class="lt-p">
+Rubrics: 2/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.111          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **well-organized chart** based on your detailed requirements, including:
+
+✅ Sales rules applied:  
+- **Old stock (&gt;1 year)** → 50% off  
+- **Stock on sale for &gt;6 months** → 30% off  
+- **Valentine’s Day ribbon** → 10% off (exception)  
+- **Quantity &gt; 25** → 5% off (if not covered by other rules)  
+- ❌ **Christmas ribbons NOT on sale until January 15, 2026**  
+- All Christmas ribbons are **highlighted in bold** for the first sale (so you don’t accidentally include them)  
+...          </p>
+          <p class="lt-p">
+Rubrics: 4/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.222          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your **fully organized and clearly labeled sales chart** for the **first sale (November 26, 2025)**, following all your conditions:
+
+---
+
+## ✅ **First Sale (November 26, 2025) – Rules Applied**
+- **All items in stock for over 1 year (date purchased ≤ 10-26-2024)** → **50% off**
+- **All items in stock for 6 months (date purchased ≤ 05-26-2025)** but not in above → **30% off**
+- **Valentine’s Day ribbons** → **10% off** (exception)
+- **Items with quantity &gt; 25** and not in abo...          </p>
+          <p class="lt-p">
+Rubrics: 3/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.167          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your **organized, fully detailed chart** for the **first sale (starting November 26, 2025)** based on your exact criteria:
+
+---
+
+### ✅ Key Rules Applied for First Sale (Nov 26, 2025):  
+- **Christmas ribbons** → ❌ NOT ON SALE (hold for January 15, 2026)  
+- **Items in stock for over 1 year** → 50% off  
+- **Items in stock for 6+ months** → 30% off  
+- **Valentine’s Day ribbon** → 10% off (exception)  
+- **Any item with quantity &gt;25 and not in above categories** → 5% off  
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 4/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.222          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down step by step to give you a clear, organized, and actionable chart for your **first sale (November 26, 2025)**.
+
+---
+
+### ✅ **Sale Rules Summary (First Sale: Nov 26, 2025)**
+- **Any ribbon with &gt;1 year in stock (purchased before Nov 26, 2024)** → **50% off**
+- **Any ribbon with 6+ months on sale (i.e., purchased between Jul 2024 and Nov 2025)** → **30% off**
+- **Valentine&#x27;s Day ribbon** → **Only 10% off** (exception)
+- **Any item with quantity &gt;25 and NOT in the ...          </p>
+          <p class="lt-p">
+Rubrics: 3/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.167          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break down your request step by step and create a **clear, organized chart** for your **first sale (November 26, 2025)** — with the **correct pricing**, **exceptions**, and **strict exclusion of Christmas ribbons** (which will go on sale in January).
+
+---
+
+## ✅ Key Rules for First Sale (Nov 26, 2025)
+
+| Rule | Application |
+|------|-------------|
+| **Old stock (&gt;1 year)** | 50% off (date purchased &lt; 1 year ago) |
+| **On sale for &gt;6 months** | 30% off |
+| **Valentine&#x27;s Day** | 1...          </p>
+          <p class="lt-p">
+Rubrics: 2/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.111          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your fully organized and customized **First Sale (November 26, 2025)** inventory plan, including all the rules you specified.
+
+---
+
+## ✅ **First Sale Rules (November 26, 2025)**  
+- **All items in stock for over 1 year (12+ months since purchase)** → **50% off**  
+- **Items in stock for 6+ months** (but not over 1 year) → **30% off**  
+- **Valentine’s Day ribbon** → **10% off** (exception)  
+- **Products with quantity &gt; 25** (not fitting above) → **5% off**  
+- **Christmas r...          </p>
+          <p class="lt-p">
+Rubrics: 2/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.111          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your organized **first-sale inventory chart** for **November 26, 2025**, following your detailed rules.
+
+---
+
+## ✅ First Sale Rules Recap (November 26, 2025)
+- **All items purchased &gt;1 year ago (over 12 months)** → **50% off**
+- **Items on sale for &gt;6 months** → **30% off**
+- **Valentine’s Day ribbon** → **10% off** (exception)
+- **Any item with quantity &gt;25** → **5% off** (if doesn’t fall into above categories)
+- **Christmas ribbons NOT on sale until January 15, 2026** → **...          </p>
+          <p class="lt-p">
+Rubrics: 0/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a **comprehensive, organized chart** for your **first sale (November 26, 2025)**, based on your exact rules:
+
+---
+
+## ✅ First Sale Rules (November 26, 2025)
+- **Old stock** (purchased &gt; 1 year ago): **50% off**
+- **Stock on sale for &gt;6 months**: **30% off**
+- **Valentine&#x27;s Day ribbons**: **10% off** (special exception)
+- **Quantity &gt; 25 units**: **5% off** (if not covered by above)
+- **All Christmas ribbons NOT on sale until January 15, 2026** — these will be in a **separate t...          </p>
+          <p class="lt-p">
+Rubrics: 4/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.222          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is your fully customized **first sale inventory chart (November 26, 2025)**, following all your rules:
+
+---
+
+### ✅ **Sales Strategy Summary (First Sale – November 26, 2025)**  
+- **All Christmas ribbons are NOT on sale now** → will be on sale **January 15, 2026**  
+- **Old stock (over 1 year in stock)** → **50% off**  
+- **Items in stock for 6+ months** (but not over 1 year) → **30% off (except Valentine&#x27;s Day)**  
+- **Valentine&#x27;s Day** → **10% off** (special exception)  
+- **A...          </p>
+          <p class="lt-p">
+Rubrics: 6/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **comprehensive, organized sales chart** for your ribbon inventory, following all your specific rules and preferences.
+
+---
+
+## ✅ Key Rules Applied:
+1. **No Christmas ribbons on sale until January 15, 2026** → These are **excluded** from the **November 26, 2025** (first sale).
+2. **First Sale (Nov 26, 2025)**:
+   - **&gt;1 year in stock**: 50% off
+   - **&gt;6 months on sale**: 30% off (this doesn’t apply since we&#x27;re starting fresh; so we ignore unless previously &quot;on sale&quot;)
+   ...          </p>
+          <p class="lt-p">
+Rubrics: 2/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.111          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your **comprehensive, organized sales chart** for the first sale (November 26, 2025), with all the rules applied:
+
+---
+
+## ✅ **First Sale: November 26, 2025 (Rules Applied)**  
+**Goal**: Clear old stock (over 1 year or 6 months on sale), avoid Christmas ribbons, and follow your pricing rules.
+
+### 💡 Sales Rules Recap:
+- **Old stock (&gt;1 year since purchase)** → **50% off**
+- **Stock on sale for &gt;6 months** → **30% off**
+- **Valentine’s Day ribbons** → **10% off** (exception)
+- ...          </p>
+          <p class="lt-p">
+Rubrics: 3/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.167          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I sell ribbons online and I have too much inventory so I&#x27;m trying to figure out what to put on sale. Can you make a chart with the product #, category, quantity, current retail price, percentage off, ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a complete, organized, and clearly labeled chart based on your needs. I&#x27;ve processed your data with the following rules:
+
+---
+
+### ✅ **SALE RULES APPLIED (First Sale – November 26, 2025):**
+
+1. **Any item purchased more than 1 year ago (over 12 months)** → **50% off**
+2. **Any item purchased between 6 and 12 months ago** → **30% off**  
+   *(Exception: Valentine’s Day ribbons → only 10% off)*
+3. **Any item with quantity &gt; 25** → **5% off** *(if not covered by above rules)*
+4. ...          </p>
+          <p class="lt-p">
+Rubrics: 4/18 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.222          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+8192                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+7995                </td>
+                <td>
+0.222                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.222                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+8192                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+8192                </td>
+                <td>
+0.111                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.111                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+7473                </td>
+                <td>
+0.222                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.222                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+7369                </td>
+                <td>
+0.167                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.167                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+6734                </td>
+                <td>
+0.222                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.222                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+7157                </td>
+                <td>
+0.167                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.167                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+7090                </td>
+                <td>
+0.111                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.111                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+6718                </td>
+                <td>
+0.111                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.111                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+8192                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+8192                </td>
+                <td>
+0.222                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.222                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+6893                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+6865                </td>
+                <td>
+0.111                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.111                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+8192                </td>
+                <td>
+0.167                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.167                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3919                </td>
+                <td>
+8192                </td>
+                <td>
+0.222                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.222                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to organize the students into appropriate small groups based on your clear and thoughtful criteria.
+
+---
+
+### ✅ **Step 1: List each student’s scores clearly (by name)**
+
+We’ll first present the scores neatly so they&#x27;re easy to find.
+
+| Student    | Foundational Skills | Literature |
+|-----------|----------------------|-----------|
+| Ryan      | 80                   | 60        |
+| Sophie    | 60                   | 20        |
+| Ming      | 80                   ...          </p>
+          <p class="lt-p">
+Rubrics: 13/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.812          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step based on your detailed instructions. We’ll:
+
+1. **List each student’s scores** for clarity.
+2. **Identify students who scored less than 60 on either or both assessments** — especially those under 60 on **foundational skills**.
+3. **Apply the rules**:
+   - Students scoring **&lt;60 on any subtest** → *do not be in a group of more than 3*.
+   - Students scoring **80+ in foundational skills** → group by literature scores.
+   - Students scoring **80 in both** → go to *...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s go step-by-step to organize the students into appropriate small group instruction groups based on your detailed guidelines.
+
+---
+
+### 📋 Given Data
+
+#### Foundational Skills Scores:
+| Student   | Foundational |
+|-----------|--------------|
+| Ryan      | 80           |
+| Sophie    | 60           |
+| Ming      | 80           |
+| Matt      | 100          |
+| Lee       | 100          |
+| Daisha    | 100          |
+| Eric      | 40           |
+| Oliver    | 60           |
+| Jay       | 80       ...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s go step by step to organize the students into small groups based on your detailed instructions. We’ll:
+
+1. List each student&#x27;s **Foundational Skills (FS)** and **Literature (Lit)** scores clearly.
+2. Apply all rules:
+   - Students with **&lt;60 on any subtest** → **group size ≤3**
+   - Prioritize **foundational skills** (if below 80)
+   - Students with **≥80 in both** → group by **literature scores**
+   - Students with **proficient (80) in both** → go to **enrichment group**
+   - Stude...          </p>
+          <p class="lt-p">
+Rubrics: 9/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.562          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step through your request to organize the students into small group instruction groups based on the literacy assessment data.
+
+---
+
+### **Step 1: List All Students with Their Scores**
+
+We&#x27;ll present each student&#x27;s **Foundational Skills (FS)** and **Literature (L)** scores clearly.
+
+| Student    | Foundational Skills | Literature |
+|------------|---------------------|------------|
+| Ryan       | 80                  | 60         |
+| Sophie     | 60                  | 2...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to organize the students into small groups based on your detailed guidelines.
+
+---
+
+### ✅ Step 1: List all students with their **Foundational Skills (FS)** and **Literature (L)** scores  
+We’ll list each student clearly for easy reference.
+
+| Student    | Foundational Skills | Literature |
+|------------|---------------------|------------|
+| Ryan       | 80                  | 60         |
+| Sophie     | 60                  | 20         |
+| Ming       | 80        ...          </p>
+          <p class="lt-p">
+Rubrics: 10/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.625          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s carefully go through your literacy assessment data and create well-structured, safe, and effective small group instruction groups based on your specific guidelines.  
+
+---
+
+### 🔍 **Step-by-Step Instructions Followed:**
+
+1. **List scores clearly by student name** for easy reference.
+2. **Identify students with scores &lt; 60 on ANY subtest** → must be in a group of **no more than 3 students**.
+3. **Prioritize foundational skills**.
+4. **If a student scored ≥80 in foundational skills**, ...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through your literacy assessment data step by step to create well-balanced, appropriate small groups for instruction based on your detailed rules.
+
+---
+
+### 🔍 **Step-by-Step Breakdown**
+
+**Given Data:**
+
+#### Foundational Skills Scores:
+| Student  | Foundational |
+|----------|--------------|
+| Ryan     | 80           |
+| Sophie   | 60           |
+| Ming     | 80           |
+| Matt     | 100          |
+| Lee      | 100          |
+| Daisha   | 100          |
+| Eric     | 40 ...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through the data carefully and follow **all** your instructions step by step to create well-organized, safe, and instructionally appropriate small groups.
+
+---
+
+### 📋 **Step-by-step Instructions Applied:**
+
+#### ✅ Rules Recap:
+1. **If a student scored &lt; 60 on *any* subtest**, they should **not be in a group of more than 3**.
+2. **Prioritize foundational skills**.
+3. If a student scored **80+ in foundational skills**, group them by **literature scores** (only if they are prof...          </p>
+          <p class="lt-p">
+Rubrics: 12/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to organize the students into small groups based on your clear criteria. We&#x27;ll follow all the instructions carefully.
+
+---
+
+### ✅ **Given Data**
+
+#### Foundational Skills Scores:
+| Student   | Foundational Score |
+|-----------|--------------------|
+| Ryan      | 80                 |
+| Sophie    | 60                 |
+| Ming      | 80                 |
+| Matt      | 100                |
+| Lee       | 100                |
+| Daisha    | 100                |
+| Eric ...          </p>
+          <p class="lt-p">
+Rubrics: 7/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.438          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through this step by step to organize the students properly for small group instruction based on your detailed guidelines.
+
+---
+
+### ✅ **Guidelines Recap**
+
+1. **Any student scoring &lt;60 on any subtest** → **group size should not exceed 3**.
+2. **Prioritize foundational skills**.
+3. **If a student scored 80+ in foundational skills**, group them by **literature scores**.
+4. **If a student scored 80+ in BOTH foundational and literature skills** → place them in an **enrichment g...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s go step-by-step to organize the students into small groups based on your detailed guidelines.
+
+---
+
+### ✅ **Step 1: List All Scores by Student**
+
+We&#x27;ll present the foundational and literature scores clearly so they’re easy to find.
+
+| Student   | Foundational Skills | Literature |
+|-----------|---------------------|-----------|
+| Ryan      | 80                  | 60        |
+| Sophie    | 60                  | 20        |
+| Ming      | 80                  | 100       |
+| Matt      |...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s systematically go through your literacy assessment data to create small group instruction groups based on your specific guidelines.
+
+---
+
+### ✅ **Step 1: List All Student Scores (Clearly by Name)**
+
+#### Foundational Skills Scores:
+| Student   | Foundational |
+|-----------|--------------|
+| Ryan      | 80           |
+| Sophie    | 60           |
+| Ming      | 80           |
+| Matt      | 100          |
+| Lee       | 100          |
+| Daisha    | 100          |
+| Eric      | 40           |
+|...          </p>
+          <p class="lt-p">
+Rubrics: 9/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.562          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed instructions. Let&#x27;s go step by step to organize the students into appropriate small groups based on your criteria.
+
+---
+
+### ✅ **Step 1: List All Students with Their Scores**
+
+We’ll list each student with both their **Foundational Skills (FS)** and **Literature (L)** scores for ease of reference.
+
+| Student  | Foundational Skills | Literature |
+|----------|---------------------|------------|
+| Ryan     | 80                  | 60         |
+| Sophie   | 60               ...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through this step-by-step based on your detailed instructions. We&#x27;ll:
+
+1. List each student&#x27;s **Foundational Skills (FS)** and **Literature (L)** scores clearly.
+2. Identify students who scored **less than 60 on *either* test** — these are restricted to groups of **no more than 3**.
+3. Identify students scoring **less than 60 on both** — **bold their names**.
+4. Group students based on priority:
+   - **Foundational Skills (FS)** are priority.
+   - If a student scored **80 or...          </p>
+          <p class="lt-p">
+Rubrics: 14/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.875          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: We just got our data back from our first literacy assessment. I need some help making groups for small group instruction. The scores are below. If students scored less than 60 on any sub test, they sh...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s organize this step-by-step based on your detailed instructions.
+
+---
+
+### **Step 1: List Each Student’s Scores Clearly**
+
+We’ll present each student with both their **Foundational Skills** and **Literature** scores so it&#x27;s easy to find.
+
+| Student    | Foundational Skills | Literature |
+|-----------|---------------------|------------|
+| Ryan      | 80                  | 60         |
+| Sophie    | 60                  | 20         |
+| Ming      | 80                  | 100        |
+| Matt    ...          </p>
+          <p class="lt-p">
+Rubrics: 11/16 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.688          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+8192                </td>
+                <td>
+0.812                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.812                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+8192                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+6569                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+8192                </td>
+                <td>
+0.562                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.562                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+8192                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+8192                </td>
+                <td>
+0.625                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.625                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+6239                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+8192                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+7190                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+5840                </td>
+                <td>
+0.438                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.438                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+7403                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+7150                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+4253                </td>
+                <td>
+0.562                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.562                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+4532                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+7698                </td>
+                <td>
+0.875                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.875                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+384                </td>
+                <td>
+8192                </td>
+                <td>
+0.688                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.688                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s create a thoughtful, efficient, and inclusive Thanksgiving dinner menu for **15 guests**, focusing on **6 total dishes** (excluding turkey and cranberry sauce) while meeting **all dietary needs**, minimizing effort, and honoring family traditions.
+
+---
+
+### ✅ **Key Requirements &amp; Constraints Summary**
+
+| Requirement / Constraint | Details |
+|--------------------------|--------|
+| **Protein Option** | Everyone must have a protein (turkey is covered). Gravy is available to all wh...          </p>
+          <p class="lt-p">
+Rubrics: 24/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.923          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful breakdown. Your goal is to serve **everyone** their **preferred protein and 3 side dishes** while minimizing the number of dishes (to no more than **6**, excluding turkey and cranberry sauce), meeting **all dietary needs**, and honoring **family traditions and preferences**, such as green bean casserole, Italian pasta, and respecting older family members&#x27; tastes.
+
+---
+
+### ✅ Goals Recap &amp; Constraints Summary
+
+| Requirement | Details |
+|-----...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the detailed and thoughtful input. Your goal is clear: **minimize the number of dishes** (to **no more than 6**, excluding turkey and cranberry sauce) while **meeting all dietary needs**, including **gluten-free (celiac-safe)**, **nut-free**, **vegetarian/vegan**, **nightshade &amp; tomato allergies**, and **specific cultural traditions** like green bean casserole and Italian pasta.
+
+---
+
+### ✅ Key Requirements Recap
+
+| Constraint | Requirement |
+|---------|-------------|
+...          </p>
+          <p class="lt-p">
+Rubrics: 20/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s work together to create a **simple, thoughtful, and inclusive Thanksgiving dinner menu** that meets **all dietary needs**, honors your family’s traditions, and keeps the **number of dishes to a minimum (no more than 6)**.
+
+---
+
+### ✅ Key Requirements Recap:
+
+- **Total guests**: ~15  
+- **Core dishes (not counted)**: Turkey, Cranberry Sauce  
+- **Dietary needs**:
+  - ✅ 1 **Celiac guest** → NO gluten (even cross-contact); all dishes must be **gluten-free (GF)** or **free from gl...          </p>
+          <p class="lt-p">
+Rubrics: 15/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.577          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m so glad you&#x27;re thinking through this carefully. Helping your mother plan a **minimalist, inclusive**, and **family-friendly** Thanksgiving dinner is fantastic, and with your clear constraints and goals, we can create a **clean, efficient menu of just 6 dishes** (excluding turkey and cranberry sauce) that meets **all dietary needs**, balances tradition, and ensures every guest has:
+
+✅ A **protein option** (turkey gravy for everyone who eats turkey)  
+✅ **Three side dish options**...          </p>
+          <p class="lt-p">
+Rubrics: 18/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the incredibly detailed and thoughtful request. This is a classic case where thoughtful planning, empathy, and minimalism come together. We’ll create a **clean, efficient, and inclusive menu** with **only 6 dinner dishes** (excluding turkey and cranberry sauce), meeting **all dietary needs**, honoring **family traditions**, and ensuring **every guest has access to protein and three side dishes**.
+
+---
+
+### ✅ **Our Goals &amp; Constraints (Summarized)**
+
+| Requirement | Sta...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work together to create a **minimalist, inclusive, and family-approved Thanksgiving dinner menu** that meets **all dietary needs**, honors **Italian traditions**, respects **all restrictions**, and ensures **everyone gets protein + three side dishes**.
+
+---
+
+### ✅ GOALS &amp; RESTRICTIONS SUMMARY
+
+- **Total guests**: ~15  
+- **Dish limit**: **No more than 6 dishes** (excluding turkey &amp; cranberry sauce)  
+- **Protein availability**: Everyone must have a protein option.  
+  - Turkish...          </p>
+          <p class="lt-p">
+Rubrics: 23/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.885          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m happy to help your mother plan a **simple, inclusive, and family-friendly** Thanksgiving dinner with only **6 dishes** (excluding turkey and cranberry sauce), while honoring all dietary needs, traditions, and family preferences.
+
+---
+
+### ✅ Key Requirements Recap:
+- **Total guests:** ~15
+- **Menus must include:**
+  - One **gluten-free guest** with **celiac disease** → *Zero gluten contamination allowed in any dish.*
+  - One **gluten-intolerant guest** → *No gluten at all.*
+  - T...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work together to create a smart, efficient, and inclusive Thanksgiving dinner menu that meets **all the dietary needs**, honors your family&#x27;s traditions, and keeps the **number of dishes to just 6** (as requested — excluding turkey and cranberry sauce).
+
+---
+
+### ✅ **Key Goals &amp; Constraints Recap**
+
+- **Total guests**: ~15  
+- **Dishes allowed**: **No more than 6** (excluding turkey and cranberry sauce)  
+- **Protein**: Everyone should have a protein option.  
+  → **Turkey is a...          </p>
+          <p class="lt-p">
+Rubrics: 24/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.923          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work through this thoughtfully — you&#x27;ve given a very detailed and realistic scenario, and your goal of minimizing dishes while satisfying **all dietary needs**, **family traditions**, and **taste preferences** is both smart and doable.
+
+---
+
+### ✅ Summary of Key Requirements:
+| Requirement | Details |
+|-----------|--------|
+| **Guests (15 total)** | 1 gluten-free (celiac), 1 gluten intolerant (no gluten), 2 vegetarians, 1 vegan, 1 nightshade allergic, 1 tomato allergy, nut-free...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for providing such a detailed and thoughtful list. Your goal is clear: **minimize the number of dishes (no more than 6)** to make dinner efficient and joyful, while **fully respecting all dietary restrictions**, culinary traditions, and family preferences.
+
+Let’s carefully break down your requirements and then craft a **highly practical, inclusive, and minimal meal plan** (6 dishes total — *excluding turkey and cranberry sauce*) that:
+
+✅ Meets all dietary restrictions  
+✅ ...          </p>
+          <p class="lt-p">
+Rubrics: 18/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the thoughtful and detailed request. We&#x27;re aiming to create a **minimalist, inclusive, and family-pleasing** Thanksgiving dinner menu with **no more than 6 dishes** (excluding turkey and cranberry sauce), that satisfies all dietary needs, respects traditions, and includes a full protein option for everyone.
+
+---
+
+### 🏁 **Key Requirements Summary**
+We need to serve:
+- **Protein option for everyone** (Turkey, so gravy is included for anyone who can eat turkey)
+- **3 side...          </p>
+          <p class="lt-p">
+Rubrics: 13/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — I&#x27;m happy to help your family plan a Thanksgiving dinner that’s thoughtful, inclusive, and efficient with only **6 dishes** (excluding turkey and cranberry sauce). We’ve carefully considered **all dietary restrictions**, **family traditions**, and **guest preferences**, while ensuring **each person has access to protein and three side dishes**.
+
+---
+
+### ✅ GOALS ACHIEVED:
+- ✅ **Only 6 dinner dishes** (excluding turkey &amp; cranberry sauce)
+- ✅ **All guests get a protein option** (turke...          </p>
+          <p class="lt-p">
+Rubrics: 19/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.731          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely — thank you for the incredibly detailed and thoughtful request. Your goal of minimizing the number of dishes (to **no more than 6**, excluding turkey and cranberry sauce) while meeting **all dietary needs**, honoring **family traditions**, and ensuring **everyone has access to a protein and three side dishes** is both practical and deeply considerate.
+
+Let’s break this down clearly and systematically.
+
+---
+
+### ✅ **Key Goals &amp; Constraints Recap**
+
+| Requirement | Details |
+|----------...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s work together to create a **minimalist, inclusive, and family-pleasing Thanksgiving dinner menu** with **only 6 dishes** (excluding turkey and cranberry sauce), that meets **all dietary needs**, respects **cultural traditions**, and ensures **every guest has both a protein and 3 side dish options**.
+
+---
+
+### ✅ Goals Recap:
+- **Total dishes (excluding turkey &amp; cranberry sauce): ≤ 6**
+- Every guest has:
+  - A **protein option** (especially gravy for those who can eat turkey)
+  -...          </p>
+          <p class="lt-p">
+Rubrics: 20/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am trying to help my mother plan the menu for a large Thanksgiving dinner. There will be about 15 of us. I want to help her figure out how she can make the fewest number of dishes but still make eve...          </p>
+          <p class="lt-p">
+Response: Absolutely! Helping your mother plan a thoughtful, inclusive, and traditional Thanksgiving dinner with **fewer than 6 dishes** (excluding turkey and cranberry sauce) while meeting **all dietary needs** is a smart and doable goal—especially with smart groupings and shared components.
+
+Let’s break down your **constraints and goals clearly**, then build a **minimalist, inclusive menu of only 6 side dishes** (no more than 6), while ensuring:
+
+✅ All guests get:
+- A **protein option** (Turkey + gravy ...          </p>
+          <p class="lt-p">
+Rubrics: 22/26 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+3443                </td>
+                <td>
+0.923                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.923                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+3742                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+3527                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+4685                </td>
+                <td>
+0.577                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.577                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+3365                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+2631                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+2442                </td>
+                <td>
+0.885                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.885                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+2950                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+3048                </td>
+                <td>
+0.923                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.923                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+2771                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+3746                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+2470                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+4498                </td>
+                <td>
+0.731                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.731                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+4575                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+2866                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+380                </td>
+                <td>
+5179                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a thoughtfully crafted 2-day meal plan using **every single ingredient** on your list, with all constraints met:
+
+---
+
+**Recipe One: Spinach &amp; Apple-Spiced Ground Beef Stew (25 minutes)**  
+*Quick Cook*  
+
+**Ingredients:**  
+- 500g ground beef (20% fat content) – *use 2/3 (≈333g)*  
+- 200g spinach – *used entirely in this recipe*  
+- 400g chopped tomatoes – *used entirely in this recipe*  
+- 2 apples – *1 apple finely diced and caramelized*  
+
+**Instructions:**  
+1. Heat a lar...          </p>
+          <p class="lt-p">
+Rubrics: 6/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a thoughtfully crafted meal plan using **all** of your ingredients exactly once, with clear labeling, cooking times, and full adherence to your specific requirements:
+
+---
+
+**Recipe One: Spicy Spinach &amp; Ground Beef Stew with Apple Chipmunk Slices (Quick Cook)**  
+*Cooking Time: 15 minutes*  
+
+**Ingredients:**  
+- 300g (approx. 2/3 of 500g) ground beef (20% fat) – *used on Day 1*  
+- 200g spinach – *used in this recipe*  
+- 400g chopped tomatoes – *used in this recipe*  
+- 1 ap...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a thoughtful, fully inclusive meal plan using **every single ingredient** on your list — no leftovers, no waste — while following all your requirements.
+
+---
+
+**Recipe One: Spinach &amp; Apple Sausage Skillet with Tomato Base (20 minutes) — Quick Cook**  
+*Uses: 200g spinach, 2 apples, 400g chopped tomatoes, 2/3 of 500g ground beef (i.e., ~333g), 2 tortilla wraps (to serve)*
+
+**Ingredients:**  
+- 333g ground beef (20% fat)  
+- 200g fresh spinach, finely chopped  
+- 400g chopped to...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: **Recipe One: Spinach &amp; Apple Ground Beef Stew (25 minutes)**  
+*Quick Cook*  
+
+**Ingredients:**  
+- 500g ground beef (20% fat content) – *use 2/3 of this (≈333g)*  
+- 200g spinach – *used entirely*  
+- 400g chopped tomatoes – *used entirely*  
+- 2 apples – *use 1 apple (cored and thinly sliced)*  
+
+**Instructions:**  
+1. Heat a large skillet over medium heat. Add the 333g of ground beef and cook until browned, breaking it apart with a spoon. Drain any excess fat.  
+2. Add the chopped tomatoes a...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: **Recipe One: Spiced Beef &amp; Spinach Stew with Apple Chips (20 minutes)**  
+*Quick Cook*  
+
+**Ingredients:**  
+- 300g (2/3 of 500g) ground beef (20% fat content)  
+- 200g chopped spinach  
+- 400g chopped tomatoes  
+- 1 apple (peeled, cored, and thinly sliced into chips — use only the slices for chips)  
+- 2 tortilla wraps (to serve as tortilla chips, lightly toasted)  
+
+**Instructions:**  
+1. Heat a large skillet over medium heat. Add the ground beef and cook until browned and no longer pink (abo...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a thoughtfully crafted two-day meal plan using **every single ingredient** from your list — no leftovers, no omissions.  
+
+You’ll enjoy a balanced, delicious, and practical plan that meets all your specific requests:
+
+- All ingredients used (no leftovers)
+- 2/3 of the ground beef on Day 1, 1/3 on Day 2
+- Spinach used in Recipe One (Day 1)
+- Apple incorporated into a cooked dish (not eaten raw)
+- Both recipes use only the listed ingredients
+- Cooking time labels: &quot;Quick Cook&quot; (...          </p>
+          <p class="lt-p">
+Rubrics: 9/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a fully customized, ingredient-complete meal plan that uses **every single item** on your list — with your specific conditions respected:
+
+---
+
+**Recipe One: Spinach &amp; Apple Ground Beef Burrito Bowl (Quick Cook)**  
+*Uses: All spinach, 2/3 of ground beef (333g), 400g chopped tomatoes, 1 apple (sliced), 2 tortilla wraps*  
+**Cooking Time:** 15 minutes  
+
+**Ingredients:**  
+- 333g ground beef (20% fat)  
+- 200g spinach, roughly chopped  
+- 400g chopped tomatoes  
+- 1 apple, peel...          </p>
+          <p class="lt-p">
+Rubrics: 9/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: **Recipe One: Spicy Ground Beef &amp; Spinach Skillet with Apple-Crusted Tortilla Wraps (20 minutes)**  
+*Quick Cook*  
+
+**Ingredients:**  
+- 333g (two-thirds of 500g) ground beef (20% fat content)  
+- 200g spinach, chopped  
+- 200g chopped tomatoes, chopped  
+- 1 apple (cored, peeled, and diced into small cubes)  
+- 2 tortilla wraps (unfilled, to be used as wrappers)  
+
+**Instructions:**  
+1. Heat a large skillet over medium-high heat. Add the ground beef and cook until browned and no longer pink (...          </p>
+          <p class="lt-p">
+Rubrics: 6/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a thoughtfully crafted meal plan that uses **every single ingredient** from your list exactly once, follows your specific requirements, and ensures balanced, delicious meals for your holiday trip.
+
+---
+
+**Recipe One: Spinach &amp; Ground Beef Tacos with Apple-Spinach Sauce (Quick Cook)**  
+*Time: 15 minutes*  
+
+**Ingredients:**  
+- 300g ground beef (20% fat content – 2/3 of total beef for Day 1)  
+- 200g spinach (all spinach used in this recipe)  
+- 400g chopped tomatoes (split eq...          </p>
+          <p class="lt-p">
+Rubrics: 7/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: **Recipe One: Spicy Ground Beef &amp; Spinach Stew with Apple-Crusted Tortilla Wraps (25 minutes)**  
+*Quick Cook*  
+
+**Ingredients:**  
+- 300g ground beef (20% fat content) – *2/3 of total beef for Day 1*  
+- 200g spinach – *all spinach used in this recipe*  
+- 400g chopped tomatoes  
+- 1 apple (cored and thinly sliced) – *incorporated into the stew as apple chunks*  
+- 2 tortilla wraps – *used as warm, crispy wraps to serve with the stew*  
+
+**Instructions:**  
+1. Heat a large skillet over medium ...          </p>
+          <p class="lt-p">
+Rubrics: 6/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: **Recipe One: Spaghetti with Ground Beef and Spinach (20 minutes)**  
+*Quick Cook*  
+
+**Ingredients:**  
+- 500g ground beef (20% fat content) – 2/3 portion (≈333g)  
+- 200g chopped spinach  
+- 400g chopped tomatoes  
+- 1 apple (cored and diced) – for sauce base (diced into small cubes)  
+- 2 tortilla wraps – used as a wrap base after sauce is prepared  
+
+**Instructions:**  
+1. Heat a large skillet over medium heat. Add the 333g of ground beef and cook until browned and no longer pink (3–4 minute...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a thoughtful, fully comprehensive meal plan that uses **every single ingredient** from your list exactly once, follows all your specific requirements, and balances flavor, practicality, and meal structure.
+
+---
+
+**Recipe One: Spinach &amp; Apple-Tomato Beef Stew (20 minutes)**  
+*Quick Cook*  
+
+**Ingredients:**  
+- 500g ground beef (20% fat content) – *2/3 used (333g)*  
+- 200g spinach – *all used*  
+- 400g chopped tomatoes  
+- 2 apples – *1 apple, thinly sliced and cooked in*  
+-...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a meal plan that uses **every single ingredient** on your list, follows your specific requirements, and creates two delicious, balanced recipes that utilize all your ingredients with no leftovers.
+
+---
+
+**Recipe One: Spicy Ground Beef &amp; Spinach Stew with Apple-Infused Tomatoes (Quick Cook)**  
+*(Cooking Time: 18 minutes)*
+
+**Ingredients:**  
+- 333g ground beef (2/3 of total beef – as required)  
+- 200g spinach (all used in this meal)  
+- 400g chopped tomatoes  
+- 1 apple (core...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: **Recipe One: Spicy Ground Beef &amp; Spinach Stew with Apple-Chili Crumble (Quick Cook)**  
+*Cooking Time: 18 minutes*  
+
+**Ingredients:**  
+- 333g (2/3 of 500g) ground beef (20% fat content)  
+- 200g spinach, chopped  
+- 400g chopped tomatoes, diced  
+- 1 apple (cored and finely diced – use for crumble, not raw)  
+- 1 tbsp olive oil (for sautéing)  
+- 1 small onion (optional, if available; not listed but not required per ingredient list) → *Note: You only have listed ingredients, so no onion is us...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a complete, ingredient-agnostic meal plan that uses **every single item** from your list exactly once, with your specific requirements met:
+
+---
+
+**Recipe One: Spinach &amp; Apple-Spinach Beef Tacos (Quick Cook)**  
+*Uses: 500g ground beef (20% fat), 200g spinach, 400g chopped tomatoes, 2 apples, 2 tortilla wraps*  
+✅ All spinach is used in Day 1  
+✅ Apple is cooked into the dish (not raw)  
+✅ 2/3 of the beef (≈333g) is used on Day 1  
+✅ Cooking time: 18 minutes → **Quick Cook**
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am leaving to go on holiday in 2 days and i want to use everything in my fridge. I have a specific list of ingredients left and I want you to create a meal plan of 2 different recipes using all of t...          </p>
+          <p class="lt-p">
+Response: **Recipe One: Spicy Ground Beef &amp; Spinach Tacos with Apple Salsa (Quick Cook)**  
+*Cooking Time: 15 minutes*  
+
+**Ingredients:**  
+- 333g ground beef (2/3 of 500g)  
+- 200g spinach, chopped  
+- 400g chopped tomatoes, diced  
+- 1 apple (peeled, cored, and finely diced)  
+- 2 tortilla wraps, warmed  
+
+**Instructions:**  
+1. In a skillet, heat a small amount of oil over medium heat.  
+2. Add the ground beef and cook until no longer pink, breaking it into small crumbles. Drain excess fat.  
+3. Stir ...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+870                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+3779                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+4151                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+788                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+817                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+1296                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+2662                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+944                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+1061                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+1733                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+802                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+1002                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+2832                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+1196                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+984                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+222                </td>
+                <td>
+765                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,4579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 22</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 22  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T13:12:32  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely — I’m excited to help you strengthen this program session with thoughtful, pedagogically grounded, and practical support. Below is a **comprehensive, step-by-step response** to your 11 requests, all tailored to your **Session 2: Understanding Digital Safety in Everyday Apps**, with clear alignment to your training goals.
+
+---
+
+## ✅ **Step One: Revised &amp; Categorised Session Objectives**
+
+| Original Objective | Revised &amp; Concise Version | Category |
+|-------------------|----------------...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, structured, and pedagogically sound** response to all ten steps of your program planning assignment. The content is tailored specifically to your **Session 2: Understanding Digital Safety in Everyday Apps**, grounded in adult learning principles, actionable outcomes, and research-backed practices.
+
+---
+
+## ✅ Step One: Revised &amp; Concise Session Objectives (Affective, Cognitive, Behavioral)
+
+| Original Objective | Revised &amp; Concise Version | Type |
+|--------...          </p>
+          <p class="lt-p">
+Rubrics: 20/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.909          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **fully developed and structured response** to all 11 steps of your program planning assignment, tailored specifically to **Session 2: Understanding Digital Safety in Everyday Apps**. The content is classroom-ready, evidence-based, and aligned with adult learning principles (andragogy), with clear distinctions between affective, cognitive, and behavioral objectives.
+
+---
+
+### **Step One: Revised, Concise Session Objectives with Category Labeling**
+
+| Original Objective | R...          </p>
+          <p class="lt-p">
+Rubrics: 20/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.909          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, step-by-step ideation support** tailored specifically to your **Session 2: Understanding Digital Safety in Everyday Apps**, aligning with your training goals, pedagogical principles, and student-centered design.
+
+---
+
+## ✅ **Step One: Revised &amp; Concise Session Objectives with Affective, Cognitive, or Behavioral Labels**
+
+| Original Objective | Revised &amp; Concise Version | Level |
+|-------------------|----------------------------|-------|
+| Define at least f...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a comprehensive, well-structured response to each of your 11 steps for **Session 2: Understanding Digital Safety in Everyday Apps**.
+
+---
+
+### ✅ **Step One: Revised &amp; Categorized Session Objectives**  
+*(Each objective is now concise, action-oriented, and clearly labeled as Affective, Cognitive, or Behavioral)*
+
+| Original Objective | Revised &amp; Concise Version | Type |
+|-------------------|----------------------------|------|
+| Define at least five key digital terms (e.g., a...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a comprehensive, step-by-step response to your program planning assignment, carefully aligned with your session goals and educational principles. This version improves clarity, academic tone, structure, and practical application while providing actionable feedback and suggestions based on current best practices in adult education and digital safety training.
+
+---
+
+## ✅ **Step One: Revised &amp; Classified Session Objectives**
+
+| Original Objective | Revised (More Concise) | Type ...          </p>
+          <p class="lt-p">
+Rubrics: 22/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s a **comprehensive, structured, and professionally developed** response to your 11-part program planning assignment, tailored specifically to **Session 2: Understanding Digital Safety in Everyday Apps**.
+
+---
+
+### ✅ Step One: Revised &amp; Concise Session Objectives (with Affection, Cognitive, or Behavioral Label)
+
+| Original Objective | Revised &amp; Concise Version | Type |
+|-------------------|----------------------------|------|
+| Define at least five key digital terms (e.g., algo...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, step-by-step response** to your program planning assignment, with clear, concise revisions to your session objectives, alignment to broader goals, assessment suggestions, a full assessment tool concept, references, feedback on your original work, and all the additional requests you listed.
+
+---
+
+## ✅ **Step One: Revised Session Objectives (Concise &amp; Categorized)**
+
+| Original Objective | Revised Objective | Type |
+|-------------------|-------------------|-...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, step-by-step response** to your program planning assignment, fully aligned with your goals, structured clearly, and grounded in educational best practices. This includes all **11 steps** as requested — with **refined objectives, alignment, assessment tools, a full assessment concept, APA references, feedback, logistical suggestions, and progression ideas**.
+
+---
+
+## ✅ Step One: Revised &amp; Concise Session Objectives (with Affective, Cognitive, Behavioral Lab...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, structured, and pedagogically sound** response to your 11-step request for your **&quot;Session 2: Understanding Digital Safety in Everyday Apps&quot;** training program. Every step is clearly addressed with revisions, rationale, assessments, practical tools, and professional guidance—all tailored to adult learners (parents/guardians) and rooted in andragogical principles.
+
+---
+
+## ✅ Step One: Revised &amp; Concise Session Objectives (with Affective, Cognitive, Behavior...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, step-by-step response** to your program planning assignment, including all 11 requested steps. This version is tailored specifically to **Session 2: Understanding Digital Safety in Everyday Apps**, with clear, concise objectives, alignment with broader goals, practical assessments, and actionable logistics.
+
+---
+
+### ✅ Step One: Revised and Concise Session Objectives with Affiliation (Affective, Cognitive, Behavioral)
+
+| Original Objective | Revised (Conci...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, structured, and pedagogically sound response** to your full program planning assignment. I&#x27;ve addressed **all ten steps** with clarity, educational alignment, practicality, and consistency with best practices in adult education and digital safety training.
+
+---
+
+## ✅ **Step One: Revised &amp; Concise Session Objectives (with Affective, Cognitive, or Behavioral Labels)**
+
+| Original Objective | Revised &amp; Concise Version | Objective Type |
+|-------------------|-...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, well-structured, and classroom-ready ideation response** to your program planning assignment — covering all 11 steps as requested, with clarity, educational rigor, and practical application.
+
+---
+
+## ✅ Step One: Revised &amp; Concise Session Objectives with Affiliation (Affective, Cognitive, Behavioral)
+
+| Original Objective | Revised &amp; Concise Version | Type |
+|-------------------|----------------------------|------|
+| Define at least five key digital terms (...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, professionally structured response** to your 11-step program planning assignment, fully aligned with your session objectives and goals. This includes **revisions to session objectives**, alignment with larger educational goals, assessment instruments, a detailed assessment tool concept, references, revision feedback, logistical suggestions (timing, capacity, pre-survey, home activities), next session ideas, facilitator recommendations, and APA 7 references...          </p>
+          <p class="lt-p">
+Rubrics: 19/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.864          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Below is a **comprehensive, class-appropriate response** to your 11-step program planning assignment, fully aligned with your session goal: **&quot;Understanding Digital Safety in Everyday Apps&quot;** for parents and guardians of adolescents.
+
+---
+
+## ✅ **Step One: Revised &amp; Concise Session Objectives with Affection, Cognitive, or Behavioral Labels**
+
+| Original Objective | Revised &amp; Concise Version | Type |
+|-------------------|----------------------------|------|
+| Define at least five key ...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I have a program planning assignment that I am working on for class that I need ideation support with.
+Step One: Take the Session Objectives I created for the session then suggest each as a revised a...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a **comprehensive, well-organized, and pedagogically grounded response** to your 11-step program planning assignment, specifically tailored to **Session 2: Understanding Digital Safety in Everyday Apps**, with clear revisions, alignment, assessment development, practical implementation guidance, and professional recommendations—all in line with adult learning principles (andragogy), digital safety best practices, and educational standards.
+
+---
+
+## 🔍 Step One: Revised &amp; Catego...          </p>
+          <p class="lt-p">
+Rubrics: 21/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.955          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3311                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3259                </td>
+                <td>
+0.909                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.909                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3148                </td>
+                <td>
+0.909                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.909                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3428                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+2950                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3389                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3067                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3391                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3707                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3364                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3257                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3311                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3276                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3187                </td>
+                <td>
+0.864                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.864                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3216                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+998                </td>
+                <td>
+3367                </td>
+                <td>
+0.955                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.955                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That’s a fantastic and richly creative idea — combining daily self-improvement, gamification, fantasy narrative, and structured habits into a **text-based, Excel-friendly system**. You&#x27;re essentially building a **self-governing personal &quot;fantasy world&quot;** where everyday tasks become quests, and progress is rewarded with experience, levels, and narrative advancement.
+
+Let’s break down your vision into actionable, Excel-ready components — with clear **engagement drivers**, **fantasy flavor**, **exp...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: Great idea — you&#x27;re blending productivity, gamification, storytelling, and daily habit reinforcement in a way that feels deeply personal and engaging. Using **Microsoft Excel** as the starting point is totally valid, and there are *strong advantages* to doing it that way — especially for your core vision.
+
+Let me break this all down clearly and pragmatically to help you build a compelling, user-engaging, daily-updating **text-based Excel template** that evolves into something fun, narrative-driv...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That&#x27;s a fantastic and creative idea — blending **daily habit tracking**, **fantasy-themed engagement**, and **gamification** into a practical, accessible tool. You&#x27;re absolutely right that a **text-based**, Excel-driven prototype is the perfect starting point, especially since Excel offers:
+
+✅ Built-in formulas  
+✅ Simple data validation and checkboxes  
+✅ Easy sharing via file-sharing platforms (Google Drive, Dropbox, OneDrive)  
+✅ Lightweight, no-frills interface for mass accessibility  
+✅ St...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: Great question—and excellent start! You&#x27;re clearly thinking creatively and with user engagement in mind. Let&#x27;s go step-by-step through your idea, tailored specifically to **Microsoft Excel**, while keeping the **fantasy-gaming vibe**, **daily engagement hooks**, and **practical usability** in focus.
+
+---
+
+## ✅ Final Answer:  
+**Yes, Excel is a better fit for this project at the early phase—especially with the fantasy gamification element—because it allows dynamic formulas, conditional formatting...          </p>
+          <p class="lt-p">
+Rubrics: 19/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.760          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: Absolutely — you&#x27;ve got a **fantastic**, creative foundation here! Combining **daily habit tracking, gamified motivation, and a narrative-driven adventure** into a practical tool like **Microsoft Excel** is not only feasible but actually *very* powerful. Let&#x27;s walk through your idea thoughtfully and systematically — with clear, actionable suggestions tailored to **Excel**, while answering your core questions about **engagement, structure, experience points, and format choices**.
+
+---
+
+## ✅ Answe...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That&#x27;s a fantastic and imaginative concept — blending a daily habit tracker, gamified engagement, narrative immersion, and personal growth into a **text-based, Excel-driven system**. You’re essentially building a **personalized fantasy RPG for self-improvement**, which is both novel and deeply motivating.
+
+Let’s go through your question in a structured, actionable way — answering all your core needs while staying grounded in the **constraints and strengths of Microsoft Excel**, and also addressi...          </p>
+          <p class="lt-p">
+Rubrics: 23/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.920          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That&#x27;s a fantastic and highly engaging idea — combining wellness, personal development, and gamified storytelling in a simple, accessible format like **Microsoft Excel** is not only practical but actually *very* effective for daily habit adoption. You&#x27;re essentially building a **fantasy-powered personal management system** that turns mundane tasks into quests.
+
+Let’s break this down thoroughly, answering **your specific questions** and giving you actionable, Excel-friendly guidance — including *...          </p>
+          <p class="lt-p">
+Rubrics: 23/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.920          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That&#x27;s a fantastic and deeply engaging idea — blending productivity, narrative fun, and gamification into a *text-based* system that can be shared freely in **Microsoft Excel**. You&#x27;re absolutely right: this is a *fantasy-powered personal management system*, and the excitement comes from turning daily habits into quests, tasks into battles, and chores into &quot;level-ups.&quot;
+
+Let&#x27;s tackle your question **step-by-step**, with clear, actionable answers tailored to your **Excel-first phase**, then addres...          </p>
+          <p class="lt-p">
+Rubrics: 23/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.920          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That&#x27;s a fantastic and creative idea — blending personal productivity with fantasy gaming mechanics! Combining the structure of a *text-based adventure* game with the daily habits of real life is both innovative and deeply engaging. And yes, **Excel is actually perfectly suited** for this initial phase — especially because of its built-in features for automation, conditional formatting, checklists, formulas, and data tracking.
+
+Let’s dive into your request **step-by-step**, with clear, actionabl...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: Great question — and excellent foundational thinking! You&#x27;re clearly building something meaningful, engaging, and grounded in *real-life behaviors*, wrapped in a high-level fantasy narrative. Let&#x27;s go through your full request **step-by-step**, tailored specifically to **Microsoft Excel as your initial platform**, because it makes sense for the constraints and goals you’ve described.
+
+---
+
+## ✅ Why Excel is Still the Right Starting Point (Even Though It’s &quot;Text-Based&quot;)
+
+**Microsoft Word is NOT b...          </p>
+          <p class="lt-p">
+Rubrics: 22/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.880          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: Absolutely — your idea is **fantastic**, and it&#x27;s exactly the kind of blend between productivity, storytelling, and gamification that can deeply engage users. Let&#x27;s break this down thoughtfully and practically **for the Excel phase** (your current starting point), so you can build a compelling, sticky, and *daily-interactive* template that people will want to update.
+
+---
+
+## ✅ Why Excel is a Strong Platform for This (Even if Word is an Option)
+
+### 🚀 Excel vs. Word: A Clear Decision
+- **Excel i...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That&#x27;s a fantastic and creative concept — blending **daily habit tracking, gamification, fantasy storytelling, and structured productivity** into a text-based, Excel-driven tool. You&#x27;re essentially building a **&quot;fantasy-powered personal development engine&quot;**, and your idea has real potential to be engaging, fun, and sustainable — especially for people who struggle with consistency.
+
+Let’s go step-by-step through your request, with clear answers to all your questions, tailored specifically for th...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That&#x27;s a fantastic and creative idea — combining practical personal development tools with a narrative-driven, gamified fantasy experience is both engaging and emotionally resonant. You&#x27;re absolutely right that **Microsoft Excel** is actually *excellent* for your initial phase — especially because of its **flexibility, formula power, automation potential, and structured data handling**. Let’s walk through everything you’ve asked with clarity, practicality, and actionable takeaways — all while ke...          </p>
+          <p class="lt-p">
+Rubrics: 24/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.960          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That’s a **fantastic** idea — blending **daily habits, role-playing mechanics, and personal growth** into a creature of habit-tracking fun, all wrapped in a format that’s accessible and shareable. Your vision of a *text-based adventure game with D&amp;D-inspired progression* is both creative and deeply engaging. Let’s walk through your request systematically so you can **build a compelling, engaging, and easy-to-update Excel template** — while also answering your question about **Word vs. Excel**.
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That’s a fantastic and imaginative idea — blending real-life productivity with a fantasy-themed, gamified experience. The core concept of **text-based adventure gameplay** woven into daily routines (especially using Microsoft Excel as the starting platform) is both creative and highly engaging. Let’s go step by step, address your request thoroughly, and give you clear, actionable guidance tailored to **Excel**, including *why* it still works despite being a &quot;constrained&quot; tool.
+
+---
+
+## ✅ Why Exc...          </p>
+          <p class="lt-p">
+Rubrics: 18/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.720          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I&#x27;ve got an idea I want to work through. Right now, it is all a &quot;text-based&quot; idea, probably created and formatted in Microsoft Excel, so the template can be shared for free with others.
+
+What I need...          </p>
+          <p class="lt-p">
+Response: That&#x27;s a fantastic and creative idea — blending daily habit-building, gamified engagement, and narrative immersion into a simple, shareable format. You&#x27;re absolutely right: **Microsoft Excel** is a powerful starting point — especially for structured data, formulas, automation, and daily tracking — even if it feels &quot;text-based&quot; at first. Let’s walk through your entire vision step-by-step, giving you **clear, actionable guidance** tailored to your **Excel-first phase**, with answers to your key qu...          </p>
+          <p class="lt-p">
+Rubrics: 21/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.840          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+2979                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+2997                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+3300                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+2928                </td>
+                <td>
+0.760                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.760                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+3223                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+2976                </td>
+                <td>
+0.920                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.920                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+3343                </td>
+                <td>
+0.920                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.920                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+2895                </td>
+                <td>
+0.920                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.920                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+3382                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+2876                </td>
+                <td>
+0.880                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.880                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+2865                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+2666                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+3453                </td>
+                <td>
+0.960                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.960                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+3198                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+2984                </td>
+                <td>
+0.720                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.720                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+432                </td>
+                <td>
+3224                </td>
+                <td>
+0.840                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.840                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon,  
+
+Here are the fully customized, grammar-accurate, and professionally worded repair status emails for your clients. Each email is tailored to the vehicle status using the correct template, with proper addressing, punctuation, and the requested PS. for all paint department vehicles affected by the backlog.  
+
+---  
+
+**Subject: 10521 Repair Status Update – Paint**  
+Good afternoon Ruby,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Yo...          </p>
+          <p class="lt-p">
+Rubrics: 10/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.909          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby Rockhound,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+PS: There is currently a minor backlog in the paint department, which may result in a slight delay. I will reach out directly if this occurs.  
+
+-----------------------------------...          </p>
+          <p class="lt-p">
+Rubrics: 6/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon,  
+
+Here are the fully personalized and properly formatted repair status update emails for your clients, using the correct templates based on vehicle status. Each email is addressed by first name, includes accurate grammar, capitalization, and punctuation, and includes the requested PS for paint department backlog notices.  
+
+---  
+
+**Subject: 10521 Repair Status Update – Paint**  
+Good afternoon Ruby,  
+
+I am just reaching out to provide you with an update regarding your 2019 Sub...          </p>
+          <p class="lt-p">
+Rubrics: 9/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.818          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby Rockhound,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+*PS: There may be a minor delay due to a backlog in the paint department. I will reach out to you if this occurs.*  
+
+-----------------------------------------------------------
+
+G...          </p>
+          <p class="lt-p">
+Rubrics: 5/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.455          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby Rockhound,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+PS: There may be a minor delay due to a backlog in the paint department. I will reach out to you if this occurs.  
+
+------------------------------------------------------
+
+Good aft...          </p>
+          <p class="lt-p">
+Rubrics: 4/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon,  
+
+Here are the fully drafted, personalized repair status update emails for your customers. Each email is formatted according to the vehicle status, with correct grammar, capitalization, punctuation, and a PS for paint department backlogs as requested. Emails are separated by a horizontal line for easy copying and pasting.
+
+---
+
+**Subject: 10521 Repair Status Update – Paint**  
+Body:  
+
+Good afternoon Ruby,  
+
+I am just reaching out to provide you with an update regarding your 20...          </p>
+          <p class="lt-p">
+Rubrics: 10/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.909          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+PS: There may be a minor delay in the paint department due to a current backlog. I will reach out to you directly if this impacts your schedule.  
+
+----------------------------------------  ...          </p>
+          <p class="lt-p">
+Rubrics: 4/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby Rockhound,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+PS: There may be a minor delay due to a backlog in the paint department. I will reach out to you if this occurs.  
+
+------------------------------------------------------------  
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 4/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby Rockhound,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+*PS: There may be a minor delay due to a backlog in the paint department. I will reach out to you if this occurs.*  
+
+----------------------------------------  
+
+Good afternoon Jef...          </p>
+          <p class="lt-p">
+Rubrics: 6/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+PS: There may be a minor delay due to a backlog in the paint department. I will reach out to you directly if this occurs.  
+
+------------------------------------------------------------  
+
+G...          </p>
+          <p class="lt-p">
+Rubrics: 6/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby Rockhound,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+PS: There may be a minor delay due to a backlog in the paint department. I will reach out to you if this impacts your schedule.  
+
+-------------------------------------------------...          </p>
+          <p class="lt-p">
+Rubrics: 5/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.455          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon,  
+
+Here are the fully customized, properly formatted update emails for your customers, based on their vehicle status and the specified templates. Each email is individually addressed, consistently grammatically correct, and includes the requested PS for paint department backlog notifications where applicable.  
+
+---
+
+**Subject: 10521 Repair Status Update – Paint**  
+Good afternoon Ruby,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Y...          </p>
+          <p class="lt-p">
+Rubrics: 4/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby Rockhound,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+PS: There is currently a minor backlog in the paint department, which may result in a slight delay. I will reach out directly if this impacts your timeline.  
+
+--------------------...          </p>
+          <p class="lt-p">
+Rubrics: 4/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby Rockhound,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+PS: There may be a minor delay in the paint department due to a current backlog. I will reach out to you directly if this impacts your timeline.  
+
+--------------------------------...          </p>
+          <p class="lt-p">
+Rubrics: 5/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.455          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Certainly! Below are the properly formatted, personalized, and grammatically correct update emails for each customer. Each email is tailored based on the vehicle status using your specified templates. A PS has been added to all paint department vehicles to address the anticipated backlog, as requested.
+
+---
+
+**Subject: 10521 Repair Status Update – Paint**  
+Good afternoon Ruby,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now enter...          </p>
+          <p class="lt-p">
+Rubrics: 8/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.727          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I work at a body shop and need to update clients on their vehicles repair status. We have 40-50+ vehicles in the shop at any given time, so updating customers eats up a lot of time every day and I nee...          </p>
+          <p class="lt-p">
+Response: Good afternoon Ruby Rockhound,  
+
+I am just reaching out to provide you with an update regarding your 2019 Subaru Forester. Your vehicle has now entered our Paint department, and we remain on schedule for a completion date of November 26, 2025.  
+
+Please do not hesitate to reach out with any questions.  
+Thank you,  
+
+PS: There is a current backlog in the paint department, which may result in a minor delay. I will reach out to you directly if this occurs.  
+
+-------------------------------------...          </p>
+          <p class="lt-p">
+Rubrics: 4/11 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1196                </td>
+                <td>
+0.909                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.909                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1087                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1309                </td>
+                <td>
+0.818                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.818                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1056                </td>
+                <td>
+0.455                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.455                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1109                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1221                </td>
+                <td>
+0.909                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.909                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1214                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1057                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1065                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1084                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1073                </td>
+                <td>
+0.455                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.455                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1150                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1097                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1089                </td>
+                <td>
+0.455                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.455                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1164                </td>
+                <td>
+0.727                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.727                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1095                </td>
+                <td>
+1054                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a carefully crafted, realistic, and challenging extra-credit diagnostic question tailored for a medical doctorate program. The scenario is designed so that students *must* dig through clinical details, reasoning for lab tests, subtle clues, and patient history to arrive at a diagnosis of **psoriatic arthritis (PsA)** — a seronegative, often underdiagnosed autoimmune condition — without relying on AI or obvious red flags.
+
+The scenario includes:
+
+- Realistic patient presentati...          </p>
+          <p class="lt-p">
+Rubrics: 23/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a carefully crafted, realistic, and thoughtfully designed **extra credit diagnostic case** tailored for a medical doctorate program. The goal is to **force students to dig deep**, recognize subtle clues, and avoid superficial AI shortcuts. The diagnosis is **psoriatic arthritis (PsA)** — a complex, seronegative, often under-recognized autoimmune condition — with realistic clinical details, red herrings, and hidden clues that only emerge through careful synthesis of history, l...          </p>
+          <p class="lt-p">
+Rubrics: 20/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.870          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely. Here&#x27;s a meticulously crafted, realistic, and challenging extra-credit case for your medical doctorate program. It&#x27;s designed to **require thoughtful clinical reasoning**, avoid AI-ready shortcuts, and embed subtle but meaningful clues related to **psoriatic arthritis (PsA)** — specifically a **seronegative, less commonly recognized form**.
+
+This case includes realistic patient-reported symptoms, lab workups with intentional red herrings and meaningful outliers, family history that p...          </p>
+          <p class="lt-p">
+Rubrics: 23/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a thoughtfully crafted, realistic, and challenging extra-credit diagnostic case designed specifically for your medical doctorate students. It centers on **psoriatic arthritis (PsA)** — a seronegative, often subtly presenting autoimmune condition — with narrative depth, real-world clinical details, and carefully placed subtle clues that require active diagnostic reasoning.
+
+---
+
+**Extra-Credit Diagnostic Case: The Patient Who Wasn’t “Sick” — But Was**  
+*Due at any point durin...          </p>
+          <p class="lt-p">
+Rubrics: 19/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.826          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a thoughtful, realistic, and challenging extra-credit diagnostic case tailored for first-year medical students in a medical doctorate program. The case is designed to mirror real-world clinical scenarios where subtle clues and layered patient history are key to uncovering a complex diagnosis like **psoriatic arthritis (PsA)** — specifically, a **seronegative, non-rheumatoid form** that doesn&#x27;t present with classic markers.
+
+This case avoids overloading with buzzwords, include...          </p>
+          <p class="lt-p">
+Rubrics: 18/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.783          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely. Here&#x27;s a **comprehensive, realistic, and challenging extra-credit case** designed specifically for your medical doctorate program — centered around **seronegative, non-RA, non-Lupus auto-immune arthritis: psoriatic arthritis (PsA)**. The goal is to *force students to think like clinicians*, dig through subtle clues, and avoid relying on AI shortcuts.
+
+This patient scenario is crafted to resemble real-world presentations: detailed, layered, with **realistic clinical reasoning pathways...          </p>
+          <p class="lt-p">
+Rubrics: 21/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.913          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely. Here’s a carefully crafted, realistic, and intellectually demanding extra-credit clinical case designed specifically for a medical doctorate program. The scenario is designed to **simulate real-world diagnostic challenges**—no AI shortcuts, no buzzwords, and no obvious flags. Students must dig through subtle clues, interpret lab values in context, recognize misdirections, and synthesize information over time to arrive at the diagnosis of **psoriatic arthritis (PsA)**—a seronegative, ...          </p>
+          <p class="lt-p">
+Rubrics: 22/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.957          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a thoughtfully crafted, **realistic, and challenging** extra credit case designed specifically for medical students in a docket-heavy, clinically grounded environment. It&#x27;s designed to:
+
+- Mimic real-world patient encounters  
+- Require deep diagnostic reasoning  
+- Include subtle, plausible clues pointing toward **psoriatic arthritis (PsA)** — without overt medical terminology or obvious red flags  
+- Avoid common pitfalls (like lupus or RA)  
+- Include **realistic lab worku...          </p>
+          <p class="lt-p">
+Rubrics: 23/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a meticulously crafted, **realistic, and challenging extra credit case** for your medical doctorate program, designed to test diagnostic reasoning in **autoimmune conditions**, specifically **psoriatic arthritis (PsA)**. The case is layered with subtle but meaningful clues, subtle red herrings, and realistic patient narratives — all without using medical buzzwords or overt signs of PsA.
+
+The goal is to make students **dig through the data**, interpret lab patterns, assess fam...          </p>
+          <p class="lt-p">
+Rubrics: 22/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.957          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely. Here&#x27;s a thoughtfully crafted, realistic, and clinically immersive extra-credit case study designed specifically for your medical doctorate program. The goal is to mimic real-world diagnostic ambiguity—where clues are subtle, often misdirecting, and require deep clinical reasoning. The case centers on **psoriatic arthritis (PsA)**, a seronegative, often underdiagnosed condition that fits your criteria: complex, nuanced, and not immediately apparent from standard labs or symptoms.
+
+--...          </p>
+          <p class="lt-p">
+Rubrics: 23/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — this is a fantastic concept for a probing, thoughtfully designed extra credit question that fosters clinical reasoning, deepens diagnostic intuition, and avoids the pitfalls of AI-driven shortcut answers. Below is a fully crafted, realistic, and subtly layered case presentation centered on **psoriatic arthritis (PsA)** — seronegative, complex, with real-world diagnostic clues buried in patient history and lab data, avoiding buzzwords and obvious flags.
+
+---
+
+### **Extra Credit Diagn...          </p>
+          <p class="lt-p">
+Rubrics: 23/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a thoughtfully crafted, realistic, and subtle extra credit question designed specifically for your MD program. The goal is to **challenge students to think like clinicians**, dig through layered patient details, and avoid relying on AI shortcuts. The case is grounded in real-world clinical practice, includes plausible red herrings, and subtly points toward **psoriatic arthritis (PsA)** without overt cues — the kind of information a real clinician might notice during history a...          </p>
+          <p class="lt-p">
+Rubrics: 17/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.739          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely. Here&#x27;s a carefully crafted, realistic, and thoughtfully complex **extra credit case** designed for your medical doctorate program — specifically targeting **psoriatic arthritis (PsA)** in a way that mirrors real-world clinical reasoning, avoids AI shortcuts, and requires deep diagnostic thinking.
+
+---
+
+### 🌟 **Extra Credit Case: &quot;The Patient Who Wasn’t On the List&quot;**  
+*(Due at any point during the semester — no deadline, just submit your full reasoning)*
+
+---
+
+**Patient Profile:**
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 20/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.870          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here’s a rich, realistic, and thoughtfully designed **extra credit diagnostic case** tailored for a medical doctorate program. It centers on **psoriatic arthritis (PsA)**, a seronegative, often underdiagnosed autoimmune condition that mimics other inflammatory or degenerative arthropathies. The goal is to **require deep clinical reasoning**, not shortcut diagnosis via AI or textbook recall.
+
+---
+
+### 🎯 Extra Credit Case: &quot;The Patient Who Came in with a Simple Complaint But Never a D...          </p>
+          <p class="lt-p">
+Rubrics: 21/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.913          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a meticulously crafted, realistic, and intellectually rigorous extra credit patient case designed specifically for your medical doctorate program. It centers on **psoriatic arthritis (PsA)** — a seronegative, often underdiagnosed autoimmune condition — and is structured to force students to dig through layered real-world clinical details, avoid superficial conclusions, and truly think like clinicians.
+
+---
+
+### 🏥 **Extra Credit Case: “A Patient Who Didn’t Fit the Pattern”**  ...          </p>
+          <p class="lt-p">
+Rubrics: 23/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 1.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am wanting to create an extra credit question for the start of the semester in my medical doctorate program. I want to let the students take all semester to determine how to diagnose a patient. I do...          </p>
+          <p class="lt-p">
+Response: Absolutely — here&#x27;s a **realistic, challenging, and carefully designed extra credit question** tailored for your medical doctorate program. The goal is to simulate a real-world clinical scenario where students must **dig through subtle clues, interpret lab results in context, and synthesize history and symptoms** to arrive at a diagnosis of **psoriatic arthritis (PsA)** — a seronegative, often under-recognized autoimmune condition.
+
+This case is crafted so that:
+- It feels like a real patient en...          </p>
+          <p class="lt-p">
+Rubrics: 21/23 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.913          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2263                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2334                </td>
+                <td>
+0.870                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.870                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2677                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2344                </td>
+                <td>
+0.826                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.826                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2223                </td>
+                <td>
+0.783                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.783                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2869                </td>
+                <td>
+0.913                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.913                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2822                </td>
+                <td>
+0.957                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.957                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2891                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2829                </td>
+                <td>
+0.957                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.957                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2578                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2266                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2194                </td>
+                <td>
+0.739                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.739                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2765                </td>
+                <td>
+0.870                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.870                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2118                </td>
+                <td>
+0.913                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.913                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2638                </td>
+                <td>
+1.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+1.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+423                </td>
+                <td>
+2503                </td>
+                <td>
+0.913                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.913                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

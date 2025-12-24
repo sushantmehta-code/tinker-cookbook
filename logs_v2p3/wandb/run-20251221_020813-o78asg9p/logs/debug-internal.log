@@ -1,0 +1,15 @@
+{"time":"2025-12-21T02:08:13.642364-08:00","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-21T02:08:13.9751-08:00","level":"INFO","msg":"stream: created new stream","id":"o78asg9p"}
+{"time":"2025-12-21T02:08:13.975162-08:00","level":"INFO","msg":"handler: started","stream_id":"o78asg9p"}
+{"time":"2025-12-21T02:08:13.975323-08:00","level":"INFO","msg":"writer: started","stream_id":"o78asg9p"}
+{"time":"2025-12-21T02:08:13.975333-08:00","level":"INFO","msg":"stream: started","id":"o78asg9p"}
+{"time":"2025-12-21T02:08:13.975373-08:00","level":"INFO","msg":"sender: started","stream_id":"o78asg9p"}
+{"time":"2025-12-21T04:57:15.186164-08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/o78asg9p/file_stream\": read tcp 10.0.0.44:60429->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-12-21T10:02:18.578541-08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/o78asg9p/file_stream\": read tcp 10.0.0.44:60904->35.186.228.49:443: read: connection reset by peer"}
+{"time":"2025-12-21T10:20:37.656805-08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/o78asg9p/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-12-22T01:30:39.050663-08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-22T01:30:39.436557-08:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-12-22T01:30:39.445594-08:00","level":"INFO","msg":"stream: closing","id":"o78asg9p"}
+{"time":"2025-12-22T01:30:39.445642-08:00","level":"INFO","msg":"handler: closed","stream_id":"o78asg9p"}
+{"time":"2025-12-22T01:30:39.445824-08:00","level":"INFO","msg":"sender: closed","stream_id":"o78asg9p"}
+{"time":"2025-12-22T01:30:39.445856-08:00","level":"INFO","msg":"stream: closed","id":"o78asg9p"}

@@ -1,0 +1,15 @@
+{"time":"2025-12-19T19:04:23.627793-08:00","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-19T19:04:24.19523-08:00","level":"INFO","msg":"stream: created new stream","id":"8zwal4ai"}
+{"time":"2025-12-19T19:04:24.195296-08:00","level":"INFO","msg":"handler: started","stream_id":"8zwal4ai"}
+{"time":"2025-12-19T19:04:24.195464-08:00","level":"INFO","msg":"stream: started","id":"8zwal4ai"}
+{"time":"2025-12-19T19:04:24.195474-08:00","level":"INFO","msg":"writer: started","stream_id":"8zwal4ai"}
+{"time":"2025-12-19T19:04:24.19556-08:00","level":"INFO","msg":"sender: started","stream_id":"8zwal4ai"}
+{"time":"2025-12-19T19:22:53.567257-08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/8zwal4ai/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-12-19T19:22:55.809643-08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/8zwal4ai/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-12-19T19:40:48.418165-08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/8zwal4ai/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-12-19T19:56:49.59895-08:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/sushantmehta-surge-ai/tinker-RLVR/8zwal4ai/file_stream\": dial tcp: lookup api.wandb.ai: no such host"}
+{"time":"2025-12-19T20:52:03.35033-08:00","level":"INFO","msg":"stream: closing","id":"8zwal4ai"}
+{"time":"2025-12-19T20:52:04.145056-08:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-19T20:52:04.514294-08:00","level":"INFO","msg":"handler: closed","stream_id":"8zwal4ai"}
+{"time":"2025-12-19T20:52:04.515107-08:00","level":"INFO","msg":"sender: closed","stream_id":"8zwal4ai"}
+{"time":"2025-12-19T20:52:04.515242-08:00","level":"INFO","msg":"stream: closed","id":"8zwal4ai"}

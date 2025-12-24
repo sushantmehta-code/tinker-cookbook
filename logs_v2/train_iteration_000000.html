@@ -1,0 +1,4622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 0</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 0  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-19T21:36:58  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face mounting challenges in managing day-to-day operations with limited time and resources. Daily decisions regarding inventory, staffing, and customer engagement often rely on outdated methods that fail to reflect real-time market dynamics. A growing number of independent stores now operate without access to timely, actionable insights. Over half of small store managers report missed sales opportunities due to insufficient visibility into customer b...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face rising complexity in managing daily operations, with inventory mismatches, inconsistent sales patterns, and delayed decision-making contributing to recurring losses. Over half of small outlets report confusion in tracking product performance across locations. Nearly every third merchant feels overwhelmed by automated tools that lack relevance to their specific context. A growing number of independent stores now operate with fragmented data syste...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face increasing pressure to understand consumer habits without relying on complex tools. Daily operations often stretch resources thin, with many struggling to identify profitable trends or adjust quickly to shifting demand. A growing number of independent stores report delayed responses to market movements, leading to lost opportunities. Over half of surveyed storefronts admit to manual data tracking, which slows decision-making and reduces consiste...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners across the mid-market face persistent challenges in understanding daily performance patterns and adapting swiftly to shifting customer behaviors. Daily operations are often guided by fragmented information sources, leading to delayed decisions and missed opportunities. A growing number of storefronts now track transactional data but lack real-time visibility into trends or seasonal shifts, resulting in inconsistent inventory management and underperfo...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face daily challenges in understanding customer behavior and managing inventory flows. A growing number of independent stores struggle with inconsistent sales patterns and delayed decisions that impact daily operations. Data access remains fragmented, often requiring manual input and external tools that fail to adapt to real time conditions. One in five such businesses reports poor inventory turnover, while nearly half spend more time on data entry t...          </p>
+          <p class="lt-p">
+Rubrics: 7/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.412          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face increasing pressure to make sense of daily sales patterns, customer preferences, and inventory shifts without relying on complex systems. A growing number of independent shops report they lack unified tools to deliver meaningful insights from routine operations. Daily activity logs are often fragmented, leading to missed opportunities and inconsistent decision-making. Over half of these operations struggle to identify seasonal trends, twenty per...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face increasing pressure to deliver consistent performance with limited resources. Daily operations are cluttered with fragmented data streams that make decision-making inefficient. A growing number of independent outlets now manage inventory, sales, and customer engagement through multiple overlapping systems, creating friction and delays. Seventy percent of small operators report feeling overwhelmed by data inconsistencies. Forty-five percent strug...          </p>
+          <p class="lt-p">
+Rubrics: 10/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.588          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners struggle with inconsistent sales patterns and delayed inventory decisions, often leading to stock shortages or overruns. A growing number of independent stores face deteriorating margins due to fragmented data systems that fail to provide actionable insights. Sixty percent of small operations report decision-making delays exceeding two weeks. Thirty percent rely on outdated spreadsheets or generic templates that miss real-time shifts in customer beha...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small businesses manage daily operations with fragmented tools, often reacting to market shifts rather than responding proactively. Routine decisions on inventory, staffing, and promotions are guided by outdated patterns and insufficient insight. A growing number of independent operators now seek systems that translate complex data into actionable signals with minimal friction. Nearly half of small operators report inconsistent customer engagement across outlets. Over 60%...          </p>
+          <p class="lt-p">
+Rubrics: 10/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.588          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners across the nation face rising complexities in managing daily operations, inventory, and customer behavior. A growing number report feeling overwhelmed by inconsistent sales patterns and delayed decision-making, often relying on outdated spreadsheets and fragmented tools. Nearly half of independent operators experience stockouts or overstocking within each quarter, while over three in ten cite poor visibility into seasonal demand shifts. More than 50 ...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small merchant operations face inconsistent decision-making cycles due to fragmented data sources and reactive practices. Daily transaction patterns are often misaligned with seasonal shifts, leading to missed opportunities and inefficiencies in inventory control. Over half of independent stores fail to leverage real-time insights from their daily operations, resulting in widespread overstocking and underperformance during peak demand. A growing number of local businesses...          </p>
+          <p class="lt-p">
+Rubrics: 6/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.353          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face persistent challenges in understanding customer movements, inventory turnover, and seasonal performance. A growing number of independent stores struggle to retain visibility into daily foot traffic patterns, leading to misaligned stock decisions and missed sales windows. Over half of such operations report reactive purchasing cycles that increase waste and reduce margins. Accumulating sales trends over time reveal similar operational inefficienc...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face mounting pressure to make timely decisions with limited visibility into customer behavior and inventory performance. A growing number of independent stores now operate with fragmented data streams, resulting in inconsistent stock levels and missed sales windows. Over half of local retailers report struggling to identify trends without manual review, while nearly 40 percent experience delayed responses to seasonal shifts. Approximately 35 percent...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small businesses operating in local commerce face persistent challenges in interpreting daily sales patterns and aligning inventory with customer behavior. Store owners frequently waste up to twenty percent of stock due to inconsistent tracking of seasonal demand. Nearly half of all small-scale operations report being unable to respond effectively to sudden shifts in customer preferences. A growing number of independent stores now rely on fragmented tools that fail to pro...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face increasing pressure to make intelligent decisions with limited resources and fragmented data sources. Over half of regional storefronts report difficulty identifying key customer trends, leading to inconsistent inventory management and missed sales windows. A growing number of independent operators now rely on fragmented tools that fail to offer actionable insights across platforms. Weekly spending patterns reveal a shift toward experiential pur...          </p>
+          <p class="lt-p">
+Rubrics: 9/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.529          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am getting ready to pitch a document for an early stage AI startup company my friends and I made. I need three deliverables that I need you to help me with. Make sure the response is in a formal and...          </p>
+          <p class="lt-p">
+Response: **Executive Summary**  
+Small business owners face mounting pressure to deliver consistent performance with shrinking margins and evolving customer expectations. Daily operations demand precise decision-making, yet many operate without data-driven clarity. Over half of independent stores report difficulties in managing inventory and response times, while more than forty percent adjust staffing based on gut feel rather than measurable insights. A growing number of local merchants plan to expand w...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+458                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+385                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+395                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+453                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+400                </td>
+                <td>
+0.412                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.412                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+407                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+449                </td>
+                <td>
+0.588                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.588                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+355                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+420                </td>
+                <td>
+0.588                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.588                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+439                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+425                </td>
+                <td>
+0.353                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.353                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+356                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+412                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+385                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+401                </td>
+                <td>
+0.529                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.529                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+357                </td>
+                <td>
+381                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a fun, unique, and brand-true social media content package for **Bee-utiful** — including **three engaging posts** (Facebook, Instagram, and Twitter/X), plus a **promotional email** targeting 150–250 words. Each post includes:
+
+- A bee pun  
+- Your tagline: *Always BEE yourself, honey!*  
+- 2–4 emojis (max)  
+- A clear CTA  
+- Product details with accuracy and care  
+
+---
+
+### 🐝 **Facebook Post**  
+✨ Meet the Buzz Daily Face Cream — lightweight, hydrating, and *bee*-outstandin...          </p>
+          <p class="lt-p">
+Rubrics: 16/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your full social media content pack — fresh, fun, authentic, and packed with bee puns, your tagline, emojis (under 3 per post), CTAs, and a polished promotional email. All tailored for **Facebook, Instagram, and Twitter (X)** — yes, it *was* a TicTac reference, but Twitter is the real third platform. 🐝✨
+
+---
+
+### 🐝 SOCIAL MEDIA POSTS
+
+#### **Facebook**  
+👉 *Great for storytelling and community*  
+**&quot;Buzz in your daily routine! Introducing our new *Buzz Daily Face Cream* — ligh...          </p>
+          <p class="lt-p">
+Rubrics: 13/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.464          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely, honey! ✨ Here&#x27;s your full social media campaign with **unique, original, bee pun-packed posts** for **Facebook, Instagram, and Twitter (X)** — all with your perfect tagline, CTA, emojis (max 3), and a beautiful, engaging promotional email. Plus, the tone is warm, breezy, and in line with a natural, honey-loving brand.
+
+---
+
+### 🐝 SOCIAL MEDIA POSTS 🐝
+
+---
+
+**📘 Facebook Post**  
+✨ Meet your new daily bee-club member: *Buzz Daily Face Cream!* 💧  
+Lightweight, fragrance &amp; dye-free — so ...          </p>
+          <p class="lt-p">
+Rubrics: 12/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here are **three unique, bee-themed social media posts** (Facebook, Instagram, and Twitter/X) with **creative bee puns**, your **tagline**, **CTAs**, and **no more than 3 emojis per post** — plus a **promotional email** crafted for your debut date.  
+
+---
+
+### 🐝 **Facebook Post**  
+🗓️ Buzz Daily Face Cream is dropping on **November 30, 2025**!  
+
+Say hello to a lightweight, fragrance-free face cream that *buzzes* with hydration — no greasiness, just freshness! 🌿 Packed with aloe vera...          </p>
+          <p class="lt-p">
+Rubrics: 16/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s your complete social media content and promotional email — tailored, unique, and packed with bee puns, your tagline, emojis (≤3 per post), CTAs, and accurate product details. All content is original and designed to stand out across Facebook, Instagram, and LinkedIn (the &quot;other one&quot; you mentioned — TicTac was just a joke!).
+
+---
+
+### 🐝 SOCIAL MEDIA POSTS  
+
+**Facebook Post**  
+✨ Meet the Buzz Daily Face Cream — lightweight, fragrance-free, and *bee* efficient! 🐝💧  
+Hydrate with...          </p>
+          <p class="lt-p">
+Rubrics: 14/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a fun, engaging, and authentic social media content plan for **Bee-utiful** — including unique, bee-themed posts for **Facebook, Instagram, and LinkedIn** (replacing &quot;TicTac&quot; with a professional yet playful platform), plus a polished promotional email. All posts include your tagline, a bee pun, emojis (no more than 3 per post), a clear CTA, and your key product details. Each is unique and crafted to feel fresh and memorable.
+
+---
+
+### 🐝 SOCIAL MEDIA POSTS  
+
+**🌿 Facebook Post*...          </p>
+          <p class="lt-p">
+Rubrics: 16/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a fun, bee-sweet social media campaign for **Bee-utiful** with unique, pun-filled posts for **Facebook, Instagram, and Twitter (X)** — all featuring your tagline, emojis (max 3 per post), a clear CTA, and a honey-sweet bee pun. Plus, a polished promotional email for your launch on **November 30, 2025**.
+
+---
+
+### 🐝 **Facebook Post**  
+Hydrate like a bee in a flower patch — no beeswax, just **Buzz Daily Face Cream**! 🌼 Lightweight, fragrance-free, and packed with aloe, shea but...          </p>
+          <p class="lt-p">
+Rubrics: 21/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a fun, original, and bee-centric social media content plan for **Bee-utiful’s Buzz Daily Face Cream**, with **unique posts for Facebook, Instagram, and Twitter (X)** — each packed with bee puns, your tagline, emojis (≤3), and a clear CTA. Plus, a polished promotional email (180 words) for your mailing list, all centered around the November 30, 2025, launch.
+
+---
+
+### 🐝 SOCIAL MEDIA POSTS (Unique &amp; Bee-Pun-Heavy)
+
+**📌 Facebook Post**  
+✨ Meet the *Buzz* in your routine! Introdu...          </p>
+          <p class="lt-p">
+Rubrics: 14/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a fun, original, and bee-angled social media campaign for **Bee-utiful’s Buzz Daily Face Cream**, tailored to Facebook, Instagram, and Twitter (not TicTac — we’re all about bees, not candy!). Every post includes a pun, your tagline, a CTA, and uses 2–4 emojis max. Plus, a polished promotional email for your launch day.
+
+---
+
+### 🐝 Social Media Posts  
+
+**Facebook Post**  
+💧 Meet your new skincare best buddy: Buzz Daily Face Cream! Lightweight &amp; non-greasy, this aloe + shea but...          </p>
+          <p class="lt-p">
+Rubrics: 15/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.536          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a fun, engaging, and brand-aligned social media content plan with unique posts for **Facebook, Instagram, and Twitter (X)** — each featuring a bee pun, your tagline, emojis (max 3 per post), and a clear CTA. Plus, a polished 200-word promotional email perfect for your launch.
+
+---
+
+### 🐝 SOCIAL MEDIA POSTS  
+
+**✅ Facebook Post**  
+Hydrate like a bee in love — with *Buzz Daily Face Cream*! 🍃💧 This lightweight, fragrance-free wonder blends aloe vera, shea butter, and vitamin E t...          </p>
+          <p class="lt-p">
+Rubrics: 13/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.464          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a fun, unique, and bee-organic set of social media posts (Facebook, Instagram, and Twitter/X) with bee puns, your tagline, emojis (no more than 3 per post), CTAs, and a polished promotional email—all tailored to your **Buzz Daily Face Cream** launch.
+
+---
+
+### 🐝 SOCIAL MEDIA POSTS
+
+---
+
+**📌 Facebook Post**  
+Humming with hydration! Meet our new *Buzz Daily Face Cream* – lightweight, fragrance-free, and packed with aloe vera &amp; shea butter. 🌿💖 Perfect for normal to dry skin. It ...          </p>
+          <p class="lt-p">
+Rubrics: 12/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.429          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a fun, engaging, and bee-ly effective social media content plan — including unique posts for **Facebook, Instagram, and TikTok** (yes, TikTok is the &quot;TicTac&quot; of social!). Each post includes your product details, a bee pun, your tagline, emojis (≤3), and a clear CTA. Plus, a polished promotional email tailored to your debut date.
+
+---
+
+### 🐝 **Facebook Post**  
+✨ Meet Buzz Daily Face Cream — lightweight, fragrance-free, and packed with aloe vera, shea butter, and vitamin E! Des...          </p>
+          <p class="lt-p">
+Rubrics: 18/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.643          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a fun, original, and bee-happy social media content plan for **Bee-utiful**, including **Facebook, Instagram, and Twitter (X)** — yes, we’ve got that *TicTac* reference: it’s Twitter, a platform with a sharp, witty vibe! Each post includes a **bee pun**, our **tagline: Always BEE yourself, honey!**, no more than 3 emojis, a clear **CTA**, and is unique and non-repetitive.
+
+---
+
+### 🐝 Facebook Post  
+✨ Meet your new hydration BEE-liever! Introducing *Buzz Daily Face Cream* — li...          </p>
+          <p class="lt-p">
+Rubrics: 16/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.571          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a fun, brand-aligned social media campaign for **Bee-utiful** with original, bee-themed posts for **Facebook, Instagram, and LinkedIn** (not TicTac — we’re keeping it professional and relevant with a professional touch!), plus a polished promotional email. Each post includes a **bee pun**, our tagline **&quot;Always BEE yourself, honey!&quot;**, a **CTA**, and **no more than 3 emojis**. All are unique and tailored.
+
+---
+
+### 🐝 **Facebook Post**  
+🌿 Meet your new daily bee-friend! Introd...          </p>
+          <p class="lt-p">
+Rubrics: 15/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.536          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here’s a fun, engaging, and authentic social media content package for **Bee-utiful**, including **3 unique posts** (Facebook, Instagram, and TikTok-style reel suggestion) with bee puns, emojis (under 3 per post), your tagline, CTAs, and a polished promotional email.
+
+---
+
+### 🐝 SOCIAL MEDIA POSTS  
+
+**1. Facebook Post**  
+🎉 New bees on the hive! Meet the *Buzz Daily Face Cream* – the lightweight, fragrance-free hero that hydrates your skin without the greasiness. Packed with aloe ve...          </p>
+          <p class="lt-p">
+Rubrics: 17/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.607          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: My company, Bee-utiful  is coming out with a new product at the end of this month, and I have to create some social media posts about it. I don&#x27;t know much about social media, so I need help. Here is ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s your full social media content package — fresh, fun, and perfectly tailored with bee puns, your tagline, strategic emojis, and a unique CTA for each platform. Plus, a polished promotional email ready to go live.
+
+---
+
+### 🐝 SOCIAL MEDIA POSTS  
+
+**Facebook Post**  
+💧 Meet the *Buzz Daily Face Cream* – lightweight, fragrance-free, and packed with aloe vera, shea butter &amp; vitamin E. It hydrates without the greasiness, absorbs fast, and is perfect for normal to dry skin. 🐝✨  
+#Bu...          </p>
+          <p class="lt-p">
+Rubrics: 18/28 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.643          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+792                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+794                </td>
+                <td>
+0.464                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.464                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+798                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+761                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+820                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+830                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+677                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+825                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+790                </td>
+                <td>
+0.536                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.536                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+773                </td>
+                <td>
+0.464                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.464                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+797                </td>
+                <td>
+0.429                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.429                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+796                </td>
+                <td>
+0.643                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.643                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+836                </td>
+                <td>
+0.571                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.571                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+763                </td>
+                <td>
+0.536                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.536                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+739                </td>
+                <td>
+0.607                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.607                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+302                </td>
+                <td>
+749                </td>
+                <td>
+0.643                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.643                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Thanks for the detailed request — this is a great opportunity to create a strategic, budget-conscious, and prioritized pantry restock plan. Let&#x27;s go step-by-step with full transparency.
+
+---
+
+### 📋 **Step 1: Understand the Requirements**
+
+#### 💡 Key Rules:
+1. **Priority order of consumption (by need):**
+   - Flour &gt; Oatmeal &gt; Pasta &gt; Tomato Sauce &gt; Beans &gt; Fruit &gt; Soup &gt; Vegetables &gt; Dessert  
+   *(This applies after zero quantities are handled)*
+
+2. **Exception #1 – If an item has 0 amount, buy...          </p>
+          <p class="lt-p">
+Rubrics: 5/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step-by-step to build a **smart, budget-conscious, prioritized 4-week pantry restock plan** that meets **all your requirements**.
+
+---
+
+## ✅ YOUR GOALS &amp; CONSTRAINTS (Summarized)
+
+### 📌 Priority List (descending order of use):
+1. Flour  
+2. Oatmeal  
+3. Pasta  
+4. Tomato Sauce  
+5. Beans  
+6. Fruit  
+7. Soup  
+8. Vegetables  
+9. Dessert
+
+&gt; ⚠️ **Exception Rule**:  
+&gt; - If any item has **0 current amount**, **buy 2 of it first**, then apply the priority list to the rest.  
+&gt; -...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down step by step according to your detailed needs.
+
+---
+
+### ✅ **Key Requirements Recap:**
+
+1. **Pantry Cleanout &amp; Restock Plan for 4 Weeks**
+2. **Weekly Budget:**
+   - Weeks 1–2 &amp; 4: $25 max
+   - Week 3: $20 max  
+   *(Budget is non-negotiable — we prioritize staying under or as close to the limit as possible)*
+3. **Priority Order (by usage frequency):**  
+   Flour &gt; Oatmeal &gt; Pasta &gt; Tomato Sauce &gt; Beans &gt; Fruit &gt; Soup &gt; Vegetables &gt; Dessert  
+   *(With 2 exceptio...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step-by-step with **clarity, logic, and your exact constraints**.
+
+---
+
+## 🔍 **Key Requirements Recap**
+
+### ✅ **Budgets:**
+- Weeks 1–2 &amp; 4: **$25 per week**
+- Week 3: **$20 per week**
+
+### ✅ **Priority Order (High to Low):**
+1. Flour  
+2. Oatmeal  
+3. Pasta  
+4. Tomato sauce  
+5. Beans  
+6. Fruit  
+7. Soup  
+8. Vegetables  
+9. Dessert  
+
+### ⚠️ **Exceptions to the Priority List:**
+- If an item is at **0**, you **must buy at least 2 units** of that item **befo...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down step by step so you get a **clear, actionable, and budget-conscious 4-week pantry restocking plan**, with **no waste, no overbuying**, and full adherence to your rules.
+
+---
+
+## ✅ Your Goals Recap:
+
+- **Weekly budget:** $25 (Weeks 1–2, 4), $20 (Week 3)
+- **Priority order (by need):**  
+  Flour &gt; Oatmeal &gt; Pasta &gt; Tomato Sauce &gt; Beans &gt; Fruit &gt; Soup &gt; Vegetables &gt; Dessert  
+  *(Note: exceptions exist — if item is at 0, buy 2 first, then follow priority)*
+  
+- **M...          </p>
+          <p class="lt-p">
+Rubrics: 10/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Great! Let&#x27;s tackle this step-by-step based on your detailed instructions.
+
+---
+
+### 🔍 **Key Requirements Recap**
+
+- **Timeframe:** 4 weeks
+- **Budget constraints:**
+  - Weeks 1–2, 4: **$25/week**
+  - Week 3: **$20/week**
+- **Priority list (from highest to lowest):**
+  1. Flour  
+  2. Oatmeal  
+  3. Pasta  
+  4. Tomato sauce  
+  5. Beans  
+  6. Fruit  
+  7. Soup  
+  8. Vegetables  
+  9. Dessert  
+
+- **Exceptions to priority:**
+  1. If an item is **at 0**, **buy 2 of it first**, then follow the p...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed instructions — this is a well-structured pantry restocking plan problem with clear priorities, budget constraints, and quantity goals.
+
+Let me now:
+
+1. **Understand current inventory and goals**  
+2. **Apply priority rules**  
+3. **Build 4 weekly shopping lists** (respecting $25/week except $20 in Week 3)  
+4. **Ensure total quantities meet specified needs**  
+5. **List any surplus items, prioritized purchases (due to quantity), and items excluded due to budget**
+
+---
+...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step-by-step with clarity and precision to meet **all** of your needs:
+
+---
+
+### ✅ **Your Key Requirements Recap:**
+
+#### 🔍 **Pantry Current Stock &amp; Costs:**
+| Item | Current Amount | Cost |
+|------|----------------|------|
+| peas | 3 | $0.50 |
+| bean with bacon soup | 7 | $1 |
+| corn | 2 | $0.50 |
+| pineapple | 4 | $2 |
+| peaches | 3 | $2 |
+| spaghetti | 3 | $1 |
+| fettucine | 0 | $1 |
+| lasagna | 1 | $2 |
+| brownie mix | 0 | $2 |
+| chocolate cake | 2 | $1.50...          </p>
+          <p class="lt-p">
+Rubrics: 7/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.467          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this **step by step**, following your detailed instructions with precision.
+
+---
+
+### ✅ YOUR RESTOCKING GOALS:
+
+#### 📌 Priority List (by need):
+Flour &gt; Oatmeal &gt; Pasta &gt; Tomato Sauce &gt; Beans &gt; Fruit &gt; Soup &gt; Vegetables &gt; Dessert
+
+#### 📌 Exceptions:
+- If **0 amount** exists → **Buy 2 of that item first** (even if it breaks priority)
+- **Total canned goods**:
+  - 5 of each canned item (except):
+    - 15 tomato sauce cans
+    - 10 bean with bacon soup cans
+- **Pasta b...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step-by-step with precision, applying **all your rules** and constraints.
+
+---
+
+## ✅ YOUR KEY INSTRUCTIONS SUMMARIZED
+
+1. **Pantry cleanout** — you’re restocking over **4 weeks**.
+2. **Budget per week**:
+   - Weeks 1–2 and 4: **$25/week**
+   - Week 3: **$20/week**
+3. **Priority order (from highest to lowest)**:
+   &gt; flour &gt; oatmeal &gt; pasta &gt; tomato sauce &gt; beans &gt; fruit &gt; soup &gt; vegetables &gt; dessert  
+   *(Only exceptions: if an item is at 0, buy 2 first — the...          </p>
+          <p class="lt-p">
+Rubrics: 1/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.067          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this step-by-step with clarity and precision so you get exactly what you need: **4 weekly shopping lists with total cost close to the weekly budget**, **respecting your priority list**, **accounting for exceptions (like zero amounts)**, and **following your exact required quantities**.
+
+---
+
+### 🔍 First: Understand Your Restocking Goals
+
+You want to **fully restock** your pantry to the following **exact quantities**, within a **$25/week (except Week 3: $20)**, and ...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down step by step, following **every rule** you&#x27;ve laid out, and deliver exactly what you asked for — four carefully planned weekly shopping lists, with clear reasoning, final totals, and detailed tracking of:
+
+- Items bought per week  
+- Quantity and cost  
+- Budget adherence  
+- Items prioritized due to quantity (zero stock)  
+- Items not purchased due to budget  
+- Extra items (where current amounts exceed needed)  
+- Any items that were **prioritized** (e.g., for...          </p>
+          <p class="lt-p">
+Rubrics: 10/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this **step-by-step** to make sure we meet **all your criteria** exactly.
+
+---
+
+### ✅ **Your Requirements Summary:**
+
+- **Pantry cleanout** → Need to restock over **4 weeks**.
+- **Weekly budget**:  
+  - Week 1–2 &amp; 4: **$25 max**  
+  - Week 3: **$20 max**  
+- **Purchase priorities** (in order):  
+  `flour &gt; oatmeal &gt; pasta &gt; tomato sauce &gt; beans &gt; fruit &gt; soup &gt; vegetables &gt; dessert`  
+- **Exceptions to priority**:  
+  1. If an item is **0**, buy **2 of it first** (...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed request! This is a well-structured problem, and I’ll go step by step to create **4 weekly shopping lists** that meet your **priority system**, **budget constraints**, and **specific quantity needs**, while also addressing your request for **extra items**, **priority exceptions**, and **items excluded due to budget**.
+
+---
+
+### 🔍 Step 1: Understand Your Requirements
+
+#### ✅ Goals:
+- Build **4 shopping lists** (1 per week), 4 weeks total.
+- Weekly budget:  
+  - Weeks 1–2...          </p>
+          <p class="lt-p">
+Rubrics: 6/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through this **step by step** to create **four well-organized, budget-constrained, prioritized pantry restocking shopping lists** over 4 weeks, based on your detailed instructions.
+
+---
+
+### ✅ **YOUR OBJECTIVES &amp; RULES SUMMARY**
+- Total restocking over 4 weeks:  
+  - Weeks 1–2–4: **$25/week**  
+  - Week 3: **$20/week**  
+- Priority of items (used most to least):  
+  `flour &gt; oatmeal &gt; pasta &gt; tomato sauce &gt; beans &gt; fruit &gt; soup &gt; vegetables &gt; dessert`  
+- Exceptions:  
+  -...          </p>
+          <p class="lt-p">
+Rubrics: 8/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.533          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I just did a pantry cleanout and I need to get my pantry restocked over the next 4 weeks. I need you to make me a shopping list for each week, for a total of 4 shopping lists. I&#x27;m including a list of ...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed request. Let&#x27;s walk through this step-by-step with clarity, precision, and strict adherence to your constraints.
+
+---
+
+### ✅ **Your Key Requirements Summary**
+
+#### 🎯 **Priority Order (by category, highest to lowest):**
+1. Flour  
+2. Oatmeal  
+3. Pasta  
+4. Tomato sauce  
+5. Beans  
+6. Fruit  
+7. Soup  
+8. Vegetables  
+9. Dessert  
+
+&gt; ⚠️ **Exception Rule 1**: If an item is at **0**, buy **2 units** first — this takes precedence over the priority list.
+
+&gt; ⚠️ **Exception...          </p>
+          <p class="lt-p">
+Rubrics: 9/15 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.600          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+8192                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+7962                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+7657                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+8192                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+6825                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+8192                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+8192                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+5868                </td>
+                <td>
+0.467                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.467                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+8192                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+8192                </td>
+                <td>
+0.067                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.067                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+7563                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+8192                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+6577                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+6730                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+8192                </td>
+                <td>
+0.533                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.533                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+697                </td>
+                <td>
+8192                </td>
+                <td>
+0.600                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.600                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley published *Frankenstein; or, The Modern Prometheus* in 1818, a work that emerged from the intellectual ferment of early 19th-century Europe. This lecture will explore how the novel reflects Mary Shelley’s deep concerns about the ethical limits of scientific innovation and the tension between divine creation and human ambition.
+
+---
+
+**Slide 1: Context and the Origins of Scientific Ambition**  ...          </p>
+          <p class="lt-p">
+Rubrics: 29/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.744          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley’s *Frankenstein; or, The Modern Prometheus* (1818) explores the ethical boundaries of human ambition and the consequences of transcending natural limits—an exploration deeply rooted in the philosophical tensions between scientific progress and spiritual doctrine.
+
+---
+
+**The Historical Context of Science in *Frankenstein***  
+*At the time of *Frankenstein*&#x27;s publication, the early 19th century...          </p>
+          <p class="lt-p">
+Rubrics: 22/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.564          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+*Mary Shelley’s 1818 novel Frankenstein explores the ethical consequences of unchecked scientific ambition and challenges foundational religious doctrines about creation and human dignity.*
+
+---
+
+**Slide 2: Context of Scientific Inquiry in Early 19th-Century Europe**  
+The Enlightenment had positioned science as a path to knowledge and progress, yet in the early 1800s, this confidence collided with widespr...          </p>
+          <p class="lt-p">
+Rubrics: 29/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.744          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley’s *Frankenstein; or, The Modern Prometheus* (1818) explores the ethical limits of scientific ambition and its friction with religious worldviews—offering a powerful cautionary tale that resonates in today’s age of rapid technological advancement.
+
+---
+
+**Slide 2: Contextual Underpinnings of the Science Debate**  
+The novel emerged during a period of intense scientific exploration—the Enlighten...          </p>
+          <p class="lt-p">
+Rubrics: 28/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.718          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+*Mary Shelley’s 1818 novel Frankenstein presents a powerful exploration of the ethical boundaries of scientific ambition and the deep cultural anxieties surrounding divine authority. This lecture will examine how the novel reflects both the dangers of unchecked scientific progress and its tension with religious worldviews.*
+
+---
+
+**Slide 2: Context of Scientific Inquiry in Early 19th Century Europe**  
+The...          </p>
+          <p class="lt-p">
+Rubrics: 29/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.744          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley’s *Frankenstein; or, The Modern Prometheus* (1818) examines the tensions between scientific ambition and moral responsibility, offering a foundational critique of unchecked progress through the lens of a story that oscillates between awe and horror. This lecture explores how the novel reflects both the anxieties of early 19th-century scientific inquiry and the deep-rooted religious convictions...          </p>
+          <p class="lt-p">
+Rubrics: 28/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.718          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley’s *Frankenstein; or, The Modern Prometheus* (1818) is a foundational narrative of ethical precipice, emerging from the scientific fervor of the Enlightenment and the spiritual anxieties of early 19th-century Europe. This lecture explores how Shelley uses *Frankenstein* as a lens through which to interrogate the tension between scientific ambition and religious doctrine.
+
+---
+
+**Slide 1: Contex...          </p>
+          <p class="lt-p">
+Rubrics: 18/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.462          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley published *Frankenstein; or, The Modern Prometheus* in 1818, a work deeply rooted in the scientific and spiritual tensions of the early 19th century. This lecture explores how the novel reflects Mary Shelley’s concerns about the ethical boundaries of scientific progress and its potential clash with religious foundations.
+
+---
+
+**Context: Science as a Force of Dawn and Distrust**  
+The novel em...          </p>
+          <p class="lt-p">
+Rubrics: 20/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.513          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+*Mary Shelley’s 1818 novel, Frankenstein, explores the ethical and existential dangers of unchecked scientific ambition, confronting both the limits of human knowledge and the foundations of religious belief. This lecture examines how the narrative reflects historical tensions between science and religion, and considers what these themes reveal about modern technological progress.*
+
+---
+
+**Slide 2: Context...          </p>
+          <p class="lt-p">
+Rubrics: 28/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.718          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley’s *Frankenstein; or, The Modern Prometheus* (1818) explores the ethical boundaries of human ambition through the lens of scientific overreach and spiritual neglect—offering a timeless caution about the dangers of unchecked progress and the fragility of moral responsibility.
+
+---
+
+**Slide 1: Context and the Origins of Scientific Doubt**  
+The novel emerged in the early 19th century, a time of r...          </p>
+          <p class="lt-p">
+Rubrics: 25/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.641          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+*Mary Shelley’s 1818 novel Frankenstein explores the moral and spiritual consequences of unchecked scientific ambition, embedding a profound tension between the pursuit of knowledge and established religious worldviews.*
+
+---
+
+**Slide 2 – Context: Science in the Early 19th Century**  
+The early 1800s witnessed an explosive rise in scientific exploration, fueled by advancements in chemistry, anatomy, and ph...          </p>
+          <p class="lt-p">
+Rubrics: 29/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.744          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+*Mary Shelley’s 1818 novel *Frankenstein* explores the moral and existential consequences of unchecked scientific ambition, positioning it as a critical response to the rapid technological and philosophical shifts of the early 19th century. This lecture examines how the novel reflects both a warning against unregulated science and a deeper theological unease regarding human interference with divine creatio...          </p>
+          <p class="lt-p">
+Rubrics: 30/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley’s *Frankenstein; or, The Modern Prometheus* (1818) explores the ethical and moral tensions arising from humanity’s pursuit of scientific mastery—particularly in relation to divine authority and the limits of knowledge. This lecture examines how Shelley uses *Frankenstein* to both critique and caution against unchecked scientific ambition, while interrogating the cultural and theological founda...          </p>
+          <p class="lt-p">
+Rubrics: 25/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.641          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley published *Frankenstein; or, The Modern Prometheus* in 1818, a work deeply shaped by the intellectual currents of the early 19th century. This lecture will explore how the novel navigates the tensions between scientific ambition and religious doctrine, examining both the dangers and ethical questions raised by human attempts to usurp nature’s design.
+
+---
+
+**Context: The Scientific and Religio...          </p>
+          <p class="lt-p">
+Rubrics: 25/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.641          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley’s *Frankenstein; or, The Modern Prometheus* (1818) explores the tension between scientific ambition and spiritual accountability—a dialogue that mirrors the intellectual struggles of the early 19th century. This lecture will examine how the novel critiques scientific overreaching through both thematic depth and historical context.
+
+---
+
+**The Historical Landscape of Science and Faith**  
+The e...          </p>
+          <p class="lt-p">
+Rubrics: 27/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a presentation for my guest lecture tomorrow. The lecture is focused on a reflection of Mary Shelley&#x27;s beliefs within Frankenstein, specifically the potential dangers of scientific ad...          </p>
+          <p class="lt-p">
+Response: **Frankenstein: Shelley&#x27;s Conflict of Religion and Science**  
+*Presented by Dr. Bysshe*  
+Mary Shelley’s *Frankenstein; or, The Modern Prometheus* (1818) explores the ethical perils of unchecked scientific ambition and its uneasy tension with religious frameworks of creation and divine authority. This lecture will examine how the novel reflects both the anxieties and possibilities of scientific progress as they intersect with spiritual belief in the early 19th century.
+
+---
+
+**The Scientific Co...          </p>
+          <p class="lt-p">
+Rubrics: 26/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2496                </td>
+                <td>
+0.744                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.744                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2738                </td>
+                <td>
+0.564                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.564                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2481                </td>
+                <td>
+0.744                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.744                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2283                </td>
+                <td>
+0.718                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.718                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2326                </td>
+                <td>
+0.744                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.744                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2748                </td>
+                <td>
+0.718                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.718                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2915                </td>
+                <td>
+0.462                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.462                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2023                </td>
+                <td>
+0.513                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.513                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2224                </td>
+                <td>
+0.718                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.718                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2797                </td>
+                <td>
+0.641                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.641                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2264                </td>
+                <td>
+0.744                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.744                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2193                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2378                </td>
+                <td>
+0.641                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.641                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2460                </td>
+                <td>
+0.641                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.641                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+1969                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+668                </td>
+                <td>
+2086                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

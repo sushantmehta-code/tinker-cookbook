@@ -1,0 +1,4596 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 25</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 25  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T13:26:17  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center places significant strain on staffing stability by increasing shift variance and requiring frequent reallocation across operational units, thereby affecting team continuity and on-the-ground execution. Equipment throughput is challenged by elevated volume demands, leading to potential bottlenecks in task processing if throughput performance does not meet defined operational standards. Inventory movement intensifies due to concurrent receipt and...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center places significant strain on staffing stability, equipment throughput, and inventory movement, demanding reevaluation of established protocols to maintain service integrity under increased demand. Operational objective is to ensure seamless coordination across all operational domains while preserving compliance with defined service standards during peak activity.  
+
+Workforce coordination between the Shift Supervisors and Warehouse Operations C...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center exerts significant pressure on staffing stability, leading to increased turnover and difficulty in maintaining consistent duty coverage across shifts. Equipment throughput is challenged by elevated volume demands, placing undue strain on machinery performance and necessitating frequent recalibration. Inventory movement escalates in both frequency and complexity, requiring real-time adjustments to handling patterns and material routing. The oper...          </p>
+          <p class="lt-p">
+Rubrics: 11/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.786          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center significantly impacts staffing stability by increasing demand across shift cycles, leading to fluctuating headcounts and potential gaps in coverage where personnel are required to perform non-traditional duties. Equipment throughput is strained due to higher volume inputs, increasing the likelihood of equipment downtime and reducing the capacity for consistent output cycles. Inventory movement becomes more complex as demand surges drive rapid t...          </p>
+          <p class="lt-p">
+Rubrics: 11/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.786          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center places significant demand on staffing stability, equipment throughput, and inventory movement, creating dynamic pressures that challenge established operational protocols. As volumes increase, shifts in staffing patterns can disrupt continuity of operations, equipment utilization rates may exceed designed thresholds, and inventory turnover becomes highly sensitive to system response times. The operational objective is to maintain seamless syste...          </p>
+          <p class="lt-p">
+Rubrics: 12/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center introduces significant strain on staffing stability, compressing operational windows and increasing turnover risk due to elevated workloads and extended shift durations. Equipment throughput is challenged by the concurrent rise in handling volume, which reduces available cycle time and increases the likelihood of mechanical inefficiencies. Inventory movement intensifies across multiple transfer points, requiring heightened precision in routing ...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center places significant pressure on staffing stability due to increased workloads and shift variability, disrupts equipment throughput through heightened operational demands, and intensifies inventory movement across zones requiring greater precision and coordination. The operational objective is to maintain consistent service performance while ensuring full compliance with surge-specific operational standards.  
+
+Workforce coordination between the ...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center places significant strain on staffing stability, compressing operational timelines and increasing the need for real-time personnel reallocation. Elevated throughput demands place consistent pressure on equipment performance, while dynamic inventory movement patterns require heightened precision in labor deployment and material handling. The operational objective is to maintain seamless execution across all core functions while preserving compli...          </p>
+          <p class="lt-p">
+Rubrics: 12/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center places significant strain on staffing stability, equipment throughput, and inventory movement due to increased order volume, compressed lead times, and heightened operational demands. This pressure exacerbates variability in team availability, challenges the capacity of current machinery under sustained load, and intensifies the need for precise, real-time inventory tracking across shifting lanes and zones. The operational objective is to maint...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center places significant strain on staffing stability, equipment throughput, and inventory movement due to increased volume processing demands and elevated operational complexity. Staffing stability is challenged by fluctuating demand patterns that require rapid reallocation of personnel across shifts, while equipment throughput is constrained by the frequency of operational peaks during peak circulation cycles. Inventory movement becomes more dynami...          </p>
+          <p class="lt-p">
+Rubrics: 12/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center introduces significant strain on staffing stability, with increased workload leading to temporary shifts in crew availability and turnover rates. Equipment throughput is challenged by a higher frequency of operational cycles, demanding enhanced performance monitoring and maintenance scheduling, while inventory movement accelerates due to elevated processing demands, placing pressure on routing protocols and handling standards. The operational o...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center significantly impacts staffing stability by increasing demand for personnel across shift operations, thereby intensifying the pressure on team members to maintain performance under elevated workloads. Concurrently, equipment throughput is strained due to increased volume and frequency of handling operations, requiring enhanced coordination to prevent bottlenecks. Inventory movement experiences heightened complexity as both inbound and outbound ...          </p>
+          <p class="lt-p">
+Rubrics: 12/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center places significant strain on staffing stability, as peak demand necessitates real-time adjustments to personnel deployment across shift boundaries, creating bandwidth challenges for both supervisory oversight and frontline execution. Concurrently, equipment throughput is impacted by increased volume and more frequent operating cycles, which may compromise consistent performance if not managed within established maintenance and scheduling protoc...          </p>
+          <p class="lt-p">
+Rubrics: 10/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.714          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center significantly strains staffing stability, as increased order volumes lead to cyclical shifts in workforce demand, disrupting established shift patterns and impacting team continuity. Equipment throughput is affected by heightened operational intensity, exceeding baseline performance thresholds and exposing wear-to-failure patterns that require proactive maintenance. Inventory movement intensifies due to compressed handling cycles and expanded r...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center introduces significant stressors across core operational domains, impacting staffing stability through increased shift rotations and reduced personnel availability, undermining consistency in team deployment. Equipment throughput faces elevated demand, placing strain on processing capacity and accelerating wear on high-use systems, while inventory movement becomes more dynamic due to shifting demand patterns and compressed fulfillment timelines...          </p>
+          <p class="lt-p">
+Rubrics: 12/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.857          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need your help drafting an operational readiness plan for the upcoming seasonal surge at the North Distribution Center. Open with one paragraph that explains how the surge affects staffing stability...          </p>
+          <p class="lt-p">
+Response: The seasonal surge at the North Distribution Center places significant strain on staffing stability, as increased volume leads to heightened demand for personnel across shifts and functions, threatening consistent coverage and rhythm in operational cycles. Equipment throughput is challenged by recurring system load thresholds, requiring real-time monitoring and adjustment to prevent bottlenecks in processing lanes. Inventory movement patterns become more complex due to elevated demand velocity a...          </p>
+          <p class="lt-p">
+Rubrics: 13/14 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.929          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+463                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+384                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+357                </td>
+                <td>
+0.786                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.786                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+493                </td>
+                <td>
+0.786                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.786                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+418                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+407                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+366                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+481                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+413                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+591                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+459                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+460                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+427                </td>
+                <td>
+0.714                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.714                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+521                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+426                </td>
+                <td>
+0.857                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.857                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+318                </td>
+                <td>
+421                </td>
+                <td>
+0.929                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.929                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have over 6 years of experience in supervisory and team-supporting roles, including a dedicated role as a Retail Supervisor at Asda from September 2018 to October 2018. This experience has equipped me with strong leadership, people management, and operational oversight skills.
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, excellent time management, and a meticulous attention to ...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have over 7 years of relevant experience in supervisory and team-coordinating roles, including a formal retail supervision role at Asda from September 2018 to October 2018. This includes direct responsibility for managing and mentoring a team of 25 employees, as well as handling operational duties such as scheduling, training, and performance reviews.
+
+2. What skills do you bring to this role?  
+I bring strong super...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have over 7 years of experience in supervisory and team-oriented roles, including a formal retail supervisor position at Asda from September 2018 to October 2018. This experience has equipped me with strong leadership, time management, and team coordination skills essential for a supervisory role.
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, excellent time management, meticulou...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have approximately 7 years of experience in supervisory and team-support roles, including a direct supervisory position at Asda from September 2018 to October 2018, where I managed a team of 25 employees. This experience has strengthened my ability to lead, delegate, maintain performance standards, and foster positive team dynamics.
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, ...          </p>
+          <p class="lt-p">
+Rubrics: 10/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have over 6 years of experience in supervisory and team-coordinating roles, including a recent position as Retail Supervisor at Asda from September 2018 to October 2018.
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, exceptional time management, a meticulous attention to detail, and the ability to work both independently and collaboratively. My proven organisational skills, combi...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have over 6 years of experience in supervisory and team-coordination roles, including a full-term supervisory position at Asda from September 2018 to October 2018.  
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, excellent time management, and a meticulous attention to detail. My ability to work both independently and in teams, combined with strong written English and organisatio...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have over 6 years of experience in supervisory and team-support roles, including a dedicated retail supervision position at Asda from September 2018 to October 2018. This gives me a solid foundation in team leadership, operational oversight, and maintaining a positive workplace environment.
+
+2. What skills do you bring to this role?  
+I bring strong time management, attention to detail, and the ability to work effec...          </p>
+          <p class="lt-p">
+Rubrics: 10/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,  
+
+1. How much experience do you have in similar positions?  
+I have approximately 7 years of experience in supervisory and team-focused roles, including a full-term retail supervisory role at Asda from September 2018 to October 2018.  
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, excellent time management, and a meticulous attention to detail. My ability to work both independently and within a team, combined with strong written English a...          </p>
+          <p class="lt-p">
+Rubrics: 10/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have approximately 7 years of experience in supervisory and team-based roles, including a specific role as a Retail Supervisor at Asda from September 2018 to October 2018.  
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, time management, attention to detail, and the ability to work both independently and within a team. My strong English and grammar skills enable clear communicati...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,  
+
+1. How much experience do you have in similar positions?  
+I have approximately 7 years of experience in supervisory and team-oriented roles, including a dedicated position as a Retail Supervisor at Asda from September 2018 to October 2018.  
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, excellent time management, and a proven ability to work both independently and within a team. My attention to detail, organisational skills, and strong...          </p>
+          <p class="lt-p">
+Rubrics: 10/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have over 6 years of experience in supervisory and team-management roles, including a direct supervisory role at Asda from September 2018 to October 2018, during which I managed a team of 25 employees.
+
+2. What skills do you bring to this role?  
+I bring strong leadership, time management, and organisational skills, along with the ability to work effectively both independently and as part of a team. My attention to ...          </p>
+          <p class="lt-p">
+Rubrics: 8/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have accumulated approximately 36 months of experience in supervisory and team leadership roles, with a key role as Retail Supervisor at Asda from September 2018 to October 2018.
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, excellent time management, and a keen attention to detail. My ability to work both independently and within a team, combined with solid communication and or...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Mrs. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have approximately 7 years of experience in supervisory and team-support roles, including a direct supervisory position at Asda from September 2018 to October 2018.  
+
+2. What skills do you bring to this role?  
+I bring strong organisational and time-management skills, a proven ability to supervise teams effectively, and excellent attention to detail. My experience in both structured and independent work environmen...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have over 6 years of experience in supervisory and team-coordinating roles, including a direct supervisory position at Asda from September 2018 to October 2018, where I managed a team of 25 employees.
+
+2. What skills do you bring to this role?  
+I bring strong time management, organisational skills, and the ability to lead and supervise teams effectively—both in fast-paced environments and with minimal oversight. My...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have over 6 years of experience in supervisory and team coordination roles, including a formal retail supervisory position at Asda from September 2018 to October 2018, where I led a team of 25 employees.
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, exceptional time management, and the ability to work both independently and in teams. My attention to detail, methodical approach, ...          </p>
+          <p class="lt-p">
+Rubrics: 9/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Please write me an application letter for a supervisor position at Tesco, using the below CV for relevant information. The application letter requires that I fill out the following questions:
+
+1. Ho...          </p>
+          <p class="lt-p">
+Response: Dear Ms. Jane Doe,
+
+1. How much experience do you have in similar positions?  
+I have approximately 7 years of experience in supervisory and team-based roles, including a dedicated role as a Retail Supervisor at Asda from September 2018 to October 2018.
+
+2. What skills do you bring to this role?  
+I bring strong supervisory experience, excellent time management, and a keen eye for detail. My ability to work independently and within teams, combined with strong written English and digital skills, ...          </p>
+          <p class="lt-p">
+Rubrics: 10/13 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+597                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+686                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+505                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+666                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+614                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+587                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+645                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+599                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+606                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+626                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+609                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+497                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+627                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+621                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+612                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+710                </td>
+                <td>
+556                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: # **Validation Master Plan (VMP)**  
+**System: ELG866 Purified Water System**  
+**Replacement of HWX755 System**  
+**Prepared for: Project Manager**  
+**Date: April 5, 2025**  
+**Document Reference: VMP-ELG866-2025**
+
+---
+
+## **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the overall approach to the qualification of the new purified water system **ELG866**, which will replace the existing **HWX755** system. The project scope is limited to:
+
+- Physical removal and decommissionin...          </p>
+          <p class="lt-p">
+Rubrics: 29/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.744          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: # **Validation Master Plan (VMP)**  
+**For Replacement of HWX755 Purified Water System with ELG866**  
+**Document Version: 1.0**  
+**Effective Date: [Insert Date]**  
+**Prepared By: Project Manager**  
+**Approved By: Project Manager, Senior Technical, Senior Quality Assurance**
+
+---
+
+## **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the qualification strategy and process for the replacement of the existing purified water system (HWX755) with a new purified water system (ELG866)...          </p>
+          <p class="lt-p">
+Rubrics: 30/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: # **Validation Master Plan (VMP)**  
+**For the Replacement of HWX755 with ELG866 Purified Water System**  
+**Version 1.0**  
+**Date:** April 5, 2025  
+
+---
+
+## **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the qualification strategy and activities for the replacement of the existing purified water system (HWX755) with a new system (ELG866), supplied by a previously qualified vendor.  
+
+The project scope includes:
+
+- Removal and decommissioning of the existing HWX755 system.  
+...          </p>
+          <p class="lt-p">
+Rubrics: 30/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **VALIDATION MASTER PLAN (VMP)**  
+**FOR PURIFIED WATER SYSTEM – ELG866**  
+**REPLACING EXISTING SYSTEM – HWX755**  
+
+---
+
+### **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the approach to the qualification of the new purified water system (Model ELG866) to replace the existing system (HWX755). The project scope is limited to the physical removal of the current system, installation of the new ELG866 system, and a full qualification cycle to confirm that the system meets all re...          </p>
+          <p class="lt-p">
+Rubrics: 30/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.769          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **VALIDATION MASTER PLAN (VMP)**  
+**FOR NEW PURIFIED WATER SYSTEM (ELG866)**  
+*Replacing Existing System (HWX755)*  
+
+---
+
+### **Project Scope**
+
+This Validation Master Plan (VMP) outlines the formal approach to the qualification of the new purified water system (ELG866), replacing the existing system (HWX755) within the facility. The project scope includes:
+
+- Removal and decommissioning of the existing purified water system (HWX755)  
+- Installation and commissioning of the new purified wate...          </p>
+          <p class="lt-p">
+Rubrics: 33/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.846          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **VALIDATION MASTER PLAN (VMP)**  
+**System:** ELG866 Purified Water System  
+**Replacement of:** HWX755 Purified Water System  
+**Prepared by:** Project Manager  
+**Date:** April 5, 2025  
+**Version:** 1.0  
+
+---
+
+### **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the qualification strategy, stages, documentation, and responsibilities for the installation, qualification, and commissioning of the new purified water system, **ELG866**, to replace the existing system **HWX755**. ...          </p>
+          <p class="lt-p">
+Rubrics: 29/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.744          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: # **Validation Master Plan (VMP)**  
+**For the Replacement of the HWX755 Purified Water System with the ELG866 System**  
+**Document Version: 1.0**  
+**Date: 5 April 2025**  
+**Prepared by: Project Management Team**  
+**Approved by: Project Manager, Senior Technical, Senior Quality Assurance**
+
+---
+
+## **Project Scope**
+
+This Validation Master Plan (VMP) outlines the qualification strategy and process for the replacement of the existing purified water system (HWX755) with a new system (ELG866) f...          </p>
+          <p class="lt-p">
+Rubrics: 28/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.718          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: # **Validation Master Plan (VMP)**  
+**For the Replacement of the HWX755 Purified Water System with the ELG866 System**  
+**Version 1.0**  
+**Date: 5 April 2025**  
+**Prepared by: Project Manager**  
+**Approved by: Project Manager, Senior Technical, Senior Quality Assurance**
+
+---
+
+## **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the approach to the qualification of the **new purified water system (ELG866)**, replacing the existing system (HWX755) within the manufacturing faci...          </p>
+          <p class="lt-p">
+Rubrics: 31/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.795          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **Validation Master Plan (VMP)**  
+**System:** ELG866 Purified Water System  
+**Date:** April 5, 2025  
+**Project Manager:** [Name]  
+**Version:** 1.0  
+
+---
+
+## **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the qualification strategy and activities for the replacement of the existing purified water system (HWX755) with the new purified water system (ELG866). This is a straightforward replacement project involving the decommissioning of the existing system and installation of ...          </p>
+          <p class="lt-p">
+Rubrics: 28/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.718          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **VALIDATION MASTER PLAN (VMP)**  
+**For Replacement of HWX755 Purified Water System with ELG866**  
+*Document Version: 1.0*  
+*Date: April 5, 2025*  
+*Prepared by: Project Manager*  
+*Approved by: Senior Technical &amp; Senior Quality Assurance*
+
+---
+
+## **Project Scope**
+
+This Validation Master Plan (VMP) defines the comprehensive qualification strategy for the replacement of the existing purified water system (HWX755) with a new system (ELG866). The project is a straightforward, low-complexity re...          </p>
+          <p class="lt-p">
+Rubrics: 32/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.821          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: # **Validation Master Plan (VMP)**  
+**System:** ELG866 Purified Water System  
+**Project Reference:** PM-2024-WATER-ELG866  
+**Effective Date:** [Insert Date]  
+**Prepared By:** [Your Name], Project Manager  
+**Approved By:** Project Manager, Senior Technical, Senior Quality Assurance  
+
+---
+
+## **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the overall approach to the qualification of the new purified water system (ELG866) to replace the existing system (HWX755) at [Facility ...          </p>
+          <p class="lt-p">
+Rubrics: 24/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.615          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **VALIDATION MASTER PLAN (VMP)**  
+**FOR THE RE-QUALIFICATION OF THE PURIFIED WATER SYSTEM (ELG866)**  
+*Replacing the HWX755 System*  
+
+---
+
+### **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the overall approach to the qualification of the new purified water system (ELG866), replacing the existing system (HWX755) at the site. The project involves the **decommissioning of the existing HWX755 system**, followed by the **installation and qualification of the new ELG866 system**,...          </p>
+          <p class="lt-p">
+Rubrics: 29/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.744          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **VALIDATION MASTER PLAN (VMP)**  
+**For the Replacement of the HWX755 Purified Water System with the ELG866 System**  
+
+---
+
+### **1. Project Scope**
+
+The objective of this project is to replace the existing purified water system (HWX755) with a new purified water system (ELG866), supplied by a previously qualified vendor. The replacement is intended to maintain the existing water quality, safety, and regulatory compliance standards required for use in the production of medicinal products.  
+
+T...          </p>
+          <p class="lt-p">
+Rubrics: 27/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.692          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **VALIDATION MASTER PLAN (VMP)**  
+**For Replacement of Purified Water System (HWX755) with ELG866**  
+*Date: [Insert Date]*  
+*Prepared by: Project Engineer*  
+*Approved by: Project Manager, Senior Technical, Senior Quality Assurance*  
+
+---
+
+### **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the qualification strategy and activities for the replacement of the existing purified water system (HWX755) with a new system (ELG866) supplied by a previously qualified vendor. The proj...          </p>
+          <p class="lt-p">
+Rubrics: 25/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.641          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **VALIDATION MASTER PLAN (VMP)**  
+**For Replacement of Purified Water System: HWX755 with ELG866**  
+**Document Version: 1.0**  
+**Date: April 5, 2025**  
+**Prepared by: Project Manager**  
+**Approved by: Project Manager, Senior Technical, Senior Quality Assurance**
+
+---
+
+## **1. Project Scope**
+
+This Validation Master Plan (VMP) outlines the overall approach to qualifying the new purified water system, **ELG866**, to replace the existing system, **HWX755**, in accordance with internal company ...          </p>
+          <p class="lt-p">
+Rubrics: 23/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.590          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a project manager and am purchasing a new purified water system from a previously qualified vendor to replace an existing system (HWX755). As the systems are not exactly the same I need to qualif...          </p>
+          <p class="lt-p">
+Response: **Validation Master Plan (VMP)**  
+**For Replacement of HWX755 Purified Water System with ELG866**  
+*Document Version: 1.0*  
+*Effective Date: [Insert Date]*  
+*Prepared by: Project Manager*  
+*Approved by: Senior Technical, Senior Quality Assurance, Project Manager*
+
+---
+
+### **Project Scope**
+
+This Validation Master Plan (VMP) outlines the overall approach, strategy, processes, and responsibilities for the qualification of a new purified water system (ELG866) to replace the existing system (H...          </p>
+          <p class="lt-p">
+Rubrics: 31/39 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.795          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3572                </td>
+                <td>
+0.744                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.744                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3454                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3113                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3395                </td>
+                <td>
+0.769                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.769                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3589                </td>
+                <td>
+0.846                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.846                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3097                </td>
+                <td>
+0.744                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.744                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3090                </td>
+                <td>
+0.718                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.718                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3280                </td>
+                <td>
+0.795                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.795                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3673                </td>
+                <td>
+0.718                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.718                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3569                </td>
+                <td>
+0.821                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.821                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3180                </td>
+                <td>
+0.615                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.615                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+2846                </td>
+                <td>
+0.744                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.744                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+2810                </td>
+                <td>
+0.692                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.692                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3074                </td>
+                <td>
+0.641                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.641                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+2989                </td>
+                <td>
+0.590                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.590                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+2641                </td>
+                <td>
+3248                </td>
+                <td>
+0.795                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.795                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Subject: Critical Travel Policy Change: Effective 1/1  
+
+Hello Team,  
+
+We are updating our travel policy with significant changes to approval processes for discretionary travel—this applies to all travel requests, including those by internal staff and clients. Effective **January 1, 2026**, all travel must receive approval at the VP or RM level, as discretionary travel now requires this standard.  
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approva...          </p>
+          <p class="lt-p">
+Rubrics: 25/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.735          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective January 1st, 2026**
+
+We are updating our travel policy with significant changes to the approval process for all discretionary travel—this includes every travel request made by internal teams and clients. All travel now requires approval at the VP or RM level, as this is the standard for all discretionary activity, which encompasses all of our team’s travel. This change takes effect on **January 1st, 2026**.
+
+**Do not promise any travel with...          </p>
+          <p class="lt-p">
+Rubrics: 23/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.676          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective January 1st, 2026**
+
+We are updating our travel policy with significant changes to the approval process for all discretionary travel, which includes all travel initiated by internal teams and those requested by clients. This change is effective **January 1st, 2026**.
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approval is received.**
+
+Below is a clear breakdown of the new approval process based ...          </p>
+          <p class="lt-p">
+Rubrics: 26/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.765          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,  
+
+**Critical Travel Policy Change: Effective January 1st, 2026**  
+
+We are updating our travel policy with significant changes to the approval process for all discretionary travel—this includes all travel requests made by internal team members or on behalf of clients. Effective **January 1st, 2026**, all travel requests must receive approval at the VP or RM level.  
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approval is received.**  
+
+T...          </p>
+          <p class="lt-p">
+Rubrics: 27/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.794          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective January 1st, 2026**
+
+We are updating our travel policy with significant changes to the approval process for all discretionary travel—this includes every travel request originating from internal teams or clients. Effective **January 1st, 2026**, all travel must receive approval at the VP or RM level, as discretionary travel now requires this tier of oversight. This applies to all proposed trips, whether internal or client-driven.
+
+**Do not p...          </p>
+          <p class="lt-p">
+Rubrics: 25/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.735          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Subject: Critical Travel Policy Change: Effective 1/1  
+
+Hello Team,  
+
+We are updating our travel policy with significant changes to the approval process for all discretionary travel, effective **January 1, 2026**. This applies to all travel requests, regardless of type or origin, as all discretionary travel now falls under the same framework.  
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approval is received.**  
+
+Below is the updated approval proc...          </p>
+          <p class="lt-p">
+Rubrics: 27/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.794          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective January 1st, 2026**
+
+An updated travel policy is now in effect, introducing significant changes to the approval process for all discretionary travel—this includes every travel arrangement currently managed by our team. Effective **January 1st, 2026**, all travel requests must now receive approval at the VP or RM level. This applies universally to all internal and client requests, as all discretionary travel falls under this new requirement....          </p>
+          <p class="lt-p">
+Rubrics: 25/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.735          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective 1/1**
+
+We are updating our travel policy with significant approval changes for discretionary travel—every travel request, regardless of type, now falls under this category. Effective **January 1, 2026**, all travel must receive approval at the VP or RM level. This applies to all internal and client-proposed travel.  
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approval is received.**
+
+Below is t...          </p>
+          <p class="lt-p">
+Rubrics: 25/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.735          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Subject: Critical Travel Policy Change: Effective 1/1
+
+Hello Team,
+
+We are updating our travel policy effective **January 1, 2026** with significant changes to the approval process for all discretionary travel, which includes every travel request within the organization.  
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approval is received.**
+
+All travel requests—whether initiated internally or by a client—now require approval at the VP or RM level. Int...          </p>
+          <p class="lt-p">
+Rubrics: 25/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.735          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Subject: Critical Travel Policy Change: Effective 1/1
+
+Hello Team,
+
+We are implementing an updated travel policy effective **January 1, 2026**, with significant changes to the approval process for all discretionary travel—this includes all travel requests originating from internal teams and client-facing activities.
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approval is received.**
+
+Below is a clear breakdown of the new approval process based on who...          </p>
+          <p class="lt-p">
+Rubrics: 27/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.794          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective January 1st, 2026**
+
+We are updating our travel policy with significant changes to the approval process for all discretionary travel, which includes every travel request within the organization. Effective **January 1st, 2026**, all travel requests—whether internal or client-based—will require approval at the VP or RM level. This reflects a standardized and enhanced governance process to ensure alignment and accountability across all travel ...          </p>
+          <p class="lt-p">
+Rubrics: 26/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.765          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective 1/1**
+
+We are updating our travel policy with significant approval changes for discretionary travel—this includes all travel initiatives across the organization. Effective **January 1, 2026**, all travel requests must receive approval at the VP or RM level. This applies to all internal and client-led travel, as all discretionary travel falls under this category.
+
+**Do not promise any travel without prior approval. Do not book any travel unt...          </p>
+          <p class="lt-p">
+Rubrics: 26/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.765          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective January 1st, 2026**
+
+We are updating our travel policy with significant changes to the approval process for all discretionary travel, which encompasses all of our travel requests. This change is effective **January 1st, 2026**.
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approval is received.**
+
+Below is a clear overview of the new approval process based on who submits the travel request.
+
+| Req...          </p>
+          <p class="lt-p">
+Rubrics: 25/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.735          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Subject: Critical Travel Policy Change: Effective 1/1  
+
+Hello Team,  
+
+We are updating our travel policy with significant changes to approval requirements for discretionary travel, which includes all of our team’s travel. This updated policy will go into effect on **January 1, 2026**.  
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approval is received.**  
+
+All travel requests—whether internal or client-based—now require approval at the VP or RM leve...          </p>
+          <p class="lt-p">
+Rubrics: 27/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.794          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective January 1, 2026**
+
+We are updating our travel policy with significant changes to the approval process for all discretionary travel, which includes all travel requested by our team. This policy goes into effect on **January 1, 2026**.  
+
+**Do not promise any travel without prior approval. Do not book any travel until highest approval is received.**
+
+Below is the updated approval process based on who initiates the request:
+
+| Request Type    ...          </p>
+          <p class="lt-p">
+Rubrics: 26/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.765          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Create an email to my team outlining updated travel limitations due to economic uncertainty, addressing it as Hello Team, without filler lines. Do not say anything about economic uncertainty, budget c...          </p>
+          <p class="lt-p">
+Response: Hello Team,
+
+**Critical Travel Policy Change: Effective January 1st, 2026**
+
+We are introducing an updated travel policy with significant approval changes for discretionary travel—this includes all travel within our organization. Effective **January 1st, 2026**, all travel requests must receive approval at the VP or RM level. This applies to all internal and client-led travel, as all such travel is categorized as discretionary.
+
+**Do not promise any travel without prior approval. Do not book any...          </p>
+          <p class="lt-p">
+Rubrics: 25/34 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.735          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+403                </td>
+                <td>
+0.735                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.735                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+302                </td>
+                <td>
+0.676                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.676                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+305                </td>
+                <td>
+0.765                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.765                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+372                </td>
+                <td>
+0.794                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.794                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+363                </td>
+                <td>
+0.735                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.735                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+392                </td>
+                <td>
+0.794                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.794                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+375                </td>
+                <td>
+0.735                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.735                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+308                </td>
+                <td>
+0.735                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.735                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+306                </td>
+                <td>
+0.735                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.735                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+366                </td>
+                <td>
+0.794                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.794                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+318                </td>
+                <td>
+0.765                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.765                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+333                </td>
+                <td>
+0.765                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.765                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+313                </td>
+                <td>
+0.735                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.735                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+332                </td>
+                <td>
+0.794                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.794                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+311                </td>
+                <td>
+0.765                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.765                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+444                </td>
+                <td>
+336                </td>
+                <td>
+0.735                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.735                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>

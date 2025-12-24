@@ -1,0 +1,4911 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>RL Iteration 18</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: var(--lt-bg, #f5f5f5);
+    color: var(--lt-text, #333);
+}
+
+.lt-root {
+    background: var(--lt-card, white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.lt-title {
+    margin: 0 0 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+    border-bottom: 2px solid var(--lt-border, #e5e7eb);
+    padding-bottom: 0.5rem;
+}
+
+.lt-subtitle {
+    color: var(--lt-sub, #666);
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+}
+
+.lt-section {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-section-body {
+    margin-top: 0.5rem;
+}
+
+.lt-section h2, .lt-section h3, .lt-section h4, .lt-section h5, .lt-section h6 {
+    margin: 0.5rem 0;
+    color: var(--lt-accent, #2563eb);
+}
+
+.lt-p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+}
+
+.lt-details {
+    margin: 0.5rem 0;
+    border: 1px solid var(--lt-border, #e5e7eb);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.lt-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    user-select: none;
+}
+
+.lt-details-body {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: var(--lt-bg, #f5f5f5);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.lt-details-body pre {
+    margin: 0;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    white-space: pre-wrap;
+}
+
+.lt-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+.lt-table th {
+    background: var(--lt-accent, #2563eb);
+    color: white;
+    padding: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.lt-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--lt-border, #e5e7eb);
+}
+
+.lt-table tr:nth-child(even) {
+    background: var(--lt-bg, #f5f5f5);
+}
+
+.lt-table-caption {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--lt-text, #333);
+}
+
+.lt-exc {
+    background: #fee;
+    border: 2px solid #c00;
+    border-radius: 4px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.lt-exc summary {
+    color: #c00;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.lt-exc pre {
+    margin-top: 0.5rem;
+    font-family: var(--lt-mono, "Courier New", monospace);
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.answer, .reward {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin: 0.25rem 0;
+}
+
+.answer {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.reward {
+    background: #dcfce7;
+    color: #166534;
+}
+
+</style></head>
+<body class="lt-root">
+  <h1 class="lt-title">
+RL Iteration 18  </h1>
+  <div class="lt-subtitle">
+Generated 2025-12-20T12:06:36  </div>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **realistic, compliant, and balanced one-week call center schedule** for the **Eastern team**, based on all your detailed constraints.
+
+---
+
+### 🔍 **Goals &amp; Constraints Summary**
+
+#### Core Requirements:
+1. **Work Hours**:
+   - Weekdays (Mon–Fri): 6:30 AM – 8:00 PM (opening)
+   - Weekdays (Mon–Fri): 9:00 AM – 5:00 PM (closing)
+   - Weekends (Sat–Sun): 9:00 AM – 5:00 PM (all shifts)
+
+2. **Daily Shift Requirements**:
+   - **Exactly 3 bilingual agents opening** (6:30 AM – ...          </p>
+          <p class="lt-p">
+Rubrics: 8/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.364          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break down and build a **realistic, compliant, and balanced one-week schedule** for the **Eastern team call center**, respecting all the rules and constraints you&#x27;ve provided.
+
+---
+
+### 🔍 **Key Constraints Recap**
+
+#### 🕒 **Hours of Operation**
+- **Weekdays (Mon–Fri):**
+  - Openers: 6:30 AM – 8:00 AM
+  - Closers: 4:00 PM – 8:00 PM
+- **Weekends (Sat–Sun):**
+  - Openers: 9:00 AM – 5:00 PM
+  - Closers: 4:00 PM – 8:00 PM
+
+#### 📋 **Daily Requirements**
+- **Every weekday:**
+  - Exact...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s carefully build a **one-week (Mon–Sun) schedule** for your **Eastern team call center**, based on all your constraints.
+
+---
+
+### ✅ **Objective Summary**
+
+We need to:
+1. **Open shifts (6:30 AM–8:00 AM)**: 3 bilingual agents every weekday (Mon–Fri).
+2. **Close shifts (8:00 PM–9:00 PM)**: 4 agents every weekday (Mon–Fri), **at least one bilingual**.
+3. **Weekend shifts (Sat–Sun)**: At least 3 bilingual agents per shift (for both open and close, if applicable).
+4. **Full-time agen...          </p>
+          <p class="lt-p">
+Rubrics: 10/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.455          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **realistic, compliant, and balanced one-week schedule** for the **Eastern Team Call Center** based on your detailed constraints.
+
+---
+
+### ✅ Key Requirements Recap:
+
+#### **Daily Operations:**
+- **Weekdays (Mon–Fri):**
+  - **3 bilingual agents opening** (6:30 AM – 8:00 AM)
+  - **4 agents closing** (8:00 PM – 9:00 PM)
+  - At least **one bilingual agent among the 4 closing agents**
+- **Weekend (Sat–Sun):**
+  - At least **3 bilingual agents** scheduled (can be opening or...          </p>
+          <p class="lt-p">
+Rubrics: 12/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely — let&#x27;s carefully create a **one-week call center schedule** for the **Eastern team** based on your detailed constraints. This will ensure:
+
+---
+
+## ✅ **Key Requirements Summary**
+
+### 🕒 **Operating Hours**
+- **Weekdays (Mon–Fri):** 6:30 AM – 8:00 PM  
+- **Weekends (Sat–Sun):** 9:00 AM – 5:00 PM  
+
+### 📋 **Daily Shift Requirements**
+- **Every weekday:**  
+  - Exactly **3 bilingual agents opening** (6:30 AM – 9:00 AM)  
+  - Exactly **4 bilingual agents closing** (4:00 PM – 8:00 PM)  
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 0/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **realistic and compliant one-week call center schedule** for the **Eastern team**, incorporating all your constraints.
+
+---
+
+## ✅ **Key Constraints Summary**
+
+### 🕐 **Operating Hours**
+- **Weekdays (Mon–Fri):**
+  - Open: 6:30 AM – 8:00 AM
+  - Close: 4:00 PM – 8:00 PM
+- **Weekends (Sat–Sun):**
+  - Shift: 9:00 AM – 5:00 PM
+
+### 🚦 **Daily Requirements**
+- **Each weekday:**
+  - **3 bilingual agents opening** (6:30–8:00 AM)
+  - **4 bilingual agents closing** (4:00–8:00 PM)...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s create a **one-week call center schedule** for the **Eastern team**, respecting all constraints and ensuring that:
+
+---
+
+### ✅ **Key Constraints Recap:**
+
+1. **Hours of Operation:**
+   - **Weekdays (Mon–Fri):** 6:30 AM – 8:00 PM
+   - **Weekends (Sat–Sun):** 9:00 AM – 5:00 PM
+
+2. **Daily Shift Requirements (Weekdays):**
+   - **Exactly 3 bilingual agents opening** (at 6:30 AM)
+   - **Exactly 4 agents closing** (at 8:00 PM), with **at least one bilingual**
+
+3. **Weekend Constraint...          </p>
+          <p class="lt-p">
+Rubrics: 14/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s build a **one-week call center schedule** for the **Eastern team**, carefully aligning with your constraints.
+
+---
+
+### ✅ **Key Requirements Recap**
+
+1. **Hours of Operation**:
+   - Weekdays (Mon–Fri): 6:30 AM – 8:00 PM
+   - Weekends (Sat–Sun): 9:00 AM – 5:00 PM
+
+2. **Daily Bilingual Agent Requirements**:
+   - Every weekday:  
+     - **3 bilingual agents opening** (must be on duty at 6:30 AM)  
+     - **4 bilingual agents closing** (must be on duty at 8:00 PM)  
+     - ✅ At leas...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **realistic, compliant, and balanced one-week call center schedule** for the **Eastern team** based on your detailed constraints.
+
+---
+
+## ✅ **Objective Summary &amp; Constraints Recap**
+
+### 🔹 **Operating Hours**
+- **Weekdays (Mon–Fri):**  
+  - **Opening shifts (6:30 AM – 8:00 AM):** 3 bilingual agents  
+  - **Closing shifts (4:00 PM – 8:00 PM):** 4 agents (at least **1 bilingual**)  
+- **Weekend (Sat–Sun):**  
+  - **Each weekend shift must have at least 3 bilingual agents...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break this down step by step to create a **realistic, compliant one-week schedule** (Monday to Sunday) for the **Eastern call center team**, respecting all the constraints.
+
+---
+
+## ✅ **Summary of Constraints &amp; Requirements**
+
+### 🕒 **Team Hours**
+- **Weekdays (Mon-Fri):** 6:30 AM – 8:00 PM (13.5 hours)
+- **Weekends (Sat-Sun):** 9:00 AM – 5:00 PM (8 hours)
+
+### 📝 **Daily Requirements**
+- **Every weekday:**  
+  - Exactly **3 bilingual agents opening** (6:30 AM – 6:30 AM)  
+  - E...          </p>
+          <p class="lt-p">
+Rubrics: 17/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.773          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Certainly! Let&#x27;s work through this step-by-step to create a **realistic, compliant, and efficient one-week call center schedule** for the **Eastern team**, meeting **all your constraints and requirements**.
+
+---
+
+### 🎯 **OBJECTIVES &amp; CONSTRAINTS**
+
+#### 1. **Hours of Operation**
+- **Weekdays (Mon–Fri):**
+  - **6:30 AM – 8:00 PM** (inclusive) → agents can open at 6:30 AM, close at 8:00 PM
+- **Weekends (Sat–Sun):**
+  - **9:00 AM – 5:00 PM** (inclusive)
+
+#### 2. **Daily Shift Roles**
+- **Every week...          </p>
+          <p class="lt-p">
+Rubrics: 10/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.455          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s breakdown and build a **realistic, compliant, and efficient one-week call center schedule** for the **Eastern team**, based on all your constraints.
+
+---
+
+### ✅ **Key Constraints Summary**
+
+#### 🕒 **Operating Hours**
+- **Weekdays (Mon–Fri)**: 6:30 AM – 8:00 PM  
+- **Weekends (Sat–Sun)**: 9:00 AM – 5:00 PM  
+
+#### 📋 **Bilingual Shift Requirements**
+- **Each weekday**:
+  - Exactly **3 bilingual agents opening** (start shift at 6:30 AM or earlier)
+  - Exactly **4 agents closing** (end shift a...          </p>
+          <p class="lt-p">
+Rubrics: 12/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.545          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s break down the scheduling requirements and build a **one-week call center schedule** (Monday to Sunday) for the **Eastern team** based on all your constraints.
+
+---
+
+### ✅ **Objective:** Create a weekly schedule that satisfies:
+
+#### 📌 General Rules:
+1. **Weekday (Mon-Fri) Operations:**
+   - Exactly **3 bilingual agents opening** (6:30 AM – 8:00 AM)
+   - Exactly **4 bilingual agents closing** (5:00 PM – 8:00 PM)
+   - **At least one of the closing agents must be bilingual** (alr...          </p>
+          <p class="lt-p">
+Rubrics: 11/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **complete, realistic one-week schedule** for your **Eastern call center**, respecting all constraints you’ve outlined.
+
+---
+
+### 📅 **Schedule Overview:**
+- **Weekdays (Mon–Fri):** 6:30 AM – 8:00 PM  
+- **Weekends (Sat–Sun):** 9:00 AM – 5:00 PM  
+- **Daily Requirements:**
+  - Exactly **3 bilingual agents opening** (6:30 AM–9:00 AM)
+  - Exactly **4 bilingual agents closing** (4:00 PM–8:00 PM)
+  - At least **1 bilingual agent among the closing agents**
+- **Shift Requireme...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **realistic, compliant, and balanced one-week call center schedule** for the **Eastern team** based on all your constraints.
+
+---
+
+## ✅ **Key Requirements Recap**
+
+### 📅 **Operating Hours**
+- **Weekdays (Mon–Fri):**  
+  - Opening: 6:30 AM – 8:00 AM  
+  - Closing: 4:00 PM – 8:00 PM  
+- **Weekends (Sat–Sun):**  
+  - Opening: 9:00 AM – 5:00 PM  
+  - Closing: 9:00 AM – 5:00 PM  
+
+&gt; So we need:
+&gt; - **Exactly 3 bilingual agents opening** each weekday (early shift)
+&gt; - **Exact...          </p>
+          <p class="lt-p">
+Rubrics: 13/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.591          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Can you please help me create a one-week schedule for the Eastern team for our call center? The hours of operation for the team are 6:30AM-8PM on weekdays and 9AM-5PM on weekdays. Every weekday, we ne...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s carefully build a **one-week call center schedule** for the **Eastern team**, respecting all the constraints and preferences.
+
+---
+
+## 🔍 **Key Requirements Summary**
+
+### 📅 **Hours of Operation**
+- **Weekdays (Mon-Fri):** 6:30 AM – 8:00 PM  
+- **Weekends (Sat-Sun):** 9:00 AM – 5:00 PM  
+
+### 📋 **Shift Requirements**
+- **Every weekday:**  
+  - Exactly **3 bilingual agents opening** (at 6:30 AM)  
+  - Exactly **4 bilingual agents closing** (at 8:00 PM)  
+  - **At least one** of t...          </p>
+          <p class="lt-p">
+Rubrics: 14/22 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.636          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6950                </td>
+                <td>
+0.364                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.364                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+7303                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+7688                </td>
+                <td>
+0.455                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.455                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+4089                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6015                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+5066                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6434                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6707                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6208                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+5671                </td>
+                <td>
+0.773                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.773                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6322                </td>
+                <td>
+0.455                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.455                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6144                </td>
+                <td>
+0.545                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.545                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6878                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6547                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+6284                </td>
+                <td>
+0.591                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.591                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+355                </td>
+                <td>
+4922                </td>
+                <td>
+0.636                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.636                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through your request and extract **only animals that can (could) fly**, reported to have gone extinct **between 2000 and 2010**, **excluded if extinction occurred while in captivity**, and **only those existing in the Southern Hemisphere**.
+
+---
+
+### 🔍 Step-by-step Filtering Based on Your Criteria:
+
+#### ✅ Criteria 1: Must be able to fly (can fly / flying animal)
+We will exclude:
+- Non-flying animals (e.g., tortoises, snails, fish, plants, palms, cacti, beetles, frogs, copepod...          </p>
+          <p class="lt-p">
+Rubrics: 6/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.353          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s go step by step to carefully extract and filter the information according to your **specific parameters**.
+
+---
+
+### ✅ **Step 1: Filter for animals that can fly**
+
+We&#x27;ll look for species with **flight capability** (e.g., birds, bats, insects such as butterflies or dragonflies, or flying reptiles/fish — but exclude fish, snails, plants, and non-flying invertebrates).
+
+We will include:
+- Birds
+- Bats
+- Butterflies (insects that fly)
+- Some other flying invertebrates (e.g., flying insects, bu...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through your request step by step and extract only the **animals that could fly**, which went extinct **between January 1, 2000, and December 31, 2010**, **excluded from captivity** (i.e., no asterisk `*` for ex situ death), and that are **native to the Southern Hemisphere**.
+
+---
+
+### 🔍 Step-by-step Filters Applied
+
+#### 1. **Must be animals that could fly**
+We are excluding non-flying organisms (plants, snails, copepods, fish, etc.). Only include **birds, bats, insects**, an...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s process your request **step by step**, carefully applying all the specified filters and conditions.
+
+---
+
+### 🔍 **Request Breakdown &amp; Filters Applied**
+
+We are to extract **only animals that can fly** (i.e., species that are **flying**, such as birds, bats, insects, etc.), and meet the following **criteria**:
+
+#### ✅ 1. **Extinction recorded between January 1, 2000, and December 31, 2010**
+- Last recorded date must be **in the 2000–2010 range**.
+- **Excludes** any with extinction reported ...          </p>
+          <p class="lt-p">
+Rubrics: 12/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.706          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through your request step-by-step to ensure we deliver an accurate, filtered, and properly formatted result.
+
+---
+
+### 🔍 **Task Breakdown**
+
+We are to **extract animals that:**
+
+1. **Can (could) fly** (i.e., are flying organisms — birds, bats, insects, etc.)
+2. Were **declared extinct between January 1, 2000, and December 31, 2010**
+3. **Were not extinct in captivity** (exclude those marked with `*` indicating death in captivity/ex situ)
+4. Were **present in the Southern Hemis...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through your request step-by-step and extract only the relevant entries based on the specified criteria.
+
+---
+
+### ✅ **Objectives &amp; Filtering Criteria:**
+
+1. **Include only animals that can (could) fly**  
+   → This includes birds, bats, insects (e.g., butterflies, moths), and possibly some flying reptiles or amphibians — but we will interpret &quot;can fly&quot; as biologically capable of flight (i.e., true flyers).  
+   → Exclude: mammals (except bats), amphibians, fish, reptiles (unl...          </p>
+          <p class="lt-p">
+Rubrics: 7/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.412          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and well-structured query. Let&#x27;s carefully go through your request step-by-step and extract **only the animals that:**
+
+1. **Can fly** (i.e., are capable of flight — birds, bats, insects, etc.),
+2. Were **documented as extinct (last recorded) between January 1, 2000, and December 31, 2010**,
+3. Were **reported to have gone extinct in the wild**, **not in captivity** (so exclude any with an asterisk `*` indicating death in captivity or ex situ),
+4. Are **from the Southe...          </p>
+          <p class="lt-p">
+Rubrics: 8/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.471          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through your request step-by-step, filtering the data according to your specific **parameters**:
+
+---
+
+### 🔍 **Filtering Criteria (Strictly Applied):**
+
+1. **Only animals that can (could) fly**  
+   → Exclude non-flying organisms (e.g., snails, fish, tortoises, plants, palms, cacti, insects that don’t fly, etc.)
+
+2. **Extinction reported between January 1, 2000 and December 31, 2010**  
+   → Last record must be in the **2000–2010** range (inclusive)
+
+3. **Exclude any extinctio...          </p>
+          <p class="lt-p">
+Rubrics: 14/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.824          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully process your request step by step, based on the detailed instructions.
+
+---
+
+### 🔍 **Step-by-step filtering criteria**:
+
+We are to **extract only animals that can (could) fly**, and which:
+1. Were **reported to have gone extinct between January 1, 2000, and December 31, 2010** (inclusive).
+2. **Excluded if extinction occurred in captivity** (i.e., exclude those marked with `*` indicating death in captivity/ex situ).
+3. Must have existed in the **Southern Hemisphere**.
+4. Only **a...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Thank you for the detailed and well-structured query.
+
+Let&#x27;s carefully follow your **parameters** step by step to extract the correct data:
+
+---
+
+### 🔍 **Filtering Criteria**:
+
+1. **Only include animals that can (could) fly**  
+   → We interpret &quot;can (could) fly&quot; as species that are **birds, bats, insects (like butterflies, moths, flies)**, or **flying reptiles**, etc.  
+   → Exclude non-flying organisms (e.g., snails, fish, reptiles not capable of flight, plants, invertebrates like copepods, la...          </p>
+          <p class="lt-p">
+Rubrics: 15/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.882          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully process your request step by step to ensure accuracy and full compliance with the given criteria.
+
+---
+
+### ✅ **Step 1: Understand the Criteria**
+
+We are to **extract animals that:**
+
+1. **Can (could) fly**  
+2. Were reported to have gone extinct **between 1 January 2000 and 31 December 2010**  
+3. **Were not extinct due to captivity/ex situ** (exclude those marked with `*` indicating death in captivity)  
+4. **Exist in the Southern Hemisphere**  
+5. Provide the result as an **al...          </p>
+          <p class="lt-p">
+Rubrics: 13/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.765          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully follow your request and refine the data step-by-step.
+
+---
+
+### 🔍 **Objective:**
+Extract **animals that can (could) fly**, which:
+1. Were **documented as extinct between January 1, 2000, and December 31, 2010** (inclusive),
+2. Were **not extinct in captivity** (exclude those with an asterisk * indicating death in captivity/ex situ),
+3. Are **southern hemisphere native** (geographical range must be in the Southern Hemisphere),
+4. Are **recorded as extinct** — meaning the **last re...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully process your request step by step to extract the **correct** information based on the **parameters** you&#x27;ve provided:
+
+---
+
+### 🔍 **Parameters (Filtered Criteria):**
+
+1. ✅ **Must be animals that can (could) fly**  
+   → So we exclude birds only if they are non-flying (e.g., omnivorous, ground-dwelling), but **all birds and bats** qualify as flying animals.  
+   → Snails, fish, reptiles (like lizards or tortoises), amphibians, and mammals (like rodents or bats) are excluded if the...          </p>
+          <p class="lt-p">
+Rubrics: 10/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.588          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through your request step by step to ensure accuracy and compliance with all constraints.
+
+---
+
+### 🔍 **Objective Summary**
+
+We are to **extract only animals that:**
+
+1. **Could fly** (i.e., are capable of flight – birds, bats, insects, or other flight-capable vertebrates/invertebrates)  
+2. Were **documented as extinct between January 1, 2000, and December 31, 2010** (inclusive)  
+3. **Were not extinct due to captivity** (i.e., exclude those marked with *asterisk* `*`)  
+4. *...          </p>
+          <p class="lt-p">
+Rubrics: 11/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.647          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully go through your request step by step to ensure we extract only the correct entries based on all criteria.
+
+---
+
+### 🔍 **Criteria for inclusion:**
+
+1. **Must be animals that can fly**  
+   → We interpret &quot;animals that can fly&quot; to include:  
+   - Birds  
+   - Bats  
+   - Insects (e.g., butterflies, winged insects)  
+   - *Exclusions*:  
+     - Snails, fish, frogs, reptiles (unless flying, e.g., not applicable), land snails, fish, amphibians  
+     - Plants (excluded by nature)  
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 13/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.765          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: Hi. I have some information about species which are documented as going extinct since January 1st, 2000. I will provide the information and then provide parameters for you to refine the information fu...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully process your request step by step, ensuring we apply **all the specified filters** correctly:
+
+---
+
+### 🔍 **Objective**:  
+Extract **animals that can (could) fly**,  
+that were **declared extinct between 2000 and 2010**,  
+**excluding those confirmed extinct in captivity**,  
+and only **those existing in the Southern Hemisphere**.  
+
+Then, provide an **alphabetised numbered list by scientific name**, including all original data from the table.
+
+---
+
+## ✅ Step-by-step Filtering
+
+-...          </p>
+          <p class="lt-p">
+Rubrics: 13/17 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.765          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+3928                </td>
+                <td>
+0.353                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.353                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+4734                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+6180                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+4612                </td>
+                <td>
+0.706                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.706                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+5656                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+4922                </td>
+                <td>
+0.412                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.412                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+3361                </td>
+                <td>
+0.471                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.471                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+3314                </td>
+                <td>
+0.824                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.824                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+3076                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+2860                </td>
+                <td>
+0.882                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.882                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+4952                </td>
+                <td>
+0.765                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.765                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+5218                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+4639                </td>
+                <td>
+0.588                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.588                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+5150                </td>
+                <td>
+0.647                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.647                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+3748                </td>
+                <td>
+0.765                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.765                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+3472                </td>
+                <td>
+3996                </td>
+                <td>
+0.765                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.765                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s work through your **fortnightly staff roster** step-by-step, based on your detailed requirements.
+
+---
+
+### 📌 **Requirements Summary**
+
+- **Duration**: 10 days (5 weekdays × 2 weeks) → Mon-Fri for two weeks (10 days).
+- **Shifts per day**: 2  
+  - Shift 1: 7:30 AM – 12:30 PM  
+  - Shift 2: 12:30 PM – 5:30 PM  
+- **Minimum staff per shift**: 2  
+- **Staff members**: 5  
+  - Maria (Wed–Fri)  
+  - Zoe (Tue–Thu)  
+  - Margaret (Mon–Thu)  
+  - Joanne (Mon, Wed, Fri)  
+  - Carlotta (Mon–Thu)  
+-...          </p>
+          <p class="lt-p">
+Rubrics: 6/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.500          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully build a **fortnightly (10-day) staff roster** from **Monday to Friday**, covering **two shifts per day** (7:30am–12:30pm and 12:30pm–5:30pm), with the following constraints:
+
+---
+
+### ✅ Key Constraints
+
+1. **Two shifts per weekday (10 shifts total over 5 days × 2 shifts) → 10 shift slots**  
+   → We need to assign staff to **10 shift assignments** (5 days × 2 shifts).
+
+2. **Each shift must have at least 2 staff members**  
+   → So each shift must have ≥2 staff members assigned.
+
+...          </p>
+          <p class="lt-p">
+Rubrics: 5/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.417          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s solve this step-by-step to create a **fortnightly (10-day) staff roster** (Mon–Fri over 2 weeks) with the following constraints:
+
+---
+
+### 🔧 **Constraints Summary**
+
+#### Staff Availability:
+- **Zoe** – Tues, Thurs  
+- **Margaret** – Mon, Tues, Wed, Thu  
+- **Maria** – Wed, Thu, Fri  
+- **Joanne** – Mon, Wed, Fri  
+- **Carlotta** – Mon, Tue, Wed, Thu  
+
+✅ Staff must be listed in **alphabetical order**.  
+✅ Each **day has two shifts**:  
+   - 7:30am–12:30pm  
+   - 12:30pm–5:30pm  
+✅ **At le...          </p>
+          <p class="lt-p">
+Rubrics: 4/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully build a **fortnightly (10-day) staff roster** over **Mon–Fri** for **5 days**, with **two shifts per day** (7:30am–12:30pm and 12:30pm–5:30pm).  
+
+### Constraints Recap:
+
+- **Two shifts per day** (morning and afternoon).  
+- **At least 2 staff members per shift**.  
+- **5 staff members**:  
+  - Maria (Wed–Fri)  
+  - Zoe (Tue–Thu)  
+  - Margaret (Mon–Thu)  
+  - Joanne (Mon, Wed, Fri)  
+  - Carlotta (Mon–Thu)  
+- **No staff can work 2 shifts in a row**  
+- **No staff can work more ...          </p>
+          <p class="lt-p">
+Rubrics: 3/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s work through this step-by-step to create a **fortnightly staff roster** over **5 days (Mon–Fri)**, covering **10 days** (2 weeks), with the following constraints:
+
+---
+
+### 📌 **Key Requirements**
+
+- **Two shifts per day**:  
+  - **Shift A**: 7:30 AM – 12:30 PM  
+  - **Shift B**: 12:30 PM – 5:30 PM  
+- **At least 2 staff members per shift**  
+- **Each shift must have coverage; if not, flag for recruitment**  
+- **No staff member can work 2 shifts in a row (consecutively)**  
+- **No staff me...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s walk through this step-by-step to create a **fortnightly staff roster** (covering **10 days**: Mon-Fri over two weeks) that meets all constraints.
+
+---
+
+### ✅ **Constraints Summary**
+
+We have **5 staff members** and want to build a **10-day** schedule (2 weeks, Mon-Fri):
+
+1. **Two shifts per day**:
+   - Shift A: 7:30 AM – 12:30 PM  
+   - Shift B: 12:30 PM – 5:30 PM
+
+2. **Each shift must have at least 2 staff members**.
+
+3. **Staff availability**:
+   - **Zoe**: only available **Tues, Thurs*...          </p>
+          <p class="lt-p">
+Rubrics: 4/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s build a **fortnightly staff roster** over **5 days (Mon–Fri)**, spanning **10 days (2 weeks)**, with the following constraints:
+
+---
+
+### ✅ **Constraints Summary**
+
+- **Two shifts per day**:
+  - Shift 1: 7:30 AM – 12:30 PM
+  - Shift 2: 12:30 PM – 5:30 PM
+- Each shift must have **at least 2 staff members**.
+- **No staff member can work 2 shifts in a row**.
+- No staff member can work **more than 4 shifts per week** (i.e., ≤4 shifts across the 10-day fortnight — so max 4 shifts per week).
+- *...          </p>
+          <p class="lt-p">
+Rubrics: 4/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s carefully build a **fortnightly staff roster** over **5 days (Mon–Fri)**, spanning **10 days (2 weeks)**.  
+
+We need to:
+
+- Assign **two shifts per day** (morning 7:30–12:30 and afternoon 12:30–5:30), so **2 shifts × 5 days = 10 shifts per fortnight (2 weeks)**.
+- Each shift must have **at least 2 staff members**.
+- We have **5 staff members**:
+  - **Maria** – available Wed–Fri  
+  - **Zoe** – available Tue–Thu  
+  - **Margaret** – available Mon–Thu  
+  - **Joanne** – available Mon, Wed, F...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s build a **fortnightly (10-day) staff roster** from Monday to Friday over two weeks, adhering to all your rules and constraints.
+
+---
+
+### 📝 **Rules &amp; Constraints Recap:**
+
+- **Shifts per day**: Two shifts:
+  - **Shift A**: 7:30 AM – 12:30 PM  
+  - **Shift B**: 12:30 PM – 5:30 PM  
+- **Minimum staff per shift**: 2 staff members
+- **No staff can work 2 shifts in a row** (i.e., no consecutive days on same shift or any shift)
+- **No staff can work more than 4 shifts per week** (i.e...          </p>
+          <p class="lt-p">
+Rubrics: 8/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.667          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s tackle this step by step to create a **fortnightly staff roster** (covering **10 days** — 5 weekdays × 2 weeks) under the given constraints.
+
+---
+
+### 🔍 **Key Requirements &amp; Constraints**
+
+1. **Shifts per day**: Two shifts  
+   - **Shift A: 7:30 am – 12:30 pm**  
+   - **Shift B: 12:30 pm – 5:30 pm**  
+   → Each day needs **at least 2 staff members** on each shift.
+
+2. **Staff Availability**:
+   - **Zoe**: only available **Tues, Thurs**
+   - **Margaret**: available **Mon, Tues, Wed, Thurs**...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s break this down step by step to create a **fortnightly (10-day) staff roster** over **Mon–Fri**, with the following constraints:
+
+---
+
+### ✅ **Given:**
+
+- **Shifts per day**: Two shifts  
+  - Shift A: 7:30 AM – 12:30 PM  
+  - Shift B: 12:30 PM – 5:30 PM  
+  → So **2 shifts × 5 days = 10 total shift slots per week**  
+  → Over **2 weeks (10 days)** → **20 shift slots** to assign
+
+- **Staff members**:  
+  - Maria  
+  - Zoe  
+  - Margaret  
+  - Joanne  
+  - Carlotta  
+
+- **Availability per st...          </p>
+          <p class="lt-p">
+Rubrics: 4/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.333          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s break this down step by step to create a **fortnightly staff roster** (covering 10 days: Mon–Fri over 2 weeks), meeting **all constraints**, including:
+
+---
+
+### ✅ **Constraints Summary**
+
+- **Workdays**: 5 days per week (Mon–Fri) × 2 shifts/day = **10 shifts per week** → **20 shifts over fortnight**.
+- **Shifts per day**: 2 shifts (7:30am–12:30pm and 12:30pm–5:30pm) → each day has **2 shifts** → 5 days × 2 = **10 shifts per week**.
+- **Fortnight**: 10 days → total of **20 shifts** to assi...          </p>
+          <p class="lt-p">
+Rubrics: 7/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.583          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s create a **fortnightly staff roster** (10 days: Mon-Fri for 2 weeks) based on your detailed requirements. We’ll follow all constraints and produce:
+
+1. A **list of staff in alphabetical order** with their shifts (from Mon–Fri over 2 weeks).
+2. A **day-by-day roster** in chronological order (Mon–Fri, repeated for 2 weeks), showing each shift and staff covering it.
+3. **Constraints respected**:
+   - Two shifts per day (7:30am–12:30pm and 12:30pm–5:30pm)
+   - At least **2 staff per shift**
+  ...          </p>
+          <p class="lt-p">
+Rubrics: 9/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.750          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s create a **fortnightly staff roster** (covering **10 days**: Mon-Fri, over 2 weeks) based on the constraints you&#x27;ve given.
+
+---
+
+### ✅ **Key Rules &amp; Constraints Summary**
+
+- **5 staff members**: Maria, Margaret, Joanne, Carlotta, Zoe  
+- **Shifts per day**: Two shifts (7:30am–12:30pm and 12:30pm–5:30pm)  
+- **Minimum**: 2 staff per shift  
+- **No staff can work 2 shifts in a row** (meaning no one can work two shifts on consecutive days)  
+- **Max shifts per staff per week**: 4  
+- **Fortni...          </p>
+          <p class="lt-p">
+Rubrics: 3/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s solve this step-by-step to create a **fortnightly (10-day) staff roster** over **Mon–Fri**, with **two shifts per day** (7:30am–12:30pm and 12:30pm–5:30pm), satisfying all constraints.
+
+---
+
+### ✅ **Constraints Summary:**
+
+- 5 staff members:  
+  - **Maria** → Wed–Fri  
+  - **Zoe** → Tue–Thu  
+  - **Margaret** → Mon–Thu  
+  - **Joanne** → Mon, Wed, Fri  
+  - **Carlotta** → Mon–Thu  
+
+- **Each shift must have at least 2 staff members**.  
+- No staff member can work **two shifts in a row**.  ...          </p>
+          <p class="lt-p">
+Rubrics: 10/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.833          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I need to create a fortnightly staff roster over 5 days, Mon-Fri. There are two shifts per day but we need at least 2 staff members on each shift. There are 5 staff members who have different days of ...          </p>
+          <p class="lt-p">
+Response: Let&#x27;s build a **fortnightly staff roster** (covering **10 days: Mon-Fri, over 2 weeks** → 5 days × 2 weeks = 10 days) following all your detailed constraints.
+
+---
+
+### ✅ **Constraints Reiterated and Verified**
+
+1. **Two shifts per day**:
+   - Shift A: 7:30 AM – 12:30 PM  
+   - Shift B: 12:30 PM – 5:30 PM  
+
+2. **Each shift must have at least 2 staff members**  
+   → So each shift (on any day) must have **≥2 staff** assigned.
+
+3. **Staff availability per week (daily)**:
+   - **Zoe**: Tues, Wed, ...          </p>
+          <p class="lt-p">
+Rubrics: 3/12 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.250          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+6601                </td>
+                <td>
+0.500                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.500                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+3741                </td>
+                <td>
+0.417                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.417                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+6798                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+4995                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+6402                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+8192                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+5702                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+7906                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+8192                </td>
+                <td>
+0.667                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.667                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+7485                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+8192                </td>
+                <td>
+0.333                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.333                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+7395                </td>
+                <td>
+0.583                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.583                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+8032                </td>
+                <td>
+0.750                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.750                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+6316                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+7699                </td>
+                <td>
+0.833                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.833                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+211                </td>
+                <td>
+5512                </td>
+                <td>
+0.250                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.250                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+  <section class="lt-section">
+    <h2 class="lt-h2">
+do_group_rollout    </h2>
+    <div class="lt-section-body">
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go step by step to simulate your 4th-grade classroom activity in a fun, clear, and educational way.
+
+---
+
+### 🌍 Step 1: Understanding the Task  
+We’re given 60 Lat/Long coordinates.  
+We’ll determine for each whether it’s on **land** or in an **ocean** (including lakes or inland seas — those go under *land*).  
+We’ll separate the coordinates into:
+- Northern Hemisphere (latitude &gt; 0°)
+- Southern Hemisphere (latitude &lt; 0°)
+
+Then:
+- For each hemisphere, we’ll make a table with:
+ ...          </p>
+          <p class="lt-p">
+Rubrics: 8/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.320          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Here&#x27;s a complete, classroom-friendly simulation of your group activity for 4th graders — including the organized tables, percentages, and a clear, simple explanation to share with your students.
+
+---
+
+### 🔍 **Northern Hemisphere Table**  
+*(Sorted descending by Latitude)*
+
+| Latitude  | Land or Ocean (Ocean Name) |
+|----------|-----------------------------|
+| 89.9254  | Ocean (Arctic)              |
+| 87.8700  | Ocean (Pacific)             |
+| 87.6863  | Ocean (Pacific)             ...          </p>
+          <p class="lt-p">
+Rubrics: 10/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s go through this step-by-step in a way that&#x27;s perfect for a 4th-grade classroom activity — clear, engaging, and based on real data.
+
+---
+
+### 🌍 Group Activity Simulation: Land or Ocean?  
+**Objective:** Students will examine a list of lat/long coordinates and determine whether each is on land or in an ocean. Lakes and inland seas are considered **land**.  
+We’ll simulate this by categorizing the points, then organize them into two tables: one for the **Northern Hemisphere** and ...          </p>
+          <p class="lt-p">
+Rubrics: 4/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.160          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through this step by step — just like a fun classroom activity for your 4th graders.
+
+---
+
+### 🌍 Step 1: Understand the Activity  
+We have **60** randomly generated latitude-longitude coordinates.  
+Each point is either:
+- On **land** (including lakes or inland seas — these count as land)
+- In an **ocean** (like the Pacific, Atlantic, Indian, Southern, etc.)
+
+We’ll:
+1. Split the coordinates into **Northern Hemisphere** (latitude &gt; 0°) and **Southern Hemisphere** (latitude &lt; ...          </p>
+          <p class="lt-p">
+Rubrics: 9/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.360          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s go through your activity step by step, just like a fun classroom experiment for 4th graders. We’ll analyze the list of latitude/longitude coordinates, determine whether each one is on **land** or in an **ocean**, and organize the results by hemisphere. Then we’ll summarize the findings and deliver a clear, engaging statement that’s perfect for your 4th-grade class.
+
+---
+
+### 🌍 **Northern Hemisphere Coordinates (Latitude &gt; 0°)**  
+*(Sorted descending by Latitude)*
+
+| Latitude | ...          </p>
+          <p class="lt-p">
+Rubrics: 8/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.320          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s simulate your **4th grade classroom activity** step by step in a fun, educational way — making it clear, accurate, and engaging.
+
+---
+
+### 🌍 Activity Simulation: Is This Land or Ocean?
+
+We have **50** random latitude and longitude coordinates.  
+Each student group will check whether each point is **on land or in an ocean**.  
+We&#x27;ll classify them based on global geography patterns:
+
+- **Lakes or inland seas** (like Lake Ontario, Black Sea) → **Land**
+- **Ocean zones** → **Ocean*...          </p>
+          <p class="lt-p">
+Rubrics: 9/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.360          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s turn this into a fun, educational group activity for your 4th-grade class — simple, clear, and grounded in real-world Earth facts.
+
+---
+
+### 🌍 **Group Activity Simulation: Is This Land or Ocean?**  
+*For 4th Graders – Based on Latitude/Longitude Coordinates*
+
+---
+
+## 📌 Northern Hemisphere Table  
+*(Sorted by descending Latitude – from highest to lowest)*  
+
+**Percentage of coordinates in this table that are land: 33%**
+
+| Lat (°)     | Long (°)        | Land or Ocean?          ...          </p>
+          <p class="lt-p">
+Rubrics: 11/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.440          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s simulate the group activity for your 4th-grade classroom in a fun, clear, and age-appropriate way.
+
+---
+
+### 🌍 Group Activity: Is This on Land or Ocean?
+
+We’ve been given 50 latitude and longitude coordinates. The students will work in groups to determine whether each point is on **land** or in an **ocean**.  
+➡️ **Rules for this activity**:
+- Points on lakes, inland seas, or inside continents (like inside a country) are considered **land**.
+- Points in the open sea (ocean) are...          </p>
+          <p class="lt-p">
+Rubrics: 9/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.360          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s simulate your classroom activity step by step — just like a fun, hands-on science lesson for 4th graders.
+
+---
+
+### 🌍 Step 1: Understand the Task  
+We’re given **50 latitude and longitude coordinates**. Each point tells us where something is on Earth.  
+- We need to determine if each is on **land** or in an **ocean** (like the Pacific, Atlantic, Indian, Southern, or Arctic).  
+- *Lakes or inland seas* (like the Caspian Sea) are treated as **land**.  
+- We&#x27;ll separate coordinate...          </p>
+          <p class="lt-p">
+Rubrics: 9/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.360          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through this step by step — just like a fun classroom activity for 4th graders.
+
+We’ll:
+
+1. **Check each Lat/Long coordinate** to determine if it’s on **land** or in an **ocean**.
+2. **Group them by hemisphere**:
+   - **Northern Hemisphere**: Latitude &gt; 0°
+   - **Southern Hemisphere**: Latitude &lt; 0°
+3. For each hemisphere, we’ll:
+   - List coordinates (Lat, Long) and whether it’s **land** or **ocean** (specifying which ocean if possible)
+   - Sort by **latitude descending**
+...          </p>
+          <p class="lt-p">
+Rubrics: 10/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.400          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through your activity step by step, just like a fun class experiment for 4th graders. We’ll simulate the group activity by analyzing each coordinate to determine if it&#x27;s on **land** or in an **ocean**, and then organize the results by **hemisphere** (North vs. South), sorting by **latitude (descending)**.
+
+We’ll follow your instructions precisely:
+
+---
+
+### 🌍 Step 1: Determine Land or Ocean  
+**Rules:**
+- If latitude is **positive** → Northern Hemisphere
+- If latitude is **n...          </p>
+          <p class="lt-p">
+Rubrics: 0/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Sure! Let&#x27;s simulate your group activity step by step for 4th graders — teaching them how much of Earth is water through a fun, hands-on exploration of coordinates.
+
+---
+
+### 🌍 **Step 1: Class Activity Setup**
+
+You’ve given 50 random latitude-longitude coordinates. Students will work in groups, each getting a few coordinates to determine whether each point is **land** or **ocean**.  
+
+We’ll use **geographic knowledge** to decide:  
+- Most **oceans** are in high latitudes (near poles) or large ar...          </p>
+          <p class="lt-p">
+Rubrics: 5/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s walk through your fantastic classroom activity step by step — just like a real 4th-grade science lesson.
+
+---
+
+### 🌍 Activity: Is This Land or Ocean?  
+**Goal**: Students will use latitude and longitude to determine if a point is on land or in an ocean.  
+**Rules**:  
+- Any point in a **lake or inland sea** is considered **land** (even if it&#x27;s surrounded by water).  
+- All other points are in an **ocean**.  
+- We’ll separate the data by **hemisphere** (North and South), sort by...          </p>
+          <p class="lt-p">
+Rubrics: 3/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.120          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s do this step-by-step in a way that’s clear, fun, and perfect for **4th graders** — while still being accurate and educational.
+
+---
+
+### 🌍 Group Activity Simulation: Is It Land or Ocean?
+
+We’re going to simulate a class activity where students look at 50 random latitude/longitude points and decide if each is on land or in an ocean.  
+**Rules:**
+- **Lakes or inland seas** (like the Caspian Sea or Lake Superior) are **land**.
+- **Oceans** are counted as oceans (e.g., Pacific, Atl...          </p>
+          <p class="lt-p">
+Rubrics: 7/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.280          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let&#x27;s go through your fun and educational group activity step by step — just like you&#x27;d do in a real 4th-grade classroom.
+
+We’ll:
+
+1. **Classify each coordinate as land or ocean** (with specific ocean names where applicable),
+   - Rules:
+     - **Lakes and inland seas** → counted as **land** (even if not connected to a continent).
+     - **Oceans** = Pacific, Atlantic, Indian, Southern, Arctic, etc.
+     - Coordinates near polar regions (e.g., near North or South Pole) are usually ic...          </p>
+          <p class="lt-p">
+Rubrics: 5/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.200          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+do_single_rollout        </h3>
+        <div class="lt-section-body">
+          <p class="lt-p">
+Prompt: I am a teacher trying to demonstrate to a class of 4th graders how much of the Earth is water (a lot!) Below is a list of randomly generated Lat/Long coordinates. I was going to slit them up amongst g...          </p>
+          <p class="lt-p">
+Response: Absolutely! Let’s simulate your classroom activity step by step, just like you’d do with 4th graders. We’ll go through each coordinate, determine whether it&#x27;s in **land** or **ocean**, and classify it by hemisphere (Northern or Southern). Then we’ll organize the data into two tables (North and South), sort them by **latitude descending**, and calculate percentages.
+
+We’ll follow your exact instructions:
+
+---
+
+### 🌍 Step 1: Determine Land vs. Ocean  
+We will use general geographic knowledge:
+
+- *...          </p>
+          <p class="lt-p">
+Rubrics: 0/25 passed          </p>
+          <p class="lt-p">
+Reward (pass rate): 0.000          </p>
+        </div>
+      </section>
+      <section class="lt-section">
+        <h3 class="lt-h3">
+Trajectory Summary        </h3>
+        <div class="lt-section-body">
+          <div class="lt-table-caption">
+Trajectory 0          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+8192                </td>
+                <td>
+0.320                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.320                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 1          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+4757                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 2          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+8192                </td>
+                <td>
+0.160                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.160                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 3          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+6671                </td>
+                <td>
+0.360                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.360                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 4          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+6520                </td>
+                <td>
+0.320                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.320                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 5          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+5401                </td>
+                <td>
+0.360                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.360                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 6          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+1657                </td>
+                <td>
+0.440                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.440                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 7          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+2394                </td>
+                <td>
+0.360                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.360                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 8          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+2473                </td>
+                <td>
+0.360                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.360                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 9          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+6447                </td>
+                <td>
+0.400                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.400                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 10          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+8192                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 11          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+8192                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 12          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+8192                </td>
+                <td>
+0.120                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.120                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 13          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+8192                </td>
+                <td>
+0.280                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.280                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 14          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+8192                </td>
+                <td>
+0.200                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.200                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="lt-table-caption">
+Trajectory 15          </div>
+          <table class="lt-table">
+            <thead>
+              <tr>
+                <th>
+step                </th>
+                <th>
+ob_len                </th>
+                <th>
+ac_len                </th>
+                <th>
+reward                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+0                </td>
+                <td>
+1565                </td>
+                <td>
+8192                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+final                </td>
+                <td>
+0                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+              <tr>
+                <td>
+total                </td>
+                <td>
+-                </td>
+                <td>
+-                </td>
+                <td>
+0.000                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </section>
+</body>
+</html>
