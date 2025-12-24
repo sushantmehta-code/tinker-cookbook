@@ -12,11 +12,11 @@ Key features:
 
 Usage:
     python -m tinker_cookbook.recipes.rlvr_tinker.train \
-        model_name="Qwen/Qwen3-4B-Instruct-2507" \
+        model_name="Qwen/Qwen3-30B-Instruct-2507" \
         grader_llm_name="Qwen/Qwen3-235B-A22B-Instruct-2507" \
         groups_per_batch=32 \
         group_size=8 \
-        learning_rate=2e-5 \
+        learning_rate=1e-5 \
         max_tokens=2048
 """
 
@@ -41,7 +41,7 @@ class CLIConfig:
     """CLI configuration for RLVR Tinker training."""
 
     # Model configuration
-    model_name: str = "Qwen/Qwen3-4B-Instruct-2507"
+    model_name: str = "Qwen/Qwen3-30B-Instruct-2507"
     lora_rank: int = 32
     renderer_name: str | None = None
 
@@ -54,7 +54,7 @@ class CLIConfig:
     train_group_size: int = 8
     test_group_size: int = 1
     num_substeps: int = 1
-    learning_rate: float = 2e-5
+    learning_rate: float = 1e-5
     max_tokens: int = 2048
     temperature: float = 1.0
     kl_penalty_coef: float = 0.0
@@ -63,7 +63,7 @@ class CLIConfig:
     grader_llm_name: str = "Qwen/Qwen3-235B-A22B-Instruct-2507"
     judge_max_retries: int = 3
     judge_max_tokens: int = 4096
-    judge_temperature: float = 0.7
+    judge_temperature: float = 0.0
 
     # Optional system message for the policy model
     system_message: str | None = None

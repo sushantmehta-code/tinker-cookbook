@@ -83,11 +83,11 @@ This creates `data/train.jsonl` (900 samples) and `data/test.jsonl` (100 samples
 
 ```bash
 python -m tinker_cookbook.recipes.rlvr_tinker.train \
-    model_name="Qwen/Qwen3-4B-Instruct-2507" \
+    model_name="Qwen/Qwen3-30B-Instruct-2507" \
     grader_llm_name="Qwen/Qwen3-235B-A22B-Instruct-2507" \
     groups_per_batch=32 \
     train_group_size=8 \
-    learning_rate=2e-5 \
+    learning_rate=1e-5 \
     max_tokens=2048 \
     wandb_project="rlvr-tinker"
 ```
@@ -102,11 +102,11 @@ python -m tinker_cookbook.recipes.rlvr_tinker.train \
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `model_name` | `Qwen/Qwen3-4B-Instruct-2507` | Policy model to train |
+| `model_name` | `Qwen/Qwen3-30B-Instruct-2507` | Policy model to train |
 | `grader_llm_name` | `Qwen/Qwen3-235B-A22B-Instruct-2507` | Judge model for rubric evaluation |
 | `groups_per_batch` | 32 | Number of unique prompts per training batch |
 | `train_group_size` | 8 | Number of rollouts per prompt (for GRPO) |
-| `learning_rate` | 2e-5 | Learning rate for LoRA training |
+| `learning_rate` | 1e-5 | Learning rate for LoRA training |
 | `max_tokens` | 2048 | Maximum tokens for policy model response |
 | `lora_rank` | 32 | LoRA rank for parameter-efficient training |
 | `judge_max_retries` | 3 | Max retries for failed judge calls |
