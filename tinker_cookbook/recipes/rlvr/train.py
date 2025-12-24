@@ -52,8 +52,8 @@ class CLIConfig:
     system_message: str | None = None
 
     # Logging configuration
-    eval_every: int = 5
-    save_every: int = 5
+    eval_every: int = 7
+    save_every: int = 7
     log_path: str | None = None
     wandb_project: str | None = None
     wandb_name: str | None = None
