@@ -126,7 +126,19 @@ class RLTestSetEvaluator(SamplingClientEvaluator):
             *[run_group_rollout(builder, i) for i, builder in enumerate(self.env_group_builders_P)]
         )
         taglist_P = [builder.logging_tags() for builder in self.env_group_builders_P]
-        metrics = compute_trajectory_metrics(trajectory_groups_P, taglist_P)
+
+        # Filter out None values (failed rollouts in fault-tolerant mode)
+        valid_pairs = [
+            (tg, tags)
+            for tg, tags in zip(trajectory_groups_P, taglist_P, strict=True)
+            if tg is not None
+        ]
+        if not valid_pairs:
+            logger.warning(f"All evaluation rollouts failed for {self.name}, returning empty metrics")
+            return {}
+        trajectory_groups_P, taglist_P = zip(*valid_pairs, strict=True)
+
+        metrics = compute_trajectory_metrics(list(trajectory_groups_P), list(taglist_P))
 
         metrics = {f"{self.name}/{k}": v for k, v in metrics.items()}
         return metrics
