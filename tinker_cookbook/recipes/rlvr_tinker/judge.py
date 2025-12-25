@@ -152,30 +152,36 @@ class TinkerRubricJudge:
             data = json.loads(text, strict=False)  # Allow control characters in strings
             ratings = data.get("ratings", [])
 
-            # Validate and normalize ratings
+            # Validate and normalize ratings - strict mode: reject malformed responses
             normalized_ratings = []
-            for r in ratings:
-                rating = r.get("rating", "").strip()
-                # Normalize to Yes/No
-                if rating.lower() in ("yes", "true", "1"):
-                    rating = "Yes"
-                elif rating.lower() in ("no", "false", "0"):
-                    rating = "No"
+            for i, r in enumerate(ratings):
+                raw_rating = r.get("rating", "")
+                rating = raw_rating.strip().lower() if raw_rating else ""
+                
+                # Strict validation: only accept valid ratings
+                if rating in ("yes", "true", "1"):
+                    normalized_rating = "Yes"
+                elif rating in ("no", "false", "0"):
+                    normalized_rating = "No"
                 else:
-                    rating = "No"  # Default to No for unclear responses
+                    # Reject unclear/invalid ratings - don't use this score for training
+                    raise JudgeError(
+                        f"Invalid rating '{raw_rating}' for rubric {i+1} - "
+                        f"expected Yes/No/True/False/1/0"
+                    )
 
                 normalized_ratings.append(
-                    {"rating": rating, "rationale": r.get("rationale", "")}
+                    {"rating": normalized_rating, "rationale": r.get("rationale", "")}
                 )
 
-            # If we got fewer ratings than rubrics, pad with No
-            while len(normalized_ratings) < num_rubrics:
-                normalized_ratings.append(
-                    {"rating": "No", "rationale": "No rating provided by judge"}
+            # Strict validation: rating count must exactly match rubric count
+            if len(normalized_ratings) != num_rubrics:
+                raise JudgeError(
+                    f"Rating count mismatch: got {len(normalized_ratings)}, "
+                    f"expected {num_rubrics}"
                 )
 
-            # If we got more ratings, truncate
-            return normalized_ratings[:num_rubrics]
+            return normalized_ratings
 
         except json.JSONDecodeError as e:
             logger.error(f"Failed to parse judge response as JSON: {e}")
