@@ -14,10 +14,10 @@ Usage:
     python -m tinker_cookbook.recipes.rlvr_tinker.train \
         model_name="Qwen/Qwen3-30B-Instruct-2507" \
         grader_llm_name="Qwen/Qwen3-235B-A22B-Instruct-2507" \
-        groups_per_batch=32 \
+        groups_per_batch=16 \
         group_size=8 \
         learning_rate=1e-5 \
-        max_tokens=2048
+        max_tokens=8192
 """
 
 import asyncio
@@ -41,7 +41,7 @@ class CLIConfig:
     """CLI configuration for RLVR Tinker training."""
 
     # Model configuration
-    model_name: str = "Qwen/Qwen3-30B-Instruct-2507"
+    model_name: str = "Qwen/Qwen3-30B-A3B-Instruct-2507"
     lora_rank: int = 32
     renderer_name: str | None = None
 
@@ -69,8 +69,8 @@ class CLIConfig:
     system_message: str | None = None
 
     # Logging configuration
-    eval_every: int = 10
-    save_every: int = 10
+    eval_every: int = 5
+    save_every: int = 5
     log_path: str | None = None
     wandb_project: str | None = None
     wandb_name: str | None = None
@@ -155,7 +155,10 @@ async def main(cli_config: CLIConfig):
 
     # Monkey-patch do_group_rollout to use the fault-tolerant version
     # This ensures that failed judge calls skip samples rather than crashing
+    # We must patch BOTH the module AND the reference in rl/train.py since it imports directly
+    from tinker_cookbook.rl import train as rl_train
     rollouts.do_group_rollout = do_fault_tolerant_group_rollout
+    rl_train.do_group_rollout = do_fault_tolerant_group_rollout
     logger.info("Using fault-tolerant rollouts (failed judge calls will skip samples)")
 
     await train.main(cfg)

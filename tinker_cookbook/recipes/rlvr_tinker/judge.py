@@ -149,7 +149,7 @@ class TinkerRubricJudge:
                         json_lines.append(line)
                 text = "\n".join(json_lines)
 
-            data = json.loads(text)
+            data = json.loads(text, strict=False)  # Allow control characters in strings
             ratings = data.get("ratings", [])
 
             # Validate and normalize ratings
