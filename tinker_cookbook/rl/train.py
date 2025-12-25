@@ -673,6 +673,10 @@ async def do_group_rollout_and_filter_constant_reward(
     with logtree.optional_enable_logging(enable_logging):
         trajectory_group = await do_group_rollout(env_group_builder, policy)
 
+    # Handle case where all rollouts failed (fault-tolerant mode)
+    if trajectory_group is None:
+        return None
+
     # Remove if all trajectories have the same reward
     if do_remove_constant_reward_groups and all_same(trajectory_group.get_total_rewards()):
         return None
