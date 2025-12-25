@@ -110,7 +110,6 @@ class TinkerRubricJudge:
             sampling_client=sampling_client,
             renderer=renderer,
             max_tokens=max_tokens,
-            temperature=temperature,
         )
 
         logger.info(f"Initialized TinkerRubricJudge with model: {grader_model}")
