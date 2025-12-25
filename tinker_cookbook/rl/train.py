@@ -1023,6 +1023,20 @@ async def do_sync_training(
                 ],
             )
 
+        # Filter out None values from failed rollouts (fault-tolerant mode)
+        # Also filter the corresponding env_group_builders
+        valid_pairs = [
+            (tg, builder)
+            for tg, builder in zip(trajectory_groups_P, env_group_builders_P, strict=True)
+            if tg is not None
+        ]
+        if not valid_pairs:
+            logger.warning("All trajectory groups failed, skipping batch")
+            continue
+        trajectory_groups_P, env_group_builders_P = zip(*valid_pairs, strict=True)
+        trajectory_groups_P = list(trajectory_groups_P)
+        env_group_builders_P = list(env_group_builders_P)
+
         if cfg.remove_constant_reward_groups:
             trajectory_groups_P = remove_constant_reward_groups(trajectory_groups_P)
 

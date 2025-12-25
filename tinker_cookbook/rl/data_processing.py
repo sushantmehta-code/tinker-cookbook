@@ -194,14 +194,21 @@ def assemble_training_data(
 
 
 def remove_constant_reward_groups(
-    trajectory_groups_P: List[TrajectoryGroup],
+    trajectory_groups_P: List[TrajectoryGroup | None],
 ) -> List[TrajectoryGroup]:
     new_groups: list[TrajectoryGroup] = []
     for group in trajectory_groups_P:
+        # Skip None groups (failed rollouts in fault-tolerant mode)
+        if group is None:
+            continue
         if not all_same(group.get_total_rewards()):
             new_groups.append(group)
     if not new_groups:
         logger.warning("All rewards are uniform. There will be no gradient")
-        return trajectory_groups_P[0:1]  # return singleton list in case empty
-        # list will cause problems
+        # Filter out None values before returning fallback
+        valid_groups = [g for g in trajectory_groups_P if g is not None]
+        if valid_groups:
+            return valid_groups[0:1]
+        # If all groups are None, return empty list (caller must handle)
+        return []
     return new_groups
