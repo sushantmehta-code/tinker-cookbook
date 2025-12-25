@@ -54,7 +54,7 @@ class CLIConfig:
     train_group_size: int = 8
     test_group_size: int = 1
     num_substeps: int = 1
-    learning_rate: float = 1e-5
+    learning_rate: float = 2e-5
     max_tokens: int = 2048
     temperature: float = 1.0
     kl_penalty_coef: float = 0.0
@@ -155,10 +155,15 @@ async def main(cli_config: CLIConfig):
 
     # Monkey-patch do_group_rollout to use the fault-tolerant version
     # This ensures that failed judge calls skip samples rather than crashing
-    # We must patch BOTH the module AND the reference in rl/train.py since it imports directly
+    # We must patch ALL modules that import do_group_rollout directly:
+    # - rollouts module itself
+    # - rl/train.py (for training rollouts)
+    # - rl/metric_util.py (for evaluation rollouts)
     from tinker_cookbook.rl import train as rl_train
+    from tinker_cookbook.rl import metric_util
     rollouts.do_group_rollout = do_fault_tolerant_group_rollout
     rl_train.do_group_rollout = do_fault_tolerant_group_rollout
+    metric_util.do_group_rollout = do_fault_tolerant_group_rollout
     logger.info("Using fault-tolerant rollouts (failed judge calls will skip samples)")
 
     await train.main(cfg)
